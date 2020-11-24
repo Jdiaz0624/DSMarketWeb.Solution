@@ -77,7 +77,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Estilos\EstilosMaster.css" />
     <Content Include="LoginSistema.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoCapacidad.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCategorias.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoCondiciones.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoMarcas.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoModelos.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoSuplidores.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoTipoSuplidor.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoUnidadMedida.aspx" />
     <Content Include="Paginas\MenuPrincipal.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -197,12 +204,61 @@
     <Compile Include="MasterPage\PaginaMaestra.Master.designer.cs">
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoCapacidad.aspx.cs">
+      <DependentUpon>MantenimientoCapacidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoCapacidad.aspx.designer.cs">
+      <DependentUpon>MantenimientoCapacidad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoCategorias.aspx.cs">
       <DependentUpon>MantenimientoCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoCategorias.aspx.designer.cs">
       <DependentUpon>MantenimientoCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoCondiciones.aspx.cs">
+      <DependentUpon>MantenimientoCondiciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoCondiciones.aspx.designer.cs">
+      <DependentUpon>MantenimientoCondiciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoMarcas.aspx.cs">
+      <DependentUpon>MantenimientoMarcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoMarcas.aspx.designer.cs">
+      <DependentUpon>MantenimientoMarcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoModelos.aspx.cs">
+      <DependentUpon>MantenimientoModelos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoModelos.aspx.designer.cs">
+      <DependentUpon>MantenimientoModelos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoSuplidores.aspx.cs">
+      <DependentUpon>MantenimientoSuplidores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoSuplidores.aspx.designer.cs">
+      <DependentUpon>MantenimientoSuplidores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoTipoSuplidor.aspx.cs">
+      <DependentUpon>MantenimientoTipoSuplidor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoTipoSuplidor.aspx.designer.cs">
+      <DependentUpon>MantenimientoTipoSuplidor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoUnidadMedida.aspx.cs">
+      <DependentUpon>MantenimientoUnidadMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoUnidadMedida.aspx.designer.cs">
+      <DependentUpon>MantenimientoUnidadMedida.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
