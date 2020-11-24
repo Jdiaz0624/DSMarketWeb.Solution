@@ -247,6 +247,12 @@ body { background-color: #465268; }
                             <div class="form-group col-md-12">
                                 <asp:TextBox ID="txtClaveLogin" runat="server" Placeholder="Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
                             </div>
+                             <div class="form-group col-md-12">
+                                <asp:TextBox ID="txtNuevaClave" Visible="false" runat="server" Placeholder="Nueva Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
+                            </div>
+                             <div class="form-group col-md-12">
+                                <asp:TextBox ID="txtConfirmarClave" Visible="false" runat="server" Placeholder="Confirmar Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
+                            </div>
                         </div>
     				</div>
     				<div class="form-actions">
