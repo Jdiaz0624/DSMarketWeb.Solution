@@ -121,121 +121,49 @@ namespace DSMarketWeb.Solution.Paginas.Inventario {
         protected global::System.Web.UI.WebControls.GridView gvListado;
         
         /// <summary>
-        /// lbEncabezadoMantenimiento control.
+        /// lbTituloMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbEncabezadoMantenimiento;
+        protected global::System.Web.UI.WebControls.Label lbTituloMantenimiento;
         
         /// <summary>
-        /// ScripManagerEmpleado control.
+        /// lbTipoProductoMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScripManagerEmpleado;
+        protected global::System.Web.UI.WebControls.Label lbTipoProductoMantenimiento;
         
         /// <summary>
-        /// UpdatePanelEmpleado control.
+        /// ddlSeleccionarTipoProductoMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelEmpleado;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarTipoProductoMantenimiento;
         
         /// <summary>
-        /// lbSeleccionarSucursalMantenimiento control.
+        /// lbCategoriaMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbSeleccionarSucursalMantenimiento;
+        protected global::System.Web.UI.WebControls.Label lbCategoriaMantenimiento;
         
         /// <summary>
-        /// ddlSeleccionarSucursalmantenimiento control.
+        /// txtCategoriaMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarSucursalmantenimiento;
-        
-        /// <summary>
-        /// lbOficinaMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOficinaMantenimiento;
-        
-        /// <summary>
-        /// ddlOficinaMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOficinaMantenimiento;
-        
-        /// <summary>
-        /// lbDepartamentoMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDepartamentoMantenimiento;
-        
-        /// <summary>
-        /// ddlDepartamenoMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDepartamenoMantenimiento;
-        
-        /// <summary>
-        /// lbNombreMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNombreMantenimiento;
-        
-        /// <summary>
-        /// txtNombreMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreMantenimiento;
-        
-        /// <summary>
-        /// lbClaveSeguridad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbClaveSeguridad;
-        
-        /// <summary>
-        /// txtClaveSeguridad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridad;
+        protected global::System.Web.UI.WebControls.TextBox txtCategoriaMantenimiento;
         
         /// <summary>
         /// cbEstatusMantenimiento control.

@@ -73,52 +73,32 @@
       <div class="modal fade bd-example-modal-lg MantenimientoEmpleados" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <div class="jumbotron" align="center">
-            <asp:Label ID="lbEncabezadoMantenimiento" runat="server" Text="Mantenimiento de Empleados"></asp:Label>
+        <div class="container-fluid">
+            <div class="jumbotron" align="center">
+                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="Mantenimiento de Categorias"></asp:Label>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoProductoMantenimiento" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarTipoProductoMantenimiento" runat="server" ToolTip="Seleccionar Tipo de Producto" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbCategoriaMantenimiento" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtCategoriaMantenimiento" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-check-inline">
+                <div class="form-group form-check">
+                    <asp:CheckBox ID="cbEstatusMantenimiento" runat="server" Text="Estatus" ToolTip="Establecer el estatus del registro" CssClass="form-check-input" />
+                </div>
+            </div>
+            <div align="center">
+                <asp:Button ID="btnGuardarMantenimiento" runat="server" Text="Guardar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnGuardarMantenimiento_Click" />
+                <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnModificarMantenimiento_Click" />
+        
+            </div>
+            <br />
         </div>
-        <!--AQUI COMIENZAN LOS CONTROLES PARA REALIZAR LOS MANTENIMIENTOS CORRESPONDIENTES-->
-    <div  class="container-fluid">
-       <asp:ScriptManager ID="ScripManagerEmpleado" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanelEmpleado" runat="server">
-            <ContentTemplate>
-                 <div " class="form-row">
-
-              <div class="form-group col-md-6">
-                <asp:Label ID="lbSeleccionarSucursalMantenimiento" runat="server" CssClass="Letranegrita" Text="Sucursal"></asp:Label>
-                <asp:DropDownList ID="ddlSeleccionarSucursalmantenimiento" runat="server" CssClass="form-control" AutoPostBack="True" ToolTip="Sucursal" OnSelectedIndexChanged="ddlSeleccionarSucursalmantenimiento_SelectedIndexChanged"></asp:DropDownList>
-            </div>
-
-            <div class="form-group col-md-6">
-                 <asp:Label ID="lbOficinaMantenimiento"  runat="server" CssClass="Letranegrita" Text="Oficina"></asp:Label>
-                <asp:DropDownList ID="ddlOficinaMantenimiento" runat="server"  CssClass="form-control"  AutoPostBack="True"  ToolTip="Seleccionar Oficina" OnSelectedIndexChanged="ddlOficinaMantenimiento_SelectedIndexChanged"></asp:DropDownList>
-            </div>
-               <div class="form-group col-md-6">
-                    <asp:Label ID="lbDepartamentoMantenimiento"   runat="server"  CssClass="Letranegrita" Text="Departamento"></asp:Label>
-                   <asp:DropDownList ID="ddlDepartamenoMantenimiento"  runat="server" CssClass="form-control"  ToolTip="Seleccionar Departamento"></asp:DropDownList>
-            </div>
-               <div class="form-group col-md-6">
-                    <asp:Label ID="lbNombreMantenimiento" runat="server" CssClass="Letranegrita"  Text="Nombre"></asp:Label>
-            <asp:TextBox ID="txtNombreMantenimiento" runat="server"  AutoCompleteType="Disabled" CssClass="form-control"  MaxLength="100"></asp:TextBox>
-            </div>
-             <div class="form-group col-md-6">
-             <asp:Label ID="lbClaveSeguridad" runat="server" CssClass="Letranegrita" Text="Clave de Seguridad"></asp:Label>
-            <asp:TextBox ID="txtClaveSeguridad" runat="server"  AutoCompleteType="Disabled" CssClass="form-control" TextMode="Password"  MaxLength="20"></asp:TextBox>
-            </div>
-        </div>
-      <div class="form-group form-check">
-          <div class="form-check-inline">
-                   <asp:CheckBox ID="cbEstatusMantenimiento"  runat="server" Text="Estatus" CssClass="form-check-input"  ToolTip="Estatus" />
-          </div>
-      </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <div align="Center">
-         <asp:Button ID="btnGuardarMantenimiento"  runat="server" CssClass="btn btn-outline-primary btn-sm Custom"  Text="Guardar" ToolTip="Guardar Registro" OnClick="btnGuardarMantenimiento_Click"/>
-         <asp:Button ID="btnModificarMantenimiento"  runat="server" CssClass="btn btn-outline-primary btn-sm Custom"  Text="Modificar" ToolTip="Modificar Registro" OnClick="btnModificarMantenimiento_Click"/>
-        </div>
-        <br />
-    </div>
-    <!--AQUI TERMINAN LOS CONTROLES PARA REALIZAR LOS MANTENIMIENTOS CORRESPONDIENTES-->
     </div>
   </div>
 </div>
