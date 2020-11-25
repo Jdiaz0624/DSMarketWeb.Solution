@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/PaginaMaestra.Master" AutoEventWireup="true" CodeBehind="MantenimientoProductosServicios.aspx.cs" Inherits="DSMarketWeb.Solution.Paginas.Inventario.MantenimientoProductosServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/PaginaMaestra.Master" Debug="true" AutoEventWireup="true" CodeBehind="MantenimientoProductosServicios.aspx.cs" Inherits="DSMarketWeb.Solution.Paginas.Inventario.MantenimientoProductosServicios" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -118,22 +120,34 @@
             <button type="button" id="btnDescartar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Descartar</button>
             <asp:Button ID="btndetalle" runat="server" Text="Detalle" OnClick="btndetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Detalle del Producto" />
             <br />
-            <asp:Label ID="lbCantidadProductosTitulo" runat="server" Text="Cantidad de Productos (" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCantidadProductosVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCantidadProductosCerrar" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
-            
-            <asp:Label ID="lbCantidadServiciosTitulo" runat="server" Text="Cantidad de registros (" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCantidadServiciosVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCantidadServiciosCerrar" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
-            <br />
+        
 
-            <asp:Label ID="lbCapitalInvertidoTitulo" runat="server" Text="Capital Invertido (" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCapitalInvertidoVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbCapitalInvertidoCerrar" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
 
-            <asp:Label ID="lbGananciaAproximadaTitulo" runat="server" Text="Ganancia Aproximada (" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbGananciaAproximadaCerrar" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbGananciaAproximada" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
+             <asp:Label ID="lbGraficoProductoServicio" runat="server" Visible="false" Text="Productos / Servicios" CssClass="Letranegrita"></asp:Label>
+           <br />
+            <asp:Chart ID="GraProductoServicio" Width="1012px" Visible="False" runat="server" Palette="Pastel">
+           <Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}" YValuesPerPoint="2"></asp:Series>
+           </Series>
+           <ChartAreas>
+               <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+           </ChartAreas>
+       </asp:Chart>
+
+
+              <asp:Label ID="lbEstadisticaCapital" runat="server" Visible="false" Text="Estadistica Capital" CssClass="Letranegrita"></asp:Label>
+           <br />
+            <asp:Chart ID="GraEstadisticaCapital" Width="1012px" Visible="False" runat="server" Palette="Pastel">
+           <Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}" YValuesPerPoint="2"></asp:Series>
+           </Series>
+           <ChartAreas>
+               <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+           </ChartAreas>
+       </asp:Chart>
+
+
+
         </div>
         <br />
          <asp:GridView ID="gvListado" runat="server" AllowPaging="true" OnPageIndexChanging="gvListado_PageIndexChanging" OnSelectedIndexChanged="gvListado_SelectedIndexChanged" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
@@ -158,5 +172,93 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#000065" />
             </asp:GridView>
+        <br />
+
+        <!--CONTROLES PARA EL DETALLE-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbProductoDetalle" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtProductoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbTipoProductoDetalle" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTipoProductoDetalle" runat="server" MaxLength="100" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbCategoriaDetalle" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCategoriaDetalle" runat="server" MaxLength="100" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbUnidadMedidaDetalle" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtUnidadMedidaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbTipoSuplidorDetalle" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTipoSuplidorDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbSuplidorDetalle" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtSuplidorDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+               <div class="form-group col-md-4">
+                <asp:Label ID="lbCodigoBarraDetalle" runat="server" Text="Codigo de Barra" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCodigoBarraDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+               <div class="form-group col-md-4">
+                <asp:Label ID="lbReferenciaDetalle" runat="server" Text="Referencia" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtReferenciaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+               <div class="form-group col-md-4">
+                <asp:Label ID="lbStockDetalle" runat="server" Text="Stock" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtStockDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+               <div class="form-group col-md-4">
+                <asp:Label ID="lbStockMinimoDetalle" runat="server" Text="Stock Minimo" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtStockMinimoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                <asp:Label ID="lbPrecioCompraDetalle" runat="server" Text="Precio de Compra" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPrecioCompraDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                <asp:Label ID="lbPrecioVentaDetalle" runat="server" Text="Precio de Venta" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPrecioVentaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                <asp:Label ID="lbAcumulativoDetalle" runat="server" Text="Acumulativo" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtAcumulativoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                <asp:Label ID="lbAplicaDescuentoDetalle" runat="server" Text="Aplica para Descuento" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtAplicaDescuentoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                <asp:Label ID="lbPorcientoDescuentoDetalle" runat="server" Text="% de Descuento" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPorcientoDescuentoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+                           <div class="form-group col-md-4">
+                                  <!--ESPACIO DISPONIBLE-->
+            </div>
+
+                           <div class="form-group col-md-12">
+                <asp:Label ID="lbComentarioDetalle" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtComentarioDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+        </div>
     </div>
 </asp:Content>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace DSMarketWeb.Solution
 {
@@ -16,7 +17,8 @@ namespace DSMarketWeb.Solution
 
         protected void btnIngresarSistema_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Paginas/MenuPrincipal.aspx");
+            //Response.Redirect("Paginas/MenuPrincipal.aspx");
+            FormsAuthentication.RedirectFromLoginPage("", false);
      
         }
     }
