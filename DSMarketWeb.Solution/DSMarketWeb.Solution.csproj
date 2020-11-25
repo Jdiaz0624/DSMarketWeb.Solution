@@ -84,6 +84,7 @@
     <Content Include="Paginas\Inventario\MantenimientoCondiciones.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoMarcas.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoModelos.aspx" />
+    <Content Include="Paginas\Inventario\MantenimientoProductosServicios.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoSuplidores.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoTipoSuplidor.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoUnidadMedida.aspx" />
@@ -249,6 +250,13 @@
     </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoModelos.aspx.designer.cs">
       <DependentUpon>MantenimientoModelos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoProductosServicios.aspx.cs">
+      <DependentUpon>MantenimientoProductosServicios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\MantenimientoProductosServicios.aspx.designer.cs">
+      <DependentUpon>MantenimientoProductosServicios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoSuplidores.aspx.cs">
       <DependentUpon>MantenimientoSuplidores.aspx</DependentUpon>

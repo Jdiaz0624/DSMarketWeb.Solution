@@ -41,7 +41,7 @@ namespace DSMarketWeb.Solution.MasterPage
        //INICIO DEL MODULO DE INVENTARIO
         protected void LinkProductos_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoProductosServicios.aspx");
         }
 
         protected void LinkMantenimientoCategoria_Click(object sender, EventArgs e)
