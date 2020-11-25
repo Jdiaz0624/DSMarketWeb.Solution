@@ -76,7 +76,7 @@
               <div class="form-row">
                   <div class="form-group col-md-4">
                       <asp:Label ID="lbUnidadMedidaMantenimiento" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>
-                  <asp:TextBox ID="txtUnidadMedidaMantenimiento" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                  <asp:TextBox ID="txtUnidadMedidaMantenimiento" AutoCompleteType="Disabled" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
                   </div>
               </div>
               <div class="form-check-inline">

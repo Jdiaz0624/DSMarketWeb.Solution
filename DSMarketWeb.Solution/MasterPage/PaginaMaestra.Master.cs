@@ -56,37 +56,37 @@ namespace DSMarketWeb.Solution.MasterPage
 
         protected void LinkMantenimientomarcas_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoMarcas.aspx");
         }
 
         protected void LinkMantenimientoModelos_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoModelos.aspx");
         }
 
         protected void LinkTipoSuplidores_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoTipoSuplidor.aspx");
         }
 
         protected void LinkSuplidores_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoSuplidores.aspx");
         }
 
         protected void LinkCapacidad_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoCapacidad.aspx");
         }
 
         protected void LinkColores_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoColores.aspx");
         }
 
         protected void LinkCondicion_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoCondiciones.aspx");
         }
         //FIN DEL MODULO DE INVENTARIO
 

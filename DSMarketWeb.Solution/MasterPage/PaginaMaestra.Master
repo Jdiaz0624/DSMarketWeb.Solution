@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
       <title>DSMarket</title>
+    <link rel="icon" type="image/png" href="../Recursos/Facturación-Electrónica-Icono-1024x1024.ico" />
     <link href="../Estilos/EstilosMaster.css" rel="stylesheet" type="text/css" />
     <link type="text/css" href="../Content/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>

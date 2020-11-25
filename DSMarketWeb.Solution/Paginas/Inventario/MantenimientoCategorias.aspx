@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbCategoriaMantenimiento" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtCategoriaMantenimiento" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtCategoriaMantenimiento" AutoCompleteType="Disabled" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
             <div class="form-check-inline">
