@@ -51,7 +51,7 @@ namespace DSMarketWeb.Solution.MasterPage
 
         protected void LinkMantenimientoUnidadMedida_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+            Response.Redirect("~/Paginas/Inventario/MantenimientoUnidadMedida.aspx");
         }
 
         protected void LinkMantenimientomarcas_Click(object sender, EventArgs e)

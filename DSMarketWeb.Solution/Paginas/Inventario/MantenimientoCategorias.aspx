@@ -37,8 +37,8 @@
         </div>
          <div align="center">
          <asp:Button ID="btnConsultar" runat="server" Text="Buscar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnConsultar_Click" />
-         <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoEmpleados">Nuevo</button>
-         <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoEmpleados">Modificar</button>
+         <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoCapacidad">Nuevo</button>
+         <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoCapacidad">Modificar</button>
          <asp:Button ID="btnRestabelcer" runat="server" Text="Atras" ToolTip="Atras" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnRestabelcer_Click" />
          <asp:Button ID="btnExportar" runat="server"  Text="Exportar" ToolTip="Exportar a exel" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnExportar_Click" />
         </div>
@@ -57,6 +57,7 @@
                     <asp:BoundField DataField="#" HeaderText="ID" />
                     <asp:BoundField DataField="#" HeaderText="Tipo de Producto" />
                     <asp:BoundField DataField="#" HeaderText="Categoria" />
+                     <asp:BoundField DataField="#" HeaderText="Estatus" />
                 </Columns  >
                  <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                 <HeaderStyle BackColor="#7BC5FF" HorizontalAlign="Center" Font-Bold="True" ForeColor="Black" />
@@ -70,7 +71,7 @@
             </asp:GridView>
         <br />
 
-      <div class="modal fade bd-example-modal-lg MantenimientoEmpleados" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-lg MantenimientoCapacidad" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="container-fluid">
