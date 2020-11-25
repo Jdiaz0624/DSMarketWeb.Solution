@@ -13,5 +13,60 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
 
         }
+
+        protected void ddlSeleccionarTipoProductoConsulta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarCategoriaConsulta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnConsultarRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRestablecer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnExportar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvListado_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void gvListado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarTipoProductoMantenimiento_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
