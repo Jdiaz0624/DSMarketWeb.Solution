@@ -30,6 +30,7 @@
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarRangoFechaConsulta" runat="server" Text="Agregar Rango de Fecha" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFechaConsulta_CheckedChanged" ToolTip="Agregar Rango de fecha en la consulta" />
+                <asp:CheckBox ID="cbReporteInventarioCompleto" runat="server" Text="Reporte Inventario Completo" ToolTip="Generar Reporte del Inventario Completo" />
             </div>
         </div>
 
@@ -112,12 +113,12 @@
         <!--BOTONES PRINCIPALES-->
         <div align="center">
             <asp:Button ID="btnBuscar" runat="server" Text="Consultar" OnClick="btnBuscar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Consultar Registros" />
-            <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Nuevo</button>
-            <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Editar</button>
-            <button type="button" id="btnEliminar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Eliminar</button>
-            <button type="button" id="btnSuplir" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Suplir</button>
+            <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Nuevo</button>
+            <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Editar</button>
+            <button type="button" id="btnEliminar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Eliminar</button>
+            <button type="button" id="btnSuplir" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPSuplirProducto">Suplir</button>
             <asp:Button ID="btnReporte" runat="server" Text="Reporte" OnClick="btnReporte_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Reporte de Inventario" />
-            <button type="button" id="btnDescartar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoModelos">Descartar</button>
+            <button type="button" id="btnDescartar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPDescartarProducto">Descartar</button>
             <asp:Button ID="btndetalle" runat="server" Text="Detalle" OnClick="btndetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Detalle del Producto" />
             <br />
         
@@ -177,77 +178,77 @@
         <!--CONTROLES PARA EL DETALLE-->
         <div class="form-row">
             <div class="form-group col-md-12">
-                <asp:Label ID="lbProductoDetalle" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtProductoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbProductoDetalle" runat="server" Visible="false" Text="Producto" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtProductoDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group col-md-4">
-                <asp:Label ID="lbTipoProductoDetalle" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtTipoProductoDetalle" runat="server" MaxLength="100" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-            <div class="form-group col-md-4">
-                <asp:Label ID="lbCategoriaDetalle" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtCategoriaDetalle" runat="server" MaxLength="100" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbTipoProductoDetalle" runat="server" Text="Tipo de Producto" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTipoProductoDetalle" runat="server" MaxLength="100" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="form-group col-md-4">
-                <asp:Label ID="lbUnidadMedidaDetalle" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtUnidadMedidaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbCategoriaDetalle" runat="server" Text="Categoria" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCategoriaDetalle" runat="server" MaxLength="100" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="form-group col-md-4">
-                <asp:Label ID="lbTipoSuplidorDetalle" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtTipoSuplidorDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbUnidadMedidaDetalle" runat="server" Visible="false" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtUnidadMedidaDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="form-group col-md-4">
-                <asp:Label ID="lbSuplidorDetalle" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtSuplidorDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbTipoSuplidorDetalle" runat="server" Visible="false" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTipoSuplidorDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbSuplidorDetalle" runat="server" Text="Suplidor" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtSuplidorDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                <div class="form-group col-md-4">
-                <asp:Label ID="lbCodigoBarraDetalle" runat="server" Text="Codigo de Barra" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtCodigoBarraDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbCodigoBarraDetalle" runat="server" Text="Codigo de Barra" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCodigoBarraDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                <div class="form-group col-md-4">
-                <asp:Label ID="lbReferenciaDetalle" runat="server" Text="Referencia" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtReferenciaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbReferenciaDetalle" runat="server" Text="Referencia" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtReferenciaDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                <div class="form-group col-md-4">
-                <asp:Label ID="lbStockDetalle" runat="server" Text="Stock" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtStockDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbStockDetalle" runat="server" Text="Stock" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtStockDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                <div class="form-group col-md-4">
-                <asp:Label ID="lbStockMinimoDetalle" runat="server" Text="Stock Minimo" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtStockMinimoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbStockMinimoDetalle" runat="server" Text="Stock Minimo" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtStockMinimoDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
-                <asp:Label ID="lbPrecioCompraDetalle" runat="server" Text="Precio de Compra" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtPrecioCompraDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbPrecioCompraDetalle" runat="server" Text="Precio de Compra" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPrecioCompraDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
-                <asp:Label ID="lbPrecioVentaDetalle" runat="server" Text="Precio de Venta" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtPrecioVentaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbPrecioVentaDetalle" runat="server" Text="Precio de Venta" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPrecioVentaDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
-                <asp:Label ID="lbAcumulativoDetalle" runat="server" Text="Acumulativo" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtAcumulativoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbAcumulativoDetalle" runat="server" Text="Acumulativo" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtAcumulativoDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
-                <asp:Label ID="lbAplicaDescuentoDetalle" runat="server" Text="Aplica para Descuento" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtAplicaDescuentoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbAplicaDescuentoDetalle" runat="server" Text="Aplica para Descuento" Visible="false" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtAplicaDescuentoDetalle" runat="server" Enabled="false" Visible="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
-                <asp:Label ID="lbPorcientoDescuentoDetalle" runat="server" Text="% de Descuento" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtPorcientoDescuentoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbPorcientoDescuentoDetalle" runat="server" Visible="false" Text="% de Descuento" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPorcientoDescuentoDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
                            <div class="form-group col-md-4">
@@ -255,10 +256,43 @@
             </div>
 
                            <div class="form-group col-md-12">
-                <asp:Label ID="lbComentarioDetalle" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtComentarioDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbComentarioDetalle" runat="server" Visible="false" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtComentarioDetalle" runat="server" Visible="false" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
         </div>
+        <br />
+        <div align="center">
+            <asp:Button ID="btnRegresarDetalle" runat="server" Text="Regresar" ToolTip="Ocultar los controles del detalle" OnClick="btnRegresarDetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" />
+        </div>
+        <br />
     </div>
+
+    <!--AQUI VAN TODOS LOS POPOS CARAJO, POR SI UN PENDEJO SE PONE A ANALIZAR MI CODIGO-->
+
+        <div class="modal fade bd-example-modal-lg POPOPMantenimiento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+
+        <div class="modal fade bd-example-modal-lg POPOPSuplirProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+
+        <div class="modal fade bd-example-modal-lg POPOPDescartarProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
 </asp:Content>

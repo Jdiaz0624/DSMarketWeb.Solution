@@ -79,7 +79,7 @@
         <br />
 
 
-                 <div class="modal fade bd-example-modal-lg MantenimientoMarcas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg MantenimientoMarcas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <asp:ScriptManager ID="ScripManagerMarcas" runat="server"></asp:ScriptManager>

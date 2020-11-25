@@ -31,6 +31,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario {
         protected global::System.Web.UI.WebControls.CheckBox cbAgregarRangoFechaConsulta;
         
         /// <summary>
+        /// cbReporteInventarioCompleto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbReporteInventarioCompleto;
+        
+        /// <summary>
         /// lbProductoConsulta control.
         /// </summary>
         /// <remarks>
@@ -641,5 +650,14 @@ namespace DSMarketWeb.Solution.Paginas.Inventario {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComentarioDetalle;
+        
+        /// <summary>
+        /// btnRegresarDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegresarDetalle;
     }
 }
