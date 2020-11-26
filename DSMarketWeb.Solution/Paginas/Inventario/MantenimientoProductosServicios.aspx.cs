@@ -211,7 +211,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Panel1.BackColor = System.Drawing.Color.Red;
+            lbRegistroDisponible.ForeColor = System.Drawing.Color.Green;
         }
 
         protected void cbAgregarRangoFechaConsulta_CheckedChanged(object sender, EventArgs e)
@@ -271,6 +272,21 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnRegresarDetalle_Click(object sender, EventArgs e)
         {
             OcultarControlesDetalle();
+        }
+
+        protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
