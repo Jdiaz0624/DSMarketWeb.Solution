@@ -263,7 +263,7 @@
         </div>
         <br />
         <div align="center">
-            <asp:Button ID="btnRegresarDetalle" runat="server" Text="Regresar" ToolTip="Ocultar los controles del detalle" OnClick="btnRegresarDetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" />
+            <asp:Button ID="btnRegresarDetalle" runat="server" Text="Regresar" Visible="false" ToolTip="Ocultar los controles del detalle" OnClick="btnRegresarDetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" />
         </div>
         <br />
     </div>
@@ -411,19 +411,193 @@
 </div>
 
 
-        <div class="modal fade bd-example-modal-lg POPOPSuplirProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade bd-example-modal-xl POPOPSuplirProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
+        <div class="container-fluid">
+            <div class="jumbotron" align="center">
+                <asp:Label ID="lbTituloSuplirProducto" runat="server" Text="Suplir / Sacar Productos"></asp:Label>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbTipoProducoSuplirTitulo" runat="server" Text="Tipo de Producto: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbTipoProducoSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbCategoriaSuplirTitulo" runat="server" Text="Categoria: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbCategoriaSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbUnidadMedidaSuplirTitulo" runat="server" Text="Unidad de Medida: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbUnidadMedidaSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbCodigoBarrasSuplirTitulo" runat="server" Text="Codigo de Barras: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbUnidadCodigoBarraVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPrecioCompraTitulo" runat="server" Text="Precio de Compra: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPrecioCompraVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPrecioVentaTitulo" runat="server" Text="Precio de Venta: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbprecioVentaVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbStockSuplirTitulo" runat="server" Text="Stock: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbStockSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbStockMinimoTitulo" runat="server" Text="Stock Minimo: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbStockMinimoVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbMarcaSuplitTitulo" runat="server" Text="Marca: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbMarcaSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbModeloSuplirTitulo" runat="server" Text="Modelo: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbModeloVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbTipoSuplidorSuplirTitulo" runat="server" Text="Tipo de Suplidor: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbTipoSuplidorVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbSuplidorSuplirTitulo" runat="server" Text="Suplidor: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSuplidorSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbReferenciaSuplirTitulo" runat="server" Text="Referencia: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbReferenciaSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPorcientoDescuentoSuplirTitulo" runat="server" Text="% de Descuento: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPorcientoDescuentoSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-12">
+                    <asp:Label ID="lbDescripcionSuplirTitulo" runat="server" Text="Descripción: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbDescripcionSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-12">
+                    <asp:Label ID="lbComentarioSuplirTitulo" runat="server" Text="Comentario: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbComentarioSuplirVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
 
+            </div>
+            <div class="form-check-inline">
+                <div class="form-group form-check">
+                    <asp:RadioButton ID="rbIngresarRegistros" runat="server" Text="Ingresar Producto" ToolTip="Ingresar Productos" GroupName="SUPLIRPRODUCTOS" CssClass="form-check-input" />
+                    <asp:RadioButton ID="rbSacarProductos" runat="server" Text="Sacar Producto" ToolTip="Sacar Productos" GroupName="SUPLIRPRODUCTOS" CssClass="form-check-input" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbCantidadRegistrosSuplir" runat="server" Text="Cantidad" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtCantidadSuplir" runat="server" TextMode="Number" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbClaveSeguridadSuplir" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtClaveSeguridadSuplir" runat="server" TextMode="Password" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                </div>
+            </div>
+
+            <div align="center">
+                <asp:Button ID="btnProcesarSuplr" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarSuplr_Click" />
+            </div>
+            <br />
+        </div>
     </div>
   </div>
 </div>
 
 
-        <div class="modal fade bd-example-modal-lg POPOPDescartarProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade bd-example-modal-xl POPOPDescartarProducto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
+        <div class="container-fluid">
+            <div class="jumbotron" align="center">
+                <asp:Label ID="lbTituloDescartarProducto" runat="server" Text="Descartar Productos"></asp:Label>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbTipoProducoDescartarTitulo" runat="server" Text="Tipo de Producto: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbTipoProducoDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbCategoriaDescartarTitulo" runat="server" Text="Categoria: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbCategoriaDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbUnidadMedidaDescartarTitulo" runat="server" Text="Unidad de Medida: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbUnidadMedidaDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbCodigoBarrasDescartarTitulo" runat="server" Text="Codigo de Barras: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbCodigoBarrasDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPrecioCompraDescartarTitulo" runat="server" Text="Precio de Compra: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPrecioCompraDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPrecioVentaDescartarTitulo" runat="server" Text="Precio de Venta: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbprecioVentaDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbStockDescartarTitulo" runat="server" Text="Stock: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbStockDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbStockMinimoDescartarTitulo" runat="server" Text="Stock Minimo: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbStockMinimoDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbMarcaDescartarTitulo" runat="server" Text="Marca: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbMarcaDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbModeloDescartarTitulo" runat="server" Text="Modelo: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbModeloDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbTipoSuplidorDescartarTitulo" runat="server" Text="Tipo de Suplidor: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbTipoSuplidorDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbSuplidorDescartarTitulo" runat="server" Text="Suplidor: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSuplidorDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbReferenciaDescartarTitulo" runat="server" Text="Referencia: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbReferenciaDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                  <div class="form-group col-md-6">
+                    <asp:Label ID="lbPorcientoDescuentoDescartarTitulo" runat="server" Text="% de Descuento: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPorcientoDescuentoDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                <div class="form-group col-md-12">
+                    <asp:Label ID="lbDescripcionDescartarTitulo" runat="server" Text="Descripción: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbDescripcionDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
+                 <div class="form-group col-md-12">
+                    <asp:Label ID="lbComentarioDescartarTitulo" runat="server" Text="Comentario: " CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbComentarioDescartarVariable" runat="server" Text="DATO" CssClass="Letranegrita"></asp:Label>
+                </div>
 
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <asp:Label ID="lbClaveSeguridadDescartar" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtClaveSeguridadDescartar" runat="server" TextMode="Password" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                </div>
+            </div>
+
+            <div align="center">
+                <asp:Button ID="btnProcesarDescartar" runat="server" Text="Procesar" ToolTip="Descartar Producto" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarDescartar_Click" />
+            </div>
+            <br />
+        </div>
     </div>
   </div>
 </div>

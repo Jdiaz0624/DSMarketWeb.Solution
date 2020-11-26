@@ -288,5 +288,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
 
         }
+
+        protected void btnProcesarSuplr_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnProcesarDescartar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
