@@ -17,6 +17,17 @@ body {
 }
 body { background-color: #465268; }
 
+#CentralizarLogin {
+       position:absolute;
+       top: 40%;
+       left: 50%;
+       width:30em;
+       height:18em;
+       margin-top: -9em; /*set to a negative number 1/2 of your height*/
+       margin-left: -15em; /*set to a negative number 1/2 of your width*/
+       /*border: 0px solid #ccc;
+       background-color: #f3f3f3;*/
+}
 .page-lock {
   margin: 90px auto 30px auto;
   width: 450px;
@@ -231,7 +242,7 @@ body { background-color: #465268; }
 <body>
     <form id="form1" runat="server">
         <div class="container">
-	<div class="page-lock">
+	<div class="page-lock"  id="CentralizarLogin">
     	<div class="page-body">
     		<div class="lock-head">
     			<asp:Label ID="NombreEmpresa" runat="server" Text="Tu Nombre Aqui"></asp:Label>
