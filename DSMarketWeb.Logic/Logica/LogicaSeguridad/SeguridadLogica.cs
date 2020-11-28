@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSMarketWeb.Logic.Logica.LogicaServicio
+namespace DSMarketWeb.Logica.Logica.LogicaSeguridad
 {
-    public class LogicaServicio
+    public class SeguridadLogica
     {
-       
     }
 }

@@ -235,7 +235,24 @@ body { background-color: #465268; }
         }
 </style>
 
-        
+        <script type="text/javascript">
+            function CamposVacios() {
+                alert("Has dejado campos vacios que son necesarios para realizar este proceso, favor de verificar");
+
+            }
+            function ClavesNoConcuerdan() {
+                alert("Las claves ingresada no concuerdan, favor de verificar");
+            }
+            function ErrorIngresoSistema() {
+                alert("Error al ingresar al sistema, favor de contactar con el administrador del sistema para solucionar este inconveniente");
+            }
+            function UsuarioNoValido() {
+                alert("El usuario ingresado no es valido, favor de verificar");
+            }
+            function UsuarioBloqueado() {
+                alert("Este usuario ha sido bloqueado, favor de contactar un administrador para desbloquear la cuenta");
+            }
+        </script>
 
 
 </head>
@@ -246,6 +263,7 @@ body { background-color: #465268; }
     	<div class="page-body">
     		<div class="lock-head">
     			<asp:Label ID="NombreEmpresa" runat="server" Text="Tu Nombre Aqui"></asp:Label>
+                <asp:Label ID="lbContador" Visible="false" runat="server" Text="0"></asp:Label>
     		</div>
     		<div class="lock-body">
     			
@@ -270,6 +288,7 @@ body { background-color: #465268; }
     				<div class="form-actions">
     					<div align="center">
                             <asp:Button ID="btnIngresarSistema" runat="server" Text="Entrar" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnIngresarSistema_Click" ToolTip="Ingrsar al Sistema" />
+                            <asp:Button ID="btnCambiarClave" runat="server" Visible="false" Text="Cambiar Clave" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCambiarClave_Click" ToolTip="Cambiar Clave" />
     					</div>
     				</div>
     			

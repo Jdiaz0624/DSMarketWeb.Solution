@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
 {
-    class LogicaConfiguracion
+    public class LogicaConfiguracion
     {
+        DSMarketWeb.Data.ConexionLINQ.BDConexionConfiguracionDataContext ObjData = new Data.ConexionLINQ.BDConexionConfiguracionDataContext(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+
+        #region MANTENIMIENTO DE INFORMACION DE EMPRESA
+        
+        #endregion
     }
 }
