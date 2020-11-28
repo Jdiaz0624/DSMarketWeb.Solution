@@ -9,6 +9,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 {
     public partial class MantenimientoProductosServicios : System.Web.UI.Page
     {
+        Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         private void EjemploGrafico() {
             /*
                decimal[] MontoFacturado = new decimal[10];
@@ -211,8 +212,11 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Panel1.BackColor = System.Drawing.Color.Red;
-            lbRegistroDisponible.ForeColor = System.Drawing.Color.Green;
+            if (!IsPostBack) {
+                Panel1.BackColor = System.Drawing.Color.Red;
+                lbRegistroDisponible.ForeColor = System.Drawing.Color.Green;
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProductoConsulta, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null), true);
+            }
         }
 
         protected void cbAgregarRangoFechaConsulta_CheckedChanged(object sender, EventArgs e)

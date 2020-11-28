@@ -12,6 +12,7 @@ namespace DSMarketWeb.Solution
     //
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
 
        
         private void IngresarSistema() {
@@ -111,7 +112,12 @@ namespace DSMarketWeb.Solution
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack) {
+                var SacarInformacionEmpresa = ObjDataConfiguracion.Value.BuscaInformacionEmpresa();
+                foreach (var n in SacarInformacionEmpresa) {
+                    lbNombreEmpresa.Text = n.NombreEmpresa;
+                }
+            }
         }
 
         protected void btnIngresarSistema_Click(object sender, EventArgs e)

@@ -262,7 +262,7 @@ body { background-color: #465268; }
 	<div class="page-lock"  id="CentralizarLogin">
     	<div class="page-body">
     		<div class="lock-head">
-    			<asp:Label ID="NombreEmpresa" runat="server" Text="Tu Nombre Aqui"></asp:Label>
+    			<asp:Label ID="lbNombreEmpresa" runat="server" Text="Tu Nombre Aqui"></asp:Label>
                 <asp:Label ID="lbContador" Visible="false" runat="server" Text="0"></asp:Label>
     		</div>
     		<div class="lock-body">
@@ -272,23 +272,23 @@ body { background-color: #465268; }
                          <!--TEXBOX-->
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <asp:TextBox ID="txtUsuarioLogin" AutoCompleteType="Disabled" runat="server" Placeholder="Usuario" CssClass="form-control" MaxLength="20"></asp:TextBox>
+                                <asp:TextBox ID="txtUsuarioLogin" AutoCompleteType="Disabled" runat="server" Placeholder="<%$ Resources:Traducciones,Usuario %>" CssClass="form-control" MaxLength="20"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-12">
-                                <asp:TextBox ID="txtClaveLogin" runat="server" Placeholder="Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
+                                <asp:TextBox ID="txtClaveLogin" runat="server" Placeholder="<%$ Resources:Traducciones,Clave %>" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
                             </div>
                              <div class="form-group col-md-12">
-                                <asp:TextBox ID="txtNuevaClave" Visible="false" runat="server" Placeholder="Nueva Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
+                                <asp:TextBox ID="txtNuevaClave" Visible="false" runat="server" Placeholder="<%$ Resources:Traducciones,NuevaClave %>" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
                             </div>
                              <div class="form-group col-md-12">
-                                <asp:TextBox ID="txtConfirmarClave" Visible="false" runat="server" Placeholder="Confirmar Clave" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
+                                <asp:TextBox ID="txtConfirmarClave" Visible="false" runat="server" Placeholder="<%$ Resources:Traducciones,ConfirmarClave %>" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>
                             </div>
                         </div>
     				</div>
     				<div class="form-actions">
     					<div align="center">
-                            <asp:Button ID="btnIngresarSistema" runat="server" Text="Entrar" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnIngresarSistema_Click" ToolTip="Ingrsar al Sistema" />
-                            <asp:Button ID="btnCambiarClave" runat="server" Visible="false" Text="Cambiar Clave" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCambiarClave_Click" ToolTip="Cambiar Clave" />
+                            <asp:Button ID="btnIngresarSistema" runat="server" Text="<%$ Resources:Traducciones,Ingresar %>" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnIngresarSistema_Click" ToolTip="<%$Resources:Traducciones,IngresarSistema %>" />
+                            <asp:Button ID="btnCambiarClave" runat="server" Visible="false" Text="<%$Resources:Traducciones,CambiarClave %>" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCambiarClave_Click" ToolTip="<%$Resources:Traducciones,CambiarClave %>" />
     					</div>
     				</div>
     			

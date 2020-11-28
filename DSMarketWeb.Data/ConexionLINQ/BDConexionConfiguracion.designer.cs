@@ -75,6 +75,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idInformacionEMpres, nombreEmpresa, rNC, direccion, email, email2, facebook, instagram, telefonos, idLogoEmpresa, accion);
 			return ((ISingleResult<SP_MODIFICAR_INFORMACION_EMPRESAResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_BUSCA_LISTAS_WEB")]
+		public ISingleResult<SP_BUSCA_LISTAS_WEBResult> SP_BUSCA_LISTAS_WEB([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreLista", DbType="VarChar(150)")] string nombreLista, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerFiltro", DbType="VarChar(150)")] string primerFiltro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoFiltro", DbType="VarChar(150)")] string segundoFiltro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TerceFiltro", DbType="VarChar(150)")] string terceFiltro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuartoFiltro", DbType="VarChar(150)")] string cuartoFiltro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QuintoFiltro", DbType="VarChar(150)")] string quintoFiltro)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombreLista, primerFiltro, segundoFiltro, terceFiltro, cuartoFiltro, quintoFiltro);
+			return ((ISingleResult<SP_BUSCA_LISTAS_WEBResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_SACAR_INFORMACION_EMPRESAResult
@@ -266,7 +273,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoEmpresa", DbType="Image")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoEmpresa", DbType="Image", CanBeNull=true)]
 		public System.Data.Linq.Binary LogoEmpresa
 		{
 			get
@@ -466,6 +473,86 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._IdLogoEmpresa != value))
 				{
 					this._IdLogoEmpresa = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_LISTAS_WEBResult
+	{
+		
+		private string _Descripcion;
+		
+		private string _PrimerValor;
+		
+		private string _SegundoValor;
+		
+		private string _TerceValor;
+		
+		public SP_BUSCA_LISTAS_WEBResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerValor", DbType="VarChar(150)")]
+		public string PrimerValor
+		{
+			get
+			{
+				return this._PrimerValor;
+			}
+			set
+			{
+				if ((this._PrimerValor != value))
+				{
+					this._PrimerValor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoValor", DbType="VarChar(150)")]
+		public string SegundoValor
+		{
+			get
+			{
+				return this._SegundoValor;
+			}
+			set
+			{
+				if ((this._SegundoValor != value))
+				{
+					this._SegundoValor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TerceValor", DbType="VarChar(150)")]
+		public string TerceValor
+		{
+			get
+			{
+				return this._TerceValor;
+			}
+			set
+			{
+				if ((this._TerceValor != value))
+				{
+					this._TerceValor = value;
 				}
 			}
 		}

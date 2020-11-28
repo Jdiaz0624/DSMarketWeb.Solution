@@ -35,6 +35,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
     <Compile Include="Comunes\SeguridadEncriptacion.cs" />
     <Compile Include="Comunes\UtilidadDrop.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
+    <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Logica\LogicaInventario\LogicaInventario.cs" />
     <Compile Include="Logica\LogicaSeguridad\LogicaSeguridad.cs" />
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
+    <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

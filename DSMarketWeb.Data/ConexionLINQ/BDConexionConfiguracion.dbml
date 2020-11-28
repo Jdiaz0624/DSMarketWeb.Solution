@@ -40,4 +40,18 @@
       <Column Name="IdLogoEmpresa" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="Configuracion.SP_BUSCA_LISTAS_WEB" Method="SP_BUSCA_LISTAS_WEB">
+    <Parameter Name="NombreLista" Parameter="nombreLista" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="PrimerFiltro" Parameter="primerFiltro" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="SegundoFiltro" Parameter="segundoFiltro" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="TerceFiltro" Parameter="terceFiltro" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="CuartoFiltro" Parameter="cuartoFiltro" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="QuintoFiltro" Parameter="quintoFiltro" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_BUSCA_LISTAS_WEBResult">
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PrimerValor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="SegundoValor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="TerceValor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

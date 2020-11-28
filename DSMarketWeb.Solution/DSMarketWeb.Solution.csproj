@@ -196,6 +196,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Traducciones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traducciones.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Traducciones.en.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traducciones.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="LoginSistema.aspx.cs">
       <DependentUpon>LoginSistema.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -320,7 +330,16 @@
       <Name>DSMarketWeb.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Traducciones.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Traducciones.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Traducciones.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Traducciones.en.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
