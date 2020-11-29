@@ -42,6 +42,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.CheckBox cbReporteInventarioCompleto;
 
         /// <summary>
+        /// cbGraficar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbGraficar;
+
+        /// <summary>
         /// lbProductoConsulta control.
         /// </summary>
         /// <remarks>

@@ -11,7 +11,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
-        private void EjemploGrafico() {
+        private void GraficarEstadistica() {
+          //  decimal[] CapitalInvertido[2]
+
             /*
                decimal[] MontoFacturado = new decimal[10];
             string[] NombreSupervisor = new string[10];
@@ -114,39 +116,53 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
              
              */
         }
+        private void GenerarNumeroAleatorio() {
+            Random NumeroAleatorio = new Random();
+            int Numero = NumeroAleatorio.Next(0, 999999999);
+            lbNumeroRegistroVariable.Text = Numero.ToString();
+        }
 
-        private void ListadoTipoProductoConsulta() {
+        #region LISTAS DESPLEGABLES DE LA PANTALLA DE CONSULTA
+        private void ListadoTipoProductoConsulta()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProductoConsulta, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaConsulta, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), null), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaConsulta, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString()), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloConsulta, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString(), ddlSeleccionarMarcaConsulta.SelectedValue.ToString()), true);
         }
-        private void ListadoCategoriasConsultas() {
+        private void ListadoCategoriasConsultas()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaConsulta, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), null), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaConsulta, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString()), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloConsulta, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString(), ddlSeleccionarMarcaConsulta.SelectedValue.ToString()), true);
         }
-        private void ListadoMarcasConsultas() {
+        private void ListadoMarcasConsultas()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaConsulta, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString()), true);
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloConsulta, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString(), ddlSeleccionarMarcaConsulta.SelectedValue.ToString()), true);
         }
-        private void ListadoModelosConsulta() {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloConsulta, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString(),ddlSeleccionarMarcaConsulta.SelectedValue.ToString()), true);
+        private void ListadoModelosConsulta()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloConsulta, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString(), ddlSeleccionarMarcaConsulta.SelectedValue.ToString()), true);
         }
-        private void ListadoUnidadmedidaCOnsulta() {
+        private void ListadoUnidadmedidaCOnsulta()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarUnidadMedidaConsulta, ObjDataConfiguracion.Value.BuscaListas("UNIDADMEDIDA", null, null), true);
         }
-        private void ListadoCapacidadCOnsulta() {
+        private void ListadoCapacidadCOnsulta()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCapacidadConsulta, ObjDataConfiguracion.Value.BuscaListas("CAPACIDAD", null, null), true);
         }
-        private void ListadoCondicionConsulta() {
+        private void ListadoCondicionConsulta()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCondicionConculta, ObjDataConfiguracion.Value.BuscaListas("CONDICION", null, null), true);
         }
-        private void ListadoColoresConsulta() {
+        private void ListadoColoresConsulta()
+        {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarColorConsulta, ObjDataConfiguracion.Value.BuscaListas("COLORES", null, null), true);
         }
-
-        private void CargarListadosConsultas() {
+        private void CargarListadosConsultas()
+        {
             ListadoTipoProductoConsulta();
             ListadoCategoriasConsultas();
             ListadoMarcasConsultas();
@@ -156,7 +172,172 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             ListadoCondicionConsulta();
             ListadoColoresConsulta();
         }
-        private void CargarListadosMantenimientos() { }
+        #endregion
+
+        #region LISTAS DESPLEGABLES DE LA PANTALLA DE MANTENIMIENTOS
+        private void ListadoTipoProductoMantenimiento()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProductoMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+        }
+        private void ListadoUnidadmedidaMantenimiento()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarUnidadMedidaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("UNIDADMEDIDA", null, null));
+        }
+        private void ListadoCapacidadMantenimiento()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCapacidadMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CAPACIDAD", null, null));
+        }
+        private void ListadoCondicionMantenimiento()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCondicionMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CONDICION", null, null));
+        }
+        private void ListadoColoresMantenimiento()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarColorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("COLORES", null, null));
+        }
+        private void ListadoTipoSplidoresMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoSuplidor, ObjDataConfiguracion.Value.BuscaListas("TIPOSUPLIDOR", null, null));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+        }
+        private void ListadoSuplidoresMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+        }
+        private void CargarListadosMantenimientos()
+        {
+            ListadoTipoProductoMantenimiento();
+            ListadoUnidadmedidaMantenimiento();
+            ListadoCapacidadMantenimiento();
+            ListadoCondicionMantenimiento();
+            ListadoColoresMantenimiento();
+            ListadoTipoSplidoresMantenimiento();
+            ListadoSuplidoresMantenimiento();
+        }
+        #endregion
+
+        /// <summary>
+        /// Este metodo es para configurar los controles para guardar un prducto.
+        /// </summary>
+        private void ControlesFacturarProductos() {
+            lbTipoProductoMntenimiento.Enabled = true;
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            lbCategoriaMantenimiento.Enabled = true;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = true;
+            lbSeleccionarUnidadMedida.Enabled = true;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = true;
+            lbMarcaMantenimiento.Enabled = true;
+            ddlseleccionarMarca.Enabled = true;
+            lbSeleccionarModeloMantenimiento.Enabled = true;
+            ddlSeleccionarModelo.Enabled = true;
+            lbSeleccionarColorMantenimiento.Enabled = true;
+            ddlSeleccionarColorMantenimiento.Enabled = true;
+            lbSeleccionarCapacidadMantenimiento.Enabled = true;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = true;
+            lbSeleccionarCondicionMantenimiento.Enabled = true;
+            ddlSeleccionarCondicionMantenimiento.Enabled = true;
+            lbNumeroSeguimientoMantenimiento.Enabled = true;
+            txtNumeroSeguimientoMantenimiento.Enabled = true;
+            lbPrecioCompraMantenimiento.Enabled = true;
+            txtPrecioCompraMantenimiento.Enabled = true;
+            lbPrecioVentaMantenimiento.Enabled = true;
+            txtPrecioVentaMantenimiento.Enabled = true;
+            lbCodigoBarraMantenimiento.Enabled = true;
+            txtCodigoBarraMantenimiento.Enabled = true;
+            lbStockMantenimiento.Enabled = true;
+            txtstockMantenimiento.Enabled = true;
+            lbStockMinimoMantenimiento.Enabled = true;
+            txtStockMinimoMantenimiento.Enabled = true;
+            lbReferenciaMantenimiento.Enabled = true;
+            txtReferenciaMantenimiento.Enabled = true;
+            lbSeleccionarTipoSuplidorMantenimiento.Enabled = true;
+            ddlSeleccionarTipoSuplidor.Enabled = true;
+            lbSeleccionarSuplidorMantenimiento.Enabled = true;
+            ddlSuplidorMantenimiento.Enabled = true;
+            lbPorcientoDescuentoMantenimiento.Enabled = true;
+            txtPorcientoDescuentoMantenimiento.Enabled = true;
+            lbDescripcionMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = false;
+            lbComentarioMantenimiento.Enabled = true;
+            txtComentarioMantenimiento.Enabled = true;
+            cbAcumulativoMantenimiento.Enabled = true;
+            txtstockMantenimiento.Text = "1";
+            txtStockMinimoMantenimiento.Text = "1";
+            txtDescripcionMantenimiento.Text = string.Empty;
+            cbAcumulativoMantenimiento.Checked = false;
+            txtstockMantenimiento.Enabled = false;
+            txtStockMinimoMantenimiento.Enabled = false;
+
+            txtNumeroSeguimientoMantenimiento.Text = string.Empty;
+            txtPrecioCompraMantenimiento.Text = string.Empty;
+            txtcodigoBarraConsulta.Text = string.Empty;
+            txtReferenciaMantenimiento.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Este metodo es para configurar los controles para guardar un servicio.
+        /// </summary>
+        private void ControlesFacturarServicios() {
+            lbTipoProductoMntenimiento.Enabled = true;
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            lbCategoriaMantenimiento.Enabled = true;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = true;
+            lbSeleccionarUnidadMedida.Enabled = false;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = false;
+            lbMarcaMantenimiento.Enabled = false;
+            ddlseleccionarMarca.Enabled = false;
+            lbSeleccionarModeloMantenimiento.Enabled = false;
+            ddlSeleccionarModelo.Enabled = false;
+            lbSeleccionarColorMantenimiento.Enabled = false;
+            ddlSeleccionarColorMantenimiento.Enabled = false;
+            lbSeleccionarCapacidadMantenimiento.Enabled = false;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = false;
+            lbSeleccionarCondicionMantenimiento.Enabled = false;
+            ddlSeleccionarCondicionMantenimiento.Enabled = false;
+            lbNumeroSeguimientoMantenimiento.Enabled = false;
+            txtNumeroSeguimientoMantenimiento.Enabled = false;
+            lbPrecioCompraMantenimiento.Enabled = false;
+            txtPrecioCompraMantenimiento.Enabled = false;
+            lbPrecioVentaMantenimiento.Enabled = true;
+            txtPrecioVentaMantenimiento.Enabled = true;
+            lbCodigoBarraMantenimiento.Enabled = false;
+            txtCodigoBarraMantenimiento.Enabled = false;
+            lbStockMantenimiento.Enabled = false;
+            txtstockMantenimiento.Enabled = false;
+            lbStockMinimoMantenimiento.Enabled = false;
+            txtStockMinimoMantenimiento.Enabled = false;
+            lbReferenciaMantenimiento.Enabled = false;
+            txtReferenciaMantenimiento.Enabled = false;
+            lbSeleccionarTipoSuplidorMantenimiento.Enabled = false;
+            ddlSeleccionarTipoSuplidor.Enabled = false;
+            lbSeleccionarSuplidorMantenimiento.Enabled = false;
+            ddlSuplidorMantenimiento.Enabled = false;
+            lbPorcientoDescuentoMantenimiento.Enabled = true;
+            txtPorcientoDescuentoMantenimiento.Enabled = true;
+            lbDescripcionMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = true;
+            lbComentarioMantenimiento.Enabled = true;
+            txtComentarioMantenimiento.Enabled = true;
+            cbAcumulativoMantenimiento.Enabled = false;
+
+            txtstockMantenimiento.Text = "1";
+            txtStockMinimoMantenimiento.Text = "1";
+            txtDescripcionMantenimiento.Text = string.Empty;
+            cbAcumulativoMantenimiento.Checked = false;
+
+            txtNumeroSeguimientoMantenimiento.Text = "0";
+            txtPrecioCompraMantenimiento.Text = "0";
+            txtcodigoBarraConsulta.Text = "0";
+            txtReferenciaMantenimiento.Text = "0";
+        }
+
+
+
+
+
 
         private void MostrarListadoProductos() {
             string _Producto = string.IsNullOrEmpty(txtProductoConsulta.Text.Trim()) ? null : txtProductoConsulta.Text.Trim();
@@ -464,6 +645,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 Panel1.BackColor = System.Drawing.Color.Red;
                 lbRegistroDisponible.ForeColor = System.Drawing.Color.Green;
                 CargarListadosConsultas();
+                CargarListadosMantenimientos();
+                GenerarNumeroAleatorio();
                 ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
             }
         }
@@ -597,6 +780,68 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             ExportarRegistrosExel();
             ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+        }
+
+        protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+
+
+            int TipoProducto = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
+            if (TipoProducto == 1) {
+                ControlesFacturarProductos();
+            }
+            else if (TipoProducto == 2) {
+                ControlesFacturarServicios();
+            }
+        }
+
+        protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+        }
+
+        protected void ddlseleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+        }
+
+        protected void ddlSeleccionarTipoSuplidor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+        }
+
+        protected void cbAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAcumulativoMantenimiento.Checked == true) {
+                txtstockMantenimiento.Enabled = true;
+                txtStockMinimoMantenimiento.Enabled = true;
+            }
+            else {
+                txtstockMantenimiento.Enabled = false;
+                txtStockMinimoMantenimiento.Enabled = false;
+                txtstockMantenimiento.Text = "1";
+                txtStockMinimoMantenimiento.Text = "1";
+            }
+        }
+
+        protected void cbGraficar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbGraficar.Checked == true) {
+                lbGraficoProductoServicio.Visible = true;
+                GraProductoServicio.Visible = true;
+                lbEstadisticaCapital.Visible = true;
+                GraEstadisticaCapital.Visible = true;
+            }
+            else {
+                lbGraficoProductoServicio.Visible = false;
+                GraProductoServicio.Visible = false;
+                lbEstadisticaCapital.Visible = false;
+                GraEstadisticaCapital.Visible = false;
+            }
         }
     }
 }

@@ -70,8 +70,154 @@
         }
 
         $(document).ready(function () {
+            $("#btnNuevo").click(function () {
+                $("#<%=btnGuardarMantenimiento.ClientID%>").show();
 
+                $("#<%=btnModificarMantenimiento.ClientID%>").hide();
+                $("#<%=btnEliminarMantenimiento.ClientID%>").hide();
+            });
 
+            $("#btnModificar").click(function () {
+                $("#<%=btnModificarMantenimiento.ClientID%>").show();
+
+                $("#<%=btnGuardarMantenimiento.ClientID%>").hide();
+                $("#<%=btnEliminarMantenimiento.ClientID%>").hide();
+            });
+
+            $("#btnEliminar").click(function () {
+                $("#<%=btnEliminarMantenimiento.ClientID%>").show();
+
+                $("#<%=btnModificarMantenimiento.ClientID%>").hide();
+                $("#<%=btnGuardarMantenimiento.ClientID%>").hide();
+            });
+
+            //FUNCION DE VALIDACON DEL BOTON GUARDAR
+            $("#<%=btnGuardarMantenimiento.ClientID%>").click(function () {
+                //VALIDAMOS EL CAMPO TIPO DE PRODUCTO
+                var ValidarTipoProducto = $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").val();
+                if (ValidarTipoProducto < 1) {
+                    alert("El campo Tipo de Prducto no puede estar vacio, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").css("border-color", "Red");
+                    return false;
+                }
+                else {
+                    //VALIDAMOS EL CAMPO CATEGORIA
+                    var ValidarCategoria = $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").val();
+                    if (ValidarCategoria < 1) {
+                        alert("El campo categoria no puede estar vacio para realizar esta operación, favor de veriicar");
+                        $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        //VALIDAMOS EL CAMPO UNIDAD DE MEDIDA
+                        var ValidarUnidadMedida = $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").val();
+                        if (ValidarUnidadMedida < 1) {
+                            alert("El campo Unidad de medida no puede estar vacio para realizar esta operación, favor de verificar");
+                            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var ValidarCampoMarca = $("#<%=ddlseleccionarMarca.ClientID%>").val();
+                            if (ValidarCampoMarca < 1) {
+                                alert("El campo marca no puede estar vacio, favor de verificar");
+                                $("#<%=ddlseleccionarMarca.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var ValidarModelo = $("#<%=ddlSeleccionarModelo.ClientID%>").val();
+                                if (ValidarModelo < 1) {
+                                    alert("El campo modelo no puede estar vacio, favor de verificar");
+                                    $("#<%=ddlSeleccionarModelo.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var ValidarColor = $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").val();
+                                    if (ValidarColor < 1) {
+                                        alert("El campo color no puede estar vacio, favor de verificar");
+                                        $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var ValidarCapacidad = $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").val();
+                                        if (ValidarCapacidad < 1) {
+                                            alert("El campo capacidad no puede estar vacio, favor de verificar");
+                                            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var ValidarCondicion = $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").val();
+                                            if (ValidarCondicion < 1) {
+                                                alert("El campo condicion no puede estar vacio, favor de verificar");
+                                                $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var ValidarPrecioCompra = $("#<%=txtPrecioCompraMantenimiento.ClientID%>").val().length;
+                                                if (ValidarPrecioCompra < 1) {
+                                                    alert("El campo precio de compra no puede estar vacio para guardar este registro");
+                                                    $("#<%=txtPrecioCompraMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var ValidarPrecioVenta = $("#<%=txtPrecioVentaMantenimiento.ClientID%>").val().length;
+                                                    if (ValidarPrecioVenta < 1) {
+                                                        alert("El campo precio de venta no puede estar vacio para realizar esta operación");
+                                                        $("#<%=txtPrecioVentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var ValidarStock = $("#<%=txtstockMantenimiento.ClientID%>").val().length;
+                                                        if (ValidarStock < 1) {
+                                                            alert("El campo stock no puede estar vacio, favor de verificar");
+                                                            $("#<%=txtstockMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var ValidarStockMinimo = $("#<%=txtStockMinimoMantenimiento.ClientID%>").val().length;
+                                                            if (ValidarStockMinimo < 1) {
+                                                                alert("El campo stock minimo no puede estar vacio para guardar este rgistro, favor de verificar");
+                                                                $("#<%=txtStockMinimoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var ValidarTipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").val();
+                                                                if (ValidarTipoSuplidor < 1) {
+                                                                    alert("El campo tipo de suplidor no puede estar vacio para realizar esta operación, favor de verificar");
+                                                                    $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ValidarSuplidores = $("#<%=ddlSuplidorMantenimiento.ClientID%>").val();
+                                                                    if (ValidarSuplidores < 1) {
+                                                                        alert("El campo suplidor no puede estar vacio para realizar esta operación");
+                                                                        $("#<%=ddlSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ValidarPorcientoDescuento = $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").val().length;
+                                                                        if (ValidarPorcientoDescuento < 1) {
+                                                                            alert("El campo Porciento de descuento no puede estar vacio, favor de verificar");
+                                                                            $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                               
+                            }
+                        }
+                    }
+                }
+
+            });
         })
         
     </script>
@@ -84,6 +230,7 @@
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarRangoFechaConsulta" runat="server" Text="Agregar Rango de Fecha" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFechaConsulta_CheckedChanged" ToolTip="Agregar Rango de fecha en la consulta" />
                 <asp:CheckBox ID="cbReporteInventarioCompleto" runat="server" Text="Reporte Inventario Completo" ToolTip="Generar Reporte del Inventario Completo" />
+                <asp:CheckBox ID="cbGraficar" runat="server" Text="Graficar" ToolTip="Graficar Registros" AutoPostBack="true" OnCheckedChanged="cbGraficar_CheckedChanged" />
             </div>
         </div>
 
@@ -158,14 +305,12 @@
              <div class="form-group col-md-3">
                 <asp:Label ID="lbSeleccionarColorConsulta" runat="server" Text="Color" CssClass="Letranegrita"></asp:Label>
                 <asp:DropDownList ID="ddlSeleccionarColorConsulta" runat="server"  ToolTip="Seleccionar Color" CssClass="form-control"></asp:DropDownList>
-            </div>
-
         </div>
 
-
+             </div>
         <!--BOTONES PRINCIPALES-->
         <div align="center">
-            <asp:Button ID="btnBuscar" runat="server" Text="Consultar" OnClick="btnBuscar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Consultar Registros" />
+            <asp:Button ID="btnBuscar" runat="server" Text="Consultar"  OnClick="btnBuscar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Consultar Registros" />
             <asp:Button ID="btnExportar" runat="server" Text="Exportar" OnClick="btnExportar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Exportar Registros" />
             <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Nuevo</button>
             <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Editar</button>
@@ -339,17 +484,17 @@
                     <div align="center">
                         <asp:Label ID="lbNumeroRegistroInventario" runat="server" Text="Numero de Registro: " CssClass="Letranegrita"></asp:Label>
                     <asp:Label ID="lbNumeroRegistroVariable" runat="server" Text="0000000000" CssClass="Letranegrita"></asp:Label>
-                         <asp:Label ID="lbRegistroDisponible" runat="server" Text="Registro Disponible" CssClass="Letranegrita"></asp:Label>
+                         <asp:Label ID="lbRegistroDisponible" runat="server" Visible="false" Text="Registro Disponible" CssClass="Letranegrita"></asp:Label>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbTipoProductoMntenimiento" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
-                            <asp:DropDownList ID="ddlSeleccionarTipoProductoMantenimiento" runat="server" ToolTip="Seleccionar el tipo de producto" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlSeleccionarTipoProductoMantenimiento" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged" ToolTip="Seleccionar el tipo de producto" CssClass="form-control"></asp:DropDownList>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbCategoriaMantenimiento" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
-                            <asp:DropDownList ID="ddlSeleccionarCategoriaMantenimiento" runat="server" ToolTip="Seleccionar Categorias" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlSeleccionarCategoriaMantenimiento" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged" ToolTip="Seleccionar Categorias" CssClass="form-control"></asp:DropDownList>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -359,7 +504,7 @@
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbMarcaMantenimiento" runat="server" Text="Marca" CssClass="Letranegrita"></asp:Label>
-                            <asp:DropDownList ID="ddlseleccionarMarca" runat="server" ToolTip="Seleccionar Marca" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlseleccionarMarca" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlseleccionarMarca_SelectedIndexChanged" ToolTip="Seleccionar Marca" CssClass="form-control"></asp:DropDownList>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -384,42 +529,42 @@
 
                          <div class="form-group col-md-4">
                             <asp:Label ID="lbNumeroSeguimientoMantenimiento" runat="server" Text="Numero de Seguimiento" CssClass="Letranegrita"></asp:Label>
-                          <asp:TextBox ID="txtNumeroSeguimientoMantenimiento" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                          <asp:TextBox ID="txtNumeroSeguimientoMantenimiento" runat="server" TextMode="SingleLine" AutoCompleteType="Disabled" MaxLength="100" CssClass="form-control"></asp:TextBox>
                         </div>
 
                          <div class="form-group col-md-4">
                             <asp:Label ID="lbPrecioCompraMantenimiento" runat="server" Text="Precio de Compra" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtPrecioCompraMantenimiento" runat="server" TextMode="Number" step="0.01" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtPrecioCompraMantenimiento" runat="server" AutoCompleteType="Disabled" TextMode="Number" step="0.01" MaxLength="20" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbPrecioVentaMantenimiento" runat="server" Text="Precio de Venta" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtPrecioVentaMantenimiento" runat="server" TextMode="Number" step="0.01" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtPrecioVentaMantenimiento" runat="server" AutoCompleteType="Disabled" TextMode="Number" step="0.01" MaxLength="20" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbCodigoBarraMantenimiento" runat="server" Text="Codigo de Barra" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtCodigoBarraMantenimiento" runat="server"  MaxLength="50" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtCodigoBarraMantenimiento" runat="server" AutoCompleteType="Disabled" MaxLength="50" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbStockMantenimiento" runat="server" Text="Stock" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtstockMantenimiento" runat="server" TextMode="Number"   CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtstockMantenimiento" runat="server" Enabled="false" Text="1" TextMode="Number" AutoCompleteType="Disabled"  CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbStockMinimoMantenimiento" runat="server" Text="Stock Minimo" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtStockMinimoMantenimiento" runat="server" TextMode="Number"   CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtStockMinimoMantenimiento" runat="server" Enabled="false" Text="1" TextMode="Number" AutoCompleteType="Disabled"  CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-4">
                             <asp:Label ID="lbReferenciaMantenimiento" runat="server" Text="Referencia" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtReferenciaMantenimiento" runat="server"    CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtReferenciaMantenimiento" runat="server"  AutoCompleteType="Disabled"  CssClass="form-control"></asp:TextBox>
                         </div>
 
                          <div class="form-group col-md-4">
                             <asp:Label ID="lbSeleccionarTipoSuplidorMantenimiento" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
-                            <asp:DropDownList ID="ddlSeleccionarTipoSuplidor" runat="server" ToolTip="Seleccionar Tipo de Suplidor" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlSeleccionarTipoSuplidor" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoSuplidor_SelectedIndexChanged" ToolTip="Seleccionar Tipo de Suplidor" CssClass="form-control"></asp:DropDownList>
                         </div>
 
                          <div class="form-group col-md-4">
@@ -429,17 +574,17 @@
 
                          <div class="form-group col-md-4">
                             <asp:Label ID="lbPorcientoDescuentoMantenimiento" runat="server" Text="% de descuento" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtPorcientoDescuentoMantenimiento" runat="server"    CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtPorcientoDescuentoMantenimiento" runat="server"  AutoCompleteType="Disabled"  CssClass="form-control"></asp:TextBox>
                         </div>
 
                          <div class="form-group col-md-12">
                             <asp:Label ID="lbDescripcionMantenimiento" runat="server" Text="Descripción" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtDescripcionMantenimiento" runat="server" Enabled="false"   CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtDescripcionMantenimiento" runat="server" Enabled="false"  AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                         </div>
 
                          <div class="form-group col-md-12">
                             <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
-                            <asp:TextBox ID="txtComentarioMantenimiento" runat="server"    CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtComentarioMantenimiento" runat="server" AutoCompleteType="Disabled"   CssClass="form-control"></asp:TextBox>
                         </div>
 
                     </div>
@@ -447,7 +592,7 @@
                     <div class="form-check-inline">
                         <div class="form-group form-check">
                             <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" ToolTip="Esta opcion es para establecer los productos a los cuales aplican para impuesto" CssClass="form-check-input" />
-                              <asp:CheckBox ID="cbAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" ToolTip="Esta opcion es para establecer los productos que son acumulativos" CssClass="form-check-input" />
+                              <asp:CheckBox ID="cbAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbAcumulativoMantenimiento_CheckedChanged" ToolTip="Esta opcion es para establecer los productos que son acumulativos" CssClass="form-check-input" />
                               <asp:CheckBox ID="cbNoLimpiarControles" runat="server" Text="No limpiar controles" ToolTip="Esta Opcion es para no limpiar los controles al momento guardar un registro" CssClass="form-check-input" />
                         </div>
                     </div>
