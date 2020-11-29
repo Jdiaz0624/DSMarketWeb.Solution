@@ -238,7 +238,6 @@ body { background-color: #465268; }
         <script type="text/javascript">
             function CamposVacios() {
                 alert("Has dejado campos vacios que son necesarios para realizar este proceso, favor de verificar");
-
             }
             function ClavesNoConcuerdan() {
                 alert("Las claves ingresada no concuerdan, favor de verificar");

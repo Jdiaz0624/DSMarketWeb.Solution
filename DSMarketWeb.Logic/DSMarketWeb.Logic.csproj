@@ -51,6 +51,7 @@
     <Compile Include="Comunes\UtilidadDrop.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Logica\LogicaSeguridad\LogicaSeguridad.cs" />
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +71,6 @@
     <Folder Include="Entidades\EntidadesCaja\" />
     <Folder Include="Entidades\EntidadesContabilidad\" />
     <Folder Include="Entidades\EntidadesEmpresa\" />
-    <Folder Include="Entidades\EntidadesInventario\" />
     <Folder Include="Entidades\EntidadesServicio\" />
   </ItemGroup>
   <ItemGroup>

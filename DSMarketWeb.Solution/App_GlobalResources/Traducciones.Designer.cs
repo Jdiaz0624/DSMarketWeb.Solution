@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Citas.
+        /// </summary>
+        internal static string Citas {
+            get {
+                return ResourceManager.GetString("Citas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clave.
         /// </summary>
         internal static string Clave {
@@ -84,6 +93,24 @@ namespace Resources {
         internal static string ConfirmarClave {
             get {
                 return ResourceManager.GetString("ConfirmarClave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facturacion.
+        /// </summary>
+        internal static string Facturacion {
+            get {
+                return ResourceManager.GetString("Facturacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Historial de Facturación.
+        /// </summary>
+        internal static string HistorialFacturacion {
+            get {
+                return ResourceManager.GetString("HistorialFacturacion", resourceCulture);
             }
         }
         
@@ -106,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inicio.
+        /// </summary>
+        internal static string Inicio {
+            get {
+                return ResourceManager.GetString("Inicio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nueva Clave.
         /// </summary>
         internal static string NuevaClave {
@@ -120,6 +156,24 @@ namespace Resources {
         internal static string Seleccionar {
             get {
                 return ResourceManager.GetString("Seleccionar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Servicio.
+        /// </summary>
+        internal static string Servicio {
+            get {
+                return ResourceManager.GetString("Servicio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo de Pago.
+        /// </summary>
+        internal static string TipoPago {
+            get {
+                return ResourceManager.GetString("TipoPago", resourceCulture);
             }
         }
         

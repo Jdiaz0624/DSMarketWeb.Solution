@@ -21,7 +21,60 @@
         .Letranegrita {
         font-weight:bold;
         }
+
+        .hiddenGrid
+     {
+         display:none;
+     }
     </style>
+
+    <script type="text/javascript">
+
+      
+        function CamposFechaVacios() {
+            alert("No puede dejar los campos fechas vacios para buscar por este tipo de filtro");
+        }
+        function CampoFechaDesdeVacio() {
+            $("#<%=txtFechaDesdeConsulta.ClientID%>").css("border-color", "red");
+        }
+        function CampoFechaHastaVacio() {
+            $("#<%=txtFechaHastaConsulta.ClientID%>").css("border-color", "red");
+        }
+
+        function BotonesModoNormal() {
+            $("#<%=btnBuscar.ClientID%>").removeAttr("disabled", true);
+            $("#<%=btnExportar.ClientID%>").removeAttr("disabled", true);
+            $("#btnNuevo").removeAttr("disabled", true);
+            $("#<%=btnReporte.ClientID%>").removeAttr("disabled", true);
+
+
+            $("#btnModificar").attr("disabled", "disabled");
+            $("#btnEliminar").attr("disabled", "disabled");
+            $("#btnSuplir").attr("disabled", "disabled");
+            $("#btnDescartar").attr("disabled", "disabled");
+            $("#<%=btndetalle.ClientID%>").attr("disabled", "disabled");
+        }
+        function BotonesModoSelect() {
+            $("#btnModificar").removeAttr("disabled", true);
+            $("#btnEliminar").removeAttr("disabled", true);
+            $("#btnSuplir").removeAttr("disabled", true);
+            $("#btnDescartar").removeAttr("disabled", true);
+            $("#<%=btndetalle.ClientID%>").removeAttr("disabled", true);
+
+
+            $("#<%=btnBuscar.ClientID%>").attr("disabled", "disabled");
+            $("#<%=btnExportar.ClientID%>").attr("disabled", "disabled");
+            $("#btnNuevo").attr("disabled", "disabled");
+            $("#<%=btnReporte.ClientID%>").attr("disabled", "disabled");
+
+        }
+
+        $(document).ready(function () {
+
+
+        })
+        
+    </script>
 
     <div class="container-fluid">
         <div class="jumbotron" align="center" >
@@ -113,6 +166,7 @@
         <!--BOTONES PRINCIPALES-->
         <div align="center">
             <asp:Button ID="btnBuscar" runat="server" Text="Consultar" OnClick="btnBuscar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Consultar Registros" />
+            <asp:Button ID="btnExportar" runat="server" Text="Exportar" OnClick="btnExportar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Exportar Registros" />
             <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Nuevo</button>
             <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Editar</button>
             <button type="button" id="btnEliminar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Eliminar</button>
@@ -124,7 +178,37 @@
         
 
 
-             <asp:Label ID="lbGraficoProductoServicio" runat="server" Visible="false" Text="Productos / Servicios" CssClass="Letranegrita"></asp:Label>
+           
+
+
+
+        </div>
+        <br />
+         <asp:GridView ID="gvListado" runat="server" AllowPaging="true" OnPageIndexChanging="gvListado_PageIndexChanging" OnSelectedIndexChanged="gvListado_SelectedIndexChanged" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <Columns>
+                   <%-- <%$ Resources:Traducciones,OrdenNivel %>--%>
+                    <asp:CommandField ButtonType="Button" HeaderText="Seleccionar"  ControlStyle-CssClass="btn btn-outline-secondary btn-sm" SelectText="Seleccionar" ShowSelectButton="True" />
+                    <asp:BoundField DataField="IdProducto" HeaderText="ID" HeaderStyle-CssClass="hiddenGrid" ItemStyle-CssClass="hiddenGrid" />
+                    <asp:BoundField DataField="Producto" HeaderText="Producto" />
+                    <asp:BoundField DataField="TipoProducto" HeaderText="Tipo" />
+                    <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
+                    <asp:BoundField DataField="Stock" HeaderText="Stock" DataFormatString="{0:N0}" HtmlEncode="false" />
+                    <asp:BoundField DataField="PrecioVenta" HeaderText="Precio" DataFormatString="{0:N2}" HtmlEncode="false" />
+              
+                </Columns  >
+                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                <HeaderStyle BackColor="#7BC5FF" HorizontalAlign="Center" Font-Bold="True" ForeColor="Black" />
+                <PagerStyle BackColor="#7BC5FF" ForeColor="Black" HorizontalAlign="Center" />
+                <RowStyle BackColor="#EEEEEE" HorizontalAlign="Center" ForeColor="Black" />
+                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#000065" />
+            </asp:GridView>
+        <br />
+          <asp:Label ID="lbGraficoProductoServicio" runat="server" Visible="false" Text="Productos / Servicios" CssClass="Letranegrita"></asp:Label>
            <br />
             <asp:Chart ID="GraProductoServicio" Width="1012px" Visible="False" runat="server" Palette="Pastel">
            <Series>
@@ -146,35 +230,7 @@
                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
            </ChartAreas>
        </asp:Chart>
-
-
-
-        </div>
         <br />
-         <asp:GridView ID="gvListado" runat="server" AllowPaging="true" OnPageIndexChanging="gvListado_PageIndexChanging" OnSelectedIndexChanged="gvListado_SelectedIndexChanged" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                <Columns>
-                   <%-- <%$ Resources:Traducciones,OrdenNivel %>--%>
-                    <asp:CommandField ButtonType="Button" HeaderText="Seleccionar"  ControlStyle-CssClass="btn btn-outline-secondary btn-sm" SelectText="Seleccionar" ShowSelectButton="True" />
-                    <asp:BoundField DataField="#" HeaderText="ID" />
-                    <asp:BoundField DataField="#" HeaderText="Producto" />
-                    <asp:BoundField DataField="#" HeaderText="Tipo" />
-                    <asp:BoundField DataField="#" HeaderText="Categoria" />
-                    <asp:BoundField DataField="#" HeaderText="Precio" />
-              
-                </Columns  >
-                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <HeaderStyle BackColor="#7BC5FF" HorizontalAlign="Center" Font-Bold="True" ForeColor="Black" />
-                <PagerStyle BackColor="#7BC5FF" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" HorizontalAlign="Center" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#000065" />
-            </asp:GridView>
-        <br />
-
         <!--CONTROLES PARA EL DETALLE-->
         <div class="form-row">
             <div class="form-group col-md-12">

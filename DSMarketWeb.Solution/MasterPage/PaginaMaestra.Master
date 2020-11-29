@@ -25,22 +25,22 @@
          
                         <ul class="navbar-nav">
                           <li class="nav-item">
-                              <asp:LinkButton ID="lbPaginaInicioSistema" runat="server" CssClass="nav-link active" OnClick="lbPaginaInicioSistema_Click" Text="Inicio"></asp:LinkButton>
+                              <asp:LinkButton ID="lbPaginaInicioSistema" runat="server" CssClass="nav-link active" OnClick="lbPaginaInicioSistema_Click" Text="<%$Resources:Traducciones,Inicio %>"></asp:LinkButton>
                 <%--            <asp:LinkButton ID="LinkInicio" runat="server"  class="nav-link active" Text="Inicio"  <img width="90px" <!--src="../Imagenes/Logo.png"--> /></asp:LinkButton>--%>
                           </li>
                           <li class="nav-item">
-                            <asp:LinkButton ID="LinkCitas" runat="server" ForeColor="Red" Text="Citas"  class="nav-link active"></asp:LinkButton>
+                            <asp:LinkButton ID="LinkCitas" runat="server" ForeColor="Red" Text="<%$Resources:Traducciones,Citas %>"  class="nav-link active"></asp:LinkButton>
                           </li>
                       
                           <!-- Dropdown -->
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  href="#" id="navbardrop" data-toggle="dropdown">
-                              Servicio
+                              <asp:Label ID="lbTituloServicio" runat="server" Text="<%$Resources:Traducciones,Servicio %>"></asp:Label>
                             </a>
                             <div class="dropdown-menu">
-                                <asp:LinkButton ID="LinkFacturacion" runat="server" Text="Facturacón" ToolTip="Pantalla de Facturación" OnClick="LinkFacturacion_Click" CssClass="dropdown-item"></asp:LinkButton>
-                                <asp:LinkButton ID="LinkTipoPago" runat="server" Text="Tipo de Pago" ToolTip="Mantenimiento de Tipo de Pagos" OnClick="LinkTipoPago_Click" CssClass="dropdown-item"></asp:LinkButton>
-                                <asp:LinkButton ID="LinkHistorialFacturacion" runat="server" Text="Historial de Facturacón" ToolTip="Pantalla de Historial de Facturación" OnClick="LinkHistorialFacturacion_Click" CssClass="dropdown-item"></asp:LinkButton>                                
+                                <asp:LinkButton ID="LinkFacturacion" runat="server" Text="<%$Resources:Traducciones,Facturacion %>" ToolTip="Pantalla de Facturación" OnClick="LinkFacturacion_Click" CssClass="dropdown-item"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkTipoPago" runat="server" Text="<%$Resources:Traducciones,TipoPago %>" ToolTip="Mantenimiento de Tipo de Pagos" OnClick="LinkTipoPago_Click" CssClass="dropdown-item"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkHistorialFacturacion" runat="server" Text="<%$Resources:Traducciones,HistorialFacturacion %>" ToolTip="Pantalla de Historial de Facturación" OnClick="LinkHistorialFacturacion_Click" CssClass="dropdown-item"></asp:LinkButton>                                
                             </div>
                           </li>
 

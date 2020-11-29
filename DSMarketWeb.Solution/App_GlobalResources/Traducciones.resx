@@ -120,11 +120,20 @@
   <data name="CambiarClave" xml:space="preserve">
     <value>Cambiar Clave</value>
   </data>
+  <data name="Citas" xml:space="preserve">
+    <value>Citas</value>
+  </data>
   <data name="Clave" xml:space="preserve">
     <value>Clave</value>
   </data>
   <data name="ConfirmarClave" xml:space="preserve">
     <value>Confirmar Clave</value>
+  </data>
+  <data name="Facturacion" xml:space="preserve">
+    <value>Facturacion</value>
+  </data>
+  <data name="HistorialFacturacion" xml:space="preserve">
+    <value>Historial de Facturación</value>
   </data>
   <data name="Ingresar" xml:space="preserve">
     <value>Ingresar</value>
@@ -132,12 +141,21 @@
   <data name="IngresarSistema" xml:space="preserve">
     <value>Ingresar al sistema</value>
   </data>
+  <data name="Inicio" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
   <data name="NuevaClave" xml:space="preserve">
     <value>Nueva Clave</value>
   </data>
   <data name="Seleccionar" xml:space="preserve">
     <value>Seleccionar</value>
     <comment>Seleccion de los drop</comment>
+  </data>
+  <data name="Servicio" xml:space="preserve">
+    <value>Servicio</value>
+  </data>
+  <data name="TipoPago" xml:space="preserve">
+    <value>Tipo de Pago</value>
   </data>
   <data name="Usuario" xml:space="preserve">
     <value>Usuario</value>
