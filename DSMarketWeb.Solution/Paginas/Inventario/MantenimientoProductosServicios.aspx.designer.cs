@@ -339,6 +339,60 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Button btndetalle;
 
         /// <summary>
+        /// lbCapitalInvertidoTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCapitalInvertidoTitulo;
+
+        /// <summary>
+        /// lbCapitalInvertidoVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCapitalInvertidoVariable;
+
+        /// <summary>
+        /// lbCapitalInvertidoCerrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCapitalInvertidoCerrar;
+
+        /// <summary>
+        /// lbGananciaAproximadaTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbGananciaAproximadaTitulo;
+
+        /// <summary>
+        /// lbGananciaAproximadaVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbGananciaAproximadaVariable;
+
+        /// <summary>
+        /// lbGananciaAproximadaCerrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbGananciaAproximadaCerrar;
+
+        /// <summary>
         /// gvListado control.
         /// </summary>
         /// <remarks>

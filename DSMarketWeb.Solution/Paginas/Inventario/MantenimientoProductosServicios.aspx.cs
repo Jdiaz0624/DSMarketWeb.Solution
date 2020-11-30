@@ -384,6 +384,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         _Condicion,
                         null, false,
                         _NumeroSeguimiento);
+                    decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                  //  int TotalProductos = 0, TotalServicios = 0;
+                    foreach (var n in Buscar) {
+                        CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
+                        GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
+             
+                    }
+                    lbCapitalInvertidoVariable.Text = CapitalInvertido.ToString("N2");
+                    lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
                     gvListado.DataSource = Buscar;
                     gvListado.DataBind();
                 }
@@ -408,6 +417,16 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                        _Condicion,
                        null, false,
                        _NumeroSeguimiento);
+                decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                //  int TotalProductos = 0, TotalServicios = 0;
+                foreach (var n in Buscar)
+                {
+                    CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
+                    GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
+
+                }
+                lbCapitalInvertidoVariable.Text = CapitalInvertido.ToString("N2");
+                lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
                 gvListado.DataSource = Buscar;
                 gvListado.DataBind();
             }

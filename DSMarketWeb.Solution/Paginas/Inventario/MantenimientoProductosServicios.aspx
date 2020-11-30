@@ -320,10 +320,22 @@
             <button type="button" id="btnDescartar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPDescartarProducto">Descartar</button>
             <asp:Button ID="btndetalle" runat="server" Text="Detalle" OnClick="btndetalle_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Detalle del Producto" />
             <br />
-        
+        <asp:Label ID="lbCapitalInvertidoTitulo" runat="server" Text="Capital Invertido (" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCapitalInvertidoVariable" runat="server" Text="0" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCapitalInvertidoCerrar" runat="server" Text=")" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+
+            <asp:Label ID="lbGananciaAproximadaTitulo" runat="server" Text="Ganancia Aproximada (" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbGananciaAproximadaVariable" runat="server" Text="0" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbGananciaAproximadaCerrar" runat="server" Text=")" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+
+           <%--  <asp:Label ID="lbCantidadProductosTitulo" runat="server" Text="Total de Productos (" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCantidadProductosVariable" runat="server" Text="0" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCantidadProductosCerrar" runat="server" Text=")" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
 
 
-           
+             <asp:Label ID="lbCantidadServiciosTitulo" runat="server" Text="Total de Servicios (" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCantidadServiciosVariable" runat="server" Text="0" CssClass="Letranegrita" Font-Size="Small"></asp:Label>
+            <asp:Label ID="lbCantidadServiciosCerrar" runat="server" Text=")" CssClass="Letranegrita" Font-Size="Small"></asp:Label>--%>
 
 
 
