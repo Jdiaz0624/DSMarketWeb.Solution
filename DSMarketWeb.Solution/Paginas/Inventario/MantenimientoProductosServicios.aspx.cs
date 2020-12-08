@@ -736,7 +736,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 Convert.ToDecimal(gb.Cells[1].Text));
             gvListado.DataSource = ConsultarPorID;
             gvListado.DataBind();
-
+            decimal CapitalInvertido = 0, GananciaAproximada = 0;
             foreach (var n in ConsultarPorID) {
                 //SACAMOS LOS DATOS DEL DETALLE
 
@@ -760,107 +760,144 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtAplicaDescuentoDetalle.Text = n.AplicaParaImpuesto;
                 txtPorcientoDescuentoDetalle.Text = n.PorcientoDescuento.ToString();
                 txtComentarioDetalle.Text = n.Comentario;
+                CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
+                GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
+
+
+                //SACAMOS LOS DATOS DEL PRODUCTOS SELECCIONADO
+                #region SACAR LOS DATOS DEL PRODUCTO SELECCIONADO
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoProductoMantenimiento, n.IdTipoProducto.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarCategoriaMantenimiento, n.IdCategoria.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarUnidadMedidaMantenimiento, n.IdUnidadMedida.ToString());                
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlseleccionarMarca, n.IdMarca.ToString());           
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarModelo, n.IdModelo.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarColorMantenimiento, n.IdColor.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarCapacidadMantenimiento, n.IdCapacidad.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarCondicionMantenimiento, n.IdCondicion.ToString());
+                txtNumeroSeguimientoMantenimiento.Text = n.NumeroSeguimiento;
+                txtPrecioCompraMantenimiento.Text = n.PrecioCompra.ToString();
+                txtPrecioVentaMantenimiento.Text = n.PrecioVenta.ToString();
+                txtCodigoBarraMantenimiento.Text = n.CodigoBarra;
+                txtstockMantenimiento.Text = n.Stock.ToString();
+                txtStockMinimoMantenimiento.Text = n.StockMinimo.ToString();
+                txtReferenciaMantenimiento.Text = n.Referencia;
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoSuplidor, n.IdTipoSuplidor.ToString());
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSuplidorMantenimiento, n.IdSuplidor.ToString());
+                txtPorcientoDescuentoMantenimiento.Text = n.PorcientoDescuento.ToString();
+                txtDescripcionMantenimiento.Text = n.Producto;
+                txtComentarioMantenimiento.Text = n.Comentario;
+                cbAplicaImpuestoMantenimiento.Checked = (n.AplicaParaImpuesto0.HasValue ? n.AplicaParaImpuesto0.Value : false);
+                cbAcumulativoMantenimiento.Checked = (n.ProductoAcumulativo0.HasValue ? n.ProductoAcumulativo0.Value : false);
+                #endregion
             }
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoSelect()", "BotonesModoSelect();", true);
-        }
-
-        protected void btnRegresarDetalle_Click(object sender, EventArgs e)
-        {
-            OcultarControlesDetalle();
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnProcesarSuplr_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnProcesarDescartar_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void btnExportar_Click(object sender, EventArgs e)
-        {
-            ExportarRegistrosExel();
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-        }
-
-        protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+lbCapitalInvertidoVariable.Text = CapitalInvertido.ToString("N2");
+lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
 
 
-            int TipoProducto = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
-            if (TipoProducto == 1) {
-                ControlesFacturarProductos();
-            }
-            else if (TipoProducto == 2) {
-                ControlesFacturarServicios();
-            }
-        }
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoSelect()", "BotonesModoSelect();", true);
+}
 
-        protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
-        }
+protected void btnRegresarDetalle_Click(object sender, EventArgs e)
+{
+OcultarControlesDetalle();
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
 
-        protected void ddlseleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
-        }
+protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
+{
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
 
-        protected void ddlSeleccionarTipoSuplidor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
-        }
+protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
+{
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
 
-        protected void cbAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbAcumulativoMantenimiento.Checked == true) {
-                txtstockMantenimiento.Enabled = true;
-                txtStockMinimoMantenimiento.Enabled = true;
-            }
-            else {
-                txtstockMantenimiento.Enabled = false;
-                txtStockMinimoMantenimiento.Enabled = false;
-                txtstockMantenimiento.Text = "1";
-                txtStockMinimoMantenimiento.Text = "1";
-            }
-        }
+protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
+{
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
 
-        protected void cbGraficar_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbGraficar.Checked == true) {
-                lbGraficoProductoServicio.Visible = true;
-                GraProductoServicio.Visible = true;
-                lbEstadisticaCapital.Visible = true;
-                GraEstadisticaCapital.Visible = true;
-            }
-            else {
-                lbGraficoProductoServicio.Visible = false;
-                GraProductoServicio.Visible = false;
-                lbEstadisticaCapital.Visible = false;
-                GraEstadisticaCapital.Visible = false;
-            }
-        }
-    }
+protected void btnProcesarSuplr_Click(object sender, EventArgs e)
+{
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
+
+protected void btnProcesarDescartar_Click(object sender, EventArgs e)
+{
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
+
+protected void btnExportar_Click(object sender, EventArgs e)
+{
+ExportarRegistrosExel();
+ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+}
+
+protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+{
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+
+
+int TipoProducto = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
+if (TipoProducto == 1) {
+ControlesFacturarProductos();
+}
+else if (TipoProducto == 2) {
+ControlesFacturarServicios();
+}
+}
+
+protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+{
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+}
+
+protected void ddlseleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
+{
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+}
+
+protected void ddlSeleccionarTipoSuplidor_SelectedIndexChanged(object sender, EventArgs e)
+{
+DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+}
+
+protected void cbAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
+{
+if (cbAcumulativoMantenimiento.Checked == true) {
+txtstockMantenimiento.Enabled = true;
+txtStockMinimoMantenimiento.Enabled = true;
+}
+else {
+txtstockMantenimiento.Enabled = false;
+txtStockMinimoMantenimiento.Enabled = false;
+txtstockMantenimiento.Text = "1";
+txtStockMinimoMantenimiento.Text = "1";
+}
+}
+
+protected void cbGraficar_CheckedChanged(object sender, EventArgs e)
+{
+if (cbGraficar.Checked == true) {
+lbGraficoProductoServicio.Visible = true;
+GraProductoServicio.Visible = true;
+lbEstadisticaCapital.Visible = true;
+GraEstadisticaCapital.Visible = true;
+}
+else {
+lbGraficoProductoServicio.Visible = false;
+GraProductoServicio.Visible = false;
+lbEstadisticaCapital.Visible = false;
+GraEstadisticaCapital.Visible = false;
+}
+}
+}
 }

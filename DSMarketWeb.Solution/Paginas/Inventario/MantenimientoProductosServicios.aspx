@@ -218,6 +218,134 @@
                 }
 
             });
+
+            //FUNCION DE VALIDACION DEL BOTON MODIFICAR
+            $("#<%=btnModificarMantenimiento.ClientID%>").click(function () {
+                //VALIDAMOS EL CAMPO TIPO DE PRODUCTO
+                var ValidarTipoProducto = $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").val();
+                if (ValidarTipoProducto < 1) {
+                    alert("El campo Tipo de Prducto no puede estar vacio, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").css("border-color", "Red");
+                    return false;
+                }
+                else {
+                    //VALIDAMOS EL CAMPO CATEGORIA
+                    var ValidarCategoria = $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").val();
+                    if (ValidarCategoria < 1) {
+                        alert("El campo categoria no puede estar vacio para realizar esta operación, favor de veriicar");
+                        $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        //VALIDAMOS EL CAMPO UNIDAD DE MEDIDA
+                        var ValidarUnidadMedida = $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").val();
+                        if (ValidarUnidadMedida < 1) {
+                            alert("El campo Unidad de medida no puede estar vacio para realizar esta operación, favor de verificar");
+                            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var ValidarCampoMarca = $("#<%=ddlseleccionarMarca.ClientID%>").val();
+                            if (ValidarCampoMarca < 1) {
+                                alert("El campo marca no puede estar vacio, favor de verificar");
+                                $("#<%=ddlseleccionarMarca.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var ValidarModelo = $("#<%=ddlSeleccionarModelo.ClientID%>").val();
+                                if (ValidarModelo < 1) {
+                                    alert("El campo modelo no puede estar vacio, favor de verificar");
+                                    $("#<%=ddlSeleccionarModelo.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var ValidarColor = $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").val();
+                                    if (ValidarColor < 1) {
+                                        alert("El campo color no puede estar vacio, favor de verificar");
+                                        $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var ValidarCapacidad = $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").val();
+                                        if (ValidarCapacidad < 1) {
+                                            alert("El campo capacidad no puede estar vacio, favor de verificar");
+                                            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var ValidarCondicion = $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").val();
+                                            if (ValidarCondicion < 1) {
+                                                alert("El campo condicion no puede estar vacio, favor de verificar");
+                                                $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var ValidarPrecioCompra = $("#<%=txtPrecioCompraMantenimiento.ClientID%>").val().length;
+                                                if (ValidarPrecioCompra < 1) {
+                                                    alert("El campo precio de compra no puede estar vacio para guardar este registro");
+                                                    $("#<%=txtPrecioCompraMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var ValidarPrecioVenta = $("#<%=txtPrecioVentaMantenimiento.ClientID%>").val().length;
+                                                    if (ValidarPrecioVenta < 1) {
+                                                        alert("El campo precio de venta no puede estar vacio para realizar esta operación");
+                                                        $("#<%=txtPrecioVentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var ValidarStock = $("#<%=txtstockMantenimiento.ClientID%>").val().length;
+                                                        if (ValidarStock < 1) {
+                                                            alert("El campo stock no puede estar vacio, favor de verificar");
+                                                            $("#<%=txtstockMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var ValidarStockMinimo = $("#<%=txtStockMinimoMantenimiento.ClientID%>").val().length;
+                                                            if (ValidarStockMinimo < 1) {
+                                                                alert("El campo stock minimo no puede estar vacio para guardar este rgistro, favor de verificar");
+                                                                $("#<%=txtStockMinimoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var ValidarTipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").val();
+                                                                if (ValidarTipoSuplidor < 1) {
+                                                                    alert("El campo tipo de suplidor no puede estar vacio para realizar esta operación, favor de verificar");
+                                                                    $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ValidarSuplidores = $("#<%=ddlSuplidorMantenimiento.ClientID%>").val();
+                                                                    if (ValidarSuplidores < 1) {
+                                                                        alert("El campo suplidor no puede estar vacio para realizar esta operación");
+                                                                        $("#<%=ddlSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ValidarPorcientoDescuento = $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").val().length;
+                                                                        if (ValidarPorcientoDescuento < 1) {
+                                                                            alert("El campo Porciento de descuento no puede estar vacio, favor de verificar");
+                                                                            $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            });
         })
         
     </script>
