@@ -30,7 +30,9 @@
 
     <script type="text/javascript">
 
-      
+        function Prueba() {
+            $("#lb").val("INSERT");
+        }
         function CamposFechaVacios() {
             alert("No puede dejar los campos fechas vacios para buscar por este tipo de filtro");
         }
@@ -200,6 +202,8 @@
                                                                             $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
                                                                             return false;
                                                                         }
+                                                                      
+                                                                     
                                                                     }
 
                                                                 }
@@ -346,6 +350,23 @@
                 }
 
             });
+
+            //EVENTO DEL BOTON NUEVO
+            $("#btnNuevo").click(function () {
+           <%--     //LIMPIAMOS LOS CONTROLES NECESARIOS
+                $("#<%=txtNumeroSeguimientoMantenimiento.ClientID%>").val("");
+                $("#<%=txtPrecioCompraMantenimiento.ClientID%>").val("");
+                $("#<%=txtPrecioVentaMantenimiento.ClientID%>").val("");
+                $("#<%=txtCodigoBarraMantenimiento.ClientID%>").val("");
+                $("#<%=txtstockMantenimiento.ClientID%>").val("1");
+                $("#<%=txtStockMinimoMantenimiento.ClientID%>").val("1");
+                $("#<%=txtReferenciaMantenimiento.ClientID%>").val("");
+                $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").val("");
+                $("#<%=txtDescripcionMantenimiento.ClientID%>").val("");
+                $("#<%=txtComentarioMantenimiento.ClientID%>").val("");
+                $("#<%=cbAcumulativoMantenimiento.ClientID%>").prop("checked", false);
+                $("#<%=cbAplicaImpuestoMantenimiento.ClientID%>").prop("checked", false);--%>
+            })
         })
         
     </script>
@@ -353,6 +374,8 @@
     <div class="container-fluid">
         <div class="jumbotron" align="center" >
             <asp:Label ID="lbTituloConsulta" runat="server" Text="Consulta de Productos / Servicios"></asp:Label>
+            <asp:Label ID="lbIdUsuario" runat="server" Visible="false" Text="IdUsuario"></asp:Label>
+             <asp:Label ID="lbIdProducto" runat="server" Visible="false" Text="IdProducto"></asp:Label>
         </div>
         <div class="form-check-inline">
             <div class="form-group form-check">
@@ -440,6 +463,7 @@
         <div align="center">
             <asp:Button ID="btnBuscar" runat="server" Text="Consultar"  OnClick="btnBuscar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Consultar Registros" />
             <asp:Button ID="btnExportar" runat="server" Text="Exportar" OnClick="btnExportar_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Exportar Registros" />
+            <asp:Button ID="btnRestabelcer" runat="server" Text="Restablecer" OnClick="btnRestabelcer_Click" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Restablecer Pantalla" />
             <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Nuevo</button>
             <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Editar</button>
             <button type="button" id="btnEliminar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".POPOPMantenimiento">Eliminar</button>
@@ -740,9 +764,12 @@
                     <asp:Panel ID="Panel1" runat="server"></asp:Panel>
 
                 </div>
+
+
+              
             </ContentTemplate>
         </asp:UpdatePanel>
-        <div align="center">
+          <div align="center">
             <asp:Button ID="btnGuardarMantenimiento" runat="server" Text="Guardar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Guardar Registro" OnClick="btnGuardarMantenimiento_Click" />
              <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Modificar Registro" OnClick="btnModificarMantenimiento_Click" />
              <asp:Button ID="btnEliminarMantenimiento" runat="server" Text="Eliminar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Eliminar Registro" OnClick="btnEliminarMantenimiento_Click"/>

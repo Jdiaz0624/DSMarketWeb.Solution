@@ -90,7 +90,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                 Item.IdProducto,
                 Item.NumeroConector,
                 Item.IdTipoProducto,
-                Item.IdCapacidad,
+                Item.IdCategoria,
                 Item.IdUnidadMedida,
                 Item.IdMarca,
                 Item.IdModelo,

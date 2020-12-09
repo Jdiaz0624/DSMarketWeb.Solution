@@ -217,6 +217,37 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         #endregion
 
+        #region RESTABLECER PANTALLA
+        private void RestablecerPantalla() {
+
+            txtProductoConsulta.Text = string.Empty;
+            txtcodigoBarraConsulta.Text = string.Empty;
+            txtReferenciaConsulta.Text = string.Empty;
+            txtNumeroSeguimientoConsulta.Text = string.Empty;
+            cbAgregarRangoFechaConsulta.Checked = false;
+            cbReporteInventarioCompleto.Checked = false;
+            cbGraficar.Checked = false;
+            CargarListadosConsultas();
+            CargarListadosMantenimientos();
+
+            txtNumeroSeguimientoMantenimiento.Text = string.Empty;
+            txtPrecioCompraMantenimiento.Text = string.Empty;
+            txtPrecioVentaMantenimiento.Text = string.Empty;
+            txtCodigoBarraMantenimiento.Text = string.Empty;
+            txtstockMantenimiento.Text = string.Empty;
+            txtStockMinimoMantenimiento.Text = string.Empty;
+            txtReferenciaMantenimiento.Text = string.Empty;
+            txtPorcientoDescuentoMantenimiento.Text = string.Empty;
+            txtDescripcionMantenimiento.Text = string.Empty;
+            txtComentarioMantenimiento.Text = string.Empty;
+            cbAcumulativoMantenimiento.Checked = false;
+            cbAplicaImpuestoMantenimiento.Checked = false;
+
+            MostrarListadoProductos();
+            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+        }
+        #endregion
+
         /// <summary>
         /// Este metodo es para configurar los controles para guardar un prducto.
         /// </summary>
@@ -657,10 +688,60 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             txtPorcientoDescuentoDetalle.Text = string.Empty;
             txtComentarioDetalle.Text = string.Empty;
         }
+
+
+        #region MANTENIMIENTO DE PRODUCTOS
+        private void MantenimientoProducto(decimal IdProducto,decimal NumeroConector,decimal IdUsuario, string Accion) {
+            try {
+                DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Procesar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                    IdProducto,
+                    NumeroConector,
+                    Convert.ToDecimal(ddlSeleccionarTipoProductoMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCategoriaMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarUnidadMedidaMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlseleccionarMarca.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarModelo.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarTipoSuplidor.SelectedValue),
+                    Convert.ToDecimal(ddlSuplidorMantenimiento.SelectedValue),
+                    txtDescripcionMantenimiento.Text,
+                    txtCodigoBarraMantenimiento.Text,
+                    txtReferenciaMantenimiento.Text,
+                    Convert.ToDecimal(txtPrecioCompraMantenimiento.Text),
+                    Convert.ToDecimal(txtPrecioVentaMantenimiento.Text),
+                    Convert.ToDecimal(txtstockMantenimiento.Text),
+                    Convert.ToDecimal(txtStockMinimoMantenimiento.Text),
+                    Convert.ToDecimal(txtPorcientoDescuentoMantenimiento.Text),
+                    false,
+                    cbAcumulativoMantenimiento.Checked,
+                    false,
+                    IdUsuario,
+                    DateTime.Now,
+                    IdUsuario,
+                    DateTime.Now,
+                    DateTime.Now,
+                    txtComentarioMantenimiento.Text,
+                    cbAplicaImpuestoMantenimiento.Checked,
+                    false,
+                    txtNumeroSeguimientoMantenimiento.Text,
+                    Convert.ToDecimal(ddlSeleccionarColorMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCondicionMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCapacidadMantenimiento.SelectedValue),
+                    Accion);
+                Procesar.ProcesarProducto();
+
+
+            }
+            catch (Exception ex) {
+                string MensajeError = "Error al realizar el mantenimiento de prducto por la razon de " + ex.Message;
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + MensajeError + "');", true);
+            }
+        }
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                lbIdUsuario.Text = Session["IdUsuario"].ToString();
                 Panel1.BackColor = System.Drawing.Color.Red;
                 lbRegistroDisponible.ForeColor = System.Drawing.Color.Green;
                 CargarListadosConsultas();
@@ -809,7 +890,18 @@ ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesMod
 
 protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
 {
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+            lbIdProducto.Text = "0";
+            Random NumeroConector = new Random();
+            int Numero = NumeroConector.Next(0, 999999999);
+            MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Numero, Convert.ToDecimal(lbIdUsuario.Text), "INSERT");
+            string Mensaje = "Registro guardado con exito";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + Mensaje + "');", true);
+            if (cbNoLimpiarControles.Checked == true) { }
+            else {
+                RestablecerPantalla();
+            }
+            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+
 }
 
 protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
@@ -899,5 +991,10 @@ lbEstadisticaCapital.Visible = false;
 GraEstadisticaCapital.Visible = false;
 }
 }
-}
+
+        protected void btnRestabelcer_Click(object sender, EventArgs e)
+        {
+            RestablecerPantalla();
+        }
+    }
 }
