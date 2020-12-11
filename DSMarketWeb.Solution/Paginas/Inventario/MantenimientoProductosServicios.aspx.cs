@@ -11,6 +11,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
         private void GraficarEstadistica() {
           //  decimal[] CapitalInvertido[2]
 
@@ -911,15 +912,35 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
            
            protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
            {
-            MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Convert.ToDecimal(lbNumeroConector.Text), Convert.ToDecimal(lbIdUsuario.Text), "UPDATE");
-            string Mensaje = "Registro Modificado con exito";
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + Mensaje + "');", true);
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridad.Text.Trim()) ? null : txtClaveSeguridad.Text.Trim();
 
-           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-           }
+            var VakudarCkave = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (VakudarCkave.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadNoValida()", "ClaveSeguridadNoValida();", true);
+            }
+            else {
+                MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Convert.ToDecimal(lbNumeroConector.Text), Convert.ToDecimal(lbIdUsuario.Text), "UPDATE");
+                string Mensaje = "Registro Modificado con exito";
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + Mensaje + "');", true);
+                
+
+            }
+             ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+        }
            
            protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
            {
+            if (txtAccion.Value == "Eliminar Registro")
+            {
+                txtComentarioMantenimiento.Text = "Prueba";
+            }
+            else { 
+            txtComentarioMantenimiento.Text="MAMAGUEBO";
+            }
+            
            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
            }
            

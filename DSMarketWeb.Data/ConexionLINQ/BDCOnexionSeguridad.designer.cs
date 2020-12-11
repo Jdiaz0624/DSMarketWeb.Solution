@@ -89,6 +89,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idContadorBloqueo, estatus, cantidadIntentos, accion);
 			return ((ISingleResult<SP_ACTUALIZAR_CANTIDAD_INTENTOS_LOGINResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Seguridad.SP_BUSCA_CLAVE_SEGURIDAD_WEB")]
+		public ISingleResult<SP_BUSCA_CLAVE_SEGURIDAD_WEBResult> SP_BUSCA_CLAVE_SEGURIDAD_WEB([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdClaveSeguridad", DbType="Decimal(20,0)")] System.Nullable<decimal> idClaveSeguridad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Clave", DbType="VarChar(8000)")] string clave)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idClaveSeguridad, idUsuario, clave);
+			return ((ISingleResult<SP_BUSCA_CLAVE_SEGURIDAD_WEBResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_BUSCA_USUARIOS_WEBResult
@@ -820,6 +827,104 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._CantidadIntentos != value))
 				{
 					this._CantidadIntentos = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_CLAVE_SEGURIDAD_WEBResult
+	{
+		
+		private decimal _IdClaveSeguridad;
+		
+		private decimal _IdUsuario;
+		
+		private string _Clave;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		public SP_BUSCA_CLAVE_SEGURIDAD_WEBResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdClaveSeguridad", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdClaveSeguridad
+		{
+			get
+			{
+				return this._IdClaveSeguridad;
+			}
+			set
+			{
+				if ((this._IdClaveSeguridad != value))
+				{
+					this._IdClaveSeguridad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdUsuario
+		{
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					this._IdUsuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Clave", DbType="VarChar(8000)")]
+		public string Clave
+		{
+			get
+			{
+				return this._Clave;
+			}
+			set
+			{
+				if ((this._Clave != value))
+				{
+					this._Clave = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
 				}
 			}
 		}

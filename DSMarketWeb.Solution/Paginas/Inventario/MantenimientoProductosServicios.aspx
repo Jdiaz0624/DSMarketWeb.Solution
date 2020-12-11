@@ -33,6 +33,56 @@
         function Prueba() {
             $("#lb").val("INSERT");
         }
+
+        function ClaveSeguridadNoValida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar");
+            return false;
+        }
+        function BloquearControles() {
+            $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlseleccionarMarca.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarModelo.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtNumeroSeguimientoMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtPrecioCompraMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtPrecioVentaMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtCodigoBarraMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtstockMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtStockMinimoMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtReferenciaMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").prop("disabled", true);
+            $("#<%=ddlSuplidorMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtDescripcionMantenimiento.ClientID%>").prop("disabled", true);
+            $("#<%=txtComentarioMantenimiento.ClientID%>").prop("disabled", true);
+        }
+
+        function DesbloquearControles() {
+            $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlseleccionarMarca.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarModelo.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtNumeroSeguimientoMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtPrecioCompraMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtPrecioVentaMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtCodigoBarraMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtstockMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtStockMinimoMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtReferenciaMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSeleccionarTipoSuplidor.ClientID%>").prop("disabled", false);
+            $("#<%=ddlSuplidorMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtDescripcionMantenimiento.ClientID%>").prop("disabled", false);
+            $("#<%=txtComentarioMantenimiento.ClientID%>").prop("disabled", false);
+        }
         function CamposFechaVacios() {
             alert("No puede dejar los campos fechas vacios para buscar por este tipo de filtro");
         }
@@ -73,6 +123,10 @@
 
         $(document).ready(function () {
             $("#btnNuevo").click(function () {
+                DesbloquearControles();
+                $("#<%=lbClaveSeguridad.ClientID%>").hide();
+                $("#<%=txtClaveSeguridad.ClientID%>").hide();
+
                 $("#<%=btnGuardarMantenimiento.ClientID%>").show();
 
                 $("#<%=btnModificarMantenimiento.ClientID%>").hide();
@@ -80,6 +134,10 @@
             });
 
             $("#btnModificar").click(function () {
+                DesbloquearControles();
+                $("#<%=lbClaveSeguridad.ClientID%>").show();
+                $("#<%=txtClaveSeguridad.ClientID%>").show();
+
                 $("#<%=btnModificarMantenimiento.ClientID%>").show();
 
                 $("#<%=btnGuardarMantenimiento.ClientID%>").hide();
@@ -87,10 +145,20 @@
             });
 
             $("#btnEliminar").click(function () {
+                $("#<%=lbClaveSeguridad.ClientID%>").show();
+                $("#<%=txtClaveSeguridad.ClientID%>").show();
+
                 $("#<%=btnEliminarMantenimiento.ClientID%>").show();
 
                 $("#<%=btnModificarMantenimiento.ClientID%>").hide();
                 $("#<%=btnGuardarMantenimiento.ClientID%>").hide();
+
+                BloquearControles();
+                
+                
+                var celda = 'algo';
+
+                $('#txtAccion').prop({ 'value': celda });
             });
 
             //FUNCION DE VALIDACON DEL BOTON GUARDAR
@@ -202,7 +270,9 @@
                                                                             $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
                                                                             return false;
                                                                         }
-                                                                      
+                                                                        else {
+                                                                            DesbloquearControles();
+                                                                        }
                                                                      
                                                                     }
 
@@ -332,6 +402,17 @@
                                                                             $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
                                                                             return false;
                                                                         }
+                                                                        else {
+                                                                            var ValidarClaveSegurdad = $("#<%=txtClaveSeguridad.ClientID%>").val().length;
+                                                                            if (ValidarClaveSegurdad < 1) {
+                                                                                alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar");
+                                                                                $("#<%=txtClaveSeguridad.ClientID%>").css("border-color", "red");
+                                                                                return false;
+                                                                            }
+                                                                            else {
+                                                                                
+                                                                            }
+                                                                        }
                                                                     }
 
                                                                 }
@@ -347,6 +428,19 @@
                             }
                         }
                     }
+                }
+
+            });
+
+            $("#<%=btnEliminarMantenimiento.ClientID%>").click(function () {
+                var ClaveSeguridad = $("#<%=txtClaveSeguridad.ClientID%>").val().length;
+                if (ClaveSeguridad < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio para eliminar este registro, favor de verificar");
+                    $("#<%=txtClaveSeguridad.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+
                 }
 
             });
@@ -648,6 +742,9 @@
                         <asp:Label ID="lbTituloMantenimiento" runat="server" Text="Mantenimiento de Producto"></asp:Label>
                     </div>
                     <div align="center">
+                        <input type="text" id="txtAccion" runat="server" />
+                    </div>
+                    <div align="center">
                         <asp:Label ID="lbNumeroRegistroInventario" runat="server" Text="Numero de Registro: " CssClass="Letranegrita"></asp:Label>
                     <asp:Label ID="lbNumeroRegistroVariable" runat="server" Text="0000000000" CssClass="Letranegrita"></asp:Label>
                          <asp:Label ID="lbRegistroDisponible" runat="server" Visible="false" Text="Registro Disponible" CssClass="Letranegrita"></asp:Label>
@@ -776,11 +873,17 @@
               
             </ContentTemplate>
         </asp:UpdatePanel>
-          <div align="center">
+         <asp:UpdatePanel ID="UpdatePanelMantenimiento2" runat="server">
+             <ContentTemplate>
+                  <div  align="center">
             <asp:Button ID="btnGuardarMantenimiento" runat="server" Text="Guardar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Guardar Registro" OnClick="btnGuardarMantenimiento_Click" />
              <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Modificar Registro" OnClick="btnModificarMantenimiento_Click" />
              <asp:Button ID="btnEliminarMantenimiento" runat="server" Text="Eliminar" CssClass="btn btn-outline-secondary btn-sm Custom" ToolTip="Eliminar Registro" OnClick="btnEliminarMantenimiento_Click"/>
-        </div><br />
+        </div
+             </ContentTemplate>
+         </asp:UpdatePanel>
+              
+              ><br />
     </div>
   </div>
 </div>

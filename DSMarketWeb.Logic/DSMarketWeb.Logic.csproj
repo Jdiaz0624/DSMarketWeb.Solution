@@ -52,6 +52,7 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
+    <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />

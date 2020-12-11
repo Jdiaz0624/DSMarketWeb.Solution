@@ -798,6 +798,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Label lbTituloMantenimiento;
 
         /// <summary>
+        /// txtAccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAccion;
+
+        /// <summary>
         /// lbNumeroRegistroInventario control.
         /// </summary>
         /// <remarks>
@@ -1237,6 +1246,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
+        /// UpdatePanelMantenimiento2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelMantenimiento2;
 
         /// <summary>
         /// btnGuardarMantenimiento control.
