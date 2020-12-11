@@ -374,8 +374,9 @@
     <div class="container-fluid">
         <div class="jumbotron" align="center" >
             <asp:Label ID="lbTituloConsulta" runat="server" Text="Consulta de Productos / Servicios"></asp:Label>
-            <asp:Label ID="lbIdUsuario" runat="server" Visible="false" Text="IdUsuario"></asp:Label>
-             <asp:Label ID="lbIdProducto" runat="server" Visible="false" Text="IdProducto"></asp:Label>
+            <asp:Label ID="lbIdUsuario" runat="server" Visible="false" Text="IdUsuario"></asp:Label><br />
+             <asp:Label ID="lbIdProducto" runat="server" Visible="false" Text="IdProducto"></asp:Label><br />
+             <asp:Label ID="lbNumeroConector" runat="server" Visible="false" Text="Numero de Conector"></asp:Label>
         </div>
         <div class="form-check-inline">
             <div class="form-group form-check">
@@ -499,6 +500,7 @@
                    <%-- <%$ Resources:Traducciones,OrdenNivel %>--%>
                     <asp:CommandField ButtonType="Button" HeaderText="Seleccionar"  ControlStyle-CssClass="btn btn-outline-secondary btn-sm" SelectText="Seleccionar" ShowSelectButton="True" />
                     <asp:BoundField DataField="IdProducto" HeaderText="ID" HeaderStyle-CssClass="hiddenGrid" ItemStyle-CssClass="hiddenGrid" />
+                    <asp:BoundField DataField="NumeroConector" HeaderText="Numero de Conector" HeaderStyle-CssClass="hiddenGrid" ItemStyle-CssClass="hiddenGrid" />
                     <asp:BoundField DataField="Producto" HeaderText="Producto" />
                     <asp:BoundField DataField="TipoProducto" HeaderText="Tipo" />
                     <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
@@ -749,6 +751,11 @@
                          <div class="form-group col-md-12">
                             <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
                             <asp:TextBox ID="txtComentarioMantenimiento" runat="server" AutoCompleteType="Disabled"   CssClass="form-control"></asp:TextBox>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <asp:Label ID="lbClaveSeguridad" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                            <asp:TextBox ID="txtClaveSeguridad" runat="server" AutoCompleteType="Disabled" TextMode="Password"  CssClass="form-control"></asp:TextBox>
                         </div>
 
                     </div>

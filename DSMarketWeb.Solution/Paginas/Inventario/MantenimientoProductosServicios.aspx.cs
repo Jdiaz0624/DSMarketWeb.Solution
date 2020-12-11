@@ -729,7 +729,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                     Accion);
                 Procesar.ProcesarProducto();
 
-
+                if (Accion == "UPDATE") {
+                    RestablecerPantalla();
+                }
             }
             catch (Exception ex) {
                 string MensajeError = "Error al realizar el mantenimiento de prducto por la razon de " + ex.Message;
@@ -814,7 +816,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             GridViewRow gb = gvListado.SelectedRow;
             var ConsultarPorID = ObjDataInventario.Value.BuscaProductos(
-                Convert.ToDecimal(gb.Cells[1].Text));
+                Convert.ToDecimal(gb.Cells[1].Text),
+                Convert.ToDecimal(gb.Cells[2].Text));
             gvListado.DataSource = ConsultarPorID;
             gvListado.DataBind();
             decimal CapitalInvertido = 0, GananciaAproximada = 0;
@@ -847,6 +850,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
                 //SACAMOS LOS DATOS DEL PRODUCTOS SELECCIONADO
                 #region SACAR LOS DATOS DEL PRODUCTO SELECCIONADO
+                lbIdProducto.Text = gb.Cells[1].Text;
+                lbNumeroConector.Text = gb.Cells[2].Text;
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoProductoMantenimiento, n.IdTipoProducto.ToString());
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarCategoriaMantenimiento, n.IdCategoria.ToString());
@@ -875,122 +880,126 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 cbAcumulativoMantenimiento.Checked = (n.ProductoAcumulativo0.HasValue ? n.ProductoAcumulativo0.Value : false);
                 #endregion
             }
-lbCapitalInvertidoVariable.Text = CapitalInvertido.ToString("N2");
-lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-
-
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoSelect()", "BotonesModoSelect();", true);
-}
-
-protected void btnRegresarDetalle_Click(object sender, EventArgs e)
-{
-OcultarControlesDetalle();
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
-{
-            lbIdProducto.Text = "0";
-            Random NumeroConector = new Random();
-            int Numero = NumeroConector.Next(0, 999999999);
-            MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Numero, Convert.ToDecimal(lbIdUsuario.Text), "INSERT");
-            string Mensaje = "Registro guardado con exito";
+           lbCapitalInvertidoVariable.Text = CapitalInvertido.ToString("N2");
+           lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+           
+           
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoSelect()", "BotonesModoSelect();", true);
+           }
+           
+           protected void btnRegresarDetalle_Click(object sender, EventArgs e)
+           {
+           OcultarControlesDetalle();
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void btnGuardarMantenimiento_Click(object sender, EventArgs e)
+           {
+                       lbIdProducto.Text = "0";
+                       Random NumeroConector = new Random();
+                       int Numero = NumeroConector.Next(0, 999999999);
+                       MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Numero, Convert.ToDecimal(lbIdUsuario.Text), "INSERT");
+                       string Mensaje = "Registro guardado con exito";
+                       ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + Mensaje + "');", true);
+                       if (cbNoLimpiarControles.Checked == true) { }
+                       else {
+                           RestablecerPantalla();
+                       }
+                       ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           
+           }
+           
+           protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
+           {
+            MantenimientoProducto(Convert.ToDecimal(lbIdProducto.Text), Convert.ToDecimal(lbNumeroConector.Text), Convert.ToDecimal(lbIdUsuario.Text), "UPDATE");
+            string Mensaje = "Registro Modificado con exito";
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + Mensaje + "');", true);
-            if (cbNoLimpiarControles.Checked == true) { }
-            else {
-                RestablecerPantalla();
-            }
-            ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
 
-}
-
-protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
-{
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
-{
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void btnProcesarSuplr_Click(object sender, EventArgs e)
-{
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void btnProcesarDescartar_Click(object sender, EventArgs e)
-{
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void btnExportar_Click(object sender, EventArgs e)
-{
-ExportarRegistrosExel();
-ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
-}
-
-protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
-{
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
-
-
-int TipoProducto = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
-if (TipoProducto == 1) {
-ControlesFacturarProductos();
-}
-else if (TipoProducto == 2) {
-ControlesFacturarServicios();
-}
-}
-
-protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
-{
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
-}
-
-protected void ddlseleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
-{
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
-}
-
-protected void ddlSeleccionarTipoSuplidor_SelectedIndexChanged(object sender, EventArgs e)
-{
-DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
-}
-
-protected void cbAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
-{
-if (cbAcumulativoMantenimiento.Checked == true) {
-txtstockMantenimiento.Enabled = true;
-txtStockMinimoMantenimiento.Enabled = true;
-}
-else {
-txtstockMantenimiento.Enabled = false;
-txtStockMinimoMantenimiento.Enabled = false;
-txtstockMantenimiento.Text = "1";
-txtStockMinimoMantenimiento.Text = "1";
-}
-}
-
-protected void cbGraficar_CheckedChanged(object sender, EventArgs e)
-{
-if (cbGraficar.Checked == true) {
-lbGraficoProductoServicio.Visible = true;
-GraProductoServicio.Visible = true;
-lbEstadisticaCapital.Visible = true;
-GraEstadisticaCapital.Visible = true;
-}
-else {
-lbGraficoProductoServicio.Visible = false;
-GraProductoServicio.Visible = false;
-lbEstadisticaCapital.Visible = false;
-GraEstadisticaCapital.Visible = false;
-}
-}
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
+           {
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void btnProcesarSuplr_Click(object sender, EventArgs e)
+           {
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void btnProcesarDescartar_Click(object sender, EventArgs e)
+           {
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void btnExportar_Click(object sender, EventArgs e)
+           {
+           ExportarRegistrosExel();
+           ClientScript.RegisterStartupScript(GetType(), "BotonesModoNormal()", "BotonesModoNormal();", true);
+           }
+           
+           protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+           {
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+           
+           
+           int TipoProducto = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
+           if (TipoProducto == 1) {
+           ControlesFacturarProductos();
+           }
+           else if (TipoProducto == 2) {
+           ControlesFacturarServicios();
+           }
+           }
+           
+           protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+           {
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlseleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+           }
+           
+           protected void ddlseleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
+           {
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlseleccionarMarca.SelectedValue.ToString()));
+           }
+           
+           protected void ddlSeleccionarTipoSuplidor_SelectedIndexChanged(object sender, EventArgs e)
+           {
+           DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidor.SelectedValue, null));
+           }
+           
+           protected void cbAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
+           {
+           if (cbAcumulativoMantenimiento.Checked == true) {
+           txtstockMantenimiento.Enabled = true;
+           txtStockMinimoMantenimiento.Enabled = true;
+           }
+           else {
+           txtstockMantenimiento.Enabled = false;
+           txtStockMinimoMantenimiento.Enabled = false;
+           txtstockMantenimiento.Text = "1";
+           txtStockMinimoMantenimiento.Text = "1";
+           }
+           }
+           
+           protected void cbGraficar_CheckedChanged(object sender, EventArgs e)
+           {
+           if (cbGraficar.Checked == true) {
+           lbGraficoProductoServicio.Visible = true;
+           GraProductoServicio.Visible = true;
+           lbEstadisticaCapital.Visible = true;
+           GraEstadisticaCapital.Visible = true;
+           }
+           else {
+           lbGraficoProductoServicio.Visible = false;
+           GraProductoServicio.Visible = false;
+           lbEstadisticaCapital.Visible = false;
+           GraEstadisticaCapital.Visible = false;
+           }
+           }
 
         protected void btnRestabelcer_Click(object sender, EventArgs e)
         {
