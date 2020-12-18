@@ -28,6 +28,18 @@
      }
     </style>
 
+    <script type="text/javascript">
+        function CamposFechaVAcios() {
+            alert("Los campos fecha no puedes estar vacios para buscar registros mediante este metodo");
+        }
+        function CampoFechaDesdeVAcio() {
+            $("#<%=txtFechaDesdeConsulta.ClientID%>").css("border-color", "red");
+        }
+        function CampoFechaHastaVacio() {
+            $("#<%=txtFechaHAstaConsulta.ClientID%>").css("border-color", "red");
+        }
+    </script>
+
     <div id="divBloqueConsulta" runat="server">
         <div class="container-fluid">
             <div class="jumbotron" align="center">
@@ -121,11 +133,11 @@
                 <asp:Label ID="lbCantidadRegistrosConsultaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosConsultaCerrar" runat="server" Text=" )" CssClass="Letranegrita"></asp:Label>
 
-                <asp:Label ID="lbCantidadInventidoTitulo" runat="server" Text="Cantidad de Registros (" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadInventidoTitulo" runat="server" Text="Capital Invertido (" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadInventidoVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadInventidoCerrar" runat="server" Text=" )" CssClass="Letranegrita"></asp:Label>
 
-                <asp:Label ID="lbGananciaAproximadaTitulo" runat="server" Text="Cantidad de Registros (" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbGananciaAproximadaTitulo" runat="server" Text="Ganancia Aproximada (" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbGananciaAproximadaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbGananciaAproximadaCerrar" runat="server" Text=" )" CssClass="Letranegrita"></asp:Label>
             </div>
