@@ -180,7 +180,7 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    <asp:Label ID="lbSeleccionarMarcaMantenimiento" runat="server" Text="Seleccionar Mantenimiento" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarMarcaMantenimiento" runat="server" Text="Seleccionar Marca" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarMarcaMantenimiento" runat="server" ToolTip="Seleccionar Marca" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarMarcaMantenimiento_SelectedIndexChanged1" CssClass="form-control"></asp:DropDownList>
                 </div>
 
@@ -190,11 +190,93 @@
                 </div>
 
                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbSeleccionarTipoSuplidorMantenimiento" runat="server" Text="Seleccionar Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarTipoSuplidorMantenimiento" runat="server" ToolTip="Seleccionar Tipo de Suplidor" CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbSeleccionarSuplidorMantenimiento" runat="server" Text="Seleccionar Suplidor" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarSuplidorMantenimiento" runat="server" ToolTip="Seleccionar Suplidor" CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbDescripcionMantenimiento" runat="server" Text="Descripción" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtDescripcionMantenimiento" runat="server" CssClass="form-control" MaxLength="200"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbCodigoBarraMantenimiento" runat="server" Text="Codigo de Barra" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtCodigoBarraMantenimiento" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbReferenciaMantenimiento" runat="server" Text="Referencia" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtReferenciaMantenimiento" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbPrecioCompraMantenimiento" runat="server" Text="Precio de Compra" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtPrecioCompraMantenimiento" runat="server" CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbPrecioVentaMantenimiento" runat="server" Text="Precio de Venta" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtPrecioVentaMantenimiento" runat="server" CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbStockMantenimiento" runat="server" Text="Stock" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtStockMantenimiento" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbStockMinimoMantenimiento" runat="server" Text="Stock Minimo" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtStockMinimoMantenimiento" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbPorcientoDescuentoMantenimiento" runat="server" Text="% de Descuento" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtPorcientoDescuentoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbNumeroSeguimientoMantenimiento" runat="server" Text="Numero de Seguimiento" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNumeroSeguimientoMantenimiento" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarColorMantenimiento" runat="server" Text="Seleccionar Color" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarColorMantenimiento" runat="server" ToolTip="Seleccionar Color" CssClass="form-control"></asp:DropDownList>
                 </div>
 
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbSeleccionarCondicionMantenimiento" runat="server" Text="Seleccionar Condición" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarCondicionMantenimiento" runat="server" ToolTip="Seleccionar Condicion" CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbSeleccionarCapacidadMantenimiento" runat="server" Text="Seleccionar Capacidad" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarCapacidadMantenimiento" runat="server" ToolTip="Seleccionar Capacidad" CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                 <div class="form-group col-md-12">
+                    <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtComentarioMantenimiento" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+
             </div>
+            <div class="form-check-inline">
+                <div class="form-group form-check">
+                    <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
+                    <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
+                    <asp:CheckBox ID="cbNoLimpiarPantalla" runat="server" Text="No Limpiar Pantalla" CssClass="form-check-input" ToolTip="No limpiar Pantalla al momento de realizar el mantenimiento" />
+                </div>
+            </div>
+            <hr />
+            <div align="center">
+                <asp:Button ID="btnProcesarMantenimiento" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarMantenimiento_Click" />
+                <asp:Button ID="btnVolverMantenimiento" runat="server" Text="Volver" ToolTip="Volver a la pantalla de conulta" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVolverMantenimiento_Click" />
+            </div><br />
         </div>
     </div>
 

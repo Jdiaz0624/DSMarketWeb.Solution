@@ -104,5 +104,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
 
         }
+
+        protected void btnProcesarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolverMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
