@@ -38,6 +38,146 @@
         function CampoFechaHastaVacio() {
             $("#<%=txtFechaHAstaConsulta.ClientID%>").css("border-color", "red");
         }
+
+        $(document).ready(function () {
+            //VALIDAMOS LOS CAMPOS EN EL EVENTO DEL BOTON GUARDAR
+            $("#<%=btnProcesarMantenimiento.ClientID%>").click(function () {
+                //TIPO DE PRODUCTO
+                var ValidarTipoProducto = $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").val();
+                if (ValidarTipoProducto < 1) {
+                    alert("El campo tipo de producto no puede estar vacio para guardar este registro, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    //CATEGORIA
+                    var ValidarCategoria = $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").val();
+                    if (ValidarCategoria < 1) {
+                        alert("EL campo categoria no puede estar vacio para guardar un nuevo registro, favor de verificar");
+                        $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        //UNIDAD DE MEDIDA
+                        var ValidarUnidadMedida = $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").val();
+                        if (ValidarUnidadMedida < 1) {
+                            alert("El campo unidad de medida no puede estar vacio para gaurdar este registro, favor de verificar");
+                            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            //MARCA
+                            var ValidarMarca = $("#<%=ddlSeleccionarMarcaMantenimiento.ClientID%>").val();
+                            if (ValidarMarca < 1) {
+                                alert("El campo marca no puede estar vacio para guardar este registro, favor de verificar");
+                                $("#<%=ddlSeleccionarMarcaMantenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                //MODELO
+                                var ValidarModelo = $("#<%=ddlSeleccionarModeloMantenimiento.ClientID%>").val();
+                                if (ValidarModelo < 1) {
+                                    alert("El campo modelo no puede estar vacio para guardar este registro, favor de verificar");
+                                    $("#<%=ddlSeleccionarModeloMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    //TIPO DE SUPLIDOR
+                                    var ValidarTipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                                    if (ValidarTipoSuplidor < 1) {
+                                        alert("El campo tipo de suplidor no puede estar vacio para guardar este registro, favor de verficar");
+                                        $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        //SUPLIDOR
+                                        var ValidarSuplidor = $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").val();
+                                        if (ValidarSuplidor < 1) {
+                                            alert("El campo suplidor no puede estar vacio para guardar este registro, favor de verificar");
+                                            $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            //PRECIO DE COMPRA
+                                            var ValidarPrecioCompra = $("#<%=txtPrecioCompraMantenimiento.ClientID%>").val().length;
+                                            if (ValidarPrecioCompra < 1) {
+                                                alert("El campo precio de compra no puede estar vacio para guardar este registro, favor de verificar");
+                                                $("#<%=txtPrecioCompraMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                //PRECIO DE VENTA
+                                                var ValidarPrecioVenta = $("#<%=txtPrecioVentaMantenimiento.ClientID%>").val().length;
+                                                if (ValidarPrecioVenta < 1) {
+                                                    alert("El campo precio de venta no puede estar vacio para guardar este registro, favor de verificar");
+                                                    $("#<%=txtPrecioVentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    //STOCK
+                                                    var ValidarStock = $("#<%=txtStockMantenimiento.ClientID%>").val().length;
+                                                    if (ValidarStock < 1) {
+                                                        alert("El campo Stock no puede estar vacio para gaurdar este registro, favor de verificar");
+                                                        $("#<%=txtStockMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        //STOCK MINIMO
+                                                        var ValidarStockMinimo = $("#<%=txtStockMinimoMantenimiento.ClientID%>").val().length;
+                                                        if (ValidarStockMinimo < 1) {
+                                                            alert("El campo Stock Minimo no puede estar vacio para guardar este registro, favor de verificar");
+                                                            $("#<%=txtStockMinimoMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            //PORCIENTO DE DESCUENTO
+                                                            var PorcientoDescuento = $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").val().length;
+                                                            if (PorcientoDescuento < 1) {
+                                                                alert("El campo porciento de descuento no puede estar vacio para guardar este registro, favor de verificar");
+                                                                $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                //COLOR
+                                                                var ValidarColor = $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").val();
+                                                                if (ValidarColor < 1) {
+                                                                    alert("El campo color no puede estar vacio para guardar este registro, favor de verificar");
+                                                                    $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    //CONDICON
+                                                                    var ValidarCondicion = $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").val();
+                                                                    if (ValidarCondicion < 1) {
+                                                                        alert("El campo color no puede estar vacio para guardar este registro, favor de veriricar");
+                                                                        $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        //CAPACIDAD
+                                                                        var ValidarCapacidad = $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").val();
+                                                                        if (ValidarCapacidad < 1) {
+                                                                            alert("El campo capacidad no puede estar vacio para guardar este registro, favor de verificar");
+                                                                            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                        else { }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
     </script>
 
     <div id="divBloqueConsulta" runat="server">
@@ -128,6 +268,9 @@
                 <button type="button" id="btnSuplirConsulta" runat="server" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoMarcas">Suplir</button>
                 <asp:Button ID="btnExportarConsulta" runat="server" Text="Exportar" ToolTip="Exportar Registros" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnExportarConsulta_Click" />
                 <button type="button" id="btnDescartarConsulta" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoMarcas">Descartar</button>
+
+                <br />
+                <asp:CheckBox ID="cbGraficarConsulta" runat="server" Text="Gradicar" ToolTip="Gradicar Consulta" AutoPostBack="true" OnCheckedChanged="cbGraficarConsulta_CheckedChanged" />
                 <hr />
                 <asp:Label ID="lbCantidadRegistrosConsultaTitulo" runat="server" Text="Cantidad de Registros (" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosConsultaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
@@ -166,6 +309,21 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#000065" />
             </asp:GridView>
+            <br />
+            <!--GRAFICO DE TIPO DE PRODUCTOS-->
+        <div id="divTipoProducto" runat="server" align="center" >
+
+             <asp:Label ID="lbGraTipoProducto" runat="server"  Text="Estadistica de Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+             <br />
+            <asp:Chart ID="GraTipoProductos" Width="1100px" runat="server" Palette="Pastel">
+           <Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}"></asp:Series>
+           </Series>
+           <ChartAreas>
+               <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+           </ChartAreas>
+       </asp:Chart>
+        </div>
         </div>
     </div>
 
@@ -193,7 +351,7 @@
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarMarcaMantenimiento" runat="server" Text="Seleccionar Marca" CssClass="Letranegrita"></asp:Label>
-                    <asp:DropDownList ID="ddlSeleccionarMarcaMantenimiento" runat="server" ToolTip="Seleccionar Marca" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarMarcaMantenimiento_SelectedIndexChanged1" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlSeleccionarMarcaMantenimiento" runat="server" ToolTip="Seleccionar Marca" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarMarcaMantenimiento_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -279,7 +437,7 @@
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
-                    <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
+                    <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbProductoAcumulativoMantenimiento_CheckedChanged" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
                     <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
                     <asp:CheckBox ID="cbNoLimpiarPantalla" runat="server" Text="No Limpiar Pantalla" CssClass="form-check-input" ToolTip="No limpiar Pantalla al momento de realizar el mantenimiento" />
                 </div>
@@ -287,12 +445,16 @@
             <hr />
             <div align="center">
                 <asp:Button ID="btnProcesarMantenimiento" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarMantenimiento_Click" />
+                <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" ToolTip="Modificar Registro" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnModificarMantenimiento_Click" />
+                <asp:Button ID="btnEliminarMantenimiento" runat="server" Text="Eliminar" ToolTip="Eliminar Registro" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnEliminarMantenimiento_Click" />
                 <asp:Button ID="btnVolverMantenimiento" runat="server" Text="Volver" ToolTip="Volver a la pantalla de conulta" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVolverMantenimiento_Click" />
             </div><br />
         </div>
     </div>
 
     <div id="divBloqueDetalle" runat="server"></div>
+
+    <div id="divBloqueSuplir" runat="server"></div>
 
     <div id="divBloqueDescartar" runat="server"></div>
 

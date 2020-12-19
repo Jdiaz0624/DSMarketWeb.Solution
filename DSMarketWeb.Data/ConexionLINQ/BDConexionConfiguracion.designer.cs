@@ -82,6 +82,20 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombreLista, primerFiltro, segundoFiltro, terceFiltro, cuartoFiltro, quintoFiltro);
 			return ((ISingleResult<SP_BUSCA_LISTAS_WEBResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO")]
+		public ISingleResult<SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult> SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdPorcientoDescuento", DbType="Int")] System.Nullable<int> idPorcientoDescuento, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PorcientoDescuento", DbType="Int")] System.Nullable<int> porcientoDescuento, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPorcientoDescuento, porcientoDescuento, accion);
+			return ((ISingleResult<SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO")]
+		public ISingleResult<SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult> SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdPorcientoDescuento", DbType="Int")] System.Nullable<int> idPorcientoDescuento)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPorcientoDescuento);
+			return ((ISingleResult<SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_SACAR_INFORMACION_EMPRESAResult
@@ -553,6 +567,94 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._TerceValor != value))
 				{
 					this._TerceValor = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult
+	{
+		
+		private System.Nullable<int> _IdPorcientoDescuento;
+		
+		private System.Nullable<int> _PorcientoDescuento;
+		
+		public SP_MODIFICAR_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPorcientoDescuento", DbType="Int")]
+		public System.Nullable<int> IdPorcientoDescuento
+		{
+			get
+			{
+				return this._IdPorcientoDescuento;
+			}
+			set
+			{
+				if ((this._IdPorcientoDescuento != value))
+				{
+					this._IdPorcientoDescuento = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PorcientoDescuento", DbType="Int")]
+		public System.Nullable<int> PorcientoDescuento
+		{
+			get
+			{
+				return this._PorcientoDescuento;
+			}
+			set
+			{
+				if ((this._PorcientoDescuento != value))
+				{
+					this._PorcientoDescuento = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult
+	{
+		
+		private int _IdPorcientoDescuento;
+		
+		private System.Nullable<int> _PorcientoDescuento;
+		
+		public SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTOResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPorcientoDescuento", DbType="Int NOT NULL")]
+		public int IdPorcientoDescuento
+		{
+			get
+			{
+				return this._IdPorcientoDescuento;
+			}
+			set
+			{
+				if ((this._IdPorcientoDescuento != value))
+				{
+					this._IdPorcientoDescuento = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PorcientoDescuento", DbType="Int")]
+		public System.Nullable<int> PorcientoDescuento
+		{
+			get
+			{
+				return this._PorcientoDescuento;
+			}
+			set
+			{
+				if ((this._PorcientoDescuento != value))
+				{
+					this._PorcientoDescuento = value;
 				}
 			}
 		}

@@ -88,5 +88,19 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             return Listado;
         }
         #endregion
+
+        #region MANTENIMIENTO DE PORCIENTO DE DESCUENTO POR DEFECTO DE PRODUCTOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPorcientoDescuentoProductoPorDefecto> BuscaPorcientoDescuentoPoeDefecto(int? IdPorcientoDescuento = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO(IdPorcientoDescuento)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPorcientoDescuentoProductoPorDefecto
+                           {
+                               IdPorcientoDescuento=n.IdPorcientoDescuento,
+                               PorcientoDescuento=n.PorcientoDescuento
+                           }).ToList();
+            return Listado;
+        }
+        #endregion
     }
 }

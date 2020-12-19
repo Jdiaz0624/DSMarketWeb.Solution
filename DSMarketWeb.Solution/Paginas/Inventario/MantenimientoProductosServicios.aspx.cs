@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DSMarketWeb.Solution.Paginas.Inventario
 {
@@ -247,15 +249,236 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
         }
         #endregion
+        #region CARGAR LAS LISTAS DESPLEGABLES PARA LA PANTALLA DE MANTENIMIENTO
+        private void CargarListasDesplegablesPantallaMantenimiento() {
+            CargarListaTipoProductoMantenimiento();
+            CargarListaCategoriaMantenimiento();
+            CargarUnidadMedidaMantenimiento();
+            CargarListaMarcaMantenimient();
+            CargarListasModeosMantenimiento();
+            CargarListaTipoSuplidorMantenimiento();
+            CargarListaSuplidorMantenimiento();
+            CargarListaColoresMantenimiento();
+            CargarListaCondicionesMantenimiento();
+            CargarListaCapacidadMantenimiento();
+        }
+        private void CargarListaTipoProductoMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProductoMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null));
+
+        }
+        private void CargarListaCategoriaMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), null));
+        }
+        private void CargarUnidadMedidaMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarUnidadMedidaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("UNIDADMEDIDA", null, null));
+        }
+        private void CargarListaMarcaMantenimient() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+        }
+        private void CargarListasModeosMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloMantenimiento, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProductoMantenimiento.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString(), ddlSeleccionarMarcaMantenimiento.SelectedValue.ToString()));
+        }
+        private void CargarListaTipoSuplidorMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOSUPLIDOR", null, null));
+        }
+        private void CargarListaSuplidorMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue.ToString(), null));
+        }
+        private void CargarListaColoresMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarColorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("COLORES", null, null));
+        }
+        private void CargarListaCondicionesMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCondicionMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CONDICION", null, null));
+        }
+        private void CargarListaCapacidadMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCapacidadMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CAPACIDAD", null, null));
+        }
+        #endregion
+        #region MODOS DE PANTALLA
+        private void ModoServicio() {
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = true;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = false;
+            ddlSeleccionarMarcaMantenimiento.Enabled = false;
+            ddlSeleccionarModeloMantenimiento.Enabled = false;
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = false;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = false;
+            txtDescripcionMantenimiento.Enabled = true;
+            txtCodigoBarraMantenimiento.Enabled = false;
+            txtReferenciaMantenimiento.Enabled = false;
+            txtPrecioCompraMantenimiento.Enabled = false;
+            txtPrecioVentaMantenimiento.Enabled = true;
+            txtStockMantenimiento.Enabled = false;
+            txtStockMinimoMantenimiento.Enabled = false;
+            txtPorcientoDescuentoMantenimiento.Enabled = true;
+            txtNumeroSeguimientoMantenimiento.Enabled = false;
+            ddlSeleccionarColorMantenimiento.Enabled = false;
+            ddlSeleccionarCondicionMantenimiento.Enabled = false;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = false;
+            txtComentarioMantenimiento.Enabled = true;
+            cbProductoAcumulativoMantenimiento.Enabled = false;
+            cbAplicaImpuestoMantenimiento.Enabled = false;
+            cbNoLimpiarPantalla.Enabled = true;
+
+            txtPrecioCompraMantenimiento.Text = "0";
+            txtStockMantenimiento.Text = "1";
+            txtStockMinimoMantenimiento.Text = "1";
+        }
+        private void ModoProducto() {
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = true;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = true;
+            ddlSeleccionarMarcaMantenimiento.Enabled = true;
+            ddlSeleccionarModeloMantenimiento.Enabled = true;
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = true;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = false;
+            txtCodigoBarraMantenimiento.Enabled = true;
+            txtReferenciaMantenimiento.Enabled = true;
+            txtPrecioCompraMantenimiento.Enabled = true;
+            txtPrecioVentaMantenimiento.Enabled = true;
+            txtStockMantenimiento.Enabled = true;
+            txtStockMinimoMantenimiento.Enabled = true;
+            txtPorcientoDescuentoMantenimiento.Enabled = true;
+            txtNumeroSeguimientoMantenimiento.Enabled = true;
+            ddlSeleccionarColorMantenimiento.Enabled = true;
+            ddlSeleccionarCondicionMantenimiento.Enabled = true;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = true;
+            txtComentarioMantenimiento.Enabled = true;
+            cbProductoAcumulativoMantenimiento.Enabled = true;
+            cbAplicaImpuestoMantenimiento.Enabled = true;
+            cbNoLimpiarPantalla.Enabled = true;
+
+            txtPrecioCompraMantenimiento.Text = string.Empty;
+            txtStockMantenimiento.Text = "1";
+            txtStockMinimoMantenimiento.Text = "1";
+        }
+        #endregion
+        #region UTILIDADES
+        private void SacarPorcientoDescuento(int IdPorcientoDescuento) {
+            DSMarketWeb.Logic.Comunes.SacarPorcientoDescuentoPrDefectoProductos Porcientodescuento = new Logic.Comunes.SacarPorcientoDescuentoPrDefectoProductos(IdPorcientoDescuento);
+            txtPorcientoDescuentoMantenimiento.Text = Porcientodescuento.SacarPorcientodescuento().ToString();
+        }
+        #endregion
+        #region GENERAR GRAFICOS
+        private void GenerarGraficos() {
+            GnerarGraficoTipoProducto();
+        }
+        private void GnerarGraficoTipoProducto() {
+            int[] CantidadRegistros = new int[2];
+            string[] NombreServicio = new string[2];
+            int Contador = 0;
+
+            int _IdProducto = 0;
+            int _NumeroConector = 0;
+            string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? "N/A" : txtDescripcionConsulta.Text.Trim();
+            string _CodigoBarra = string.IsNullOrEmpty(txtCodigoBarra.Text.Trim()) ? "N/A" : txtCodigoBarra.Text.Trim();
+            string _Referencia = string.IsNullOrEmpty(txtReferenciaConsulta.Text.Trim()) ? "N/A" : txtReferenciaConsulta.Text.Trim();
+            DateTime _FechaDesde, _FechaHasta;
+            if (cbAgregarRangoFecha.Checked == true) {
+                _FechaDesde = Convert.ToDateTime(txtFechaDesdeConsulta.Text);
+                _FechaHasta = Convert.ToDateTime(txtFechaHAstaConsulta.Text);
+            }
+            else {
+                _FechaDesde = Convert.ToDateTime("1900-01-01");
+                _FechaHasta = Convert.ToDateTime("1900-01-01");
+            }
+            decimal _IdTipoProducto = ddlSeleccionarTipoProductoCOnsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoProductoCOnsulta.SelectedValue) : 0;
+            decimal _IdCategoria = ddlSeleccionarCategoria.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarCategoria.SelectedValue) : 0;
+            decimal _IdUnidadMedida = ddlSeleccionarUnidadMedida.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarUnidadMedida.SelectedValue) : 0;
+            decimal _IdMarca = ddlSeleccionarMarcaConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarMarcaConsulta.SelectedValue) : 0;
+            decimal _IdModelo = ddlSeleccionarModelosConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelosConsulta.SelectedValue) : 0;
+            decimal _IdColor = 0;
+            decimal _Idcapacidad = 0;
+            decimal _IdCondicion = 0;
+            bool _TieneOferta = false;
+            string _NumeroSeguimiento = string.IsNullOrEmpty(txtNumeroSeguimientoConsulta.Text.Trim()) ? "N/A" : txtNumeroSeguimientoConsulta.Text.Trim();
+            bool _EstatusProducto = false;
+            if (cbProductosVendisodDescartados.Checked == true) {
+                _EstatusProducto = true;
+            }
+            else {
+                _EstatusProducto = false;
+            }
+
+
+            SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_BUSCA_PRODUCTO_GRAFICO_WEB] @IdProducto,@NumeroConector,@Descripcion,@CodigoBarra,@Referencia,@FechaDesde,@FechaHasta,@IdTipoProducto,@IdCategoria,@IdUnidadMedida,@IdMarca,@IdModelo,@IdColor,@IdCapacidad,@IdCondicion,@TieneOferta,@EstatusProducto,@NumeroSeguimiento,@TipoGraficoGenerar", Conexion);
+
+            Comando.Parameters.AddWithValue("@IdProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@NumeroConector", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@Descripcion", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@CodigoBarra", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@Referencia", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@FechaDesde", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@FechaHasta", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@IdTipoProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCategoria", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdUnidadMedida", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdMarca", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdModelo", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdColor", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCapacidad", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCondicion", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@TieneOferta", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@EstatusProducto", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@NumeroSeguimiento", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@TipoGraficoGenerar", SqlDbType.Int);
+
+            Comando.Parameters["@IdProducto"].Value = _IdProducto;
+            Comando.Parameters["@NumeroConector"].Value = _NumeroConector;
+            Comando.Parameters["@Descripcion"].Value = _Descripcion;
+            Comando.Parameters["@CodigoBarra"].Value = _CodigoBarra;
+            Comando.Parameters["@Referencia"].Value = _Referencia;
+            Comando.Parameters["@FechaDesde"].Value = _FechaDesde;
+            Comando.Parameters["@FechaHasta"].Value = _FechaHasta;
+            Comando.Parameters["@IdTipoProducto"].Value = _IdTipoProducto;
+            Comando.Parameters["@IdCategoria"].Value = _IdCategoria;
+            Comando.Parameters["@IdUnidadMedida"].Value = _IdUnidadMedida;
+            Comando.Parameters["@IdMarca"].Value = _IdMarca;
+            Comando.Parameters["@IdModelo"].Value = _IdModelo;
+            Comando.Parameters["@IdColor"].Value = _IdColor;
+            Comando.Parameters["@IdCapacidad"].Value = _Idcapacidad;
+            Comando.Parameters["@IdCondicion"].Value = _IdCondicion;
+            Comando.Parameters["@TieneOferta"].Value = _TieneOferta;
+            Comando.Parameters["@EstatusProducto"].Value = _EstatusProducto;
+            Comando.Parameters["@NumeroSeguimiento"].Value = _NumeroSeguimiento;
+            Comando.Parameters["@TipoGraficoGenerar"].Value = 1;
+
+            Conexion.Open();
+            SqlDataReader Reader = Comando.ExecuteReader();
+            while (Reader.Read()) {
+                CantidadRegistros[Contador] = Convert.ToInt32(Reader.GetInt32(1));
+                NombreServicio[Contador] = Reader.GetString(0);
+                Contador++;
+            }
+            Reader.Close();
+            Conexion.Close();
+
+            GraTipoProductos.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
+            GraTipoProductos.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            GraTipoProductos.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+            GraTipoProductos.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            GraTipoProductos.Series["Serie"].Points.DataBindXY(NombreServicio, CantidadRegistros);
+        }
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                SacarPorcientoDescuento(1);
+                txtStockMantenimiento.Text = "1";
+                txtStockMinimoMantenimiento.Text = "1";
+                txtStockMantenimiento.Enabled = false;
+                txtStockMinimoMantenimiento.Enabled = false;
+                txtDescripcionMantenimiento.Enabled = false;
                 divBloqueConsulta.Visible = true;
                 divBloqueMantenimiento.Visible = false;
 
                 CargarListasDesplegablesCOnsulta();
+                CargarListasDesplegablesPantallaMantenimiento();
             }
         }
 
@@ -290,21 +513,37 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnConsultarRegistros_Click(object sender, EventArgs e)
         {
             MostrarListadoInventario();
+            GenerarGraficos();
         }
 
         protected void btnNuevoConsulta_Click(object sender, EventArgs e)
         {
+            divBloqueConsulta.Visible = false;
+            divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = false;
+            divBloqueDescartar.Visible = false;
+            divBloqueMantenimiento.Visible = true;
 
         }
 
         protected void btnModificarConsulta_Click(object sender, EventArgs e)
         {
+            divBloqueConsulta.Visible = false;
+            divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = false;
+            divBloqueDescartar.Visible = false;
+            divBloqueMantenimiento.Visible = true;
 
         }
 
         protected void btnEliminarConsulta_Click(object sender, EventArgs e)
         {
-
+            divBloqueConsulta.Visible = false;
+            divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = false;
+            divBloqueDescartar.Visible = false;
+            divBloqueMantenimiento.Visible = true;
+   
         }
 
         protected void btnExportarConsulta_Click(object sender, EventArgs e)
@@ -325,22 +564,28 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CargarListaCategoriaMantenimiento();
+            CargarListaMarcaMantenimient();
+            CargarListasModeosMantenimiento();
 
+            int TipoProductoSeleciconado = Convert.ToInt32(ddlSeleccionarTipoProductoMantenimiento.SelectedValue);
+            if (TipoProductoSeleciconado == 1) {
+                ModoProducto();
+            }
+            else {
+                ModoServicio();
+            }
         }
 
         protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CargarListaMarcaMantenimient();
+            CargarListasModeosMantenimiento();
         }
 
         protected void ddlSeleccionarMarcaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        protected void ddlSeleccionarMarcaMantenimiento_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-
+            CargarListasModeosMantenimiento();
         }
 
         protected void ddlSeleccionarModeloMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
@@ -354,6 +599,39 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
 
         protected void btnVolverMantenimiento_Click(object sender, EventArgs e)
+        {
+            divBloqueConsulta.Visible = true;
+            divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = false;
+            divBloqueDescartar.Visible = false;
+            divBloqueMantenimiento.Visible = false;
+        }
+
+        protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void cbProductoAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbProductoAcumulativoMantenimiento.Checked == true) {
+                txtStockMantenimiento.Enabled = true;
+                txtStockMinimoMantenimiento.Enabled = true;
+            }
+            else {
+                txtStockMantenimiento.Text = "1";
+                txtStockMinimoMantenimiento.Text = "1";
+                txtStockMantenimiento.Enabled = false;
+                txtStockMinimoMantenimiento.Enabled = false;
+            }
+        }
+
+        protected void cbGraficarConsulta_CheckedChanged(object sender, EventArgs e)
         {
 
         }
