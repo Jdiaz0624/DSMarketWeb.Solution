@@ -102,5 +102,46 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             return Listado;
         }
         #endregion
+
+        #region MANTENIMIENTO DE CONFIGURACION GENERAL
+        //BUSCA CONFIGURACION GENERAL
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral> BuscaConfiguracionGeneral(int? IdConfiguracionGeneral = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CONFIGURACION_GENERAL(IdConfiguracionGeneral)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral
+                           {
+                               IdConfiguracionGeneral=n.IdConfiguracionGeneral,
+                               Descripcion=n.Descripcion,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               CantidadActivos=n.CantidadActivos,
+                               CantidadInactivos=n.CantidadInactivos
+                           }).ToList();
+            return Listado;
+        }
+        //MANTENIMIENTO DE CONFIGURACION GENERAL
+        public DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral MantenimientoConfiguracionGeneral(DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral Mantenimiento = null;
+
+            var ConfguracionGeneral = ObjData.SP_MANTENIMIENTO_CONFIGURACION_GENERAL(
+                Item.IdConfiguracionGeneral,
+                Item.Descripcion,
+                Item.Estatus0,
+                Accion);
+            if (ConfguracionGeneral != null) {
+                Mantenimiento = (from n in ConfguracionGeneral
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral
+                                 {
+                                     IdConfiguracionGeneral=n.IdConfiguracionGeneral,
+                                     Descripcion=n.Descripcion,
+                                     Estatus0=n.Estatus
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }

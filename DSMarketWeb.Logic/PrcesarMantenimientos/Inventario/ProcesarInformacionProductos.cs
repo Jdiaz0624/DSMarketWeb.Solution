@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
 {
-    public class ProcesarInformacionProductos : DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario
+    public class ProcesarInformacionProductos 
     {
+
+        readonly DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario ObjData = new Logica.LogicaInventario.LogicaInventario();
         private decimal IdProducto = 0;
         private decimal NumeroConector = 0;
         private decimal IdTipoProducto = 0;
@@ -147,7 +149,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.IdCondicion = IdCondicion;
             Procesar.IdCapacidad = IdCapacidad;
 
-            MantenimientoProductos(Procesar, Accion);
+            var MAN = ObjData.MantenimientoProductos(Procesar, Accion);
         }
     }
 }

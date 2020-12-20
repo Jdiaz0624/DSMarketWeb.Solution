@@ -15,6 +15,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjdataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
 
+
         #region CARGAR LAS LISTAS DESPLEGABLES EN LA PANTALLA DE CONSULTA
         private void CargarTipoProductosConsultas() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProductoCOnsulta, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null), true);
@@ -247,6 +248,17 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                     }
                 }
             }
+
+            if (cbGraficarConsulta.Checked == true)
+            {
+                divTipoProducto.Visible = true;
+                divGraficoMarcas.Visible = true;
+                divGraficoServicios.Visible = true;
+                GenerarGraficos();
+            }
+            else { 
+            
+            }
         }
         #endregion
         #region CARGAR LAS LISTAS DESPLEGABLES PARA LA PANTALLA DE MANTENIMIENTO
@@ -353,6 +365,30 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             txtStockMantenimiento.Text = "1";
             txtStockMinimoMantenimiento.Text = "1";
         }
+
+        private void ModoConsulta() {
+            btnConsultarRegistrosConsulta.Enabled = true;
+            btnNuevoConsulta.Enabled = true;
+            btnModificarConsulta.Enabled = false;
+            btnEliminarConsulta.Enabled = false;
+            btnSuplirConsulta.Disabled = false;
+            btnExportarConsulta.Enabled = false;
+            btnDescartarConsulta.Disabled = false;
+            btnRestablecerPantallaConsulta.Enabled = true;
+            cbGraficarConsulta.Enabled = true;
+        }
+        private void ModoMantenimiento() {
+            btnConsultarRegistrosConsulta.Enabled = false;
+            btnNuevoConsulta.Enabled = false;
+            btnModificarConsulta.Enabled = true;
+            btnEliminarConsulta.Enabled = true;
+            btnSuplirConsulta.Disabled = true;
+            btnExportarConsulta.Enabled = true;
+            btnDescartarConsulta.Disabled = true;
+            btnRestablecerPantallaConsulta.Enabled = true;
+            cbGraficarConsulta.Enabled = false;
+            
+        }
         #endregion
         #region UTILIDADES
         private void SacarPorcientoDescuento(int IdPorcientoDescuento) {
@@ -363,6 +399,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         #region GENERAR GRAFICOS
         private void GenerarGraficos() {
             GnerarGraficoTipoProducto();
+            GenerarGraficoMarcas();
+            GenerarGraficoServicios();
         }
         private void GnerarGraficoTipoProducto() {
             int[] CantidadRegistros = new int[2];
@@ -455,12 +493,328 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Reader.Close();
             Conexion.Close();
 
-            GraTipoProductos.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
+            //GraTipoProductos.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
             GraTipoProductos.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
             GraTipoProductos.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
             GraTipoProductos.ChartAreas["ChartArea1"].AxisX.Interval = 1;
 
             GraTipoProductos.Series["Serie"].Points.DataBindXY(NombreServicio, CantidadRegistros);
+        }
+        private void GenerarGraficoMarcas() {
+            int[] CantidadRegistros = new int[10];
+            string[] Marca = new string[10];
+            int Contador = 0;
+
+            int _IdProducto = 0;
+            int _NumeroConector = 0;
+            string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? "N/A" : txtDescripcionConsulta.Text.Trim();
+            string _CodigoBarra = string.IsNullOrEmpty(txtCodigoBarra.Text.Trim()) ? "N/A" : txtCodigoBarra.Text.Trim();
+            string _Referencia = string.IsNullOrEmpty(txtReferenciaConsulta.Text.Trim()) ? "N/A" : txtReferenciaConsulta.Text.Trim();
+            DateTime _FechaDesde, _FechaHasta;
+            if (cbAgregarRangoFecha.Checked == true)
+            {
+                _FechaDesde = Convert.ToDateTime(txtFechaDesdeConsulta.Text);
+                _FechaHasta = Convert.ToDateTime(txtFechaHAstaConsulta.Text);
+            }
+            else
+            {
+                _FechaDesde = Convert.ToDateTime("1900-01-01");
+                _FechaHasta = Convert.ToDateTime("1900-01-01");
+            }
+            decimal _IdTipoProducto = ddlSeleccionarTipoProductoCOnsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoProductoCOnsulta.SelectedValue) : 0;
+            decimal _IdCategoria = ddlSeleccionarCategoria.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarCategoria.SelectedValue) : 0;
+            decimal _IdUnidadMedida = ddlSeleccionarUnidadMedida.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarUnidadMedida.SelectedValue) : 0;
+            decimal _IdMarca = ddlSeleccionarMarcaConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarMarcaConsulta.SelectedValue) : 0;
+            decimal _IdModelo = ddlSeleccionarModelosConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelosConsulta.SelectedValue) : 0;
+            decimal _IdColor = 0;
+            decimal _Idcapacidad = 0;
+            decimal _IdCondicion = 0;
+            bool _TieneOferta = false;
+            string _NumeroSeguimiento = string.IsNullOrEmpty(txtNumeroSeguimientoConsulta.Text.Trim()) ? "N/A" : txtNumeroSeguimientoConsulta.Text.Trim();
+            bool _EstatusProducto = false;
+            if (cbProductosVendisodDescartados.Checked == true)
+            {
+                _EstatusProducto = true;
+            }
+            else
+            {
+                _EstatusProducto = false;
+            }
+
+
+            SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_BUSCA_PRODUCTO_GRAFICO_WEB] @IdProducto,@NumeroConector,@Descripcion,@CodigoBarra,@Referencia,@FechaDesde,@FechaHasta,@IdTipoProducto,@IdCategoria,@IdUnidadMedida,@IdMarca,@IdModelo,@IdColor,@IdCapacidad,@IdCondicion,@TieneOferta,@EstatusProducto,@NumeroSeguimiento,@TipoGraficoGenerar", Conexion);
+
+            Comando.Parameters.AddWithValue("@IdProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@NumeroConector", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@Descripcion", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@CodigoBarra", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@Referencia", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@FechaDesde", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@FechaHasta", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@IdTipoProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCategoria", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdUnidadMedida", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdMarca", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdModelo", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdColor", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCapacidad", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCondicion", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@TieneOferta", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@EstatusProducto", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@NumeroSeguimiento", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@TipoGraficoGenerar", SqlDbType.Int);
+
+            Comando.Parameters["@IdProducto"].Value = _IdProducto;
+            Comando.Parameters["@NumeroConector"].Value = _NumeroConector;
+            Comando.Parameters["@Descripcion"].Value = _Descripcion;
+            Comando.Parameters["@CodigoBarra"].Value = _CodigoBarra;
+            Comando.Parameters["@Referencia"].Value = _Referencia;
+            Comando.Parameters["@FechaDesde"].Value = _FechaDesde;
+            Comando.Parameters["@FechaHasta"].Value = _FechaHasta;
+            Comando.Parameters["@IdTipoProducto"].Value = _IdTipoProducto;
+            Comando.Parameters["@IdCategoria"].Value = _IdCategoria;
+            Comando.Parameters["@IdUnidadMedida"].Value = _IdUnidadMedida;
+            Comando.Parameters["@IdMarca"].Value = _IdMarca;
+            Comando.Parameters["@IdModelo"].Value = _IdModelo;
+            Comando.Parameters["@IdColor"].Value = _IdColor;
+            Comando.Parameters["@IdCapacidad"].Value = _Idcapacidad;
+            Comando.Parameters["@IdCondicion"].Value = _IdCondicion;
+            Comando.Parameters["@TieneOferta"].Value = _TieneOferta;
+            Comando.Parameters["@EstatusProducto"].Value = _EstatusProducto;
+            Comando.Parameters["@NumeroSeguimiento"].Value = _NumeroSeguimiento;
+            Comando.Parameters["@TipoGraficoGenerar"].Value = 2;
+
+            Conexion.Open();
+            SqlDataReader Reader = Comando.ExecuteReader();
+            while (Reader.Read())
+            {
+                CantidadRegistros[Contador] = Convert.ToInt32(Reader.GetInt32(1));
+                Marca[Contador] = Reader.GetString(0);
+                Contador++;
+            }
+            Reader.Close();
+            Conexion.Close();
+
+         //   GraMarcas.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
+            GraMarcas.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            GraMarcas.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+            GraMarcas.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            GraMarcas.Series["Serie"].Points.DataBindXY(Marca, CantidadRegistros);
+        }
+        private void GenerarGraficoServicios() {
+            decimal[] Precio = new decimal[10];
+            string[] DescripcionServicio = new string[10];
+            int Contador = 0;
+
+            int _IdProducto = 0;
+            int _NumeroConector = 0;
+            string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? "N/A" : txtDescripcionConsulta.Text.Trim();
+            string _CodigoBarra = string.IsNullOrEmpty(txtCodigoBarra.Text.Trim()) ? "N/A" : txtCodigoBarra.Text.Trim();
+            string _Referencia = string.IsNullOrEmpty(txtReferenciaConsulta.Text.Trim()) ? "N/A" : txtReferenciaConsulta.Text.Trim();
+            DateTime _FechaDesde, _FechaHasta;
+            if (cbAgregarRangoFecha.Checked == true)
+            {
+                _FechaDesde = Convert.ToDateTime(txtFechaDesdeConsulta.Text);
+                _FechaHasta = Convert.ToDateTime(txtFechaHAstaConsulta.Text);
+            }
+            else
+            {
+                _FechaDesde = Convert.ToDateTime("1900-01-01");
+                _FechaHasta = Convert.ToDateTime("1900-01-01");
+            }
+            decimal _IdTipoProducto = ddlSeleccionarTipoProductoCOnsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoProductoCOnsulta.SelectedValue) : 0;
+            decimal _IdCategoria = ddlSeleccionarCategoria.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarCategoria.SelectedValue) : 0;
+            decimal _IdUnidadMedida = ddlSeleccionarUnidadMedida.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarUnidadMedida.SelectedValue) : 0;
+            decimal _IdMarca = ddlSeleccionarMarcaConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarMarcaConsulta.SelectedValue) : 0;
+            decimal _IdModelo = ddlSeleccionarModelosConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelosConsulta.SelectedValue) : 0;
+            decimal _IdColor = 0;
+            decimal _Idcapacidad = 0;
+            decimal _IdCondicion = 0;
+            bool _TieneOferta = false;
+            string _NumeroSeguimiento = string.IsNullOrEmpty(txtNumeroSeguimientoConsulta.Text.Trim()) ? "N/A" : txtNumeroSeguimientoConsulta.Text.Trim();
+            bool _EstatusProducto = false;
+            if (cbProductosVendisodDescartados.Checked == true)
+            {
+                _EstatusProducto = true;
+            }
+            else
+            {
+                _EstatusProducto = false;
+            }
+
+
+            SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_BUSCA_PRODUCTO_GRAFICO_WEB] @IdProducto,@NumeroConector,@Descripcion,@CodigoBarra,@Referencia,@FechaDesde,@FechaHasta,@IdTipoProducto,@IdCategoria,@IdUnidadMedida,@IdMarca,@IdModelo,@IdColor,@IdCapacidad,@IdCondicion,@TieneOferta,@EstatusProducto,@NumeroSeguimiento,@TipoGraficoGenerar", Conexion);
+
+            Comando.Parameters.AddWithValue("@IdProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@NumeroConector", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@Descripcion", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@CodigoBarra", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@Referencia", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@FechaDesde", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@FechaHasta", SqlDbType.Date);
+            Comando.Parameters.AddWithValue("@IdTipoProducto", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCategoria", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdUnidadMedida", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdMarca", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdModelo", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdColor", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCapacidad", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@IdCondicion", SqlDbType.Decimal);
+            Comando.Parameters.AddWithValue("@TieneOferta", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@EstatusProducto", SqlDbType.Bit);
+            Comando.Parameters.AddWithValue("@NumeroSeguimiento", SqlDbType.VarChar);
+            Comando.Parameters.AddWithValue("@TipoGraficoGenerar", SqlDbType.Int);
+
+            Comando.Parameters["@IdProducto"].Value = _IdProducto;
+            Comando.Parameters["@NumeroConector"].Value = _NumeroConector;
+            Comando.Parameters["@Descripcion"].Value = _Descripcion;
+            Comando.Parameters["@CodigoBarra"].Value = _CodigoBarra;
+            Comando.Parameters["@Referencia"].Value = _Referencia;
+            Comando.Parameters["@FechaDesde"].Value = _FechaDesde;
+            Comando.Parameters["@FechaHasta"].Value = _FechaHasta;
+            Comando.Parameters["@IdTipoProducto"].Value = _IdTipoProducto;
+            Comando.Parameters["@IdCategoria"].Value = _IdCategoria;
+            Comando.Parameters["@IdUnidadMedida"].Value = _IdUnidadMedida;
+            Comando.Parameters["@IdMarca"].Value = _IdMarca;
+            Comando.Parameters["@IdModelo"].Value = _IdModelo;
+            Comando.Parameters["@IdColor"].Value = _IdColor;
+            Comando.Parameters["@IdCapacidad"].Value = _Idcapacidad;
+            Comando.Parameters["@IdCondicion"].Value = _IdCondicion;
+            Comando.Parameters["@TieneOferta"].Value = _TieneOferta;
+            Comando.Parameters["@EstatusProducto"].Value = _EstatusProducto;
+            Comando.Parameters["@NumeroSeguimiento"].Value = _NumeroSeguimiento;
+            Comando.Parameters["@TipoGraficoGenerar"].Value = 3;
+
+            Conexion.Open();
+            SqlDataReader Reader = Comando.ExecuteReader();
+            while (Reader.Read())
+            {
+                Precio[Contador] = Convert.ToDecimal(Reader.GetDecimal(1));
+                DescripcionServicio[Contador] = Reader.GetString(0);
+                Contador++;
+            }
+            Reader.Close();
+            Conexion.Close();
+
+            GraServicios.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
+            GraServicios.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            GraServicios.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+            GraServicios.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            GraServicios.Series["Serie"].Points.DataBindXY(DescripcionServicio, Precio);
+        }
+        #endregion
+        #region GENERAR PROCESAR INFORMACION DEL PRODUCTO
+        private void ProcesarInformacionProducto(decimal IdProducto, decimal NumeroConector, string Accion) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Procesar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                IdProducto,
+                NumeroConector,
+                Convert.ToDecimal(ddlSeleccionarTipoProductoMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarCategoriaMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarUnidadMedidaMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarMarcaMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarModeloMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarSuplidorMantenimiento.SelectedValue),
+                txtDescripcionMantenimiento.Text,
+                txtCodigoBarraMantenimiento.Text,
+                txtReferenciaMantenimiento.Text,
+                Convert.ToDecimal(txtPrecioCompraMantenimiento.Text),
+                Convert.ToDecimal(txtPrecioVentaMantenimiento.Text),
+                Convert.ToDecimal(txtStockMantenimiento.Text),
+                Convert.ToDecimal(txtStockMinimoMantenimiento.Text),
+                Convert.ToDecimal(txtPorcientoDescuentoMantenimiento.Text),
+                false,
+                cbProductoAcumulativoMantenimiento.Checked,
+                false,
+                Convert.ToDecimal(Session["IdUsuario"]),
+                DateTime.Now,
+                Convert.ToDecimal(Session["IdUsuario"]),
+                DateTime.Now,
+                DateTime.Now,
+                txtComentarioMantenimiento.Text,
+                cbAplicaImpuestoMantenimiento.Checked,
+                false,
+                txtNumeroSeguimientoMantenimiento.Text,
+                Convert.ToDecimal(ddlSeleccionarColorMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarCondicionMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarCapacidadMantenimiento.SelectedValue),
+                Accion);
+            Procesar.ProcesarProducto();
+        }
+        #endregion
+        #region GENERAR NUMERO DE CONECTOR
+        private void GenerarNumeroConector() {
+
+            Random NumeroConector = new Random();
+            int Numero = NumeroConector.Next(0, 999999999);
+            lbNumeroConectorProducto.Text = Numero.ToString();
+        }
+        #endregion
+        #region LIMPIAR CONTROLES y VOLVER ATRAS, RESTABLECER
+        private void LimpiarControlesCOnsulta() {
+            CargarListasDesplegablesCOnsulta();
+            cbAgregarRangoFecha.Checked = false;
+            cbMostrarTodoHistorialVenta.Checked = false;
+            cbProductosVendisodDescartados.Checked = false;
+            rbExportarPDF.Checked = true;
+            txtFechaDesdeConsulta.Text = string.Empty;
+            txtFechaHAstaConsulta.Text = string.Empty;
+            txtDescripcionConsulta.Text = string.Empty;
+            txtCodigoBarra.Text = string.Empty;
+            txtReferenciaConsulta.Text = string.Empty;
+            txtNumeroSeguimientoConsulta.Text = string.Empty;
+        }
+        private void LimpiarCOntrolesMantenimiento() {
+            txtDescripcionMantenimiento.Text = string.Empty;
+            txtCodigoBarraMantenimiento.Text = string.Empty;
+            txtReferenciaMantenimiento.Text = string.Empty;
+            txtPrecioCompraMantenimiento.Text = string.Empty;
+            txtPrecioVentaMantenimiento.Text = string.Empty;
+            txtStockMantenimiento.Text = "1";
+            txtStockMinimoMantenimiento.Text = "1";
+            txtNumeroSeguimientoMantenimiento.Text = string.Empty;
+            txtComentarioMantenimiento.Text = string.Empty;
+            cbProductoAcumulativoMantenimiento.Checked = false;
+            cbAplicaImpuestoMantenimiento.Checked = false;
+            ValidarCheckLimpiarPantalla();
+            SacarPorcientoDescuento(1);
+        }
+        private void VolverAtras() {
+            divBloqueConsulta.Visible = true;
+            divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = false;
+            divBloqueDescartar.Visible = false;
+            divBloqueMantenimiento.Visible = false;
+            LimpiarControlesCOnsulta();
+            LimpiarCOntrolesMantenimiento();
+        }
+        private void RestablecerPantallaCOnsulta() {
+        
+        
+        }
+        #endregion
+        #region VALIDAR FNCIONES
+        private void ValidarCheckLimpiarPantalla()
+        {
+            cbNoLimpiarPantalla.Visible = true;
+            int IdConfiguracionGeneral = (int)DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera.ConceptoConfiguracionGeneral.VALIDAR_CHECK_LIMPIAR_PANTALLA_EN_MANTENIMIENTOS;
+            bool Estatus = false;
+            DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera Validar = new Logic.Comunes.ValidarConfiguracionGenera(IdConfiguracionGeneral);
+            Estatus = Validar.SacarEstatusConfiguracionGeneral();
+            if (Estatus == true)
+            {
+                cbNoLimpiarPantalla.Checked = true;
+            }
+            else
+            {
+                cbNoLimpiarPantalla.Checked = false;
+            }
+
+
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -468,6 +822,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                ModoConsulta();
+                ValidarCheckLimpiarPantalla();
                 SacarPorcientoDescuento(1);
                 txtStockMantenimiento.Text = "1";
                 txtStockMinimoMantenimiento.Text = "1";
@@ -476,9 +832,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtDescripcionMantenimiento.Enabled = false;
                 divBloqueConsulta.Visible = true;
                 divBloqueMantenimiento.Visible = false;
-
+                divBloqueDetalle.Visible = false;
                 CargarListasDesplegablesCOnsulta();
                 CargarListasDesplegablesPantallaMantenimiento();
+
+                divGraficoMarcas.Visible = false;
+                divGraficoServicios.Visible = false;
+                divTipoProducto.Visible = false;
             }
         }
 
@@ -513,17 +873,21 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnConsultarRegistros_Click(object sender, EventArgs e)
         {
             MostrarListadoInventario();
-            GenerarGraficos();
+            divBloqueDetalle.Visible = false;
         }
 
         protected void btnNuevoConsulta_Click(object sender, EventArgs e)
         {
+
             divBloqueConsulta.Visible = false;
             divBloqueDetalle.Visible = false;
             divBloqueSuplir.Visible = false;
             divBloqueDescartar.Visible = false;
             divBloqueMantenimiento.Visible = true;
-
+            btnProcesarMantenimiento.Visible = true;
+            btnModificarMantenimiento.Visible = false;
+            btnEliminarMantenimiento.Visible = false;
+            ValidarCheckLimpiarPantalla();
         }
 
         protected void btnModificarConsulta_Click(object sender, EventArgs e)
@@ -533,7 +897,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             divBloqueSuplir.Visible = false;
             divBloqueDescartar.Visible = false;
             divBloqueMantenimiento.Visible = true;
-
+            btnProcesarMantenimiento.Visible = false;
+            btnModificarMantenimiento.Visible = true;
+            btnEliminarMantenimiento.Visible = false;
         }
 
         protected void btnEliminarConsulta_Click(object sender, EventArgs e)
@@ -543,7 +909,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             divBloqueSuplir.Visible = false;
             divBloqueDescartar.Visible = false;
             divBloqueMantenimiento.Visible = true;
-   
+            btnProcesarMantenimiento.Visible = false;
+            btnModificarMantenimiento.Visible = false;
+            btnEliminarMantenimiento.Visible = true;
         }
 
         protected void btnExportarConsulta_Click(object sender, EventArgs e)
@@ -559,7 +927,48 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void gvListado_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            GridViewRow gv = gvListado.SelectedRow;
+            divBloqueMantenimiento.Visible = false;
+            divBloqueDetalle.Visible = true;
+            cbGraficarConsulta.Checked = false;
+            divGraficoMarcas.Visible = false;
+            divGraficoServicios.Visible = false;
+            divTipoProducto.Visible = false;
+            var BuscarRegistroSeleccionado = ObjdataInventario.Value.BuscaProductos(
+                Convert.ToDecimal(gv.Cells[1].Text),
+                Convert.ToDecimal(gv.Cells[2].Text),
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            gvListado.DataSource = BuscarRegistroSeleccionado;
+            gvListado.DataBind();
+            foreach (var n in BuscarRegistroSeleccionado) {
+                txtTipoProductoDetalle.Text = n.TipoProducto;
+                txtCategoriaDetalle.Text = n.Categoria;
+                txtUnidadMedidaDetalle.Text = n.UnidadMedida;
+                txtMarcaDetalle.Text = n.Marca;
+                txtModeloDetalle.Text = n.Modelo;
+                txtTipoSuplidorDetalle.Text = n.TipoSuplidor;
+                txtSuplidorDetalle.Text = n.Suplidor;
+                txtDescripcionDetalle.Text = n.Producto;
+                txtCodigoBarraDetalle.Text = n.CodigoBarra;
+                txtReferenciaDetalle.Text = n.Referencia;
+                decimal PrecioCompra = Convert.ToDecimal(n.PrecioCompra);
+                txtPrecioCompraDetalle.Text = PrecioCompra.ToString("N2");
+                decimal PrecioVenta = Convert.ToDecimal(n.PrecioVenta);
+                txtPrecioVentaDetalle.Text = PrecioVenta.ToString("N2");
+                int Stock = Convert.ToInt32(n.Stock);
+                txtStockDetalle.Text = Stock.ToString("N0");
+                int StockMinimo = Convert.ToInt32(n.StockMinimo);
+                txtStockMinimo.Text = StockMinimo.ToString("N0");
+                txtPorcientoDescuentoDetalle.Text = n.PorcientoDescuento.ToString();
+                txtNumeroSeguimientoDetalle.Text = n.NumeroSeguimiento;
+                txtColorDetalle.Text = n.Color;
+                txtCondcionDetalle.Text = n.Condicion;
+                txtCapacidadDetalle.Text = n.Capacidad;
+                txtProductoAcumulativoDetalle.Text = n.ProductoAcumulativo;
+                txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
+                txtComentarioDetalle.Text = n.Comentario;
+            }
+            ModoMantenimiento();
         }
 
         protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
@@ -595,16 +1004,25 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnProcesarMantenimiento_Click(object sender, EventArgs e)
         {
+            //GENERAMOS EL NUMERO DE CONECTOR
+            GenerarNumeroConector();
 
+            lbIdProductoSeleccionado.Text = "0";
+            ProcesarInformacionProducto(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProducto.Text), "INSERT");
+            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardadoConExito()", "RegistroGuardadoConExito();", true);
+            if (cbNoLimpiarPantalla.Checked == true) {
+                txtReferenciaMantenimiento.Text = string.Empty;
+                GenerarNumeroConector();
+            }
+
+            else {
+                VolverAtras();
+            }
         }
 
         protected void btnVolverMantenimiento_Click(object sender, EventArgs e)
         {
-            divBloqueConsulta.Visible = true;
-            divBloqueDetalle.Visible = false;
-            divBloqueSuplir.Visible = false;
-            divBloqueDescartar.Visible = false;
-            divBloqueMantenimiento.Visible = false;
+            VolverAtras();
         }
 
         protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
@@ -632,6 +1050,30 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
 
         protected void cbGraficarConsulta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbGraficarConsulta.Checked == true) {
+                //divGraficoMarcas.Visible = true;
+                //divGraficoServicios.Visible = true;
+                //divTipoProducto.Visible = true;
+            }
+            else {
+                divGraficoMarcas.Visible = false;
+                divGraficoServicios.Visible = false;
+                divTipoProducto.Visible = false;
+            }
+        }
+
+        protected void btnVolverDetalle_Click(object sender, EventArgs e)
+        {
+            divBloqueDetalle.Visible = false;
+        }
+
+        protected void btnRestablecerPantallaConsulta_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnProcesarSuplirSacar_Click(object sender, EventArgs e)
         {
 
         }
