@@ -144,4 +144,29 @@
       <Column Name="IdCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="Inventario.SP_SACAR_ID_PRODUCTO_CREADO" Method="SP_SACAR_ID_PRODUCTO_CREADO">
+    <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdTipoProducto" Parameter="idTipoProducto" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdCategoria" Parameter="idCategoria" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdMarca" Parameter="idMarca" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdModelo" Parameter="idModelo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdCcolor" Parameter="idCcolor" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdCapacidad" Parameter="idCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdCondicion" Parameter="idCondicion" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <ElementType Name="SP_SACAR_ID_PRODUCTO_CREADOResult">
+      <Column Name="IdProducto" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_FOTO_PRODUCTO" Method="SP_BUSCA_FOTO_PRODUCTO">
+    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <ElementType Name="SP_BUSCA_FOTO_PRODUCTOResult">
+      <Column Name="IdProducto" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="NumeroConector" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoProducto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Categoria" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Producto" Type="System.String" DbType="VarChar(504) NOT NULL" CanBeNull="false" />
+      <Column Name="FotoProducto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

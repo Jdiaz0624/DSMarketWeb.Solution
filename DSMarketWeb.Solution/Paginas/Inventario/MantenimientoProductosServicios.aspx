@@ -474,10 +474,31 @@
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbProductoAcumulativoMantenimiento_CheckedChanged" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
                     <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
+                    <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server" Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />
                     <asp:CheckBox ID="cbNoLimpiarPantalla" runat="server" Text="No Limpiar Pantalla" CssClass="form-check-input" ToolTip="No limpiar Pantalla al momento de realizar el mantenimiento" />
                 </div>
             </div>
             <hr />
+            <!--ESTE ESTE BLOQUE ES PARA COLOCAR LA IMAGEN A UN PRODUCTO-->
+            <div id="DivBloqueImagenProducto"  visible="false" runat="server">
+                <div class="container" >
+                    <div class="row" >
+                        <div class="col-md-4 col-md-offset-4" align="center">
+                            <asp:Label ID="lbTituloImagen" runat="server" Text="Imagen de Producto" CssClass="Letranegrita"></asp:Label>
+                            <br />
+                            <asp:Image ID="IMGProducto" runat="server" Width="200" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <br />
+                            <br />
+                            <asp:Label ID="lbBuscarImagen" runat="server" Text="Subir Imagen" CssClass="Letranegrita"></asp:Label>
+                            <asp:FileUpload ID="UpImagen" runat="server" accept=".jpg" CssClass="form-control" />
+                            <br />
+                            <br />
+                           <asp:Button ID="btnVisualizarImagen" runat="server" Text="Visualizar" ToolTip="Visualizar Imagen" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVisualizarImagen_Click" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div align="center">
                 <asp:Button ID="btnProcesarMantenimiento" runat="server" Text="Guardar" ToolTip="Guardar Registro" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarMantenimiento_Click" />
                 <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" ToolTip="Modificar Registro" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnModificarMantenimiento_Click" />
@@ -607,6 +628,17 @@
                     <asp:TextBox ID="txtComentarioDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                 </div>
 
+            </div>
+            <div id="BloqueImagenProductoSeleccionado" runat="server">
+                <div class="row">
+                       <asp:Repeater runat="server" ID="RepeaterFotoProducto">
+                         <ItemTemplate>
+                             <div class="jumbotron">
+                                 <asp:Image ID="IMGFotoProducto" runat="server" ImageUrl='<%#Bind("FotoProducto") %>' />
+                             </div>
+                         </ItemTemplate>
+                  </asp:Repeater>
+                </div>
             </div>
             <div align="center">
                 <asp:Button ID="btnVolverDetalle" runat="server" Text="Volver" ToolTip="Ocultar la Información del detalle del producto seleccionado" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVolverDetalle_Click" />

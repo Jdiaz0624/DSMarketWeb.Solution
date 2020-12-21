@@ -157,5 +157,34 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region SACAR EL ID DEL PRODUCTO CREADO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ESacarIDProductoCreado> SacarIdProductocreado(decimal? NumeroConector = null, decimal? IdTipoProducto = null, decimal? IdCategoria = null, decimal? IdMarca = null, decimal? IdModelo = null, decimal? IdCcolor = null, decimal? IdCapacidad = null, decimal? IdCondicion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_SACAR_ID_PRODUCTO_CREADO(NumeroConector, IdTipoProducto, IdCategoria, IdMarca, IdModelo, IdCcolor, IdCapacidad, IdCondicion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ESacarIDProductoCreado
+                           {
+                               IdProducto=n.IdProducto
+                           }).ToList();
+            return Listado;
+        }
+        #endregion
+        #region SACAR LA FOTO DE UN PRODUCTO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EBuscaFotoProducto> BuscaFotoProucto(decimal? IdProducto = null, decimal? NumeroConector = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_FOTO_PRODUCTO(IdProducto, NumeroConector)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EBuscaFotoProducto
+                           {
+                               IdProducto=n.IdProducto,
+                               NumeroConector=n.NumeroConector,
+                               TipoProducto=n.TipoProducto,
+                               Categoria=n.Categoria,
+                               Producto=n.Producto,
+                               FotoProducto=n.FotoProducto
+                           }).ToList();
+            return Listado;
+        }
+        #endregion
     }
 }

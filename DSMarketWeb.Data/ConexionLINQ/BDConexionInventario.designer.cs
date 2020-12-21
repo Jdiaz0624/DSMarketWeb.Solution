@@ -122,6 +122,20 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector, idTipoProducto, idCategoria, idUnidadMedida, idMarca, idModelo, idTipoSuplidor, idSuplidor, descripcion, codigoBarra, referencia, precioCompra, precioVenta, stock, stockMinimo, porcientoDescuento, afectaOferta, productoAcumulativo, llevaImagen, idUsuario, comentario, aplicaParaImpuesto, estatusProducto, numeroSeguimiento, idColor, idCondicion, idCapacidad, accion);
 			return ((ISingleResult<SP_MANTENIMIENTO_PRODUCTOResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_SACAR_ID_PRODUCTO_CREADO")]
+		public ISingleResult<SP_SACAR_ID_PRODUCTO_CREADOResult> SP_SACAR_ID_PRODUCTO_CREADO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoProducto", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCategoria", DbType="Decimal(20,0)")] System.Nullable<decimal> idCategoria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMarca", DbType="Decimal(20,0)")] System.Nullable<decimal> idMarca, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdModelo", DbType="Decimal(20,0)")] System.Nullable<decimal> idModelo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCcolor", DbType="Decimal(20,0)")] System.Nullable<decimal> idCcolor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCapacidad", DbType="Decimal(20,0)")] System.Nullable<decimal> idCapacidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCondicion", DbType="Decimal(20,0)")] System.Nullable<decimal> idCondicion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroConector, idTipoProducto, idCategoria, idMarca, idModelo, idCcolor, idCapacidad, idCondicion);
+			return ((ISingleResult<SP_SACAR_ID_PRODUCTO_CREADOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_FOTO_PRODUCTO")]
+		public ISingleResult<SP_BUSCA_FOTO_PRODUCTOResult> SP_BUSCA_FOTO_PRODUCTO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Decimal(20,0)")] System.Nullable<decimal> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroConector)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector);
+			return ((ISingleResult<SP_BUSCA_FOTO_PRODUCTOResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_BUSCA_PRODUCTO_WEBResult
@@ -1737,6 +1751,148 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._IdCapacidad != value))
 				{
 					this._IdCapacidad = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_SACAR_ID_PRODUCTO_CREADOResult
+	{
+		
+		private decimal _IdProducto;
+		
+		public SP_SACAR_ID_PRODUCTO_CREADOResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_FOTO_PRODUCTOResult
+	{
+		
+		private decimal _IdProducto;
+		
+		private decimal _NumeroConector;
+		
+		private string _TipoProducto;
+		
+		private string _Categoria;
+		
+		private string _Producto;
+		
+		private System.Data.Linq.Binary _FotoProducto;
+		
+		public SP_BUSCA_FOTO_PRODUCTOResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroConector", DbType="Decimal(20,0) NOT NULL")]
+		public decimal NumeroConector
+		{
+			get
+			{
+				return this._NumeroConector;
+			}
+			set
+			{
+				if ((this._NumeroConector != value))
+				{
+					this._NumeroConector = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoProducto", DbType="VarChar(100)")]
+		public string TipoProducto
+		{
+			get
+			{
+				return this._TipoProducto;
+			}
+			set
+			{
+				if ((this._TipoProducto != value))
+				{
+					this._TipoProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="VarChar(100)")]
+		public string Categoria
+		{
+			get
+			{
+				return this._Categoria;
+			}
+			set
+			{
+				if ((this._Categoria != value))
+				{
+					this._Categoria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Producto", DbType="VarChar(504) NOT NULL", CanBeNull=false)]
+		public string Producto
+		{
+			get
+			{
+				return this._Producto;
+			}
+			set
+			{
+				if ((this._Producto != value))
+				{
+					this._Producto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image")]
+		public System.Data.Linq.Binary FotoProducto
+		{
+			get
+			{
+				return this._FotoProducto;
+			}
+			set
+			{
+				if ((this._FotoProducto != value))
+				{
+					this._FotoProducto = value;
 				}
 			}
 		}

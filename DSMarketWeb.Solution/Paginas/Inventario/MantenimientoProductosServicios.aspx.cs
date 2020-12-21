@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 
 namespace DSMarketWeb.Solution.Paginas.Inventario
 {
@@ -817,6 +819,99 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         }
         #endregion
+        #region GUARDAR IMAGEN DE PRODUCTO
+
+        /// <summary>
+        /// Este metodo es para guardar la imagen la base de datos
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <param name="NumeroConector"></param>
+        private void GuardarImagenProdicto(decimal IdProducto, decimal NumeroConector) {
+            int Tamanio = UpImagen.PostedFile.ContentLength;
+            byte[] ImagenOriginal = new byte[Tamanio];
+            UpImagen.PostedFile.InputStream.Read(ImagenOriginal, 0, Tamanio);
+            Bitmap ImagenOriginalBinaria = new Bitmap(UpImagen.PostedFile.InputStream);
+
+            //REDIRECCIONAR LA IMAGEN PARA COLOCARLE UN TAMAñO A VOLUNTAD
+            System.Drawing.Image ImgThumbNail;
+            int TamanioThumbNail = 200;
+            ImgThumbNail = DSMarketWeb.Logic.Comunes.RedimencionarImagen.Redireccionar(ImagenOriginalBinaria, TamanioThumbNail);
+            ImageConverter Convertidor = new ImageConverter();
+            byte[] bImagenThumbNail = (byte[])Convertidor.ConvertTo(ImgThumbNail, typeof(byte[]));
+
+
+            //GUARDMOS LA IMAGEN EN BASE DE DATOS
+            SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_GUARDAR_FOTO_PRODUCTO] @IdProducto,@NumeroConector,@FotoProducto", Conexion);
+            Comando.Parameters.Add("@IdProducto", SqlDbType.Decimal).Value = IdProducto;
+            Comando.Parameters.Add("@NumeroConector", SqlDbType.Decimal).Value = NumeroConector;
+            Comando.Parameters.Add("@FotoProducto", SqlDbType.Image).Value = bImagenThumbNail;
+            Conexion.Open();
+            Comando.ExecuteNonQuery();
+            Conexion.Close();
+
+            //VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
+            string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
+            IMGProducto.ImageUrl = ImagenDataUrl64;
+
+
+
+        }
+        #endregion
+        #region MOSTRAR LA FOTO DEL PROEUCTO SELECCIONADO
+        private void MostrarFotoProductoSeleccionado(decimal IdProducto, decimal NumeroConector) {
+            //SqlConnection Conecion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            //SqlCommand Comando = new SqlCommand();
+            //Comando.CommandText = "select FotoProducto from Inventario.FotoProducto";
+            //Comando.CommandType = CommandType.Text;
+            //Comando.Connection = Conecion;
+            //Conecion.Open();
+
+            //DataTable ImagenProducto = new DataTable();
+            //ImagenProducto.Load(Comando.ExecuteReader());
+
+            //RepeaterFotoProducto.DataSource = ImagenProducto;
+            //RepeaterFotoProducto.DataBind();
+            //Conecion.Close();..
+
+            var Buscar = ObjdataInventario.Value.BuscaFotoProucto();
+            RepeaterFotoProducto.DataSource = Buscar;
+            RepeaterFotoProducto.DataBind();
+
+            //SqlConnection Conecion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            //string Query;
+            //SqlCommand sqlCommand;
+            //SqlDataReader reader;
+
+            //SqlDataAdapter adaptar = new SqlDataAdapter();
+            //Conecion.Open();
+            //Query = "select FotoProducto from Inventario.FotoProducto";
+            //sqlCommand = new SqlCommand(Query, Conecion);
+            //reader = sqlCommand.ExecuteReader();
+            //RepeaterFotoProducto.DataSource = reader;
+            //RepeaterFotoProducto.DataBind();
+            //SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-StudentMoneySaver-20160203040444.mdf;Initial Catalog=aspnet-StudentMoneySaver-20160203040444;Integrated Security=True");
+
+            //string query;
+            //SqlCommand SqlCommand;
+            //SqlDataReader reader;
+
+            //SqlDataAdapter adapter = new SqlDataAdapter();
+            ////Open the connection to db
+            //conn.Open();
+
+            ////Generating the query to fetch the contact details
+            //query = "SELECT EvtName, EvtType, EvtDescription, EvtDate, EvtVote, EvtImage FROM Events";
+            //SqlCommand = new SqlCommand(query, conn);
+            //adapter.SelectCommand = new SqlCommand(query, conn);
+            ////execute the query
+            //reader = SqlCommand.ExecuteReader();
+            ////Assign the results 
+            //repeaterEvent.DataSource = reader;
+            ////Bind the data
+            //repeaterEvent.DataBind();
+        }
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -968,6 +1063,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
                 txtComentarioDetalle.Text = n.Comentario;
             }
+            MostrarFotoProductoSeleccionado(Convert.ToDecimal(gv.Cells[1].Text), Convert.ToDecimal(gv.Cells[2].Text));
             ModoMantenimiento();
         }
 
@@ -1010,9 +1106,29 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             lbIdProductoSeleccionado.Text = "0";
             ProcesarInformacionProducto(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProducto.Text), "INSERT");
             ClientScript.RegisterStartupScript(GetType(), "RegistroGuardadoConExito()", "RegistroGuardadoConExito();", true);
+
+            //GUARDAMOS AL IMAGEN DEL PRODUCTO
+            if (cbAgregarImagenArticulo.Checked == true) {
+                DSMarketWeb.Logic.Comunes.SacarIdCreadoProducto SacarID = new Logic.Comunes.SacarIdCreadoProducto(
+                    Convert.ToDecimal(lbNumeroConectorProducto.Text),
+                    Convert.ToDecimal(ddlSeleccionarTipoProductoMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCategoriaMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarMarcaMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarModeloMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarColorMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCapacidadMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCondicionMantenimiento.SelectedValue));
+
+                GuardarImagenProdicto(SacarID.SacarIdProductoCreado(), Convert.ToDecimal(lbNumeroConectorProducto.Text));
+                
+            }
+
+
             if (cbNoLimpiarPantalla.Checked == true) {
                 txtReferenciaMantenimiento.Text = string.Empty;
                 GenerarNumeroConector();
+
+                
             }
 
             else {
@@ -1076,6 +1192,21 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnProcesarSuplirSacar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void cbAgregarImagenArticulo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAgregarImagenArticulo.Checked == true) {
+                DivBloqueImagenProducto.Visible = true;
+            }
+            else {
+                DivBloqueImagenProducto.Visible = false;
+            }
+        }
+
+        protected void btnVisualizarImagen_Click(object sender, EventArgs e)
+        {
+            GuardarImagenProdicto(200, 300);
         }
     }
 }
