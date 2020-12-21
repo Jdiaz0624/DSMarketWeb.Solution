@@ -26,6 +26,30 @@
      {
          display:none;
      }
+
+
+        .auto-style1 {
+            width: 100%;
+        }
+
+        .auto-style3 {
+            width: 162px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, td, th {
+            border: 1px solid blue;
+        }
+
+        th {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+
     </style>
 
     <script type="text/javascript">
@@ -289,30 +313,94 @@
                 <asp:Label ID="lbGananciaAproximadaCerrar" runat="server" Text=" )" CssClass="Letranegrita"></asp:Label>
             </div>
             <br />
-                <asp:GridView ID="gvListado" runat="server" AllowPaging="true" OnPageIndexChanging="gvListado_PageIndexChanging" OnSelectedIndexChanged="gvListado_SelectedIndexChanged" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                <Columns>
-                   <%-- <%$ Resources:Traducciones,OrdenNivel %>--%>
-                    <asp:CommandField ButtonType="Button" HeaderText="Seleccionar"  ControlStyle-CssClass="btn btn-outline-secondary btn-sm" SelectText="Seleccionar" ShowSelectButton="True" />
-                    <asp:BoundField DataField="IdProducto" HeaderText="ID" HeaderStyle-CssClass="hiddenGrid" ItemStyle-CssClass="hiddenGrid" />
-                    <asp:BoundField DataField="NumeroConector" HeaderText="Numero de Conector" HeaderStyle-CssClass="hiddenGrid" ItemStyle-CssClass="hiddenGrid" />
-                    <asp:BoundField DataField="Producto" HeaderText="Producto" />
-                    <asp:BoundField DataField="TipoProducto" HeaderText="Tipo" />
-                    <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
-                    <asp:BoundField DataField="Stock" HeaderText="Stock" DataFormatString="{0:N0}" HtmlEncode="false" />
-                    <asp:BoundField DataField="PrecioVenta" HeaderText="Precio" DataFormatString="{0:N2}" HtmlEncode="false" />
-              
-                </Columns  >
-                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <HeaderStyle BackColor="#7BC5FF" HorizontalAlign="Center" Font-Bold="True" ForeColor="Black" />
-                <PagerStyle BackColor="#7BC5FF" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" HorizontalAlign="Center" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#000065" />
-            </asp:GridView>
+             
+
+            <br />
+
+                <div>
+                <asp:Label ID="lbPagina" runat="server" Text=""></asp:Label>
+                <div class="table-responsive mT20">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                               <th style="width:5%">
+                                    <asp:Label ID="lbSelect" runat="server" Text="Select" CssClass="Letranegrita"></asp:Label>
+                                <th style="width:35%">
+                                    <asp:Label ID="lbProductoHeader" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label>
+                                </th>
+                                <th style="width:20%">
+                                    <asp:Label ID="lbTipoProductoHeader" runat="server" Text="Tipo Producto" CssClass="Letranegrita"></asp:Label>
+                                </th>
+                                <th style="width:20%">
+                                    <asp:Label ID="lbCategoriaHeader" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                                </th>
+                                <th style="width:10%">
+                                    <asp:Label ID="lbStockHeader" runat="server" Text="Stock" CssClass="Letranegrita"></asp:Label>
+                                </th>
+                                <th style="width:10%">
+                                    <asp:Label ID="lbPrecio" runat="server" Text="Precio" CssClass="Letranegrita"></asp:Label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="RVListadoProducto" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <asp:HiddenField ID="hfIdProducto" runat="server" Value='<%# Eval("IdProducto") %>' />
+                                        <asp:HiddenField ID="hfNumeroConector" runat="server" Value='<%# Eval("NumeroConector") %>' />
+                                           <td style="width:5%"><asp:Button ID="btnSeleccionarRegistro" runat="server" Text="Seleccionar" ToolTip="Seleccionar registo" OnClick="btnSeleccionarRegistro_Click" CssClass="btn btn-outline-secondary btn-sm" /> </th> </td>
+                                           <td style="width:35%"><%#Eval("Producto") %></td>
+                                           <td style="width:20%"><%#Eval("TipoProducto") %></td>
+                                           <td style="width:20%"><%#Eval("Categoria") %></td>
+                                           <td style="width:10%"><%#Eval("Stock") %></td>
+                                           <td style="width:10%"><asp:Label ID="lbPrecioVentaRepeater" runat="server" Text='<%#Eval("PrecioVenta")%>'></asp:Label> </td>
+                                           
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            <!--INICIO DE LA PAGINACION-->
+                <div id="divPaginacion" runat="server" align="center">
+                 <div style="margin-top: 20px;">
+                    <table style="width: 600px;">
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="lbPrimeraPagina" runat="server" CssClass="btn btn-success fr" OnClick="lbFirst_Click" >Primero</asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:LinkButton ID="lbPaginaAnterior" runat="server" CssClass="btn btn-success fr" OnClick="lbPrevious_Click" >Atras</asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:DataList ID="rptPaging" runat="server"
+                                    OnItemCommand="rptPaging_ItemCommand"
+                                    OnItemDataBound="rptPaging_ItemDataBound" RepeatDirection="Horizontal">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lbPaging" runat="server"
+                                            CommandArgument='<%# Eval("PageIndex") %>' CommandName="newPage"
+                                            Text='<%# Eval("PageText") %> ' Width="20px"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:DataList>
+                            </td>
+                            <td>
+                                <asp:LinkButton ID="lbPaginaGuguiente" runat="server" CssClass="btn btn-success fr" OnClick="lbNext_Click" >Siguiente</asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:LinkButton ID="lbUltimaPagina" runat="server" CssClass="btn btn-success fr" OnClick="lbLast_Click" >Ultimo</asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:Label ID="pgsource" runat="server" Text=""></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+             </div>
+            <!--FIN DE LA PAGINACION-->
+
+
             <br />
             <!--GRAFICO DE TIPO DE PRODUCTOS-->
         <div id="divTipoProducto" runat="server" align="center" >
@@ -630,15 +718,11 @@
 
             </div>
             <div id="BloqueImagenProductoSeleccionado" runat="server">
-                <div class="row">
-                       <asp:Repeater runat="server" ID="RepeaterFotoProducto">
-                         <ItemTemplate>
-                             <div class="jumbotron">
-                                 <asp:Image ID="IMGFotoProducto" runat="server" ImageUrl='<%#Bind("FotoProducto") %>' />
-                             </div>
-                         </ItemTemplate>
-                  </asp:Repeater>
-                </div>
+                 <div align="center">
+                     <asp:Image ID="IMGFotoProducto" runat="server" />
+                 </div>
+                <br />
+             
             </div>
             <div align="center">
                 <asp:Button ID="btnVolverDetalle" runat="server" Text="Volver" ToolTip="Ocultar la Información del detalle del producto seleccionado" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVolverDetalle_Click" />

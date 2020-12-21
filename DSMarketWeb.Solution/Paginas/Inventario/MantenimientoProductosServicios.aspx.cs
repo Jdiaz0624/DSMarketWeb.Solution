@@ -13,10 +13,32 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 {
     public partial class MantenimientoProductosServicios : System.Web.UI.Page
     {
+
+        
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjdataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
 
+        readonly PagedDataSource pagedDataSource = new PagedDataSource();
+        int _PrimeraPagina, _UltimaPagina;
+        private int _TamanioPagina = 10;
+        private int CurrentPage
+        {
+            get
+            {
+                if (ViewState["CurrentPage"] == null)
+                {
+                    return 0;
+                }
+                return ((int)ViewState["CurrentPage"]);
+            }
+            set
+            {
+                ViewState["CurrentPage"] = value;
+            }
+
+        }
+        
 
         #region CARGAR LAS LISTAS DESPLEGABLES EN LA PANTALLA DE CONSULTA
         private void CargarTipoProductosConsultas() {
@@ -43,8 +65,43 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         #endregion
         #region MOSTRAR EL LISTADO DE INVENTARIO
-        private void MostrarListadoInventario() {
-            //CONTROLES DE FILTROS
+        private void HandlePaging()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("PageIndex"); //Start from 0
+            dt.Columns.Add("PageText"); //Start from 1
+
+            _PrimeraPagina = CurrentPage - 5;
+            if (CurrentPage > 5)
+                _UltimaPagina = CurrentPage + 5;
+            else
+                _UltimaPagina = 10;
+
+            // Check last page is greater than total page then reduced it to total no. of page is last index
+            if (_UltimaPagina > Convert.ToInt32(ViewState["TotalPages"]))
+            {
+                _UltimaPagina = Convert.ToInt32(ViewState["TotalPages"]);
+                _PrimeraPagina = _UltimaPagina - 10;
+            }
+
+            if (_PrimeraPagina < 0)
+                _PrimeraPagina = 0;
+
+            // Now creating page number based on above first and last page index
+            for (var i = _PrimeraPagina; i < _UltimaPagina; i++)
+            {
+                var dr = dt.NewRow();
+                dr[0] = i;
+                dr[1] = i + 1;
+                dt.Rows.Add(dr);
+            }
+
+            rptPaging.DataSource = dt;
+            rptPaging.DataBind();
+        }
+        private void BindDataIntoRepeater(int _NumeroRegistros = 0)
+        {
+            //FILTROS
             string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? null : txtDescripcionConsulta.Text.Trim();
             string _CodigoBarra = string.IsNullOrEmpty(txtCodigoBarra.Text.Trim()) ? null : txtCodigoBarra.Text.Trim();
             string _Referencia = string.IsNullOrEmpty(txtReferenciaConsulta.Text.Trim()) ? null : txtReferenciaConsulta.Text.Trim();
@@ -55,25 +112,19 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             decimal? _Modelo = ddlSeleccionarModelosConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelosConsulta.SelectedValue) : new Nullable<decimal>();
             decimal? _UnidadMedida = ddlSeleccionarUnidadMedida.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarUnidadMedida.SelectedValue) : new Nullable<decimal>();
 
-            //REALIZAMOS LA CONSULLTA AGREGANDO RANGO DE FECHA
-            if (cbAgregarRangoFecha.Checked == true) {
-                //BUSCAMOS LOS REGISTROS VENDIDOS Y DESCARTADOS MEDIANTE EL RANGO DE FECHA
-                if (cbProductosVendisodDescartados.Checked == true) {
-                    if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()) || string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim()))
-                    {
+            
+            if (cbProductosVendisodDescartados.Checked == true) {
+                if (cbAgregarRangoFecha.Checked == true) {
+                    if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()) || string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim())) {
                         ClientScript.RegisterStartupScript(GetType(), "CamposFechaVAcios()", "CamposFechaVAcios();", true);
-                        if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()))
-                        {
+                        if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim())) {
                             ClientScript.RegisterStartupScript(GetType(), "CampoFechaDesdeVAcio()", "CampoFechaDesdeVAcio();", true);
                         }
-                        if (string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim()))
-                        {
-                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaHastaVacio()", "CampoFechaHastaVacio();", true);
-                        }
-                    }
-                    else
-                    {
-                        var Buscar = ObjdataInventario.Value.BuscaProductos(
+                        if (string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim())) { ClientScript.RegisterStartupScript(GetType(), "CampoFechaHastaVacio()", "CampoFechaHastaVacio();", true); }
+                    }       
+                    else {
+                     
+                        var ListadoProducto = ObjdataInventario.Value.BuscaProductos(
                             new Nullable<decimal>(),
                             null,
                             _Descripcion,
@@ -86,122 +137,65 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                             _UnidadMedida,
                             _Marca,
                             _Modelo,
-                            null, null, null, null,
+                            null,
+                            null,
+                            null,
+                            null,
                             true,
                             _NumeroSeguimiento);
-                        gvListado.DataSource = Buscar;
-                        gvListado.DataBind();
-                        int CantidadRegistros = 0;
-                        decimal CapitalInvertido = 0, GananciaAproximada = 0;
-                        if (Buscar.Count() < 1)
+                        if (ListadoProducto.Count() < 1)
                         {
-                            lbCantidadRegistrosConsultaVariable.Text = "0";
+                            divPaginacion.Visible = false;
                             lbCantidadInventidoVariable.Text = "0";
-                            lbGananciaAproximadaVariable.Text = "0";
-                        }
-                        else
-                        {
-                            foreach (var n in Buscar)
-                            {
-                                CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
-                                CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
-                                GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
-                            }
-                            lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
-                            lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
-                            lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-                        }
-
-                    }
-                }
-                //BUSCAMOS LOS REGISTROS DEL INVENTARIO APLICANDO RANGO DE FECHA
-                else
-                {
-                    if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()) || string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim()))
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "CamposFechaVAcios()", "CamposFechaVAcios();", true);
-                        if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()))
-                        {
-                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaDesdeVAcio()", "CampoFechaDesdeVAcio();", true);
-                        }
-                        if (string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim()))
-                        {
-                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaHastaVacio()", "CampoFechaHastaVacio();", true);
-                        }
-                    }
-                    else {
-                        var Buscar = ObjdataInventario.Value.BuscaProductos(
-                            new Nullable<decimal>(),
-                            null,
-                            _Descripcion,
-                            _CodigoBarra,
-                            _Referencia,
-                            Convert.ToDateTime(txtFechaDesdeConsulta.Text),
-                            Convert.ToDateTime(txtFechaHAstaConsulta.Text),
-                            _TipoProducto,
-                            _Categoria,
-                            _UnidadMedida,
-                            _Marca,
-                            _Modelo,
-                            null, null, null, null,
-                            false,
-                            _NumeroSeguimiento);
-                        gvListado.DataSource = Buscar;
-                        gvListado.DataBind();
-                        int CantidadRegistros = 0;
-                        decimal CapitalInvertido = 0, GananciaAproximada = 0;
-                        if (Buscar.Count() < 1) {
                             lbCantidadRegistrosConsultaVariable.Text = "0";
-                            lbCantidadInventidoVariable.Text = "0";
                             lbGananciaAproximadaVariable.Text = "0";
                         }
                         else {
-                            foreach (var n in Buscar) {
-                                CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
+                            divPaginacion.Visible = true;
+                            int CantidadMostrada = 0;
+                            decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                            foreach (var n in ListadoProducto) {
+                                CantidadMostrada = Convert.ToInt32(n.CantidadRegistros);
                                 CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
                                 GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
                             }
-                            lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
-                            lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
+                            lbCantidadInventidoVariable.Text = CantidadMostrada.ToString("N0");
+                            lbCantidadRegistrosConsultaVariable.Text = CapitalInvertido.ToString("N2");
                             lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+
+                            Paginar(ref RVListadoProducto, ListadoProducto, 10);
+                         
                         }
-                        
                     }
                 }
-            }
-            //REALIZMAOS LA BUSQUEDA SIN APLICAR RANGO DE FECHA
-            else {
-                //BUSCAMOS LOS PRODUCTOS DESCARTADOS Y VENDIDOS SIN APLICAR RANGO DE FECHA
-                if (cbProductosVendisodDescartados.Checked == true) {
-                    var Listado = ObjdataInventario.Value.BuscaProductos(
-                            new Nullable<decimal>(),
-                            null,
-                            _Descripcion,
-                            _CodigoBarra,
-                            _Referencia,
-                            null, null,
-                            _TipoProducto,
-                            _Categoria,
-                            _UnidadMedida,
-                            _Marca,
-                            _Modelo,
-                            null, null, null,
-                            null, true,
-                            _NumeroSeguimiento);
-                    gvListado.DataSource = Listado;
-                    gvListado.DataBind();
-                    int CantidadRegistros = 0;
-                    decimal CapitalInvertido = 0, GananciaAproximada = 0;
-                    if (Listado.Count() < 1)
+                else {
+                    var BuscarRegistrosSinRangoFecha = ObjdataInventario.Value.BuscaProductos(
+                        new Nullable<decimal>(),
+                        null,
+                        _Descripcion,
+                        _CodigoBarra,
+                        _Referencia,
+                        null,
+                        null,
+                        _TipoProducto,
+                        _Categoria,
+                        _UnidadMedida,
+                        _Marca,
+                        _Modelo,
+                        null, null, null, null, true,
+                        _NumeroSeguimiento);
+                    if (BuscarRegistrosSinRangoFecha.Count() < 1)
                     {
+                        divPaginacion.Visible = false;
                         lbCantidadRegistrosConsultaVariable.Text = "0";
                         lbCantidadInventidoVariable.Text = "0";
                         lbGananciaAproximadaVariable.Text = "0";
                     }
-                    else
-                    {
-                        foreach (var n in Listado)
-                        {
+                    else {
+                        divPaginacion.Visible = true;
+                        int CantidadRegistros=0;
+                        decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                        foreach (var n in BuscarRegistrosSinRangoFecha) {
                             CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
                             CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
                             GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
@@ -209,12 +203,64 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                         lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                         lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+                        Paginar(ref RVListadoProducto, BuscarRegistrosSinRangoFecha, 10);
+                     
                     }
-
                 }
-               //BUSCAMOS LOS PRODUCTOS DEL INVENTARIO SIN APLICAR EL RANGO DE FECHA
+            }
+            else {
+                if (cbAgregarRangoFecha.Checked == true) {
+                    if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim()) || string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim())) {
+                        ClientScript.RegisterStartupScript(GetType(), "CamposFechaVAcios()", "CamposFechaVAcios();", true);
+                        if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim())) {
+                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaDesdeVAcio()", "CampoFechaDesdeVAcio();", true);
+                        }
+                        if (string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim())) {
+                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaHastaVacio()", "CampoFechaHastaVacio();", true);
+                        }
+                    }
+                    else {
+                        var BuscarInventario = ObjdataInventario.Value.BuscaProductos(
+                            new Nullable<decimal>(),
+                            null,
+                            _Descripcion,
+                            _CodigoBarra,
+                            _Referencia,
+                            Convert.ToDateTime(txtFechaDesdeConsulta.Text),
+                            Convert.ToDateTime(txtFechaHAstaConsulta.Text),
+                            _TipoProducto,
+                            _Categoria,
+                            _UnidadMedida,
+                            _Marca,
+                            _Modelo,
+                            null, null, null, null, false,
+                            _NumeroSeguimiento);
+                        if (BuscarInventario.Count() < 1)
+                        {
+                            divPaginacion.Visible = false;
+                            lbCantidadRegistrosConsultaVariable.Text = "0";
+                            lbCantidadInventidoVariable.Text = "0";
+                            lbGananciaAproximadaVariable.Text = "0";
+                        }
+                        else {
+                            divPaginacion.Visible = true;
+                            int CantidadRegistros = 0;
+                            decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                            foreach (var n in BuscarInventario) {
+                                CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
+                                CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
+                                GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
+                            }
+                            lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
+                            lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
+                            lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+                            Paginar(ref RVListadoProducto, BuscarInventario, 10);
+                           
+                        }
+                    }
+                }
                 else {
-                    var Listado = ObjdataInventario.Value.BuscaProductos(
+                    var BuscarInventarioSinRangoFecha = ObjdataInventario.Value.BuscaProductos(
                         new Nullable<decimal>(),
                         null,
                         _Descripcion,
@@ -226,20 +272,20 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         _UnidadMedida,
                         _Marca,
                         _Modelo,
-                        null, null, null,
-                        null, false,
+                        null, null, null, null, false,
                         _NumeroSeguimiento);
-                    gvListado.DataSource = Listado;
-                    gvListado.DataBind();
-                    int CantidadRegistros = 0;
-                    decimal CapitalInvertido = 0, GananciaAproximada = 0;
-                    if (Listado.Count() < 1) {
+                    if (BuscarInventarioSinRangoFecha.Count() < 1)
+                    {
+                        divPaginacion.Visible = false;
                         lbCantidadRegistrosConsultaVariable.Text = "0";
                         lbCantidadInventidoVariable.Text = "0";
                         lbGananciaAproximadaVariable.Text = "0";
                     }
                     else {
-                        foreach (var n in Listado) {
+                        divPaginacion.Visible = true;
+                        int CantidadRegistros = 0;
+                        decimal CapitalInvertido = 0, GananciaAproximada = 0;
+                        foreach (var n in BuscarInventarioSinRangoFecha) {
                             CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
                             CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
                             GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
@@ -247,21 +293,49 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                         lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                         lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+                        Paginar(ref RVListadoProducto, BuscarInventarioSinRangoFecha, 10);
+                     
                     }
                 }
             }
 
-            if (cbGraficarConsulta.Checked == true)
-            {
-                divTipoProducto.Visible = true;
+            if (cbGraficarConsulta.Checked == true) {
                 divGraficoMarcas.Visible = true;
                 divGraficoServicios.Visible = true;
+                divTipoProducto.Visible = true;
                 GenerarGraficos();
             }
-            else { 
-            
-            }
+
+       
+
+          
         }
+        private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros) {
+            pagedDataSource.DataSource = Listado;
+            pagedDataSource.AllowPaging = true;
+
+            ViewState["TotalPages"] = pagedDataSource.PageCount;
+
+            //MOSTRAMOS LA CANTIDAD DE PAGINAS A MOSTRAR O NUMERO DE REGISTROS
+            pagedDataSource.PageSize = (_NumeroRegistros == 0 ? _TamanioPagina : _NumeroRegistros);
+            pagedDataSource.CurrentPageIndex = CurrentPage;
+
+            //HABILITAMOS LOS BOTONES DE LA PAGINACION
+            lbPrimeraPagina.Enabled = !pagedDataSource.IsFirstPage;
+            lbPaginaAnterior.Enabled = !pagedDataSource.IsFirstPage;
+            lbPaginaGuguiente.Enabled = !pagedDataSource.IsLastPage;
+            lbUltimaPagina.Enabled = !pagedDataSource.IsLastPage;
+
+            RVListadoProducto.DataSource = pagedDataSource;
+            RVListadoProducto.DataBind();
+
+            if (pagedDataSource.PageCount <= 1)
+                this.Visible = false;
+            else
+                this.Visible = true;
+            divPaginacion.Visible = true;
+        }
+
         #endregion
         #region CARGAR LAS LISTAS DESPLEGABLES PARA LA PANTALLA DE MANTENIMIENTO
         private void CargarListasDesplegablesPantallaMantenimiento() {
@@ -859,64 +933,36 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         #endregion
         #region MOSTRAR LA FOTO DEL PROEUCTO SELECCIONADO
-        private void MostrarFotoProductoSeleccionado(decimal IdProducto, decimal NumeroConector) {
-            //SqlConnection Conecion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
-            //SqlCommand Comando = new SqlCommand();
-            //Comando.CommandText = "select FotoProducto from Inventario.FotoProducto";
-            //Comando.CommandType = CommandType.Text;
-            //Comando.Connection = Conecion;
-            //Conecion.Open();
+        private void MostrarFotoProductoSeleccionado(decimal IdProducto) {
+            var ValidarFotoProducto = ObjdataInventario.Value.BuscaFotoProucto(IdProducto, null);
+            if (ValidarFotoProducto.Count() < 1) { }
+            else {
 
-            //DataTable ImagenProducto = new DataTable();
-            //ImagenProducto.Load(Comando.ExecuteReader());
+                SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                Conexion.Open();
+                string Query = "select FotoProducto from Inventario.FotoProducto where IdProducto = " + IdProducto;
+                SqlCommand comando = new SqlCommand(Query, Conexion);
+                comando.CommandTimeout = 0;
+                byte[] IMG = (byte[])comando.ExecuteScalar();
 
-            //RepeaterFotoProducto.DataSource = ImagenProducto;
-            //RepeaterFotoProducto.DataBind();
-            //Conecion.Close();..
-
-            var Buscar = ObjdataInventario.Value.BuscaFotoProucto();
-            RepeaterFotoProducto.DataSource = Buscar;
-            RepeaterFotoProducto.DataBind();
-
-            //SqlConnection Conecion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
-            //string Query;
-            //SqlCommand sqlCommand;
-            //SqlDataReader reader;
-
-            //SqlDataAdapter adaptar = new SqlDataAdapter();
-            //Conecion.Open();
-            //Query = "select FotoProducto from Inventario.FotoProducto";
-            //sqlCommand = new SqlCommand(Query, Conecion);
-            //reader = sqlCommand.ExecuteReader();
-            //RepeaterFotoProducto.DataSource = reader;
-            //RepeaterFotoProducto.DataBind();
-            //SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-StudentMoneySaver-20160203040444.mdf;Initial Catalog=aspnet-StudentMoneySaver-20160203040444;Integrated Security=True");
-
-            //string query;
-            //SqlCommand SqlCommand;
-            //SqlDataReader reader;
-
-            //SqlDataAdapter adapter = new SqlDataAdapter();
-            ////Open the connection to db
-            //conn.Open();
-
-            ////Generating the query to fetch the contact details
-            //query = "SELECT EvtName, EvtType, EvtDescription, EvtDate, EvtVote, EvtImage FROM Events";
-            //SqlCommand = new SqlCommand(query, conn);
-            //adapter.SelectCommand = new SqlCommand(query, conn);
-            ////execute the query
-            //reader = SqlCommand.ExecuteReader();
-            ////Assign the results 
-            //repeaterEvent.DataSource = reader;
-            ////Bind the data
-            //repeaterEvent.DataBind();
+                IMGFotoProducto.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMG);
+                Conexion.Close();
+            }
         }
+        #endregion
+        #region BOTONONES DE LA PAGINACION
+        private void PrimeraPagina() { }
+        private void SiguientePagina() { }
+        private void PaginaAnterior() { }
+        private void UltimaPagina() { }
+        
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                divPaginacion.Visible = false;
                 ModoConsulta();
                 ValidarCheckLimpiarPantalla();
                 SacarPorcientoDescuento(1);
@@ -967,7 +1013,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnConsultarRegistros_Click(object sender, EventArgs e)
         {
-            MostrarListadoInventario();
+            CurrentPage = 0;
+            BindDataIntoRepeater(10);
             divBloqueDetalle.Visible = false;
         }
 
@@ -1014,58 +1061,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         }
 
-        protected void gvListado_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvListado.PageIndex = e.NewPageIndex;
-            MostrarListadoInventario();
-        }
 
-        protected void gvListado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GridViewRow gv = gvListado.SelectedRow;
-            divBloqueMantenimiento.Visible = false;
-            divBloqueDetalle.Visible = true;
-            cbGraficarConsulta.Checked = false;
-            divGraficoMarcas.Visible = false;
-            divGraficoServicios.Visible = false;
-            divTipoProducto.Visible = false;
-            var BuscarRegistroSeleccionado = ObjdataInventario.Value.BuscaProductos(
-                Convert.ToDecimal(gv.Cells[1].Text),
-                Convert.ToDecimal(gv.Cells[2].Text),
-                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-            gvListado.DataSource = BuscarRegistroSeleccionado;
-            gvListado.DataBind();
-            foreach (var n in BuscarRegistroSeleccionado) {
-                txtTipoProductoDetalle.Text = n.TipoProducto;
-                txtCategoriaDetalle.Text = n.Categoria;
-                txtUnidadMedidaDetalle.Text = n.UnidadMedida;
-                txtMarcaDetalle.Text = n.Marca;
-                txtModeloDetalle.Text = n.Modelo;
-                txtTipoSuplidorDetalle.Text = n.TipoSuplidor;
-                txtSuplidorDetalle.Text = n.Suplidor;
-                txtDescripcionDetalle.Text = n.Producto;
-                txtCodigoBarraDetalle.Text = n.CodigoBarra;
-                txtReferenciaDetalle.Text = n.Referencia;
-                decimal PrecioCompra = Convert.ToDecimal(n.PrecioCompra);
-                txtPrecioCompraDetalle.Text = PrecioCompra.ToString("N2");
-                decimal PrecioVenta = Convert.ToDecimal(n.PrecioVenta);
-                txtPrecioVentaDetalle.Text = PrecioVenta.ToString("N2");
-                int Stock = Convert.ToInt32(n.Stock);
-                txtStockDetalle.Text = Stock.ToString("N0");
-                int StockMinimo = Convert.ToInt32(n.StockMinimo);
-                txtStockMinimo.Text = StockMinimo.ToString("N0");
-                txtPorcientoDescuentoDetalle.Text = n.PorcientoDescuento.ToString();
-                txtNumeroSeguimientoDetalle.Text = n.NumeroSeguimiento;
-                txtColorDetalle.Text = n.Color;
-                txtCondcionDetalle.Text = n.Condicion;
-                txtCapacidadDetalle.Text = n.Capacidad;
-                txtProductoAcumulativoDetalle.Text = n.ProductoAcumulativo;
-                txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
-                txtComentarioDetalle.Text = n.Comentario;
-            }
-            MostrarFotoProductoSeleccionado(Convert.ToDecimal(gv.Cells[1].Text), Convert.ToDecimal(gv.Cells[2].Text));
-            ModoMantenimiento();
-        }
 
         protected void ddlSeleccionarTipoProductoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1207,6 +1203,55 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnVisualizarImagen_Click(object sender, EventArgs e)
         {
             GuardarImagenProdicto(200, 300);
+        }
+
+        protected void rptPaging_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            BindDataIntoRepeater(10);
+        }
+
+        protected void rptPaging_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            var lnkPage = (LinkButton)e.Item.FindControl("lbPaging");
+            if (lnkPage.CommandArgument != CurrentPage.ToString()) return;
+            lnkPage.Enabled = false;
+        }
+
+        protected void lbFirst_Click(object sender, EventArgs e)
+        {
+            CurrentPage = 0;
+            BindDataIntoRepeater(10);
+            
+        }
+
+        protected void lbPrevious_Click(object sender, EventArgs e)
+        {
+            CurrentPage += -1;
+            BindDataIntoRepeater(10);
+            
+        }
+
+        protected void lbNext_Click(object sender, EventArgs e)
+        {
+            CurrentPage += 1;
+            BindDataIntoRepeater(10);
+            
+        }
+
+        protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
+        {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProducto = decimal.Parse((((HiddenField)ItemSeleccionado.FindControl("hfIdProducto")).Value.ToString()));
+            txtDescripcionConsulta.Text = hfIdProducto.ToString();
+        }
+
+        protected void lbLast_Click(object sender, EventArgs e)
+        {
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            BindDataIntoRepeater(10);
+            
         }
     }
 }
