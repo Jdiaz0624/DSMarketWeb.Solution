@@ -474,15 +474,6 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Label lbGananciaAproximadaCerrar;
 
         /// <summary>
-        /// lbPagina control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPagina;
-
-        /// <summary>
         /// lbSelect control.
         /// </summary>
         /// <remarks>
@@ -544,6 +535,42 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RVListadoProducto;
+
+        /// <summary>
+        /// lbPaginaInicialTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPaginaInicialTitulo;
+
+        /// <summary>
+        /// lbNumeroVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroVariable;
+
+        /// <summary>
+        /// lbDeTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDeTitulo;
+
+        /// <summary>
+        /// lbCantidadPaginasVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCantidadPaginasVariable;
 
         /// <summary>
         /// divPaginacion control.
@@ -1084,6 +1111,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComentarioMantenimiento;
+
+        /// <summary>
+        /// lbClaveSeguridadMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridadMantenimiento;
+
+        /// <summary>
+        /// txtclaveSeguridadMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtclaveSeguridadMantenimiento;
 
         /// <summary>
         /// cbProductoAcumulativoMantenimiento control.

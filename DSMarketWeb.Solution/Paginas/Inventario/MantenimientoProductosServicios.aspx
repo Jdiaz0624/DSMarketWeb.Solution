@@ -66,6 +66,12 @@
             alert("Registro Guardado con Exito");
         }
 
+        function ClaveSeguridadIngresadaNoValida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar");
+        }
+
+
+
         $(document).ready(function () {
             //VALIDAMOS LOS CAMPOS EN EL EVENTO DEL BOTON GUARDAR
             $("#<%=btnProcesarMantenimiento.ClientID%>").click(function () {
@@ -204,6 +210,153 @@
                     }
                 }
             });
+
+            //VALIDAMOS LOS CAMPOS EN EL BOTON MODIFICAR
+            $("#<%=btnModificarMantenimiento.ClientID%>").click(function () {
+                //TIPO DE PRODUCTO
+                var ValidarTipoProducto = $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").val();
+                if (ValidarTipoProducto < 1) {
+                    alert("El campo tipo de producto no puede estar vacio para guardar este registro, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    //CATEGORIA
+                    var ValidarCategoria = $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").val();
+                    if (ValidarCategoria < 1) {
+                        alert("EL campo categoria no puede estar vacio para guardar un nuevo registro, favor de verificar");
+                        $("#<%=ddlSeleccionarCategoriaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        //UNIDAD DE MEDIDA
+                        var ValidarUnidadMedida = $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").val();
+                        if (ValidarUnidadMedida < 1) {
+                            alert("El campo unidad de medida no puede estar vacio para gaurdar este registro, favor de verificar");
+                            $("#<%=ddlSeleccionarUnidadMedidaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            //MARCA
+                            var ValidarMarca = $("#<%=ddlSeleccionarMarcaMantenimiento.ClientID%>").val();
+                            if (ValidarMarca < 1) {
+                                alert("El campo marca no puede estar vacio para guardar este registro, favor de verificar");
+                                $("#<%=ddlSeleccionarMarcaMantenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                //MODELO
+                                var ValidarModelo = $("#<%=ddlSeleccionarModeloMantenimiento.ClientID%>").val();
+                                if (ValidarModelo < 1) {
+                                    alert("El campo modelo no puede estar vacio para guardar este registro, favor de verificar");
+                                    $("#<%=ddlSeleccionarModeloMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    //TIPO DE SUPLIDOR
+                                    var ValidarTipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                                    if (ValidarTipoSuplidor < 1) {
+                                        alert("El campo tipo de suplidor no puede estar vacio para guardar este registro, favor de verficar");
+                                        $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        //SUPLIDOR
+                                        var ValidarSuplidor = $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").val();
+                                        if (ValidarSuplidor < 1) {
+                                            alert("El campo suplidor no puede estar vacio para guardar este registro, favor de verificar");
+                                            $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            //PRECIO DE COMPRA
+                                            var ValidarPrecioCompra = $("#<%=txtPrecioCompraMantenimiento.ClientID%>").val().length;
+                                            if (ValidarPrecioCompra < 1) {
+                                                alert("El campo precio de compra no puede estar vacio para guardar este registro, favor de verificar");
+                                                $("#<%=txtPrecioCompraMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                //PRECIO DE VENTA
+                                                var ValidarPrecioVenta = $("#<%=txtPrecioVentaMantenimiento.ClientID%>").val().length;
+                                                if (ValidarPrecioVenta < 1) {
+                                                    alert("El campo precio de venta no puede estar vacio para guardar este registro, favor de verificar");
+                                                    $("#<%=txtPrecioVentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    //STOCK
+                                                    var ValidarStock = $("#<%=txtStockMantenimiento.ClientID%>").val().length;
+                                                    if (ValidarStock < 1) {
+                                                        alert("El campo Stock no puede estar vacio para gaurdar este registro, favor de verificar");
+                                                        $("#<%=txtStockMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        //STOCK MINIMO
+                                                        var ValidarStockMinimo = $("#<%=txtStockMinimoMantenimiento.ClientID%>").val().length;
+                                                        if (ValidarStockMinimo < 1) {
+                                                            alert("El campo Stock Minimo no puede estar vacio para guardar este registro, favor de verificar");
+                                                            $("#<%=txtStockMinimoMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            //PORCIENTO DE DESCUENTO
+                                                            var PorcientoDescuento = $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").val().length;
+                                                            if (PorcientoDescuento < 1) {
+                                                                alert("El campo porciento de descuento no puede estar vacio para guardar este registro, favor de verificar");
+                                                                $("#<%=txtPorcientoDescuentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                //COLOR
+                                                                var ValidarColor = $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").val();
+                                                                if (ValidarColor < 1) {
+                                                                    alert("El campo color no puede estar vacio para guardar este registro, favor de verificar");
+                                                                    $("#<%=ddlSeleccionarColorMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    //CONDICON
+                                                                    var ValidarCondicion = $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").val();
+                                                                    if (ValidarCondicion < 1) {
+                                                                        alert("El campo color no puede estar vacio para guardar este registro, favor de veriricar");
+                                                                        $("#<%=ddlSeleccionarCondicionMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        //CAPACIDAD
+                                                                        var ValidarCapacidad = $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").val();
+                                                                        if (ValidarCapacidad < 1) {
+                                                                            alert("El campo capacidad no puede estar vacio para guardar este registro, favor de verificar");
+                                                                            $("#<%=ddlSeleccionarCapacidadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                        else {
+                                                                            //VALIDAMOS LA CLAVE DE SEGURIDAD
+                                                                            var ValidarClaveSeguridad = $("#<%=txtclaveSeguridadMantenimiento.ClientID%>").val().length;
+                                                                            if (ValidarClaveSeguridad < 1) {
+                                                                                alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar");
+                                                                                $("#<%=txtclaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                return false;
+                                                                            }
+
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         })
     </script>
 
@@ -318,7 +471,7 @@
             <br />
 
                 <div>
-                <asp:Label ID="lbPagina" runat="server" Text=""></asp:Label>
+                
                 <div class="table-responsive mT20">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -352,8 +505,8 @@
                                            <td style="width:35%"><%#Eval("Producto") %></td>
                                            <td style="width:20%"><%#Eval("TipoProducto") %></td>
                                            <td style="width:20%"><%#Eval("Categoria") %></td>
-                                           <td style="width:10%"><%#Eval("Stock") %></td>
-                                           <td style="width:10%"><asp:Label ID="lbPrecioVentaRepeater" runat="server" Text='<%#Eval("PrecioVenta")%>'></asp:Label> </td>
+                                           <td style="width:10%"><%#string.Format("{0:n0}", Eval("Stock")) %></td>
+                                           <td style="width:10%"><asp:Label ID="lbPrecioVentaRepeater" runat="server" Text='<%#string.Format("{0:n2}", Eval("PrecioVenta")) %>'></asp:Label> </td>
                                            
                                     </tr>
                                 </ItemTemplate>
@@ -361,6 +514,12 @@
                         </tbody>
                     </table>
                 </div>
+                </div>
+            <div align="center">
+                    <asp:Label ID="lbPaginaInicialTitulo" runat="server" CssClass="Letranegrita" Text="Pagina "></asp:Label>
+                    <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
+                    <asp:Label ID="lbDeTitulo" runat="server" CssClass="Letranegrita" Text=" De "></asp:Label>
+                    <asp:Label ID="lbCantidadPaginasVariable" CssClass="Letranegrita" runat="server" Text=" 0 "></asp:Label>
                 </div>
             <!--INICIO DE LA PAGINACION-->
                 <div id="divPaginacion" runat="server" align="center">
@@ -555,6 +714,10 @@
                  <div class="form-group col-md-12">
                     <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtComentarioMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
+                </div>
+                 <div class="form-group col-md-6">
+                    <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad" Visible="false" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtclaveSeguridadMantenimiento" runat="server" TextMode="Password" Visible="false" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                 </div>
 
             </div>
