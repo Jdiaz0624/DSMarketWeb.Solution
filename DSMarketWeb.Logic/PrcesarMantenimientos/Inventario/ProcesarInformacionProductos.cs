@@ -44,6 +44,42 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
         private decimal IdCapacidad = 0;
         private string Accion = "";
 
+        /// <summary>
+        /// Este Constructor es para Guardar, Modificar Eliminar y Suplir Productos del Inventario
+        /// </summary>
+        /// <param name="IdProductoCON"></param>
+        /// <param name="NumeroConectorCON"></param>
+        /// <param name="IdTipoProductoCON"></param>
+        /// <param name="IdCategoriaCON"></param>
+        /// <param name="IdUnidadMedidaCON"></param>
+        /// <param name="IdMarcaCON"></param>
+        /// <param name="IdModeloCON"></param>
+        /// <param name="IdTipoSuplidorCON"></param>
+        /// <param name="IdSuplidorCON"></param>
+        /// <param name="DescripcionCON"></param>
+        /// <param name="CodigoBarraCON"></param>
+        /// <param name="ReferenciaCON"></param>
+        /// <param name="PrecioCompraCON"></param>
+        /// <param name="PrecioVentaCON"></param>
+        /// <param name="StockCON"></param>
+        /// <param name="StockMinimoCON"></param>
+        /// <param name="PorcientoDescuentoCON"></param>
+        /// <param name="AfectaOfertaCON"></param>
+        /// <param name="ProductoAcumulativoCON"></param>
+        /// <param name="LlevaImagenCON"></param>
+        /// <param name="UsuarioAdicionCON"></param>
+        /// <param name="FechaAdicionaCON"></param>
+        /// <param name="UsuarioModificaCON"></param>
+        /// <param name="FechaModificaCON"></param>
+        /// <param name="FechaCON"></param>
+        /// <param name="ComentarioCON"></param>
+        /// <param name="AplicaParaImpuestoCON"></param>
+        /// <param name="EstatusProductoCON"></param>
+        /// <param name="NumeroSeguimientoCON"></param>
+        /// <param name="IdColorCON"></param>
+        /// <param name="IdCondicionCON"></param>
+        /// <param name="IdCapacidadCON"></param>
+        /// <param name="AccionCON"></param>
         public ProcesarInformacionProductos(
             decimal IdProductoCON,
             decimal NumeroConectorCON,
@@ -113,6 +149,22 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             IdCapacidad = IdCapacidadCON;
             Accion = AccionCON;
         }
+
+        /// <summary>
+        /// Este Constroctor es para eliminar registros de las fotos de los productos seleccionado
+        /// </summary>
+        /// <param name="IdProductoCON"></param>
+        /// <param name="NumeroConectorCON"></param>
+        /// <param name="AccionCON"></param>
+        public ProcesarInformacionProductos(
+            decimal IdProductoCON,
+            decimal NumeroConectorCON,
+            string AccionCON)
+        {
+            IdProducto = IdProductoCON;
+            NumeroConector = NumeroConectorCON;
+            Accion = AccionCON;
+        }
         public void ProcesarProducto() {
             DSMarketWeb.Logic.Entidades.EntidadesInventario.EProducto Procesar = new Entidades.EntidadesInventario.EProducto();
 
@@ -150,6 +202,13 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.IdCapacidad = IdCapacidad;
 
             var MAN = ObjData.MantenimientoProductos(Procesar, Accion);
+        }
+
+        public void EliminarFotoProducto() {
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EEliminarFotoProducto Eliminar = new Entidades.EntidadesInventario.EEliminarFotoProducto();
+            Eliminar.IdProducto = IdProducto;
+            Eliminar.NumeroConector = NumeroConector;
+            var MAN = ObjData.EliminarFotoProducto(Eliminar, Accion);
         }
     }
 }

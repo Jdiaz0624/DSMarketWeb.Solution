@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DSMarket" Class="BDConexionConfiguracionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarket;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.26.24.199;Initial Catalog=DSMarket;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketConnectionString2" Provider="System.Data.SqlClient" />
   <Function Name="Configuracion.SP_SACAR_INFORMACION_EMPRESA" Method="SP_SACAR_INFORMACION_EMPRESA">
     <ElementType Name="SP_SACAR_INFORMACION_EMPRESAResult">
       <Column Name="IdInformacionEmpresa" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
@@ -90,6 +90,14 @@
       <Column Name="IdConfiguracionGeneral" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Configuracion.SP_BUSCAR_IMAGENES_DEL_SISTEMA" Method="SP_BUSCAR_IMAGENES_DEL_SISTEMA">
+    <Parameter Name="IdLogoSistema" Parameter="idLogoSistema" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <ElementType Name="SP_BUSCAR_IMAGENES_DEL_SISTEMAResult">
+      <Column Name="IdLogoEmpresa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LogoEmpresa" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

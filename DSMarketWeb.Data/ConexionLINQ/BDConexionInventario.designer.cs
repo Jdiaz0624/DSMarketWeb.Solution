@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionInventarioDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -135,6 +135,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector);
 			return ((ISingleResult<SP_BUSCA_FOTO_PRODUCTOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_ELIMINAR_FOTO_PRODUCTO")]
+		public ISingleResult<SP_ELIMINAR_FOTO_PRODUCTOResult> SP_ELIMINAR_FOTO_PRODUCTO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Decimal(20,0)")] System.Nullable<decimal> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector, accion);
+			return ((ISingleResult<SP_ELIMINAR_FOTO_PRODUCTOResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1877,6 +1884,68 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._Producto != value))
 				{
 					this._Producto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image")]
+		public System.Data.Linq.Binary FotoProducto
+		{
+			get
+			{
+				return this._FotoProducto;
+			}
+			set
+			{
+				if ((this._FotoProducto != value))
+				{
+					this._FotoProducto = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_ELIMINAR_FOTO_PRODUCTOResult
+	{
+		
+		private System.Nullable<decimal> _IdProducto;
+		
+		private System.Nullable<decimal> _NumeroConector;
+		
+		private System.Data.Linq.Binary _FotoProducto;
+		
+		public SP_ELIMINAR_FOTO_PRODUCTOResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroConector", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> NumeroConector
+		{
+			get
+			{
+				return this._NumeroConector;
+			}
+			set
+			{
+				if ((this._NumeroConector != value))
+				{
+					this._NumeroConector = value;
 				}
 			}
 		}

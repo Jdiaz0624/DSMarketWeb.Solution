@@ -143,5 +143,20 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             return Mantenimiento;
         }
         #endregion
+
+        #region BUSCAR LAS IMAGENES POR DEFECTO DE DEL SISTEMA
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EBuscaImagenesSistema> BuscaImagenesSistema(decimal? IdLogoSistema = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCAR_IMAGENES_DEL_SISTEMA(IdLogoSistema)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EBuscaImagenesSistema
+                           {
+                               IdLogoEmpresa=n.IdLogoEmpresa,
+                               Nombre=n.Nombre,
+                               LogoEmpresa=n.LogoEmpresa
+                           }).ToList();
+            return Listado;
+        }
+        #endregion
     }
 }

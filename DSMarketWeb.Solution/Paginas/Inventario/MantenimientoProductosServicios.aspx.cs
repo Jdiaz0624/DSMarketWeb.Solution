@@ -148,6 +148,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                             lbCantidadRegistrosConsultaVariable.Text = "0";
                             lbCantidadInventidoVariable.Text = "0";
                             lbGananciaAproximadaVariable.Text = "0";
+                            RVListadoProducto.DataSource = null;
+                            RVListadoProducto.DataBind();
                         }
                         else
                         {
@@ -191,6 +193,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = "0";
                         lbCantidadInventidoVariable.Text = "0";
                         lbGananciaAproximadaVariable.Text = "0";
+                        RVListadoProducto.DataSource = null;
+                        RVListadoProducto.DataBind();
                     }
                     else
                     {
@@ -246,6 +250,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                             lbCantidadRegistrosConsultaVariable.Text = "0";
                             lbCantidadInventidoVariable.Text = "0";
                             lbGananciaAproximadaVariable.Text = "0";
+                            RVListadoProducto.DataSource = null;
+                            RVListadoProducto.DataBind();
                         }
                         else {
                             divPaginacion.Visible = true;
@@ -286,6 +292,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = "0";
                         lbCantidadInventidoVariable.Text = "0";
                         lbGananciaAproximadaVariable.Text = "0";
+                        RVListadoProducto.DataSource = null;
+                        RVListadoProducto.DataBind();
                     }
                     else
                     {
@@ -508,6 +516,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnDescartarConsulta.Disabled = false;
             btnRestablecerPantallaConsulta.Enabled = true;
             cbGraficarConsulta.Enabled = true;
+            btnSuplirConsulta.Visible = false;
         }
         private void ModoMantenimiento() {
             btnConsultarRegistrosConsulta.Enabled = false;
@@ -861,7 +870,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 Convert.ToDecimal(txtPorcientoDescuentoMantenimiento.Text),
                 false,
                 cbProductoAcumulativoMantenimiento.Checked,
-                false,
+                cbAgregarImagenArticulo.Checked,
                 Convert.ToDecimal(Session["IdUsuario"]),
                 DateTime.Now,
                 Convert.ToDecimal(Session["IdUsuario"]),
@@ -876,6 +885,19 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 Convert.ToDecimal(ddlSeleccionarCapacidadMantenimiento.SelectedValue),
                 Accion);
             Procesar.ProcesarProducto();
+
+            if (Accion == "UPDATE" || Accion == "DELETE") {
+                EliminarFotoProducto(IdProducto, NumeroConector);
+            }
+            
+        }
+
+        private void EliminarFotoProducto(decimal IdProducto, decimal NumeroConector) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos EliminarFoto = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                IdProducto,
+                NumeroConector,
+                "DELETE");
+            EliminarFoto.EliminarFotoProducto();
         }
         #endregion
         #region GENERAR NUMERO DE CONECTOR
@@ -925,8 +947,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             LimpiarCOntrolesMantenimiento();
         }
         private void RestablecerPantallaCOnsulta() {
-        
-        
+            LimpiarControlesCOnsulta();
+            LimpiarCOntrolesMantenimiento();
+            VolverAtras();
+            ModoConsulta();
+
+            CurrentPage = 0;
+            lbNumeroVariable.Text = "1";
+            BindDataIntoRepeater(10);
+            divBloqueDetalle.Visible = false;
         }
         #endregion
         #region VALIDAR FNCIONES
@@ -983,26 +1012,50 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             //VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
             string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
             IMGProducto.ImageUrl = ImagenDataUrl64;
-
-
-
         }
         #endregion
         #region MOSTRAR LA FOTO DEL PROEUCTO SELECCIONADO
-        private void MostrarFotoProductoSeleccionado(decimal IdProducto) {
+        private void MostrarFotoProductoSeleccionado(decimal IdProducto, string Accion) {
             var ValidarFotoProducto = ObjdataInventario.Value.BuscaFotoProucto(IdProducto, null);
             if (ValidarFotoProducto.Count() < 1) { }
             else {
-
+                if (Accion == "CONSULTA") {
+                    SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                    Conexion.Open();
+                    string Query = "SELECT FotoProducto FROM [Inventario].[FotoProducto] WHERE IdProducto = " + IdProducto;
+                    SqlCommand comando = new SqlCommand(Query, Conexion);
+                    comando.CommandTimeout = 0;
+                    byte[] IMG = (byte[])comando.ExecuteScalar();
+                    IMGFotoProducto.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMG);
+                    Conexion.Close();
+                }
+                else if (Accion == "MANTENIMIENTO") {
+                    SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                    Conexion.Open();
+                    string Query = "SELECT FotoProducto FROM [Inventario].[FotoProducto] WHERE IdProducto = " + IdProducto;
+                    SqlCommand comando = new SqlCommand(Query, Conexion);
+                    comando.CommandTimeout = 0;
+                    byte[] IMG = (byte[])comando.ExecuteScalar();
+                    IMGProducto.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMG);
+                    Conexion.Close();
+                }
+            }
+        }
+        private void MostrarImagenPorDefectoSistema(decimal IdLogoSistema) {
+            DSMarketWeb.Logic.Comunes.ValidarImagenSistema Imagen = new Logic.Comunes.ValidarImagenSistema(IdLogoSistema);
+            bool Validar = Imagen.ValidarImagenSistemaPorDefecto();
+            if (Validar == true) {
                 SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
                 Conexion.Open();
-                string Query = "select FotoProducto from Inventario.FotoProducto where IdProducto = " + IdProducto;
-                SqlCommand comando = new SqlCommand(Query, Conexion);
-                comando.CommandTimeout = 0;
-                byte[] IMG = (byte[])comando.ExecuteScalar();
-
-                IMGFotoProducto.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMG);
+                string Query = "SELECT LogoEmpresa FROM [Configuracion].[ImagenesSistema] WHERE IdLogoEmpresa = " + IdLogoSistema;
+                SqlCommand Comando = new SqlCommand(Query, Conexion);
+                Comando.CommandTimeout = 0;
+                byte[] IMGPorDefecto = (byte[])Comando.ExecuteScalar();
+                IMGProducto.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMGPorDefecto);
                 Conexion.Close();
+            }
+            else {
+                ClientScript.RegisterStartupScript(GetType(), "ImagenPorDefectoNoEncontrada()", "ImagenPorDefectoNoEncontrada();", true);
             }
         }
         #endregion
@@ -1011,8 +1064,69 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         private void SiguientePagina() { }
         private void PaginaAnterior() { }
         private void UltimaPagina() { }
-        
+
         #endregion
+        #region BLOQUEAR Y DESBLOQUEAR CONTROLES DEL MANTENIMIENTO
+        private void BloquearControlesMantenimiento() {
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = false;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = false;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = false;
+            ddlSeleccionarMarcaMantenimiento.Enabled = false;
+            ddlSeleccionarModeloMantenimiento.Enabled = false;
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = false;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = false;
+            txtDescripcionMantenimiento.Enabled = false;
+            txtCodigoBarraMantenimiento.Enabled = false;
+            txtReferenciaMantenimiento.Enabled = false;
+            txtPrecioCompraMantenimiento.Enabled = false;
+            txtPrecioVentaMantenimiento.Enabled = false;
+            txtStockMantenimiento.Enabled = false;
+            txtStockMinimoMantenimiento.Enabled = false;
+            txtPorcientoDescuentoMantenimiento.Enabled = false;
+            txtNumeroSeguimientoMantenimiento.Enabled = false;
+            ddlSeleccionarColorMantenimiento.Enabled = false;
+            ddlSeleccionarCondicionMantenimiento.Enabled = false;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = false;
+            txtComentarioMantenimiento.Enabled = false;
+            lbClaveSeguridadMantenimiento.Visible = true;
+            txtclaveSeguridadMantenimiento.Visible = true;
+            cbProductoAcumulativoMantenimiento.Enabled = false;
+            cbAplicaImpuestoMantenimiento.Enabled = false;
+            cbAgregarImagenArticulo.Enabled = false;
+            cbNoLimpiarPantalla.Enabled = false;
+        }
+        private void DesbloquearControles() {
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            ddlSeleccionarCategoriaMantenimiento.Enabled = true;
+            ddlSeleccionarUnidadMedidaMantenimiento.Enabled = true;
+            ddlSeleccionarMarcaMantenimiento.Enabled = true;
+            ddlSeleccionarModeloMantenimiento.Enabled = true;
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = true;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = true;
+            txtDescripcionMantenimiento.Enabled = true;
+            txtCodigoBarraMantenimiento.Enabled = true;
+            txtReferenciaMantenimiento.Enabled = true;
+            txtPrecioCompraMantenimiento.Enabled = true;
+            txtPrecioVentaMantenimiento.Enabled = true;
+            txtStockMantenimiento.Enabled = false;
+            txtStockMinimoMantenimiento.Enabled = false;
+            txtPorcientoDescuentoMantenimiento.Enabled = true;
+            txtNumeroSeguimientoMantenimiento.Enabled = true;
+            ddlSeleccionarColorMantenimiento.Enabled = true;
+            ddlSeleccionarCondicionMantenimiento.Enabled = true;
+            ddlSeleccionarCapacidadMantenimiento.Enabled = true;
+            txtComentarioMantenimiento.Enabled = true;
+            lbClaveSeguridadMantenimiento.Visible = false;
+            txtclaveSeguridadMantenimiento.Visible = false;
+            cbProductoAcumulativoMantenimiento.Enabled = true;
+            cbAplicaImpuestoMantenimiento.Enabled = true;
+            cbAgregarImagenArticulo.Enabled = true;
+            cbNoLimpiarPantalla.Enabled = true;
+            cbProductoAcumulativoMantenimiento.Checked = false;
+            cbAgregarImagenArticulo.Checked = false;
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -1036,6 +1150,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 divGraficoMarcas.Visible = false;
                 divGraficoServicios.Visible = false;
                 divTipoProducto.Visible = false;
+                ClientScript.RegisterStartupScript(GetType(), "BloquearSuplir()", "BloquearSuplir();", true);
             }
         }
 
@@ -1088,7 +1203,12 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnEliminarMantenimiento.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = false;
             txtclaveSeguridadMantenimiento.Visible = false;
+            cbProductoAcumulativoMantenimiento.Visible = true;
             ValidarCheckLimpiarPantalla();
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = true;
+            cbAgregarImagenArticulo.Checked = false;
+            DivBloqueImagenProducto.Visible = false;
+            UpImagen.Enabled = true;
         }
 
         protected void btnModificarConsulta_Click(object sender, EventArgs e)
@@ -1103,6 +1223,16 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnEliminarMantenimiento.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = true;
             txtclaveSeguridadMantenimiento.Visible = true;
+            if (cbAgregarImagenArticulo.Checked == true) {
+                DivBloqueImagenProducto.Visible = true;
+                MostrarFotoProductoSeleccionado(Convert.ToDecimal(lbIdProductoSeleccionado.Text), "MANTENIMIENTO");
+            }
+            if (cbProductoAcumulativoMantenimiento.Checked == true) {
+                txtStockMinimo.Enabled = true;
+            }
+            cbProductoAcumulativoMantenimiento.Visible = false;
+            ddlSeleccionarTipoProductoMantenimiento.Enabled = false;
+            UpImagen.Enabled = true;
         }
 
         protected void btnEliminarConsulta_Click(object sender, EventArgs e)
@@ -1117,6 +1247,16 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnEliminarMantenimiento.Visible = true;
             lbClaveSeguridadMantenimiento.Visible = true;
             txtclaveSeguridadMantenimiento.Visible = true;
+            cbProductoAcumulativoMantenimiento.Visible = true;
+            BloquearControlesMantenimiento();
+            if (cbAgregarImagenArticulo.Checked == true)
+            {
+                DivBloqueImagenProducto.Visible = true;
+                MostrarFotoProductoSeleccionado(Convert.ToDecimal(lbIdProductoSeleccionado.Text), "MANTENIMIENTO");
+               
+            }
+            UpImagen.Enabled = false;
+
         }
 
         protected void btnExportarConsulta_Click(object sender, EventArgs e)
@@ -1216,6 +1356,12 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
             else {
                 ProcesarInformacionProducto(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProducto.Text), "UPDATE");
+                //GUARDAMOS LA IMAGEN
+                if (cbAgregarImagenArticulo.Checked == true) {
+                    GuardarImagenProdicto(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProducto.Text));
+
+                }
+                ClientScript.RegisterStartupScript(GetType(), "RegistroModificadoConExito()", "RegistroModificadoConExito();", true);
                 VolverAtras();
                 ModoConsulta();
                 var Buscar = ObjdataInventario.Value.BuscaProductos(
@@ -1227,7 +1373,25 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnEliminarMantenimiento_Click(object sender, EventArgs e)
         {
+            //VALIDAMOS LA CLAVE DE SEGURIDAD ANTES DE ELIMINAR EL REGISTRO
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtclaveSeguridadMantenimiento.Text.Trim()) ? null : txtclaveSeguridadMantenimiento.Text.Trim();
 
+            var ValidarClaveSeguridad = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (ValidarClaveSeguridad.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadIngresadaNoValida()", "ClaveSeguridadIngresadaNoValida();", true);
+                txtclaveSeguridadMantenimiento.Text = string.Empty;
+                txtclaveSeguridadMantenimiento.Focus();
+            }
+            else {
+                ProcesarInformacionProducto(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProducto.Text), "DELETE");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroEliminadoConExito()", "RegistroEliminadoConExito();", true);
+                VolverAtras();
+                ModoConsulta();
+            
+            }
         }
 
         protected void cbProductoAcumulativoMantenimiento_CheckedChanged(object sender, EventArgs e)
@@ -1266,7 +1430,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnRestablecerPantallaConsulta_Click(object sender, EventArgs e)
         {
-
+            RestablecerPantallaCOnsulta();
         }
 
         protected void btnProcesarSuplirSacar_Click(object sender, EventArgs e)
@@ -1278,6 +1442,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             if (cbAgregarImagenArticulo.Checked == true) {
                 DivBloqueImagenProducto.Visible = true;
+                MostrarImagenPorDefectoSistema(2);
             }
             else {
                 DivBloqueImagenProducto.Visible = false;
@@ -1286,7 +1451,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnVisualizarImagen_Click(object sender, EventArgs e)
         {
-            GuardarImagenProdicto(200, 300);
+           
         }
 
         protected void rptPaging_ItemCommand(object source, DataListCommandEventArgs e)
@@ -1335,6 +1500,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             var hfIdProducto = decimal.Parse((((HiddenField)IdProductpSeleccionado.FindControl("hfIdProducto")).Value.ToString()));
             var HfNumeroConector = decimal.Parse((((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConector")).Value.ToString()));
 
+            bool ProductoAcumulativo = false;
             //BUSCAMOS EL REGISTRO
             var BuscarRegistro = ObjdataInventario.Value.BuscaProductos(
                 Convert.ToDecimal(hfIdProducto),
@@ -1343,6 +1509,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             lbNumeroVariable.Text = "1";
             divBloqueDetalle.Visible = true;
             //SACAMOS LOS DATOS DEL PRODUCTO DETALLE
+            
+            
             foreach (var n in BuscarRegistro) {
                 txtTipoProductoDetalle.Text = n.TipoProducto;
                 txtCategoriaDetalle.Text = n.Categoria;
@@ -1370,6 +1538,20 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtProductoAcumulativoDetalle.Text = n.ProductoAcumulativo;
                 txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
                 txtComentarioDetalle.Text = n.Comentario;
+                ProductoAcumulativo = Convert.ToBoolean(n.ProductoAcumulativo0);
+                int CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
+                lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
+                decimal CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
+                lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
+                decimal GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
+                lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+                bool TieneImagen = Convert.ToBoolean(n.LlevaImagen0);
+                if (TieneImagen == true) {
+                    IMGFotoProducto.Visible = true;
+                }
+                else {
+                    IMGFotoProducto.Visible = false;
+                }
             }
             foreach (var Seleccionar in BuscarRegistro) {
                 CargarListaTipoProductoMantenimiento();
@@ -1408,11 +1590,16 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
                 
             }
+
+            if (ProductoAcumulativo == true) {
+                btnSuplirConsulta.Visible = true;
+                
+            }
             lbIdProductoSeleccionado.Text = hfIdProducto.ToString();
             lbNumeroConectorProducto.Text = HfNumeroConector.ToString();
-            MostrarFotoProductoSeleccionado((decimal)hfIdProducto);
+            MostrarFotoProductoSeleccionado((decimal)hfIdProducto, "CONSULTA");
             ModoMantenimiento();
-            cbGraficarConsulta.Visible = false;
+            cbGraficarConsulta.Checked = false;
             divGraficoMarcas.Visible = false;
             divGraficoServicios.Visible = false;
             divTipoProducto.Visible = false;

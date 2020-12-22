@@ -185,6 +185,27 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                            }).ToList();
             return Listado;
         }
+
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EEliminarFotoProducto EliminarFotoProducto(DSMarketWeb.Logic.Entidades.EntidadesInventario.EEliminarFotoProducto Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EEliminarFotoProducto Eliminar = null;
+
+            var FotoProducto = ObjData.SP_ELIMINAR_FOTO_PRODUCTO(
+                Item.IdProducto,
+                Item.NumeroConector,
+                Accion);
+            if (FotoProducto != null) {
+                Eliminar = (from n in FotoProducto
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EEliminarFotoProducto
+                            {
+                                IdProducto=n.IdProducto,
+                                NumeroConector=n.NumeroConector,
+                                FotoProducto=n.FotoProducto
+                            }).FirstOrDefault();
+            }
+            return Eliminar;
+        }
         #endregion
     }
 }

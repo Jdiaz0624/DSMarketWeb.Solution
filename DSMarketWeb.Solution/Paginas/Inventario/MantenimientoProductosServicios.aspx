@@ -28,14 +28,6 @@
      }
 
 
-        .auto-style1 {
-            width: 100%;
-        }
-
-        .auto-style3 {
-            width: 162px;
-        }
-
         table {
             border-collapse: collapse;
         }
@@ -54,7 +46,7 @@
 
     <script type="text/javascript">
         function CamposFechaVAcios() {
-            alert("Los campos fecha no puedes estar vacios para buscar registros mediante este metodo");
+            alert("Los campos fecha no pueden estar vacios para buscar registros mediante este metodo.");
         }
         function CampoFechaDesdeVAcio() {
             $("#<%=txtFechaDesdeConsulta.ClientID%>").css("border-color", "red");
@@ -63,13 +55,30 @@
             $("#<%=txtFechaHAstaConsulta.ClientID%>").css("border-color", "red");
         }
         function RegistroGuardadoConExito() {
-            alert("Registro Guardado con Exito");
+            alert("Registro Guardado con Exito.");
         }
 
         function ClaveSeguridadIngresadaNoValida() {
-            alert("La clave de seguridad ingresada no es valida, favor de verificar");
+            alert("La clave de seguridad ingresada no es valida, favor de verificar.");
         }
 
+        function RegistroModificadoConExito() {
+            alert("Registro Modificado con Exito.");
+        }
+        function RegistroEliminadoConExito() {
+            alert("Registro Eliminado con Exito.");
+        }
+
+        function BloquearSuplir() {
+  
+            $("#btnSuplirConsulta").attr("disabled", "disabled");
+        }
+        function HabilitarSuplir() {
+            $("#btnSuplirConsulta").removeAttr("disabled", true);
+        }
+        function ImagenPorDefectoNoEncontrada() {
+            alert("La imagen por defecto no se encuentra, favor de contactar con el administrador del sistema para solucionar este problema.");
+        }
 
 
         $(document).ready(function () {
@@ -355,6 +364,16 @@
                             }
                         }
                     }
+                }
+            });
+
+            $("#<%=btnEliminarMantenimiento.ClientID%>").click(function () {
+                var ValidarClaveSeguridad = $("#<%=txtclaveSeguridadMantenimiento.ClientID%>").val().length;
+
+                if (ValidarClaveSeguridad < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio para eliminar este registro, favor de verificar.");
+                    $("#<%=txtclaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
                 }
             });
         })
@@ -744,7 +763,6 @@
                             <asp:FileUpload ID="UpImagen" runat="server" accept=".jpg" CssClass="form-control" />
                             <br />
                             <br />
-                           <asp:Button ID="btnVisualizarImagen" runat="server" Text="Visualizar" ToolTip="Visualizar Imagen" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnVisualizarImagen_Click" />
                         </div>
                     </div>
                 </div>

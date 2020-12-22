@@ -55,11 +55,14 @@
     <Compile Include="Comunes\SeguridadEncriptacion.cs" />
     <Compile Include="Comunes\UtilidadDrop.cs" />
     <Compile Include="Comunes\ValidarConfiguracionGenera.cs" />
+    <Compile Include="Comunes\ValidarImagenSistema.cs" />
+    <Compile Include="Entidades\EntidadesConfiguracion\EBuscaImagenesSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EConfiguracionGeneral.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EEliminarFotoProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />

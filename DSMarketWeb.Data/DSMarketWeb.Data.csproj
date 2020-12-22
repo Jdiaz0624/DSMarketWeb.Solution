@@ -87,6 +87,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ConexionLINQ\BDConexionCaja.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>BDConexionCaja.designer.cs</LastGenOutput>

@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionConfiguracionDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -109,6 +109,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idConfiguracionGeneral, descripcion, estatus, accion);
 			return ((ISingleResult<SP_MANTENIMIENTO_CONFIGURACION_GENERALResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_BUSCAR_IMAGENES_DEL_SISTEMA")]
+		public ISingleResult<SP_BUSCAR_IMAGENES_DEL_SISTEMAResult> SP_BUSCAR_IMAGENES_DEL_SISTEMA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdLogoSistema", DbType="Decimal(20,0)")] System.Nullable<decimal> idLogoSistema)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idLogoSistema);
+			return ((ISingleResult<SP_BUSCAR_IMAGENES_DEL_SISTEMAResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -847,6 +854,68 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._Estatus != value))
 				{
 					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCAR_IMAGENES_DEL_SISTEMAResult
+	{
+		
+		private System.Nullable<int> _IdLogoEmpresa;
+		
+		private string _Nombre;
+		
+		private System.Data.Linq.Binary _LogoEmpresa;
+		
+		public SP_BUSCAR_IMAGENES_DEL_SISTEMAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdLogoEmpresa", DbType="Int")]
+		public System.Nullable<int> IdLogoEmpresa
+		{
+			get
+			{
+				return this._IdLogoEmpresa;
+			}
+			set
+			{
+				if ((this._IdLogoEmpresa != value))
+				{
+					this._IdLogoEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(20)")]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoEmpresa", DbType="Image")]
+		public System.Data.Linq.Binary LogoEmpresa
+		{
+			get
+			{
+				return this._LogoEmpresa;
+			}
+			set
+			{
+				if ((this._LogoEmpresa != value))
+				{
+					this._LogoEmpresa = value;
 				}
 			}
 		}
