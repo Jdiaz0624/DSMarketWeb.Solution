@@ -1394,7 +1394,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtStockMantenimiento.Text = Seleccionar.Stock.ToString();
                 txtStockMinimoMantenimiento.Text = Seleccionar.StockMinimo.ToString();
                 txtPorcientoDescuentoMantenimiento.Text = Seleccionar.PorcientoDescuento.ToString();
-                txtNumeroSeguimientoMantenimiento.Text = Seleccionar.NumeroSeguimiento;
+                txtNumeroSeguimientoMantenimiento.Text = Seleccionar.NumeroSeguimiento; 
                 CargarListaColoresMantenimiento();
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarColorMantenimiento, Seleccionar.IdColor.ToString());
                 CargarListaCondicionesMantenimiento();
