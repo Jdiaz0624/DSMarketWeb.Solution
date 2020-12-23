@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DSMarket" Class="BDConexionInventarioDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarket;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.26.24.199;Initial Catalog=DSMarket;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketConnectionString2" Provider="System.Data.SqlClient" />
   <Function Name="Inventario.SP_MANTENIMIENTO_PRODUCTO" Method="SP_MANTENIMIENTO_PRODUCTO">
     <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Decimal" DbType="Decimal(20,0)" />
     <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.Decimal" DbType="Decimal(20,0)" />
@@ -119,6 +119,7 @@
     <Parameter Name="TieneOferta" Parameter="tieneOferta" Type="System.Boolean" DbType="Bit" />
     <Parameter Name="EstatusProducto" Parameter="estatusProducto" Type="System.Boolean" DbType="Bit" />
     <Parameter Name="NumeroSeguimiento" Parameter="numeroSeguimiento" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="GeneradoPor" Parameter="generadoPor" Type="System.Decimal" DbType="Decimal(20,0)" />
     <ElementType Name="SP_BUSCA_PRODUCTO_WEBResult">
       <Column Name="IdProducto" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
       <Column Name="IdMarca" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
@@ -176,9 +177,19 @@
       <Column Name="ProductosAgostados" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CapilalInvertido" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
       <Column Name="GananciaAproximada" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="RNC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="Telefonos" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Facebook" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Instagran" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LogoEmpresa" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
       <Column Name="Comentario" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
       <Column Name="IdProductoFoto" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
       <Column Name="FotoProducto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="GeneradoPor" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

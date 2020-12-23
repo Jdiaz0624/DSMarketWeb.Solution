@@ -516,7 +516,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnEliminarConsulta.Enabled = false;
           //  btnSuplirConsulta.Disabled = false;
             btnExportarConsulta.Enabled = false;
-            btnDescartarConsulta.Disabled = false;
+            //  btnDescartarConsulta.Disabled = false;
+            btnDescartarConsulta.Visible = false;
             btnRestablecerPantallaConsulta.Enabled = true;
             cbGraficarConsulta.Enabled = true;
             btnSuplirConsulta.Visible = false;
@@ -528,7 +529,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnEliminarConsulta.Enabled = true;
           //  btnSuplirConsulta.Disabled = true;
             btnExportarConsulta.Enabled = true;
-            btnDescartarConsulta.Disabled = true;
+           // btnDescartarConsulta.Disabled = true;
             btnRestablecerPantallaConsulta.Enabled = true;
             cbGraficarConsulta.Enabled = false;
             
@@ -1130,6 +1131,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         #endregion
         #region EXPORTAR INFORMACION
+        /// <summary>
+        /// Este metodo es para generar el reporte de un producto seleccionado
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <param name="NumeroConector"></param>
+        /// <param name="RutaReporte"></param>
+        /// <param name="UsuarioBD"></param>
+        /// <param name="ClaveBD"></param>
+        /// <param name="NombreArchivo"></param>
         private void ExportarInformacionProductoEspesifico(decimal IdProducto, decimal NumeroConector, string RutaReporte, string UsuarioBD, string ClaveBD,string NombreArchivo) 
         {
             string _Descripcion = null;
@@ -1188,6 +1198,89 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             else if (rbExportarCSV.Checked == true) {
                 Reporte.ExportToHttpResponse(ExportFormatType.CharacterSeparatedValues, Response, true, NombreArchivo);
             }
+        }
+
+        private void ExportarReporteInventarioGeneral(decimal? IdUsuario, string RutaReporte, string UsuarioBD, string ClaveBD, string Nombrearchivo) {
+
+            string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? null : txtDescripcionConsulta.Text.Trim();
+            string _CodigoBarra = string.IsNullOrEmpty(txtCodigoBarra.Text.Trim()) ? null : txtCodigoBarra.Text.Trim();
+            string _Referencia = string.IsNullOrEmpty(txtReferenciaConsulta.Text.Trim()) ? null : txtReferenciaConsulta.Text.Trim();
+            DateTime? _FechaDesde = null;
+            if (string.IsNullOrEmpty(txtFechaDesdeConsulta.Text.Trim())) {
+                _FechaDesde = null;
+            }
+            else {
+                _FechaDesde = Convert.ToDateTime(txtFechaDesdeConsulta.Text);
+            }
+            DateTime? _FechaHasta = null;
+            if (string.IsNullOrEmpty(txtFechaHAstaConsulta.Text.Trim())) {
+                _FechaHasta = null;
+            }
+            else {
+                _FechaHasta = Convert.ToDateTime(txtFechaHAstaConsulta.Text.Trim());
+            }
+            decimal? IdProducto = null;
+            decimal? NumeroConector = null;
+            decimal? _IdTipoProducto = ddlSeleccionarTipoProductoCOnsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoProductoCOnsulta.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdCategoria = ddlSeleccionarCategoria.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarCategoria.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdUnidadMedida = ddlSeleccionarUnidadMedida.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarUnidadMedida.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdMarca = ddlSeleccionarMarcaConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarMarcaConsulta.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdModelo = ddlSeleccionarModelosConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelosConsulta.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdColor = null;
+            decimal? _IdCapacidad = null;
+            decimal? _IdCondicion = null;
+            bool? _TieneOferta = null;
+            bool? _EstatusProducto = null;
+            if (cbProductosVendisodDescartados.Checked == true) {
+                _EstatusProducto = true;
+            }
+            else {
+                _EstatusProducto = false;
+            }
+            string _NumeroSeguimiento = string.IsNullOrEmpty(txtNumeroSeguimientoConsulta.Text.Trim()) ? null : txtNumeroSeguimientoConsulta.Text.Trim();
+
+            //GENERAMOS EL REPORTE
+            ReportDocument ReporteInventario = new ReportDocument();
+
+            ReporteInventario.Load(RutaReporte);
+            ReporteInventario.Refresh();
+            ReporteInventario.SetParameterValue("@IdProducto", IdProducto); //VALIDO
+            ReporteInventario.SetParameterValue("@NumeroConector", NumeroConector); //VALIDO
+            ReporteInventario.SetParameterValue("@Descripcion", _Descripcion); //VALIDO
+            ReporteInventario.SetParameterValue("@CodigoBarra", _CodigoBarra);
+            ReporteInventario.SetParameterValue("@Referencia", _Referencia);
+            ReporteInventario.SetParameterValue("@FechaDesde", _FechaDesde);
+            ReporteInventario.SetParameterValue("@FechaHasta", _FechaHasta);
+            ReporteInventario.SetParameterValue("@IdTipoProducto", _IdTipoProducto);
+            ReporteInventario.SetParameterValue("@IdCategoria", _IdCategoria);
+            ReporteInventario.SetParameterValue("@IdUnidadMedida", _IdUnidadMedida);
+            ReporteInventario.SetParameterValue("@IdMarca", _IdMarca);
+            ReporteInventario.SetParameterValue("@IdModelo", _IdModelo);
+            ReporteInventario.SetParameterValue("@IdColor", _IdColor);
+            ReporteInventario.SetParameterValue("@IdCapacidad", _IdCapacidad);
+            ReporteInventario.SetParameterValue("@IdCondicion", _IdCondicion);
+            ReporteInventario.SetParameterValue("@TieneOferta", _TieneOferta);
+            ReporteInventario.SetParameterValue("@EstatusProducto", _EstatusProducto);
+            ReporteInventario.SetParameterValue("@NumeroSeguimiento", _NumeroSeguimiento);
+            ReporteInventario.SetParameterValue("@GeneradoPor", IdUsuario);
+            ReporteInventario.SetDatabaseLogon(UsuarioBD, ClaveBD);
+            if (rbExportarPDF.Checked == true) {
+                ReporteInventario.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, Nombrearchivo);
+            }
+            else if (rbExportarExcel.Checked == true) {
+                ReporteInventario.ExportToHttpResponse(ExportFormatType.Excel, Response, true, Nombrearchivo);
+            }
+            else if (rbExportarWord.Checked == true) {
+                ReporteInventario.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, Nombrearchivo);
+            }
+            else if (rbExportarTXT.Checked == true) {
+                ReporteInventario.ExportToHttpResponse(ExportFormatType.Text, Response, true, Nombrearchivo);
+            }
+            else if (rbExportarCSV.Checked == true) {
+                ReporteInventario.ExportToHttpResponse(ExportFormatType.CharacterSeparatedValues, Response, true, Nombrearchivo);
+            }
+
+
         }
         #endregion
 
@@ -1332,7 +1425,14 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 _UsuarioBD = n.Usuario;
                 _ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
             }
-            if (cbMostrarTodoHistorialVenta.Checked == true) { }
+            if (cbMostrarTodoHistorialVenta.Checked == true) {
+                ExportarReporteInventarioGeneral(
+                    (decimal)Session["IdUsuario"],
+                    Server.MapPath("ReporteInventario.rpt"),
+                    _UsuarioBD,
+                    _ClaveBD,
+                    "Reporte de Inventario");
+            }
             else {
                 ExportarInformacionProductoEspesifico(
                     Convert.ToDecimal(lbIdProductoSeleccionado.Text),
@@ -1514,6 +1614,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             // cbMostrarTodoHistorialVenta.Enabled = false;
             cbMostrarTodoHistorialVenta.Checked = false;
             btnExportarConsulta.Enabled = false;
+            cbMostrarTodoHistorialVenta.Enabled = true;
         }
 
         protected void btnProcesarSuplirSacar_Click(object sender, EventArgs e)
@@ -1638,6 +1739,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             var HfNumeroConector = decimal.Parse((((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConector")).Value.ToString()));
 
             bool ProductoAcumulativo = false;
+            decimal IdTipoproducto = 0;
+            string EstatusProducto = "";
             //BUSCAMOS EL REGISTRO
             var BuscarRegistro = ObjdataInventario.Value.BuscaProductos(
                 Convert.ToDecimal(hfIdProducto),
@@ -1649,6 +1752,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             
             
             foreach (var n in BuscarRegistro) {
+                EstatusProducto = n.EstatusProducto;
                 txtTipoProductoDetalle.Text = n.TipoProducto;
                 txtCategoriaDetalle.Text = n.Categoria;
                 txtUnidadMedidaDetalle.Text = n.UnidadMedida;
@@ -1676,6 +1780,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
                 txtComentarioDetalle.Text = n.Comentario;
                 ProductoAcumulativo = Convert.ToBoolean(n.ProductoAcumulativo0);
+                IdTipoproducto = Convert.ToDecimal(n.IdTipoProducto);
                 int CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
                 lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                 decimal CapitalInvertido = Convert.ToDecimal(n.CapilalInvertido);
@@ -1728,6 +1833,37 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 
             }
 
+            if (IdTipoproducto == 1)
+            {
+                btnDescartarConsulta.Visible = true;
+                lbCambioEtatusProductoCambioEstatusVariable.Text = EstatusProducto;
+                lbTipoProductoCambioEstatusDato.Text = txtTipoProductoDetalle.Text;
+                lbCategoriaCambioEstatusDato.Text = txtCategoriaDetalle.Text;
+                lbUnidadMedidaCambioEstatusDato.Text = txtUnidadMedidaDetalle.Text;
+                lbMarcaCambioEstatusDato.Text = txtMarcaDetalle.Text;
+                lbModeloCambioEstatusDato.Text = txtModeloDetalle.Text;
+                lbTipoSuplidorCambioEstatusDato.Text = txtTipoProductoDetalle.Text;
+                lbSuplidorCambioEstatusDato.Text = txtSuplidorDetalle.Text;
+                lbProductoCambioEstatusDato.Text = txtDescripcionDetalle.Text;
+                lbCodigoBarrasCambioEstatusDato.Text = txtCodigoBarraDetalle.Text;
+                lbReferenciaCambioEstatusDato.Text = txtReferenciaDetalle.Text;
+                lbPrecioCompraCambioEstatusDato.Text = txtPrecioCompraDetalle.Text;
+                lbPrecioVentaCambioEstatusDato.Text = txtPrecioVentaDetalle.Text;
+                lbStockCambioEstatusDato.Text = txtStockDetalle.Text;
+                lbStockMinimoCambioEstatusDato.Text = txtStockMinimo.Text;
+                lbPorcientoDescuentoCambioEstatusDato.Text = txtPorcientoDescuentoDetalle.Text;
+                lbNumeroSeguimientoCambioEstatusDato.Text = txtNumeroSeguimientoDetalle.Text;
+                lbColorCambioEstatusDato.Text = txtColorDetalle.Text;
+                lbCondicionCambioEstatusDato.Text = txtCondcionDetalle.Text;
+                lbCapacidadCambioEstatusDato.Text = txtCapacidadDetalle.Text;
+                lbProductoAcumulativoCambioEstatusDato.Text = txtProductoAcumulativoDetalle.Text;
+                lbIdAplicaParaImpuestoCambioDato.Text = txtAplicaParaImpuestoDetalle.Text;
+                txtComentarioCambioEstatus.Text = string.Empty;
+                txtClaveSeguridadCambioEstatus.Text = string.Empty;
+            }
+            else {
+                btnDescartarConsulta.Visible = false;
+            }
             if (ProductoAcumulativo == true) {
                 btnSuplirConsulta.Visible = true;
 
@@ -1775,6 +1911,11 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             else {
                 btnExportarConsulta.Enabled = false;
             }
+        }
+
+        protected void btnCambiarEstatus_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void lbLast_Click(object sender, EventArgs e)

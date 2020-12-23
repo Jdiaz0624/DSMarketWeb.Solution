@@ -13,10 +13,10 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
 
         #region MANTENIMIENTO DE PRODUCTOS
         //LISTADO DE PRODUCTOS
-        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EProducto> BuscaProductos(decimal? IdProducto = null, decimal? NumeroConector = null, string Descripcion = null, string CodigoBarra = null, string Referencia = null, DateTime? FechaDesde = null, DateTime? FechaHasta = null, decimal? IdTipoProducto = null, decimal? IdCategoria = null, decimal? IdUnidadMedida = null, decimal? IdMarca = null, decimal? IdModelo = null, decimal? IdColor = null, decimal? IdCapacidad = null, decimal? IdCondicion = null, bool? TieneOferta = null, bool? EstatusProducto = null, string NumeroSeguimiento = null) {
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EProducto> BuscaProductos(decimal? IdProducto = null, decimal? NumeroConector = null, string Descripcion = null, string CodigoBarra = null, string Referencia = null, DateTime? FechaDesde = null, DateTime? FechaHasta = null, decimal? IdTipoProducto = null, decimal? IdCategoria = null, decimal? IdUnidadMedida = null, decimal? IdMarca = null, decimal? IdModelo = null, decimal? IdColor = null, decimal? IdCapacidad = null, decimal? IdCondicion = null, bool? TieneOferta = null, bool? EstatusProducto = null, string NumeroSeguimiento = null, decimal? GeneradoPor = null) {
             ObjData.CommandTimeout = 999999999;
 
-            var ListadoProductos = (from n in ObjData.SP_BUSCA_PRODUCTO_WEB(IdProducto, NumeroConector, Descripcion, CodigoBarra, Referencia, FechaDesde, FechaHasta, IdTipoProducto, IdCategoria, IdUnidadMedida, IdMarca, IdModelo, IdColor, IdCapacidad, IdCondicion, TieneOferta, EstatusProducto, NumeroSeguimiento)
+            var ListadoProductos = (from n in ObjData.SP_BUSCA_PRODUCTO_WEB(IdProducto, NumeroConector, Descripcion, CodigoBarra, Referencia, FechaDesde, FechaHasta, IdTipoProducto, IdCategoria, IdUnidadMedida, IdMarca, IdModelo, IdColor, IdCapacidad, IdCondicion, TieneOferta, EstatusProducto, NumeroSeguimiento,GeneradoPor)
                                     select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EProducto
                                     {
                                         IdProducto=n.IdProducto,

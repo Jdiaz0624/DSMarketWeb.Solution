@@ -2191,5 +2191,455 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBloqueDescartar;
+
+        /// <summary>
+        /// lbTituloCambiarEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTituloCambiarEstatus;
+
+        /// <summary>
+        /// lbEstatusProductoCambioEstatusTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbEstatusProductoCambioEstatusTitulo;
+
+        /// <summary>
+        /// lbCambioEtatusProductoCambioEstatusVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCambioEtatusProductoCambioEstatusVariable;
+
+        /// <summary>
+        /// lbTipoProductoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoProductoCambioEstatus;
+
+        /// <summary>
+        /// lbTipoProductoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoProductoCambioEstatusDato;
+
+        /// <summary>
+        /// lbCategoriaCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCategoriaCambioEstatus;
+
+        /// <summary>
+        /// lbCategoriaCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCategoriaCambioEstatusDato;
+
+        /// <summary>
+        /// lbUnidadMedidaCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbUnidadMedidaCambioEstatus;
+
+        /// <summary>
+        /// lbUnidadMedidaCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbUnidadMedidaCambioEstatusDato;
+
+        /// <summary>
+        /// lbMarcaCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbMarcaCambioEstatus;
+
+        /// <summary>
+        /// lbMarcaCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbMarcaCambioEstatusDato;
+
+        /// <summary>
+        /// lbModeloCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbModeloCambioEstatus;
+
+        /// <summary>
+        /// lbModeloCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbModeloCambioEstatusDato;
+
+        /// <summary>
+        /// lbTipoSuplidorCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoSuplidorCambioEstatus;
+
+        /// <summary>
+        /// lbTipoSuplidorCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoSuplidorCambioEstatusDato;
+
+        /// <summary>
+        /// lbSuplidorCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSuplidorCambioEstatus;
+
+        /// <summary>
+        /// lbSuplidorCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSuplidorCambioEstatusDato;
+
+        /// <summary>
+        /// lbProductoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbProductoCambioEstatus;
+
+        /// <summary>
+        /// lbProductoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbProductoCambioEstatusDato;
+
+        /// <summary>
+        /// lbCodigoBarraCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCodigoBarraCambioEstatus;
+
+        /// <summary>
+        /// lbCodigoBarrasCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCodigoBarrasCambioEstatusDato;
+
+        /// <summary>
+        /// lbReferenciaCambiEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbReferenciaCambiEstatus;
+
+        /// <summary>
+        /// lbReferenciaCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbReferenciaCambioEstatusDato;
+
+        /// <summary>
+        /// lbPrecioCompraCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPrecioCompraCambioEstatus;
+
+        /// <summary>
+        /// lbPrecioCompraCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPrecioCompraCambioEstatusDato;
+
+        /// <summary>
+        /// lbPrecioVentaCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPrecioVentaCambioEstatus;
+
+        /// <summary>
+        /// lbPrecioVentaCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPrecioVentaCambioEstatusDato;
+
+        /// <summary>
+        /// lbStockCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbStockCambioEstatus;
+
+        /// <summary>
+        /// lbStockCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbStockCambioEstatusDato;
+
+        /// <summary>
+        /// lbStockminimoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbStockminimoCambioEstatus;
+
+        /// <summary>
+        /// lbStockMinimoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbStockMinimoCambioEstatusDato;
+
+        /// <summary>
+        /// lbPorcientoDescuentoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPorcientoDescuentoCambioEstatus;
+
+        /// <summary>
+        /// lbPorcientoDescuentoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPorcientoDescuentoCambioEstatusDato;
+
+        /// <summary>
+        /// lbNumeroSeguimientoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroSeguimientoCambioEstatus;
+
+        /// <summary>
+        /// lbNumeroSeguimientoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroSeguimientoCambioEstatusDato;
+
+        /// <summary>
+        /// lbColorCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbColorCambioEstatus;
+
+        /// <summary>
+        /// lbColorCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbColorCambioEstatusDato;
+
+        /// <summary>
+        /// lbCondicionCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCondicionCambioEstatus;
+
+        /// <summary>
+        /// lbCondicionCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCondicionCambioEstatusDato;
+
+        /// <summary>
+        /// lbCapacidadCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCapacidadCambioEstatus;
+
+        /// <summary>
+        /// lbCapacidadCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCapacidadCambioEstatusDato;
+
+        /// <summary>
+        /// lbProductoAcumulativoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbProductoAcumulativoCambioEstatus;
+
+        /// <summary>
+        /// lbProductoAcumulativoCambioEstatusDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbProductoAcumulativoCambioEstatusDato;
+
+        /// <summary>
+        /// lbAplicaParaImpuestoCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbAplicaParaImpuestoCambioEstatus;
+
+        /// <summary>
+        /// lbIdAplicaParaImpuestoCambioDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbIdAplicaParaImpuestoCambioDato;
+
+        /// <summary>
+        /// lbComentarioCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbComentarioCambioEstatus;
+
+        /// <summary>
+        /// txtComentarioCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComentarioCambioEstatus;
+
+        /// <summary>
+        /// lbClaveSeguridadCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridadCambioEstatus;
+
+        /// <summary>
+        /// txtClaveSeguridadCambioEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridadCambioEstatus;
+
+        /// <summary>
+        /// btnCambiarEstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiarEstatus;
     }
 }

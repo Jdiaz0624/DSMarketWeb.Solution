@@ -488,7 +488,7 @@
                 <asp:Button ID="btnEliminarConsulta" runat="server" Text="Eliminar" ToolTip="Eliminar Registros Seleccionados" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnEliminarConsulta_Click" />
                 <button type="button" id="btnSuplirConsulta" runat="server" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".SacarSuplirProductos">Suplir</button>
                 <asp:Button ID="btnExportarConsulta" runat="server" Text="Exportar" ToolTip="Exportar Registros" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnExportarConsulta_Click" />
-                <button type="button" id="btnDescartarConsulta" runat="server" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoMarcas">Descartar</button>
+                <button type="button" id="btnDescartarConsulta" runat="server" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".DescartarProductos">Descartar</button>
                 <asp:Button ID="btnRestablecerPantallaConsulta" runat="server" Text="Restablecer" ToolTip="Restablecer la Pantalla" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnRestablecerPantallaConsulta_Click" />
 
                 <br />
@@ -603,26 +603,46 @@
 
             <br />
             <!--GRAFICO DE TIPO DE PRODUCTOS-->
-        <div id="divTipoProducto" runat="server" align="center" >
+       <div class="col-md-6">
+            <div id="divTipoProducto" runat="server" align="center" >
 
              <asp:Label ID="lbGraTipoProducto" runat="server"  Text="Estadistica de Tipo de Producto" CssClass="Letranegrita"></asp:Label>
              <br />
-            <asp:Chart ID="GraTipoProductos" Width="1100px" runat="server" Palette="Pastel">
+            <asp:Chart ID="GraTipoProductos" Width="800px" runat="server" Palette="Excel">
            <Series>
-               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}"></asp:Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true"></asp:Series>
            </Series>
            <ChartAreas>
                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
            </ChartAreas>
        </asp:Chart>
         </div>
+       </div>
 
 
-        <div id="divGraficoMarcas" runat="server" align="center" >
+        <div class="form-group col-md-6">
+            <div id="divGraficoMarcas"  runat="server" align="center" >
 
              <asp:Label ID="lbGraficoMarcas" runat="server"  Text="Top 10 Marcas" CssClass="Letranegrita"></asp:Label>
              <br />
-            <asp:Chart ID="GraMarcas" Width="1100px" runat="server" Palette="Pastel">
+            <asp:Chart ID="GraMarcas" Width="800px" runat="server" Palette="Excel">
+           <Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true"></asp:Series>
+           </Series>
+           <ChartAreas>
+               <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+           </ChartAreas>
+       </asp:Chart>
+        </div>
+        </div>
+
+            
+        <div class="form-group col-md-6">
+            <div id="divGraficoServicios" runat="server" align="center" >
+
+             <asp:Label ID="lbGraficarServicios" runat="server"  Text="Top 10 Servicios" CssClass="Letranegrita"></asp:Label>
+             <br />
+            <asp:Chart ID="GraServicios" Width="800px" runat="server" Palette="Excel">
            <Series>
                <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}"></asp:Series>
            </Series>
@@ -631,20 +651,6 @@
            </ChartAreas>
        </asp:Chart>
         </div>
-
-            
-        <div id="divGraficoServicios" runat="server" align="center" >
-
-             <asp:Label ID="lbGraficarServicios" runat="server"  Text="Top 10 Servicios" CssClass="Letranegrita"></asp:Label>
-             <br />
-            <asp:Chart ID="GraServicios" Width="1100px" runat="server" Palette="Pastel">
-           <Series>
-               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}"></asp:Series>
-           </Series>
-           <ChartAreas>
-               <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
-           </ChartAreas>
-       </asp:Chart>
         </div>
         </div>
     </div>
@@ -1097,7 +1103,141 @@
 </div>
     </div>
 
-    <div id="divBloqueDescartar" runat="server"></div>
+    <div id="divBloqueDescartar" runat="server">
+         <div class="modal fade bd-example-modal-lg DescartarProductos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+       <div class="container">
+           <div class="jumbotron" align="center">
+               <asp:Label ID="lbTituloCambiarEstatus" runat="server" Text="CAMBIO DE ESTATUS DE PRODUCTO"></asp:Label><br />
+               <asp:Label ID="lbEstatusProductoCambioEstatusTitulo" runat="server" Text="Estatus de Producto: "></asp:Label>
+               <asp:Label  ID="lbCambioEtatusProductoCambioEstatusVariable" runat="server" Text="Dato"></asp:Label>
+           </div>
+           <div class="form-row">
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbTipoProductoCambioEstatus" runat="server" Text="Tipo de Producto: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbTipoProductoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+                <div class="form-group col-md-4">
+                   <asp:Label ID="lbCategoriaCambioEstatus" runat="server" Text="Categoria: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbCategoriaCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+                <div class="form-group col-md-4">
+                   <asp:Label ID="lbUnidadMedidaCambioEstatus" runat="server" Text="Unidad de Medida: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbUnidadMedidaCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbMarcaCambioEstatus" runat="server" Text="Marca: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbMarcaCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbModeloCambioEstatus" runat="server" Text="Modelo: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbModeloCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbTipoSuplidorCambioEstatus" runat="server" Text="Tipo de Suplidor: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbTipoSuplidorCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbSuplidorCambioEstatus" runat="server" Text="Suplidor: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbSuplidorCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbProductoCambioEstatus" runat="server" Text="Producto: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbProductoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbCodigoBarraCambioEstatus" runat="server" Text="Codigo de Barras: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbCodigoBarrasCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbReferenciaCambiEstatus" runat="server" Text="Referencia: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbReferenciaCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbPrecioCompraCambioEstatus" runat="server" Text="Precio de Compra: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbPrecioCompraCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbPrecioVentaCambioEstatus" runat="server" Text="Precio de Venta: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbPrecioVentaCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbStockCambioEstatus" runat="server" Text="Stock: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbStockCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbStockminimoCambioEstatus" runat="server" Text="Stock Minimo: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbStockMinimoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbPorcientoDescuentoCambioEstatus" runat="server" Text="% de Descuento: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbPorcientoDescuentoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbNumeroSeguimientoCambioEstatus" runat="server" Text="Numero de Seguimiento: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbNumeroSeguimientoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbColorCambioEstatus" runat="server" Text="Color: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbColorCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbCondicionCambioEstatus" runat="server" Text="Condición: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbCondicionCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+                <div class="form-group col-md-4">
+                   <asp:Label ID="lbCapacidadCambioEstatus" runat="server" Text="Capacidad: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbCapacidadCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+                <div class="form-group col-md-4">
+                   <asp:Label ID="lbProductoAcumulativoCambioEstatus" runat="server" Text="Producto Acumulativo: " CssClass="Letranegrita"></asp:Label>
+                   <asp:Label ID="lbProductoAcumulativoCambioEstatusDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+                <div class="form-group col-md-4">
+                   <asp:Label ID="lbAplicaParaImpuestoCambioEstatus" runat="server" Text="Aplica Para Impuesto: " CssClass="Letranegrita"></asp:Label>
+    <asp:Label ID="lbIdAplicaParaImpuestoCambioDato" runat="server" Text="Dato"></asp:Label>
+               </div>
+
+               <div class="form-group col-md-8">
+                   <asp:Label ID="lbComentarioCambioEstatus" runat="server" Text="Comentario: " CssClass="Letranegrita"></asp:Label>
+                   <asp:TextBox ID="txtComentarioCambioEstatus" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
+               </div>
+               <div class="form-group col-md-4">
+                   <asp:Label ID="lbClaveSeguridadCambioEstatus" runat="server" Text="Clave de Seguridad: " CssClass="Letranegrita"></asp:Label>
+                   <asp:TextBox ID="txtClaveSeguridadCambioEstatus" runat="server" CssClass="form-control" AutoCompleteType="Disabled" TextMode="Password"></asp:TextBox>
+               </div>
+           </div>
+           <div align="center">
+               <asp:Button ID="btnCambiarEstatus" runat="server" Text="Procesar" ToolTip="Cambiar Estatus" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnCambiarEstatus_Click" />
+           </div>
+           <br />
+       </div>
+    </div>
+  </div>
+</div>
+
+    </div>
 
 
 </asp:Content>

@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionInventarioDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -138,9 +138,10 @@ namespace DSMarketWeb.Data.ConexionLINQ
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCondicion", DbType="Decimal(20,0)")] System.Nullable<decimal> idCondicion, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TieneOferta", DbType="Bit")] System.Nullable<bool> tieneOferta, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="EstatusProducto", DbType="Bit")] System.Nullable<bool> estatusProducto, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroSeguimiento", DbType="VarChar(100)")] string numeroSeguimiento)
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroSeguimiento", DbType="VarChar(100)")] string numeroSeguimiento, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="GeneradoPor", DbType="Decimal(20,0)")] System.Nullable<decimal> generadoPor)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector, descripcion, codigoBarra, referencia, fechaDesde, fechaHasta, idTipoProducto, idCategoria, idUnidadMedida, idMarca, idModelo, idColor, idCapacidad, idCondicion, tieneOferta, estatusProducto, numeroSeguimiento);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, numeroConector, descripcion, codigoBarra, referencia, fechaDesde, fechaHasta, idTipoProducto, idCategoria, idUnidadMedida, idMarca, idModelo, idColor, idCapacidad, idCondicion, tieneOferta, estatusProducto, numeroSeguimiento, generadoPor);
 			return ((ISingleResult<SP_BUSCA_PRODUCTO_WEBResult>)(result.ReturnValue));
 		}
 	}
@@ -854,7 +855,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image", CanBeNull=true)]
 		public System.Data.Linq.Binary FotoProducto
 		{
 			get
@@ -916,7 +917,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image", CanBeNull=true)]
 		public System.Data.Linq.Binary FotoProducto
 		{
 			get
@@ -1048,11 +1049,31 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		
 		private System.Nullable<decimal> _GananciaAproximada;
 		
+		private string _NombreEmpresa;
+		
+		private string _RNC;
+		
+		private string _Direccion;
+		
+		private string _Telefonos;
+		
+		private string _Email;
+		
+		private string _Email2;
+		
+		private string _Facebook;
+		
+		private string _Instagran;
+		
+		private System.Data.Linq.Binary _LogoEmpresa;
+		
 		private string _Comentario;
 		
 		private System.Nullable<decimal> _IdProductoFoto;
 		
 		private System.Data.Linq.Binary _FotoProducto;
+		
+		private string _GeneradoPor;
 		
 		public SP_BUSCA_PRODUCTO_WEBResult()
 		{
@@ -1954,6 +1975,150 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreEmpresa", DbType="VarChar(100)")]
+		public string NombreEmpresa
+		{
+			get
+			{
+				return this._NombreEmpresa;
+			}
+			set
+			{
+				if ((this._NombreEmpresa != value))
+				{
+					this._NombreEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RNC", DbType="VarChar(20)")]
+		public string RNC
+		{
+			get
+			{
+				return this._RNC;
+			}
+			set
+			{
+				if ((this._RNC != value))
+				{
+					this._RNC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(8000)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this._Direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefonos", DbType="VarChar(200)")]
+		public string Telefonos
+		{
+			get
+			{
+				return this._Telefonos;
+			}
+			set
+			{
+				if ((this._Telefonos != value))
+				{
+					this._Telefonos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email2", DbType="VarChar(50)")]
+		public string Email2
+		{
+			get
+			{
+				return this._Email2;
+			}
+			set
+			{
+				if ((this._Email2 != value))
+				{
+					this._Email2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Facebook", DbType="VarChar(50)")]
+		public string Facebook
+		{
+			get
+			{
+				return this._Facebook;
+			}
+			set
+			{
+				if ((this._Facebook != value))
+				{
+					this._Facebook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Instagran", DbType="VarChar(50)")]
+		public string Instagran
+		{
+			get
+			{
+				return this._Instagran;
+			}
+			set
+			{
+				if ((this._Instagran != value))
+				{
+					this._Instagran = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoEmpresa", DbType="Image", CanBeNull=true)]
+		public System.Data.Linq.Binary LogoEmpresa
+		{
+			get
+			{
+				return this._LogoEmpresa;
+			}
+			set
+			{
+				if ((this._LogoEmpresa != value))
+				{
+					this._LogoEmpresa = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comentario", DbType="VarChar(8000)")]
 		public string Comentario
 		{
@@ -1986,7 +2151,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoProducto", DbType="Image", CanBeNull=true)]
 		public System.Data.Linq.Binary FotoProducto
 		{
 			get
@@ -1998,6 +2163,22 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._FotoProducto != value))
 				{
 					this._FotoProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GeneradoPor", DbType="VarChar(100)")]
+		public string GeneradoPor
+		{
+			get
+			{
+				return this._GeneradoPor;
+			}
+			set
+			{
+				if ((this._GeneradoPor != value))
+				{
+					this._GeneradoPor = value;
 				}
 			}
 		}
