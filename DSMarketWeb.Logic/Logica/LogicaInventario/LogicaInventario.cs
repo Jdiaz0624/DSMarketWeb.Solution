@@ -75,7 +75,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                         ProductosAgostados=n.ProductosAgostados,
                                         CapilalInvertido=n.CapilalInvertido,
                                         GananciaAproximada=n.GananciaAproximada,
-                                        Comentario=n.Comentario
+                                        Comentario=n.Comentario,
+                                        IdProductoFoto=n.IdProductoFoto,
+                                        FotoProducto=n.FotoProducto
                                     }).ToList();
             return ListadoProductos;
         }

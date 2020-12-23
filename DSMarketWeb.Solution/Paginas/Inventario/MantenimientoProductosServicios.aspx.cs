@@ -8,6 +8,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportSource;
+using CrystalDecisions.Shared;
 
 namespace DSMarketWeb.Solution.Paginas.Inventario
 {
@@ -511,7 +514,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnNuevoConsulta.Enabled = true;
             btnModificarConsulta.Enabled = false;
             btnEliminarConsulta.Enabled = false;
-            btnSuplirConsulta.Disabled = false;
+          //  btnSuplirConsulta.Disabled = false;
             btnExportarConsulta.Enabled = false;
             btnDescartarConsulta.Disabled = false;
             btnRestablecerPantallaConsulta.Enabled = true;
@@ -523,7 +526,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnNuevoConsulta.Enabled = false;
             btnModificarConsulta.Enabled = true;
             btnEliminarConsulta.Enabled = true;
-            btnSuplirConsulta.Disabled = true;
+          //  btnSuplirConsulta.Disabled = true;
             btnExportarConsulta.Enabled = true;
             btnDescartarConsulta.Disabled = true;
             btnRestablecerPantallaConsulta.Enabled = true;
@@ -1126,12 +1129,74 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             cbAgregarImagenArticulo.Checked = false;
         }
         #endregion
+        #region EXPORTAR INFORMACION
+        private void ExportarInformacionProductoEspesifico(decimal IdProducto, decimal NumeroConector, string RutaReporte, string UsuarioBD, string ClaveBD,string NombreArchivo) 
+        {
+            string _Descripcion = null;
+            string _CodigoBarra = null;
+            string _Referencia = null;
+            DateTime? _FechaDesde = null;
+            DateTime? _FechaHasta = null;
+            decimal? _IdTipoProducto = null;
+            decimal? _IdCategoria = null;
+            decimal? _IdUnidadMedida = null;
+            decimal? _IdMarca = null;
+            decimal? _IdModelo = null;
+            decimal? _IdColor = null;
+            decimal? _IdCapacidad = null;
+            decimal? _IdCondicion = null;
+            bool? _TieneOferta = null;
+            bool? _EstatusProducto = null;
+            string _NumeroSeguimiento = null;
+
+
+            ReportDocument Reporte = new ReportDocument();
+
+            Reporte.Load(RutaReporte);
+            Reporte.Refresh();
+            Reporte.SetParameterValue("@IdProducto", IdProducto);
+            Reporte.SetParameterValue("@NumeroConector", NumeroConector);
+            Reporte.SetParameterValue("@Descripcion", _Descripcion);
+            Reporte.SetParameterValue("@CodigoBarra", _CodigoBarra);
+            Reporte.SetParameterValue("@Referencia", _Referencia);
+            Reporte.SetParameterValue("@FechaDesde", _FechaDesde);
+            Reporte.SetParameterValue("@FechaHasta", _FechaHasta);
+            Reporte.SetParameterValue("@IdTipoProducto", _IdTipoProducto);
+            Reporte.SetParameterValue("@IdCategoria", _IdCategoria);
+            Reporte.SetParameterValue("@IdUnidadMedida", _IdUnidadMedida);
+            Reporte.SetParameterValue("@IdMarca", _IdMarca);
+            Reporte.SetParameterValue("@IdModelo", _IdModelo);
+            Reporte.SetParameterValue("@IdColor", _IdColor);
+            Reporte.SetParameterValue("@IdCapacidad", _IdCapacidad);
+            Reporte.SetParameterValue("@IdCondicion", _IdCondicion);
+            Reporte.SetParameterValue("@TieneOferta", _TieneOferta);
+            Reporte.SetParameterValue("@EstatusProducto", _EstatusProducto);
+            Reporte.SetParameterValue("@NumeroSeguimiento", _NumeroSeguimiento);
+            Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+            if (rbExportarPDF.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+            }
+            else if (rbExportarExcel.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.Excel, Response, true, NombreArchivo);
+            }
+            else if (rbExportarWord.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+            }
+            else if (rbExportarTXT.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.Text, Response, true, NombreArchivo);
+            }
+            else if (rbExportarCSV.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.CharacterSeparatedValues, Response, true, NombreArchivo);
+            }
+        }
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                rbExportarPDF.Checked = true;
                 divPaginacion.Visible = false;
                 ModoConsulta();
                 ValidarCheckLimpiarPantalla();
@@ -1150,7 +1215,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 divGraficoMarcas.Visible = false;
                 divGraficoServicios.Visible = false;
                 divTipoProducto.Visible = false;
-                ClientScript.RegisterStartupScript(GetType(), "BloquearSuplir()", "BloquearSuplir();", true);
+              //  ClientScript.RegisterStartupScript(GetType(), "BloquearSuplir()", "BloquearSuplir();", true);
             }
         }
 
@@ -1261,7 +1326,22 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnExportarConsulta_Click(object sender, EventArgs e)
         {
-
+            string _UsuarioBD="", _ClaveBD = "";
+            var SacarCredenciales = ObjDataSeguridad.Value.SacarCredencialesBD(1);
+            foreach (var n in SacarCredenciales) {
+                _UsuarioBD = n.Usuario;
+                _ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
+            }
+            if (cbMostrarTodoHistorialVenta.Checked == true) { }
+            else {
+                ExportarInformacionProductoEspesifico(
+                    Convert.ToDecimal(lbIdProductoSeleccionado.Text),
+                    Convert.ToDecimal(lbNumeroConectorProducto.Text),
+                    Server.MapPath("ReporteProductoIndividual.rpt"),
+                    _UsuarioBD,
+                    _ClaveBD,
+                    "Reporte de Producto");
+            }
         }
 
 
@@ -1431,11 +1511,68 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnRestablecerPantallaConsulta_Click(object sender, EventArgs e)
         {
             RestablecerPantallaCOnsulta();
+            // cbMostrarTodoHistorialVenta.Enabled = false;
+            cbMostrarTodoHistorialVenta.Checked = false;
+            btnExportarConsulta.Enabled = false;
         }
 
         protected void btnProcesarSuplirSacar_Click(object sender, EventArgs e)
         {
+            //VALIDAMOS LA CLAVE DE SEGURIDAD
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadSuplir.Text.Trim()) ? null : txtClaveSeguridadSuplir.Text.Trim();
 
+            var ValidarClaveSeguridad = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (ValidarClaveSeguridad.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadIngresadaNoValida()", "ClaveSeguridadIngresadaNoValida();", true);
+            }
+            else {
+                int Stock = 0, Cantidad = 0, NuevoStock = 0;
+                Stock = Convert.ToInt32(lbStockSuplirDato.Text);
+                Cantidad = Convert.ToInt32(txtCantidadSuplir.Text);
+
+                if (rbSuplirProducto.Checked == true)
+                {
+                    NuevoStock = Stock + Cantidad;
+                    DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos SacarProducto = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                        Convert.ToDecimal(lbIdProductoSeleccionado.Text),
+                        Convert.ToDecimal(lbNumeroConectorProducto.Text),
+                        0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0,
+                        (decimal)Cantidad,
+                        0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0, "ADDPRODUCT");
+                    SacarProducto.ProcesarProducto();
+                    lbStockSuplirDato.Text = NuevoStock.ToString("N0");
+                }
+                else if (rbSacarProducto.Checked == true)
+                {
+
+
+                    if (Cantidad > Stock)
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "CantidadSacarNoDisponible()", "CantidadSacarNoDisponible();", true);
+                    }
+                    else
+                    {
+                        NuevoStock = Stock - Cantidad;
+                        DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos SacarProducto = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                         Convert.ToDecimal(lbIdProductoSeleccionado.Text),
+                         Convert.ToDecimal(lbNumeroConectorProducto.Text),
+                         0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0,
+                         (decimal)Cantidad,
+                         0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0, "LESSPRODUCT");
+                        SacarProducto.ProcesarProducto();
+                        lbStockSuplirDato.Text = NuevoStock.ToString("N0");
+                    }
+                }
+
+                var BuscarProductoAfectado = ObjdataInventario.Value.BuscaProductos(
+                    Convert.ToDecimal(lbIdProductoSeleccionado.Text),
+                    Convert.ToDecimal(lbNumeroConectorProducto.Text));
+                Paginar(ref RVListadoProducto, BuscarProductoAfectado, 1);
+            }
+          
         }
 
         protected void cbAgregarImagenArticulo_CheckedChanged(object sender, EventArgs e)
@@ -1593,7 +1730,30 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
             if (ProductoAcumulativo == true) {
                 btnSuplirConsulta.Visible = true;
-                
+
+                lbTipoProductoSuplirDato.Text = txtTipoProductoDetalle.Text;
+                lbCategoriaSuplirDato.Text = txtCategoriaDetalle.Text;
+                lbUnidadMedidaSuplirDato.Text = txtUnidadMedidaDetalle.Text;
+                lbMarcaSuplirDato.Text = txtMarcaDetalle.Text;
+                lbModeloSuplirDato.Text = txtModeloDetalle.Text;
+                lbTipoSuplidorSuplirDato.Text = txtTipoSuplidorDetalle.Text;
+                lbSuplidorSuplirDato.Text = txtSuplidorDetalle.Text;
+                lbDescripcionSuplirDato.Text = txtDescripcionDetalle.Text;
+                lbCodigoBarraSuplirDato.Text = txtCodigoBarra.Text;
+                lbReferenciaSuplirDato.Text = txtReferenciaDetalle.Text;
+                lbPrecioCompraSuplirDato.Text = txtPrecioCompraDetalle.Text;
+                lbPrecioVentaSuplirDato.Text = txtPrecioVentaDetalle.Text;
+                lbStockSuplirDato.Text = txtStockDetalle.Text;
+                lbStockMinimoSuplirDato.Text = txtStockMantenimiento.Text;
+                lbPorcientoDescuentoSuplirDato.Text = txtPorcientoDescuentoDetalle.Text;
+                lbNumeroSeguiientoSuplirDato.Text = txtNumeroSeguimientoDetalle.Text;
+                lbColorSUplirDato.Text = txtColorDetalle.Text;
+                lbCondicionSuplirDato.Text = txtCondcionDetalle.Text;
+                lbCapacidadSuplirDato.Text = txtCapacidadDetalle.Text;
+                lbProductoAcumulativoSuplirDato.Text = txtProductoAcumulativoDetalle.Text;
+                lbAplicaImpuestoSuplirDato.Text = txtAplicaParaImpuestoDetalle.Text;
+                lbComentarioSuplirDato.Text = txtComentarioDetalle.Text;
+                rbSuplirProducto.Checked = true;
             }
             lbIdProductoSeleccionado.Text = hfIdProducto.ToString();
             lbNumeroConectorProducto.Text = HfNumeroConector.ToString();
@@ -1603,6 +1763,18 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             divGraficoMarcas.Visible = false;
             divGraficoServicios.Visible = false;
             divTipoProducto.Visible = false;
+            cbMostrarTodoHistorialVenta.Checked = false;
+            cbMostrarTodoHistorialVenta.Enabled = false;
+        }
+
+        protected void cbMostrarTodoHistorialVenta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbMostrarTodoHistorialVenta.Checked == true) {
+                btnExportarConsulta.Enabled = true;
+            }
+            else {
+                btnExportarConsulta.Enabled = false;
+            }
         }
 
         protected void lbLast_Click(object sender, EventArgs e)

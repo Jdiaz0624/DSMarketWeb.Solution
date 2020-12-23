@@ -5,7 +5,7 @@
         <style type="text/css">
         .jumbotron{
             color:#000000; 
-            background:#96CEF7;
+            background:#1E90FF;
             font-size:30px;
             font-weight:bold;
             font-family:'Gill Sans';

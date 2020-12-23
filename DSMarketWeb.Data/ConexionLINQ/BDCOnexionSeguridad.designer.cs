@@ -96,6 +96,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idClaveSeguridad, idUsuario, clave);
 			return ((ISingleResult<SP_BUSCA_CLAVE_SEGURIDAD_WEBResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Seguridad.SP_SACAR_CREDENCIALES_BD")]
+		public ISingleResult<SP_SACAR_CREDENCIALES_BDResult> SP_SACAR_CREDENCIALES_BD([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCredencial", DbType="Int")] System.Nullable<int> idCredencial)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCredencial);
+			return ((ISingleResult<SP_SACAR_CREDENCIALES_BDResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_BUSCA_USUARIOS_WEBResult
@@ -925,6 +932,68 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._Estatus != value))
 				{
 					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_SACAR_CREDENCIALES_BDResult
+	{
+		
+		private int _IdCredencial;
+		
+		private string _Usuario;
+		
+		private string _Clave;
+		
+		public SP_SACAR_CREDENCIALES_BDResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCredencial", DbType="Int NOT NULL")]
+		public int IdCredencial
+		{
+			get
+			{
+				return this._IdCredencial;
+			}
+			set
+			{
+				if ((this._IdCredencial != value))
+				{
+					this._IdCredencial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(100)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this._Usuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Clave", DbType="VarChar(8000)")]
+		public string Clave
+		{
+			get
+			{
+				return this._Clave;
+			}
+			set
+			{
+				if ((this._Clave != value))
+				{
+					this._Clave = value;
 				}
 			}
 		}

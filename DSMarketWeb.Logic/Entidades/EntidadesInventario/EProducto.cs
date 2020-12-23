@@ -121,5 +121,8 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesInventario
 		public System.Nullable<decimal> GananciaAproximada {get;set;}
 
 		public string Comentario {get;set;}
+		public System.Nullable<decimal> IdProductoFoto { get; set; }
+
+		public System.Data.Linq.Binary FotoProducto { get; set; }
 	}
 }

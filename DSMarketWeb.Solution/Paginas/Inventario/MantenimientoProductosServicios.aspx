@@ -7,7 +7,7 @@
       <style type="text/css">
         .jumbotron{
             color:#000000; 
-            background:#96CEF7;
+            background:#1E90FF;
             font-size:30px;
             font-weight:bold;
             font-family:'Gill Sans';
@@ -78,6 +78,11 @@
         }
         function ImagenPorDefectoNoEncontrada() {
             alert("La imagen por defecto no se encuentra, favor de contactar con el administrador del sistema para solucionar este problema.");
+        }
+
+        function CantidadSacarNoDisponible() {
+            alert("La cantidad que intentas sacar supera la cantidad existente en almacen, favor de verificar.");
+            $("#<%=txtCantidadSuplir.ClientID%>").css("border-color", "red");
         }
 
 
@@ -376,18 +381,35 @@
                     return false;
                 }
             });
+
+            $("#<%=btnProcesarSuplirSacar.ClientID%>").click(function () {
+                var ValidarCantidaSuplir = $("#<%=txtCantidadSuplir.ClientID%>").val().length;
+                if (ValidarCantidaSuplir < 1) {
+                    alert("El campo Cantidad no puede estar vacio, favor de verificar.");
+                    $("#<%=txtCantidadSuplir.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var ValidarClaveSeguridadSuplir = $("#<%=txtClaveSeguridadSuplir.ClientID%>").val().length;
+                if (ValidarClaveSeguridadSuplir < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio, favor de verificar.");
+                    $("#<%=txtClaveSeguridadSuplir.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                }
+            });
         })
     </script>
 
     <div id="divBloqueConsulta" runat="server">
         <div class="container-fluid">
             <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" runat="server" Text="Consulta de Productos"></asp:Label>
+                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE PRODUCTOS"></asp:Label>
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de Fecha a la Consulta" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFecha_CheckedChanged" />
-                    <asp:CheckBox ID="cbMostrarTodoHistorialVenta" runat="server" Text="Mostrar todo el Inventario (Reporte)" ToolTip="Mostrar Todo el Inventario en el reprte" CssClass="form-check-input Letranegrita" />
+                    <asp:CheckBox ID="cbMostrarTodoHistorialVenta" runat="server" Text="Mostrar todo el Inventario (Reporte)" AutoPostBack="true" OnCheckedChanged="cbMostrarTodoHistorialVenta_CheckedChanged" ToolTip="Mostrar Todo el Inventario en el reprte" CssClass="form-check-input Letranegrita" />
                     <asp:CheckBox ID="cbProductosVendisodDescartados" runat="server" Text="Productos Vendididos / Descartados" ToolTip="Mostrar el Historial de Productos Vendidos y Descartados" CssClass="form-check-input Letranegrita" />
                 </div>
             </div>
@@ -1059,13 +1081,14 @@
                             <asp:TextBox ID="txtClaveSeguridadSuplir" runat="server" TextMode="Password" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                         </div>
                         </div>
-                        <div align="center">
-                <asp:Button ID="btnProcesarSuplirSacar" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarSuplirSacar_Click" />
-            </div>
+                        
                         <br />
                 </ContentTemplate>
             </asp:UpdatePanel>
-
+            <div align="center">
+                <asp:Button ID="btnProcesarSuplirSacar" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnProcesarSuplirSacar_Click" />
+            </div>
+            <br />
 
 
         </div>

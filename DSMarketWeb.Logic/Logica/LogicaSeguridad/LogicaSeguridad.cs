@@ -137,5 +137,19 @@ namespace DSMarketWeb.Logic.Logica.LogicaSeguridad
 
         }
         #endregion
+        #region MANTENIMIENTO DE CREDENCIALES DE BASE DE DATOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesSeguridad.ESacarCreencialesBD> SacarCredencialesBD(int? IdCredencial = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Buscar = (from n in ObjData.SP_SACAR_CREDENCIALES_BD(IdCredencial)
+                          select new DSMarketWeb.Logic.Entidades.EntidadesSeguridad.ESacarCreencialesBD
+                          {
+                              IdCredencial=n.IdCredencial,
+                              Usuario=n.Usuario,
+                              Clave=n.Clave
+                          }).ToList();
+            return Buscar;
+        }
+        #endregion
     }
 }

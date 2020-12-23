@@ -67,6 +67,7 @@
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
+    <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
     <Compile Include="Logica\LogicaCaja\LogicaCaja.cs" />
