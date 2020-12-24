@@ -545,9 +545,8 @@
              
 
             <br />
-
-                <div>
-                
+            <!--INICIO DEL REPEATER-->
+                <div>                
                 <div class="table-responsive mT20">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -592,11 +591,12 @@
                 </div>
                 </div>
             <div align="center">
-                    <asp:Label ID="lbPaginaInicialTitulo" runat="server" CssClass="Letranegrita" Text="Pagina "></asp:Label>
-                    <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
-                    <asp:Label ID="lbDeTitulo" runat="server" CssClass="Letranegrita" Text=" De "></asp:Label>
+                    
+                    <asp:Label ID="lbDeTitulo" runat="server" CssClass="Letranegrita" Text="Total de Paginas "></asp:Label>
                     <asp:Label ID="lbCantidadPaginasVariable" CssClass="Letranegrita" runat="server" Text=" 0 "></asp:Label>
                 </div>
+            <!--FIN DEL REPEATER-->
+
             <!--INICIO DE LA PAGINACION-->
                 <div id="divPaginacion" runat="server" align="center">
                  <div style="margin-top: 20px;">
@@ -626,7 +626,7 @@
                                 <asp:LinkButton ID="lbUltimaPagina" runat="server" CssClass="btn btn-success fr" OnClick="lbLast_Click" >Ultimo</asp:LinkButton>
                             </td>
                             <td>
-                                <asp:Label ID="pgsource" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
                             </td>
                         </tr>
                     </table>

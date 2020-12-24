@@ -90,6 +90,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             if (_PrimeraPagina < 0)
                 _PrimeraPagina = 0;
 
+            //AGREGAMOS LA PAGINA EN LA QUE ESTAMOS
+            int NumeroPagina = (int)CurrentPage;
+            lbNumeroVariable.Text = (NumeroPagina + 1).ToString();
             // Now creating page number based on above first and last page index
             for (var i = _PrimeraPagina; i < _UltimaPagina; i++)
             {
@@ -98,6 +101,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 dr[1] = i + 1;
                 dt.Rows.Add(dr);
             }
+
 
             rptPaging.DataSource = dt;
             rptPaging.DataBind();
@@ -326,9 +330,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 GenerarGraficos();
             }
 
-       
 
-          
+
+            HandlePaging();
+            //if (pagedDataSource.PageCount <= 1)
+            //    this.Visible = false;
+            //else
+            //    this.Visible = true;
         }
         private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros) {
             pagedDataSource.DataSource = Listado;
@@ -351,10 +359,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             RVListadoProducto.DataSource = pagedDataSource;
             RVListadoProducto.DataBind();
 
-            //if (pagedDataSource.PageCount <= 1)
-            //    this.Visible = false;
-            ////else
-            ////    this.Visible = true;
+
             divPaginacion.Visible = true;
         }
 
