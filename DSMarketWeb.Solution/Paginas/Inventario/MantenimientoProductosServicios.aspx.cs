@@ -1297,7 +1297,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
-                DivBloqueEliminarProductosDescartados.Visible = false;
+              //  DivBloqueEliminarProductosDescartados.Visible = false;
                 rbExportarPDF.Checked = true;
                 divPaginacion.Visible = false;
                 ModoConsulta();
