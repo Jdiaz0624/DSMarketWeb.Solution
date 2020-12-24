@@ -438,7 +438,7 @@
                 </div>
             </div>
             <br />
-            <div id="DivBloqueEliminarProductosDescartados" runat="server">
+            <div id="DivBloqueEliminarProductosDescartados" visible="false" runat="server">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <asp:Label ID="lbClaveSeguridadConsulta" runat="server" Text="Ingresar Clave de Seguridad" CssClass="Letranegrita"></asp:Label>

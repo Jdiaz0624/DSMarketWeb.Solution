@@ -1297,7 +1297,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
-              //  DivBloqueEliminarProductosDescartados.Visible = false;
+              
                 rbExportarPDF.Checked = true;
                 divPaginacion.Visible = false;
                 ModoConsulta();
@@ -1317,7 +1317,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 divGraficoMarcas.Visible = false;
                 divGraficoServicios.Visible = false;
                 divTipoProducto.Visible = false;
-              //  ClientScript.RegisterStartupScript(GetType(), "BloquearSuplir()", "BloquearSuplir();", true);
+                //  ClientScript.RegisterStartupScript(GetType(), "BloquearSuplir()", "BloquearSuplir();", true);
+              //  DivBloqueEliminarProductosDescartados.Visible = false;
             }
         }
 
