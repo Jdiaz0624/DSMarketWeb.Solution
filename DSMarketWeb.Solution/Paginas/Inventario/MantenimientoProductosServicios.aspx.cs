@@ -106,7 +106,32 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             rptPaging.DataSource = dt;
             rptPaging.DataBind();
         }
-        private void BindDataIntoRepeater(int _NumeroRegistros = 0)
+        private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros)
+        {
+            pagedDataSource.DataSource = Listado;
+            pagedDataSource.AllowPaging = true;
+
+            ViewState["TotalPages"] = pagedDataSource.PageCount;
+            // lbNumeroVariable.Text = "1";
+            lbCantidadPaginasVariable.Text = pagedDataSource.PageCount.ToString();
+
+            //MOSTRAMOS LA CANTIDAD DE PAGINAS A MOSTRAR O NUMERO DE REGISTROS
+            pagedDataSource.PageSize = (_NumeroRegistros == 0 ? _TamanioPagina : _NumeroRegistros);
+            pagedDataSource.CurrentPageIndex = CurrentPage;
+
+            //HABILITAMOS LOS BOTONES DE LA PAGINACION
+            lbPrimeraPagina.Enabled = !pagedDataSource.IsFirstPage;
+            lbPaginaAnterior.Enabled = !pagedDataSource.IsFirstPage;
+            lbPaginaGuguiente.Enabled = !pagedDataSource.IsLastPage;
+            lbUltimaPagina.Enabled = !pagedDataSource.IsLastPage;
+
+            RVListadoProducto.DataSource = pagedDataSource;
+            RVListadoProducto.DataBind();
+
+
+            divPaginacion.Visible = true;
+        }
+        private void BindDataIntoRepeater(int _NumeroRegistros = 10)
         {
             //FILTROS
             string _Descripcion = string.IsNullOrEmpty(txtDescripcionConsulta.Text.Trim()) ? null : txtDescripcionConsulta.Text.Trim();
@@ -172,7 +197,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                             lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                             lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                             lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-                            Paginar(ref RVListadoProducto, BuscarConRangoFecha, 10);
+                            Paginar(ref RVListadoProducto, BuscarConRangoFecha, _NumeroRegistros);
                         }
                     }
                 }
@@ -217,7 +242,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                         lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                         lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-                        Paginar(ref RVListadoProducto, BuscarSINRangoFecha, 10);
+                        Paginar(ref RVListadoProducto, BuscarSINRangoFecha, _NumeroRegistros);
                     }
                 }
             }
@@ -272,7 +297,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                             lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                             lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                             lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-                            Paginar(ref RVListadoProducto, BuscarRegistrosConRangoFecha, 10);
+                            Paginar(ref RVListadoProducto, BuscarRegistrosConRangoFecha, _NumeroRegistros);
                         }
                     }
                 }
@@ -316,7 +341,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         lbCantidadRegistrosConsultaVariable.Text = CantidadRegistros.ToString("N0");
                         lbCantidadInventidoVariable.Text = CapitalInvertido.ToString("N2");
                         lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
-                        Paginar(ref RVListadoProducto, BuscarRegistrosSINRangoFecha, 10);
+                        Paginar(ref RVListadoProducto, BuscarRegistrosSINRangoFecha, _NumeroRegistros);
                     }
                 }
             }
@@ -333,35 +358,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
 
             HandlePaging();
-            //if (pagedDataSource.PageCount <= 1)
-            //    this.Visible = false;
-            //else
-            //    this.Visible = true;
         }
-        private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros) {
-            pagedDataSource.DataSource = Listado;
-            pagedDataSource.AllowPaging = true;
-
-            ViewState["TotalPages"] = pagedDataSource.PageCount;
-           // lbNumeroVariable.Text = "1";
-            lbCantidadPaginasVariable.Text = pagedDataSource.PageCount.ToString();
-
-            //MOSTRAMOS LA CANTIDAD DE PAGINAS A MOSTRAR O NUMERO DE REGISTROS
-            pagedDataSource.PageSize = (_NumeroRegistros == 0 ? _TamanioPagina : _NumeroRegistros);
-            pagedDataSource.CurrentPageIndex = CurrentPage;
-
-            //HABILITAMOS LOS BOTONES DE LA PAGINACION
-            lbPrimeraPagina.Enabled = !pagedDataSource.IsFirstPage;
-            lbPaginaAnterior.Enabled = !pagedDataSource.IsFirstPage;
-            lbPaginaGuguiente.Enabled = !pagedDataSource.IsLastPage;
-            lbUltimaPagina.Enabled = !pagedDataSource.IsLastPage;
-
-            RVListadoProducto.DataSource = pagedDataSource;
-            RVListadoProducto.DataBind();
-
-
-            divPaginacion.Visible = true;
-        }
+        
 
         enum OpcionesPaginacionValores
         {
@@ -1716,9 +1714,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void rptPaging_ItemDataBound(object sender, DataListItemEventArgs e)
         {
-            var lnkPage = (LinkButton)e.Item.FindControl("lbPaging");
-            if (lnkPage.CommandArgument != CurrentPage.ToString()) return;
-            lnkPage.Enabled = false;
+            
         }
 
         protected void lbFirst_Click(object sender, EventArgs e)
