@@ -60,6 +60,51 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.CheckBox cbProductosVendisodDescartados;
 
         /// <summary>
+        /// cbELiminarProductosVendidosDescartados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbELiminarProductosVendidosDescartados;
+
+        /// <summary>
+        /// DivBloqueEliminarProductosDescartados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBloqueEliminarProductosDescartados;
+
+        /// <summary>
+        /// lbClaveSeguridadConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridadConsulta;
+
+        /// <summary>
+        /// txtClaveSeguridadConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridadConsulta;
+
+        /// <summary>
+        /// btnEliminarTodoHistorialFueraStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminarTodoHistorialFueraStock;
+
+        /// <summary>
         /// lbExportarA control.
         /// </summary>
         /// <remarks>
@@ -2632,6 +2677,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridadCambioEstatus;
+
+        /// <summary>
+        /// cbEliminarRegistroDescartado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbEliminarRegistroDescartado;
 
         /// <summary>
         /// btnCambiarEstatus control.

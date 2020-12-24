@@ -951,6 +951,12 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             LimpiarCOntrolesMantenimiento();
         }
         private void RestablecerPantallaCOnsulta() {
+            cbELiminarProductosVendidosDescartados.Checked = false;
+            cbELiminarProductosVendidosDescartados.Visible = false;
+            txtClaveSeguridadConsulta.Text = string.Empty;
+            DivBloqueEliminarProductosDescartados.Visible = false;
+            cbProductosVendisodDescartados.Checked = false;
+
             LimpiarControlesCOnsulta();
             LimpiarCOntrolesMantenimiento();
             VolverAtras();
@@ -960,6 +966,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             lbNumeroVariable.Text = "1";
             BindDataIntoRepeater(10);
             divBloqueDetalle.Visible = false;
+            divBloqueSuplir.Visible = true;
+            divBloqueDescartar.Visible = true;
         }
         #endregion
         #region VALIDAR FNCIONES
@@ -1289,6 +1297,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DivBloqueEliminarProductosDescartados.Visible = false;
                 rbExportarPDF.Checked = true;
                 divPaginacion.Visible = false;
                 ModoConsulta();
@@ -1739,6 +1748,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             var HfNumeroConector = decimal.Parse((((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConector")).Value.ToString()));
 
             bool ProductoAcumulativo = false;
+            bool EstatusProductoOriginal = false;
             decimal IdTipoproducto = 0;
             string EstatusProducto = "";
             //BUSCAMOS EL REGISTRO
@@ -1788,6 +1798,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 decimal GananciaAproximada = Convert.ToDecimal(n.GananciaAproximada);
                 lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
                 bool TieneImagen = Convert.ToBoolean(n.LlevaImagen0);
+                EstatusProductoOriginal = (bool)n.EstatusProducto0;
                 if (TieneImagen == true) {
                     IMGFotoProducto.Visible = true;
                 }
@@ -1860,6 +1871,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 lbIdAplicaParaImpuestoCambioDato.Text = txtAplicaParaImpuestoDetalle.Text;
                 txtComentarioCambioEstatus.Text = string.Empty;
                 txtClaveSeguridadCambioEstatus.Text = string.Empty;
+                if (EstatusProductoOriginal == true)
+                {
+                    cbEliminarRegistroDescartado.Visible = true;
+                }
+                else {
+                    cbEliminarRegistroDescartado.Visible = false;
+                }
             }
             else {
                 btnDescartarConsulta.Visible = false;
@@ -1915,7 +1933,93 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnCambiarEstatus_Click(object sender, EventArgs e)
         {
+            string AccionTomar = "";
+            if (cbEliminarRegistroDescartado.Checked == true) {
+                AccionTomar = "DELETEPRODUCTOUTOFSTOCK";
+            }
+            else {
+                AccionTomar = "CHANGESTATUS";
+            }
+            //VALIDAMOS LA CLAVE DE SEGURIDAD
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadCambioEstatus.Text.Trim()) ? null : txtClaveSeguridadCambioEstatus.Text.Trim();
 
+            var Validar = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (Validar.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadIngresadaNoValida()", "ClaveSeguridadIngresadaNoValida();", true);
+            }
+            else {
+                //BUSCAMOS LOS DATOS DEL REGISTRO Y SACAMOS LOS DATOS NECESARIOS PARA REALIZAR EL PROCESO DEL CAMBIO DE ESTATUS
+                decimal _IdTipoProducto = 0;
+                bool _ProductoAcumulativo = false, _EstatusProducto = false;
+                decimal _IdProducto = Convert.ToDecimal(lbIdProductoSeleccionado.Text);
+                string _Comentario = string.IsNullOrEmpty(txtComentarioCambioEstatus.Text.Trim()) ? null : txtComentarioCambioEstatus.Text.Trim();
+
+                var BuscarDatosProducto = ObjdataInventario.Value.BuscaProductos(_IdProducto);
+                foreach (var n in BuscarDatosProducto) {
+                    _IdTipoProducto = Convert.ToDecimal(n.IdTipoProducto);
+                    _ProductoAcumulativo = Convert.ToBoolean(n.ProductoAcumulativo0);
+                    _EstatusProducto = Convert.ToBoolean(n.EstatusProducto0);
+                }
+
+                //CAMBISMOS EL ESTATUS
+                DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos CambiarEstatus = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                    _IdProducto, Convert.ToDecimal(lbNumeroConectorProducto.Text), _IdTipoProducto, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, 0, 0, 0, false,
+                    _ProductoAcumulativo, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, _Comentario, false, _EstatusProducto, "", 0, 0, 0, AccionTomar);
+                CambiarEstatus.ProcesarProducto();
+                if (cbEliminarRegistroDescartado.Checked == true) {
+                    ClientScript.RegisterStartupScript(GetType(), "RegistroEliminadoConExito()", "RegistroEliminadoConExito();", true);
+                }
+                else {
+                    ClientScript.RegisterStartupScript(GetType(), "RegistroProcesadoConExito()", "RegistroProcesadoConExito();", true);
+                }
+                cbEliminarRegistroDescartado.Checked = false;
+                RestablecerPantallaCOnsulta();
+            }
+        }
+
+        protected void cbELiminarProductosVendidosDescartados_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbELiminarProductosVendidosDescartados.Checked == true) {
+                DivBloqueEliminarProductosDescartados.Visible = true;
+            }
+            else {
+                DivBloqueEliminarProductosDescartados.Visible = false;
+            }
+        }
+
+        protected void cbProductosVendisodDescartados_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbProductosVendisodDescartados.Checked == true) {
+                cbELiminarProductosVendidosDescartados.Visible = true;
+            }
+            else {
+                cbELiminarProductosVendidosDescartados.Checked = false;
+                cbELiminarProductosVendidosDescartados.Visible = false;
+                DivBloqueEliminarProductosDescartados.Visible = false;
+            }
+        }
+
+        protected void btnEliminarTodoHistorialFueraStock_Click(object sender, EventArgs e)
+        {
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadConsulta.Text.Trim()) ? null : txtClaveSeguridadConsulta.Text.Trim();
+
+            var Validar = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (Validar.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadIngresadaNoValida()", "ClaveSeguridadIngresadaNoValida();", true);
+            }
+            else {
+                DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos EliminarProductosFueraInventario = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, 0, 0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, true, "", 0, 0, 0, "DELETEALLPRODUCTOUTOFSTOCK");
+                EliminarProductosFueraInventario.ProcesarProducto();
+                ClientScript.RegisterStartupScript(GetType(), "ProcesoCompletadoCOnExito()", "ProcesoCompletadoCOnExito();", true);
+                RestablecerPantallaCOnsulta();
+            }
         }
 
         protected void lbLast_Click(object sender, EventArgs e)

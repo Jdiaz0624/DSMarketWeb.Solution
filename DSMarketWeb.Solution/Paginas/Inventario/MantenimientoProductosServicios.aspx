@@ -57,6 +57,9 @@
         function RegistroGuardadoConExito() {
             alert("Registro Guardado con Exito.");
         }
+        function RegistroProcesadoConExito() {
+            alert("Registro procesado con exito.");
+        }
 
         function ClaveSeguridadIngresadaNoValida() {
             alert("La clave de seguridad ingresada no es valida, favor de verificar.");
@@ -68,7 +71,9 @@
         function RegistroEliminadoConExito() {
             alert("Registro Eliminado con Exito.");
         }
-
+        function ProcesoCompletadoCOnExito() {
+            alert("Proceso completado con exito.");
+        }
         function BloquearSuplir() {
   
             $("#btnSuplirConsulta").attr("disabled", "disabled");
@@ -398,6 +403,24 @@
                 }
                 }
             });
+
+            $("#<%=btnCambiarEstatus.ClientID%>").click(function () {
+                var ValidarClaveseguridadCambioEstatus = $("#<%=txtClaveSeguridadCambioEstatus.ClientID%>").val().length;
+                if (ValidarClaveseguridadCambioEstatus < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio, para procesar este producto, favor de verificar");
+                    $("#<%=txtClaveSeguridadCambioEstatus.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
+
+            $("#<%=btnEliminarTodoHistorialFueraStock.ClientID%>").click(function () {
+                var ValidarClaveSeguridadConsulta = $("#<%=txtClaveSeguridadConsulta.ClientID%>").val().length;
+                if (ValidarClaveSeguridadConsulta < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio para realizar este proceso, favor de verificar.");
+                    $("#<%=txtClaveSeguridadConsulta.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
         })
     </script>
 
@@ -410,8 +433,20 @@
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de Fecha a la Consulta" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFecha_CheckedChanged" />
                     <asp:CheckBox ID="cbMostrarTodoHistorialVenta" runat="server" Text="Mostrar todo el Inventario (Reporte)" AutoPostBack="true" OnCheckedChanged="cbMostrarTodoHistorialVenta_CheckedChanged" ToolTip="Mostrar Todo el Inventario en el reprte" CssClass="form-check-input Letranegrita" />
-                    <asp:CheckBox ID="cbProductosVendisodDescartados" runat="server" Text="Productos Vendididos / Descartados" ToolTip="Mostrar el Historial de Productos Vendidos y Descartados" CssClass="form-check-input Letranegrita" />
+                    <asp:CheckBox ID="cbProductosVendisodDescartados" runat="server" Text="Productos Vendididos / Descartados" ToolTip="Mostrar el Historial de Productos Vendidos y Descartados" CssClass="form-check-input Letranegrita" AutoPostBack="true" OnCheckedChanged="cbProductosVendisodDescartados_CheckedChanged" />
+                    <asp:CheckBox ID="cbELiminarProductosVendidosDescartados" runat="server" CssClass="Letranegrita" Text="Eliminar Productos fuera de Stock" ToolTip="Sacar todos los prductos que esten fuera del inventario para aligerar el inventario general" Visible="false" AutoPostBack="true" OnCheckedChanged="cbELiminarProductosVendidosDescartados_CheckedChanged" />
                 </div>
+            </div>
+            <br />
+            <div id="DivBloqueEliminarProductosDescartados" runat="server">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <asp:Label ID="lbClaveSeguridadConsulta" runat="server" Text="Ingresar Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtClaveSeguridadConsulta" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox><br />
+                        <asp:Button ID="btnEliminarTodoHistorialFueraStock" runat="server" Text="Eliminar" ToolTip="Eliminar Todos los registros fuera de inventario" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnEliminarTodoHistorialFueraStock_Click" />
+                    </div>
+                </div>
+               
             </div>
             <br />
             <asp:Label ID="lbExportarA" runat="server" Text="Exportar A:" CssClass="Letranegrita"></asp:Label>
@@ -1226,6 +1261,11 @@
                <div class="form-group col-md-4">
                    <asp:Label ID="lbClaveSeguridadCambioEstatus" runat="server" Text="Clave de Seguridad: " CssClass="Letranegrita"></asp:Label>
                    <asp:TextBox ID="txtClaveSeguridadCambioEstatus" runat="server" CssClass="form-control" AutoCompleteType="Disabled" TextMode="Password"></asp:TextBox>
+               </div>
+           </div>
+           <div class="form-check">
+               <div class="form-group form-check">
+                   <asp:CheckBox ID="cbEliminarRegistroDescartado" runat="server" Text="Eliminar Registro" CssClass="form-check"  ToolTip="Eliminar este registro permanentemente" />
                </div>
            </div>
            <div align="center">
