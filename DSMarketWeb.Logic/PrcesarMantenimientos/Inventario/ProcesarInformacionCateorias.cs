@@ -10,7 +10,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
     {
         readonly DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario ObjData = new Logica.LogicaInventario.LogicaInventario();
 
-        private decimal IdCategoria = 0;
+        private decimal IdCategoria = 0; 
         private decimal IdTipoProducto = 0;
         private string Categoria = "";
         private bool Estatus = false;
