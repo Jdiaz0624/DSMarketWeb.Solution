@@ -358,6 +358,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
         {
             MostrarControles();
+
             txtCategoriaMantenimiento.Text = string.Empty;
             cbEstatusMantenimiento.Checked = true;
             lbAccionTomarMantenimiento.Text = "INSERT";

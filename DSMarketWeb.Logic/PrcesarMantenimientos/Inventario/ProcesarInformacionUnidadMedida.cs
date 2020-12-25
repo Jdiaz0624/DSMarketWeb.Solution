@@ -40,6 +40,8 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.FechaAdiciona = DateTime.Now;
             Procesar.UsuarioModifica = UsuarioProcesa;
             Procesar.FechaModifica = DateTime.Now;
+
+            var MAN = ObjData.MantenimientoUnidadMEdida(Procesar, Accion);
         }
     }      
 }          

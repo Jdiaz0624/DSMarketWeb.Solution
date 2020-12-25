@@ -177,6 +177,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Repeater rpListadoCategoria;
 
         /// <summary>
+        /// lbPaginaActualTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPaginaActualTitulo;
+
+        /// <summary>
+        /// lbPaginaActualPaginacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPaginaActualPaginacion;
+
+        /// <summary>
         /// lbCantidadPagiansTitulos control.
         /// </summary>
         /// <remarks>
@@ -247,15 +265,6 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkUltimaPagina;
-
-        /// <summary>
-        /// lbPaginaActualPaginacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPaginaActualPaginacion;
 
         /// <summary>
         /// divBloqueMantenimiento control.

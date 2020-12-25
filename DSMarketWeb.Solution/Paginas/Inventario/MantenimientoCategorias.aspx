@@ -144,6 +144,8 @@
         </div>
         <!--FIN DEL REPEATER-->
             <div align="center">
+                <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina: " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualPaginacion" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadPagiansTitulos" runat="server" Text="Cantidad de Paginas: " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadPaginasVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
@@ -178,10 +180,6 @@
 
                             <td>
                                 <asp:LinkButton ID="LinkUltimaPagina" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimaPagina_Click"></asp:LinkButton>
-                            </td>
-
-                            <td>
-                                <asp:Label ID="lbPaginaActualPaginacion" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
                             </td>
                         </tr>
                     </table>
