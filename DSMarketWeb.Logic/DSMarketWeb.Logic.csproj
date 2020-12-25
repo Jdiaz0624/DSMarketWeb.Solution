@@ -62,6 +62,7 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
+    <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />
     <Compile Include="Entidades\EntidadesInventario\EEliminarFotoProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Logica\LogicaSeguridad\LogicaSeguridad.cs" />
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />

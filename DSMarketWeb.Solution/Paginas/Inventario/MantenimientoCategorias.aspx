@@ -5,7 +5,7 @@
     <style type="text/css">
         .jumbotron{
             color:#000000; 
-            background:#96CEF7;
+            background:#1E90FF;
             font-size:30px;
             font-weight:bold;
             font-family:'Gill Sans';
@@ -19,10 +19,57 @@
         .Letranegrita {
         font-weight:bold;
         }
+
+         table {
+            border-collapse: collapse;
+        }
+        
+
+        th {
+            background-color: dodgerblue;
+            color: white;
+        }
     </style>
 
+    <script type="text/javascript">
+        function RegistroGuardado() {
+            alert("Registro gaurdado con exito.");
+        }
+
+        function RegistroModificado() {
+            alert("Registro modificado con exito.");
+        }
+
+        function RegistroDeshabilitado() {
+            alert("Registro deshabilitada con exito.");
+        }
+        function ClaveSeguridadIncorrecta() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar.");
+        }
+
+        $(document).ready(function () {
+            $("#<%=btnGuardarMantenimiento.ClientID%>").click(function () {
+                var ValidarTipoProducto = $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").val();
+                if (ValidarTipoProducto < 1) {
+                    alert("El campo tipo de producto no puede estar vacio para realizar esta operación, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoProductoMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var ValidarClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                    if (ValidarClaveSeguridad < 1) {
+                        alert("El campo clave de seguridad no puede estar vacio para realizar esta operación, favor de verificar");
+                        $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+
     <div class="container-fluid">
-        <div class="jumbotron" align="center">
+        <div id="divBloqueConsulta" runat="server">
+              <div class="jumbotron" align="center">
             <asp:Label ID="lbTitulo" runat="server" Text="Consulta de Categorias"></asp:Label>
         </div>
         <div class="form-row">
@@ -37,10 +84,9 @@
         </div>
          <div align="center">
          <asp:Button ID="btnConsultar" runat="server" Text="Buscar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnConsultar_Click" />
-         <button type="button" id="btnNuevo" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoCapacidad">Nuevo</button>
-         <button type="button" id="btnModificar" class="btn btn-outline-secondary btn-sm Custom" data-toggle="modal" data-target=".MantenimientoCapacidad">Modificar</button>
-         <asp:Button ID="btnRestabelcer" runat="server" Text="Atras" ToolTip="Atras" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnRestabelcer_Click" />
-         <asp:Button ID="btnExportar" runat="server"  Text="Exportar" ToolTip="Exportar a exel" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnExportar_Click" />
+         <asp:Button ID="btnNuevoRegistro" runat="server" Text="Nuevo" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Crear nuevo registro" OnClick="btnNuevoRegistro_Click" />
+         <asp:Button ID="btnModificarRegistroSeleccionado" runat="server" Text="Modificar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Modificar Registro Seleccionado" OnClick="btnModificarRegistroSeleccionado_Click" />
+         <asp:Button ID="btnRestabelcer" runat="server" Text="Restablecer" ToolTip="Restablecer" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnRestabelcer_Click" />
         </div>
         <br />
         <div align="center">
@@ -49,34 +95,110 @@
             <asp:Label ID="lbCantidadRegistroscerrar" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
         </div>
         <br />
-         <asp:GridView ID="gvListado" runat="server" AllowPaging="true" OnPageIndexChanging="gvListado_PageIndexChanging" OnSelectedIndexChanged="gvListado_SelectedIndexChanged" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                <Columns>
-                   <%-- <%$ Resources:Traducciones,OrdenNivel %>--%>
-                    <asp:CommandField ButtonType="Button" HeaderText="Seleccionar"  ControlStyle-CssClass="btn btn-outline-secondary btn-sm" SelectText="Seleccionar" ShowSelectButton="True" />
-                    <asp:BoundField DataField="#" HeaderText="ID" />
-                    <asp:BoundField DataField="#" HeaderText="Tipo de Producto" />
-                    <asp:BoundField DataField="#" HeaderText="Categoria" />
-                     <asp:BoundField DataField="#" HeaderText="Estatus" />
-                </Columns  >
-                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <HeaderStyle BackColor="#7BC5FF" HorizontalAlign="Center" Font-Bold="True" ForeColor="Black" />
-                <PagerStyle BackColor="#7BC5FF" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" HorizontalAlign="Center" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#000065" />
-            </asp:GridView>
-        <br />
+         <!--INICIO DEL REPEATER-->
+        <div>
+            <div class="table-responsive mT20">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:15%" >
+                                <asp:Label ID="lbSeleccionarHeaderrepeater" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label>
+                            </th>
+                            <th style="width:35%" >
+                                 <asp:Label ID="lbTipoProductoHeaderRepeater" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+                            </th>
+                            <th style="width:40%" >
+                                 <asp:Label ID="lbCategoriaHeaderRepeater" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                            </th>
+                            <th style="width:10%" >
+                                 <asp:Label ID="lbEstatusHeaderRepeater" runat="server" Text="Estatus" CssClass="Letranegrita"></asp:Label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <asp:Repeater ID="rpListadoCategoria" runat="server">
+                            <ItemTemplate>
+                                <tr>
+                                    <asp:HiddenField ID="hfIdCategoria" runat="server" Value='<%#Eval("IdCategoria") %>' />
+                                    <td style="width:15%" >
+                                        <asp:Button ID="btnSeleccionarRegistrosRepeater" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnSeleccionarRegistrosRepeater_Click" />
+                                    </td>
 
-      <div class="modal fade bd-example-modal-lg MantenimientoCapacidad" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="container-fluid">
+                                    <td style="width:35%" >
+                                        <asp:Label ID="lbTipoProductoBodyRepeater" runat="server" Text='<%#Eval("TipoProducto") %>'></asp:Label>
+                                    </td>
+
+                                    <td style="width:40%" >
+                                        <asp:Label ID="lbCategoriaBodyRepeater" runat="server" Text='<%# Eval("Categoria") %>'></asp:Label>
+                                    </td>
+
+                                    <td style="width:10%" >
+                                        <asp:Label ID="lbEstatusBodyRepeater" runat="server" Text='<%# Eval("Estatus") %>'></asp:Label>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--FIN DEL REPEATER-->
+            <div align="center">
+                <asp:Label ID="lbCantidadPagiansTitulos" runat="server" Text="Cantidad de Paginas: " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginasVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+            </div>
+            <!--INICIO DE LA PAGINACION-->
+            <div id="divPaginacionCategorias" runat="server" align="center">
+                <div style="margin-top:20px;">
+                    <table style="width:600px;">
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="LinkPrimeraPagina" Text="Primero" runat="server" ToolTip="Ir a la primera pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkPrimeraPagina_Click" ></asp:LinkButton>
+                            </td>
+
+                            <td>
+                                <asp:LinkButton ID="LinkSiguientePagina" runat="server" Text="Siguiente" ToolTip="Pasar a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguientePagina_Click"></asp:LinkButton>
+                            </td>
+
+                            <td>
+                                 <asp:DataList ID="rptPaging" runat="server"
+                                    OnItemCommand="rptPaging_ItemCommand"
+                                    OnItemDataBound="rptPaging_ItemDataBound" RepeatDirection="Horizontal">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lbPaging" runat="server"
+                                            CommandArgument='<%# Eval("PageIndex") %>' CommandName="newPage"
+                                            Text='<%# Eval("PageText") %> ' Width="20px"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:DataList>
+                            </td>
+
+                            <td>
+                                <asp:LinkButton ID="LinkPaginaAnterior" runat="server" Text="Anterior" ToolTip="Ir a la pagina anterior del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkPaginaAnterior_Click"></asp:LinkButton>
+                            </td>
+
+                            <td>
+                                <asp:LinkButton ID="LinkUltimaPagina" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimaPagina_Click"></asp:LinkButton>
+                            </td>
+
+                            <td>
+                                <asp:Label ID="lbPaginaActualPaginacion" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        
+        <br />
+        </div>
+
+
+
+        <div id="divBloqueMantenimiento" runat="server">
+            <div class="container-fluid">
             <div class="jumbotron" align="center">
                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="Mantenimiento de Categorias"></asp:Label>
+                <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Visible="false" Text="IdRegistro"></asp:Label>
+                <asp:Label ID="lbAccionTomarMantenimiento" runat="server" Visible="false" Text="Accion a Tomar"></asp:Label>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -87,6 +209,10 @@
                     <asp:Label ID="lbCategoriaMantenimiento" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtCategoriaMantenimiento" AutoCompleteType="Disabled" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
                 </div>
+                <div id="BloqueClaveSeguridad" runat="server" class="form-group col-md-4">
+                    <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtClaveSeguridadMantenimiento" AutoCompleteType="Disabled" TextMode="Password" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                </div>
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
@@ -95,13 +221,13 @@
             </div>
             <div align="center">
                 <asp:Button ID="btnGuardarMantenimiento" runat="server" Text="Guardar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnGuardarMantenimiento_Click" />
-                <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Modificar" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnModificarMantenimiento_Click" />
+                <asp:Button ID="btnModificarMantenimiento" runat="server" Text="Volver" ToolTip="Buscar" CssClass="btn btn-outline-secondary btn-sm Custom" OnClick="btnModificarMantenimiento_Click" />
         
             </div>
             <br />
         </div>
-    </div>
-  </div>
-</div>
+        </div>
+
+
     </div>
 </asp:Content>

@@ -31,10 +31,7 @@
         table {
             border-collapse: collapse;
         }
-
-        table, td, th {
-            border: 1px solid blue;
-        }
+        
 
         th {
             background-color: dodgerblue;
@@ -603,10 +600,10 @@
                     <table style="width: 600px;">
                         <tr>
                             <td>
-                                <asp:LinkButton ID="lbPrimeraPagina" runat="server" CssClass="btn btn-success fr" OnClick="lbFirst_Click" >Primero</asp:LinkButton>
+                                <asp:LinkButton ID="lbPrimeraPagina" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbFirst_Click" >Primero</asp:LinkButton>
                             </td>
                             <td>
-                                <asp:LinkButton ID="lbPaginaAnterior" runat="server" CssClass="btn btn-success fr" OnClick="lbPrevious_Click" >Atras</asp:LinkButton>
+                                <asp:LinkButton ID="lbPaginaAnterior" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbPrevious_Click" >Atras</asp:LinkButton>
                             </td>
                             <td>
                                 <asp:DataList ID="rptPaging" runat="server"
@@ -620,13 +617,13 @@
                                 </asp:DataList>
                             </td>
                             <td>
-                                <asp:LinkButton ID="lbPaginaGuguiente" runat="server" CssClass="btn btn-success fr" OnClick="lbNext_Click" >Siguiente</asp:LinkButton>
+                                <asp:LinkButton ID="lbPaginaGuguiente" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbNext_Click" >Siguiente</asp:LinkButton>
                             </td>
                             <td>
-                                <asp:LinkButton ID="lbUltimaPagina" runat="server" CssClass="btn btn-success fr" OnClick="lbLast_Click" >Ultimo</asp:LinkButton>
+                                <asp:LinkButton ID="lbUltimaPagina" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbLast_Click" >Ultimo</asp:LinkButton>
                             </td>
                             <td>
-                    <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
+                                      <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
                             </td>
                         </tr>
                     </table>

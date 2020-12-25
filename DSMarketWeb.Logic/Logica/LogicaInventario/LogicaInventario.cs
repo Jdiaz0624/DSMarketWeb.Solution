@@ -209,5 +209,62 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Eliminar;
         }
         #endregion
+        #region MANTENIMIENTO DE CATEGORIAS
+        //LISTADO DE CATEGORIAS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias> BuscaCategorias(decimal? IdCategoria = null, decimal? IdTipoProducto = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CATEGORIAS_WEB(IdCategoria, IdTipoProducto, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias
+                           {
+                               IdCategoria=n.IdCategoria,
+                               IdTipoProducto=n.IdTipoProducto,
+                               TipoProducto=n.TipoProducto,
+                               Categoria=n.Categoria,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               Fechaadiciona=n.Fechaadiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE CATEGORIAS
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias MantenimientoCategorias(DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias Mantenimiento = null;
+
+            var Catrgoria = ObjData.SP_MANTENIMIENTO_CATEGORIAS(
+                Item.IdCategoria,
+                Item.IdTipoProducto,
+                Item.Categoria,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Catrgoria != null) {
+                Mantenimiento = (from n in Catrgoria
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECategorias
+                                 {
+                                     IdCategoria=n.IdCategoria,
+                                     IdTipoProducto=n.IdTipoProducto,
+                                     Categoria=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     Fechaadiciona=n.Fechaadiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }
