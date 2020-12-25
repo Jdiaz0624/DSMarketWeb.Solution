@@ -103,7 +103,7 @@
         <div class="table-responsive mT20">
             <table class="table table-striped table-hover">
                 <thead>
-                    <tr>
+                    <tr> 
                         <th style="width:10%" > <asp:Label ID="lbSeleccionarRepeaterHeader" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
                         <th style="width:80%"> <asp:Label ID="lbDescripcionHeaderRepeater" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label> </th>
                         <th style="width:10%"> <asp:Label ID="lbEstatusHeaderRepeater" runat="server" Text="Estatus" CssClass="Letranegrita"></asp:Label> </th>
