@@ -266,5 +266,184 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region MANTENIMIENTO DE UNIDAD DE MEDIDA
+        //LISTADO DE UNIDAD DE MEDIDA
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida> BuscaUnidadMedida(decimal? IdUnidadMedida = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_UNIDAD_MEDIDA_WEB(IdUnidadMedida, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida
+                           {
+                               IdUnidadMedida=n.IdUnidadMedida,
+                               UnidadMedida=n.UnidadMedida,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CredoPor=n.CredoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+        //MANTENIMIENTO DE UNIDAD DE MEDIAD
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida MantenimientoUnidadMEdida(DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida Mantenimiento = null;
+
+            var UnidadMedida = ObjData.SP_MANTENIMIENTO_UNIDAD_MEDIDA(
+                Item.IdUnidadMedida,
+                Item.UnidadMedida,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (UnidadMedida != null) {
+                Mantenimiento = (from n in UnidadMedida
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida
+                                 {
+                                     IdUnidadMedida=n.IdUnidadMedida,
+                                     UnidadMedida=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+        #region MANTENIMIENTO DE MARCAS
+        //LISTADO DE MARCAS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas> BuscaMarcas(decimal? IdMarca = null, decimal? IdTipoProducto = null, decimal? IdCategoria = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_MARCAS_WEB(IdMarca, IdTipoProducto, IdCategoria, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas
+                           {
+                               IdMarca=n.IdMarca,
+                               IdTipoProducto=n.IdTipoProducto,
+                               TipoProducto=n.TipoProducto,
+                               IdCateoria=n.IdCateoria,
+                               Categoria=n.Categoria,
+                               Marca=n.Marca,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE MARCAS
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas MantenimientoMarcas(DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas Mantenimiento = null;
+
+            var Marcas = ObjData.SP_MANTENIMIENTO_MARCAS(
+                Item.IdMarca,
+                Item.Marca,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Item.IdCateoria,
+                Item.IdTipoProducto,
+                Accion);
+            if (Marcas != null) {
+                Mantenimiento = (from n in Marcas
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EMarcas
+                                 {
+                                     IdMarca=n.IdMarca,
+                                     Marca=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica,
+                                     IdCateoria=n.IdCategoria,
+                                     IdTipoProducto=n.IdTipoProducto
+
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+
+        #endregion
+        #region MANTENIMIENTO DE MODELOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos> BuscaModelos(decimal? IdTipoProducto = null, decimal? IdCategoria = null, decimal? IdMarca = null, decimal? IdModelo = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_MODELOS_WEB(IdTipoProducto, IdCategoria, IdMarca, IdModelo, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos
+                           {
+                               IdMarca=n.IdMarca,
+                               IdModelo=n.IdModelo,
+                               IdTipoProducto=n.IdTipoProducto,
+                               TipoPrducto=n.TipoPrducto,
+                               IdCategoria=n.IdCategoria,
+                               Categoria=n.Categoria,
+                               Marca=n.Marca,
+                               Modelo=n.Modelo,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos MantenimientoModelos(DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos Mantenimiento = null;
+
+            var Modelo = ObjData.SP_MANTENIMIENTO_MODELO(
+                Item.IdMarca,
+                Item.IdModelo,
+                Item.Modelo,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Item.IdTipoProducto,
+                Item.IdCategoria,
+                Accion);
+            if (Modelo != null) {
+                Mantenimiento = (from n in Modelo
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos
+                                 {
+                                     IdMarca=n.IdMarca,
+                                     IdModelo=n.IdModelo,
+                                     Modelo=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica,
+                                     IdTipoProducto=n.IdTipoProducto,
+                                     IdCategoria=n.IdCategoria
+
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }

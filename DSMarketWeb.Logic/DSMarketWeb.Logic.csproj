@@ -64,8 +64,11 @@
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />
     <Compile Include="Entidades\EntidadesInventario\EEliminarFotoProducto.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EMarcas.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EModelos.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EUnidadMedida.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
@@ -79,7 +82,10 @@
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionMarcas.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionModelos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionUnidadMedida.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
