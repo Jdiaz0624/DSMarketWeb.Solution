@@ -99,7 +99,7 @@
             <asp:Label ID="lbCantidadRegistrosCerrar" runat="server" Text=")" CssClass="Letranegrita"></asp:Label>
         </div>
         <br />
-        <!--REPEATER-->
+        <!--REPEATER--> 
         <div class="table-responsive mT20">
             <table class="table table-striped table-hover">
                 <thead>
