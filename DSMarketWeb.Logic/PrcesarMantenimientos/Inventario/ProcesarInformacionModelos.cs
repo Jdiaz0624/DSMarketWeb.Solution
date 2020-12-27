@@ -29,6 +29,17 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
         decimal IdCategoriaCON,
         string AccionCON)
         {
+            IdMarca = IdMarcaCON;
+            IdModelo = IdModeloCON;
+            Descripcion = DescripcionCON;
+            Estatus = EstatusCON;
+            UsuarioProcesa = UsuarioProcesaCON;
+            IdTipoProducto = IdTipoProductoCON;
+            IdCategoria = IdCategoriaCON;
+            Accion = AccionCON;
+        }
+
+        public void ProcesarDatosnModelos() {
             DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos Procesar = new Entidades.EntidadesInventario.EModelos();
 
             Procesar.IdMarca = IdMarca;
