@@ -13,5 +13,80 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
 
         }
+
+        protected void btnConsultarRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNuevoRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificarRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnExportarRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSeleccionarRegistroBodyRepeater_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaAnterior_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaSiguiente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltipaPagina_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacion_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void btnGaurdar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
