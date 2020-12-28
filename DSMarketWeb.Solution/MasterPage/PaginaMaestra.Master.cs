@@ -17,7 +17,8 @@ namespace DSMarketWeb.Solution.MasterPage
 
         protected void linkCerrarCesion_Click(object sender, EventArgs e)
         {
-
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
 
         //INICIO DEL MODULO DE SERVICIO

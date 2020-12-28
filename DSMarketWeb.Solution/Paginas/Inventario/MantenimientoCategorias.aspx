@@ -56,11 +56,19 @@
                     return false;
                 }
                 else {
-                    var ValidarClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                    var ValidarCategoria = $("#<%=txtCategoriaMantenimiento.ClientID%>").val().length;
+                    if (ValidarCategoria < 1) {
+                        alert("El campo categoria no puede estar vacio, favor de verificar.");
+                        $("#<%=txtCategoriaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var ValidarClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
                     if (ValidarClaveSeguridad < 1) {
                         alert("El campo clave de seguridad no puede estar vacio para realizar esta operación, favor de verificar");
                         $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
                         return false;
+                    }
                     }
                 }
             });
