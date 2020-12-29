@@ -68,6 +68,7 @@
     <Compile Include="Entidades\EntidadesInventario\EModelos.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
+    <Compile Include="Entidades\EntidadesInventario\ESuplidores.cs" />
     <Compile Include="Entidades\EntidadesInventario\ETipoSuplidores.cs" />
     <Compile Include="Entidades\EntidadesInventario\EUnidadMedida.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionMarcas.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionModelos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionTipoSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionUnidadMedida.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />

@@ -51,7 +51,25 @@
                     $("#<%=txtTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
                     return false;
                 }
-            });            $("#<%=btnModificar.ClientID%>").click(function () {                var TipoSuplidorModificar = $("#<%=txtTipoSuplidorMantenimiento.ClientID%>").val().length;                if (TipoSuplidorModificar < 1) {                    alert("El campo tipo de suplidor no puede estar vacio para modificar este registro, favor de verificar.");                    $("#<%=txtTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");                    return false;                }                else {                    var ClaveSeguridad = $("#<%=txtClaveseguridad.ClientID%>").val().length;                    if (ClaveSeguridad < 1) {                        alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar.");                        $("#<%=txtClaveseguridad.ClientID%>").css("border-color", "red");                        return false;                    }                }            });
+            });
+
+            $("#<%=btnModificar.ClientID%>").click(function () {
+                var TipoSuplidorModificar = $("#<%=txtTipoSuplidorMantenimiento.ClientID%>").val().length;
+                if (TipoSuplidorModificar < 1) {
+                    alert("El campo tipo de suplidor no puede estar vacio para modificar este registro, favor de verificar.");
+                    $("#<%=txtTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var ClaveSeguridad = $("#<%=txtClaveseguridad.ClientID%>").val().length;
+                    if (ClaveSeguridad < 1) {
+                        alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar.");
+                        $("#<%=txtClaveseguridad.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                }
+            });
+
         })
     </script>
 

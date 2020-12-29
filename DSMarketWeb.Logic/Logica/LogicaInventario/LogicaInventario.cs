@@ -498,5 +498,75 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region MANTENIMIENTO DE SUPLIDORES
+        //LISTADO DE SUPLIDORES
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores> BuscaSuplidores(decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string Nombre = null, decimal? IdUsuarioProcesa = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_SUPLIDORES(IdTipoSuplidor, IdSuplidor, Nombre, IdUsuarioProcesa)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores
+                           {
+                               IdTipoSuplidor=n.IdTipoSuplidor,
+                               TipoSuplidor=n.TipoSuplidor,
+                               IdSuplidor=n.IdSuplidor,
+                               Suplidor=n.Suplidor,
+                               Telefono=n.Telefono,
+                               Email=n.Email,
+                               Direccion=n.Direccion,
+                               Contacto=n.Contacto,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               FechaModifica=n.FechaModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros,
+                               GeneradoPor=n.GeneradoPor
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE TIPO DE SUPLIDORES
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores MantenimientoSupoSuplidores(DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores Mantenimiento = null;
+
+            var Suplidor = ObjData.SP_MANTENIMIENTO_SUPLIDORES(
+                Item.IdTipoSuplidor,
+                Item.IdSuplidor,
+                Item.Suplidor,
+                Item.Telefono,
+                Item.Email,
+                Item.Direccion,
+                Item.Contacto,
+                Item.Estatus0,
+               Item.UsuarioAdiciona,
+                Accion);
+            if (Suplidor != null) {
+                Mantenimiento = (from n in Suplidor
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores
+                                 {
+                                     IdTipoSuplidor=n.IdTipoSuplidor,
+                                     IdSuplidor=n.IdSuplidor,
+                                     Suplidor=n.Nombre,
+                                     Telefono=n.Telefono,
+                                     Email=n.Email,
+                                     Direccion=n.Direccion,
+                                     Contacto=n.Contacto,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }
