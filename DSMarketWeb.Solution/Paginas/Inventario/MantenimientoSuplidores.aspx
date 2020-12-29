@@ -29,6 +29,24 @@
             color: white;
         }
     </style>
+    <script type="text/javascript">
+        function RegistroGuardado() {
+            alert("Registro Guardado con exito");
+        }
+
+        function RegistroModificado() {
+            alert("Registro Modificado Con exito");
+        }
+
+        function ClaveSeguridadNoValida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar");
+        }
+
+        $(document).ready(function () {
+            $("#<%=btnGaurdar.ClientID%>").click(function () { });
+            $("#<%=btnModificar.ClientID%>").click(function () { });
+        })
+    </script>
 <div class="container-fluid">
         <div id="DivBloqueConsulta"  runat="server">
         <div class="jumbotron" align="center">
@@ -73,8 +91,8 @@
                     <thead>
                         <tr>
                             <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarheaderRepeater" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
-                            <th style="width:10%" align="left"> <asp:Label ID="lbTipoSuplidorHeaderRepeater" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label> </th>
-                            <th style="width:40%" align="left"> <asp:Label ID="lbSuplidorHeaderRepeater" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label> </th>
+                            <th style="width:15%" align="left"> <asp:Label ID="lbTipoSuplidorHeaderRepeater" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label> </th>
+                            <th style="width:35%" align="left"> <asp:Label ID="lbSuplidorHeaderRepeater" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:10%" align="left"> <asp:Label ID="lbTelefonoHeaderRepeater" runat="server" Text="Telefono" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:10%" align="left"> <asp:Label ID="lbEmailHeaderRepeater" runat="server" Text="Email" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:10%" align="left"> <asp:Label ID="lbContactoHEaderRepeater" runat="server" Text="Contacto" CssClass="Letranegrita"></asp:Label> </th>
@@ -88,8 +106,8 @@
                                 <tr>
                                     <asp:HiddenField ID="hfIdSuplidor" runat="server" Value='<%# Eval("IdSuplidor") %>' />
                                     <td style="width:10%" align="left"> <asp:Button ID="btnSeleccionarRegistroBodyRepeater" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Seleccionar Registros" OnClick="btnSeleccionarRegistroBodyRepeater_Click" /> </td>
-                                    <td style="width:10%" align="left"> <asp:Label ID="lbTipoSuplidorBodyRepeater" runat="server" Text='<%# Eval("TipoSuplidor") %>'></asp:Label> </td>
-                                    <td style="width:40%" align="left"> <asp:Label ID="lbSuplidorBodyRepeater" runat="server" Text='<%# Eval("Suplidor") %>'></asp:Label> </td>
+                                    <td style="width:15%" align="left"> <asp:Label ID="lbTipoSuplidorBodyRepeater" runat="server" Text='<%# Eval("TipoSuplidor") %>'></asp:Label> </td>
+                                    <td style="width:35%" align="left"> <asp:Label ID="lbSuplidorBodyRepeater" runat="server" Text='<%# Eval("Suplidor") %>'></asp:Label> </td>
                                     <td style="width:10%" align="left"> <asp:Label ID="lbTelefonoBodyRepeater" runat="server" Text='<%# Eval("Telefono") %>'></asp:Label> </td>
                                     <td style="width:10%" align="left"> <asp:Label ID="lbEmailBodyRepeater" runat="server" Text='<%# Eval("Email") %>'></asp:Label> </td>
                                     <td style="width:10%" align="left"> <asp:Label ID="lbContactoBodyRepeater" runat="server" Text='<%# Eval("Contacto") %>'></asp:Label> </td>
@@ -107,27 +125,26 @@
                 <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadPaginaVAriable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
-            <div id="DivPaginacionSuplidores" runat="server" align="center" >
-                <div style="margin-top=20px;">
-                    <table style="width:600px;">
-                        <tr>
-                            <td> <asp:LinkButton ID="LinkPrimeraPaginaPaginacion" runat="server" Text="Primero" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaPaginacion_Click" CssClass="btn btn-outline-success btn-sm"  ></asp:LinkButton> </td>
-                            <td> <asp:LinkButton ID="LinkPaginaAnterior" runat="server" Text="Anterior" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkPaginaAnterior_Click" CssClass="btn btn-outline-success btn-sm"></asp:LinkButton> </td>
-                            <td>
-                                <asp:DataList ID="dlPaginacion" runat="server" OnCancelCommand="dlPaginacion_CancelCommand" OnItemDataBound="dlPaginacion_ItemDataBound" RepeatDirection="Horizontal" >
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="LinkIndicePaginacion" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="NuevaPagina" Text='<%# Eval("TextoPagina")%>' Width="20px"></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:DataList>
+             <div id="divPaginacion" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPagina" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPagina_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnterior" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnterior_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacion" runat="server" OnItemCommand="dtPaginacion_ItemCommand" OnItemDataBound="dtPaginacion_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentral" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
 
-                            </td>
-                            <td> <asp:LinkButton ID="LinkPaginaSiguiente" runat="server" Text="Siguiente" ToolTip="Ir la Siguiente pagina del listado" OnClick="LinkPaginaSiguiente_Click" CssClass="btn btn-outline-success btn-sm"></asp:LinkButton> </td>
-                            <td> <asp:LinkButton ID="LinkUltipaPagina" runat="server" Text="Ultmo" ToolTip="Ir a la Ultima Pagina del listado" OnClick="LinkUltipaPagina_Click" CssClass="btn btn-outline-success btn-sm"></asp:LinkButton> </td>
-                           
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguiente" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguiente_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimo" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimo_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
     </div>
 
 
@@ -168,6 +185,9 @@
              <div class="form-group col-md-12">
                 <asp:Label ID="lbDireccionMantenimiento" runat="server" Text="Dirección" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtDirecconMantenimiento" runat="server" MaxLength="8000" TextMode="MultiLine"  AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad"
             </div>
         </div>
         <div class="form-check-inline">

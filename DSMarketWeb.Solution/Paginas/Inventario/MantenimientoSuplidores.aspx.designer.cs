@@ -285,58 +285,58 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Label lbCantidadPaginaVAriable;
 
         /// <summary>
-        /// DivPaginacionSuplidores control.
+        /// divPaginacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivPaginacionSuplidores;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPaginacion;
 
         /// <summary>
-        /// LinkPrimeraPaginaPaginacion control.
+        /// LinkPrimeraPagina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkPrimeraPaginaPaginacion;
+        protected global::System.Web.UI.WebControls.LinkButton LinkPrimeraPagina;
 
         /// <summary>
-        /// LinkPaginaAnterior control.
+        /// LinkAnterior control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkPaginaAnterior;
+        protected global::System.Web.UI.WebControls.LinkButton LinkAnterior;
 
         /// <summary>
-        /// dlPaginacion control.
+        /// dtPaginacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dlPaginacion;
+        protected global::System.Web.UI.WebControls.DataList dtPaginacion;
 
         /// <summary>
-        /// LinkPaginaSiguiente control.
+        /// LinkSiguiente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkPaginaSiguiente;
+        protected global::System.Web.UI.WebControls.LinkButton LinkSiguiente;
 
         /// <summary>
-        /// LinkUltipaPagina control.
+        /// LinkUltimo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkUltipaPagina;
+        protected global::System.Web.UI.WebControls.LinkButton LinkUltimo;
 
         /// <summary>
         /// DivBloqueMantenimiento control.

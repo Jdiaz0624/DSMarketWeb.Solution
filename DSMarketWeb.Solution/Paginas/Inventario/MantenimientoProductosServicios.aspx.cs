@@ -1714,7 +1714,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void rptPaging_ItemDataBound(object sender, DataListItemEventArgs e)
         {
-            
+            var lnkPage = (LinkButton)e.Item.FindControl("LinkIndicePaginacion");
+            if (lnkPage.CommandArgument != CurrentPage.ToString()) return;
+            lnkPage.Enabled = false;
         }
 
         protected void lbFirst_Click(object sender, EventArgs e)
