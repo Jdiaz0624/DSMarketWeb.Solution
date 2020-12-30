@@ -568,5 +568,167 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region MANTENIMIENTO DE COLORES
+        //LISTADO DE COLORES
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores> BuscaColores(decimal? IdColor = null, string Color = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Colores = (from n in ObjData.SP_BUSCA_COLORES_EQUIPOS(IdColor, Color)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores
+                           {
+                               IdColor=n.IdColor,
+                               Color=n.Color,
+                               Estatus=n.Estatus,
+                               Estatus0=n.Estatus0,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Colores;
+        }
+        //MANTENIMIENTO DE COLORES
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores MantenimientoColores(DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores Mantenimiento = null;
+
+            var Colores = ObjData.SP_MANTENIMIENTO_COLORES_EQUIPOS(
+                Item.IdColor,
+                Item.Color,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Colores != null) {
+                Mantenimiento = (from n in Colores
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores
+                                 {
+                                     IdColor=n.IdColor,
+                                     Color=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaAdiciona
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+        #region MANTENIMIENTO DE CONDICIONES
+        //LISTADO DE COLORES
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion> BuscaCondiciones(decimal? IdCondicion = null, string Condicion = null)
+        {
+            ObjData.CommandTimeout = 999999999;
+
+            var Colores = (from n in ObjData.SP_BUSCA_CONDICION_ARTICULO(IdCondicion, Condicion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion
+                           {
+                               IdCondicion = n.IdCondicion,
+                               Condicion = n.Condicion,
+                               Estatus = n.Estatus,
+                               Estatus0 = n.Estatus0,
+                               UsuarioAdiciona = n.UsuarioAdiciona,
+                               CreadoPor = n.CreadoPor,
+                               FechaAdiciona = n.FechaAdiciona,
+                               FechaCreado = n.FechaCreado,
+                               UsuarioModifica = n.UsuarioModifica,
+                               ModificadoPor = n.ModificadoPor,
+                               FechaModifica = n.FechaModifica,
+                               FechaModificado = n.FechaModificado,
+                               CantidadRegistros = n.CantidadRegistros
+                           }).ToList();
+            return Colores;
+        }
+        //MANTENIMIENTO DE COLORES
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion MantenimientoCondicion(DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion Item, string Accion)
+        {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion Mantenimiento = null;
+
+            var Condicion = ObjData.SP_MANTENIMIENTO_CONDICION_ARTICULOS(
+                Item.IdCondicion,
+                Item.Condicion,
+                Item.Estatus0,
+                (int)Item.UsuarioAdiciona,
+                Accion);
+            if (Condicion != null)
+            {
+                Mantenimiento = (from n in Condicion
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondicion
+                                 {
+                                     IdCondicion = n.IdCondicion,
+                                     Condicion = n.Descripcion,
+                                     Estatus0 = n.Estatus,
+                                     UsuarioAdiciona = n.UsuarioAdiciona,
+                                     FechaAdiciona = n.FechaAdiciona,
+                                     UsuarioModifica = n.UsuarioModifica,
+                                     FechaModifica = n.FechaAdiciona
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+        #region MANTENIMIENTO DE CONDICIONES
+        //LISTADO DE COLORES
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad> BuscaCapacdad(decimal? IdCapacidad = null, string Capacidad = null)
+        {
+            ObjData.CommandTimeout = 999999999;
+
+            var Colores = (from n in ObjData.SP_BUSCA_CAPACIDAD_ARTICULO(IdCapacidad, Capacidad)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad
+                           {
+                               IdCapacidad = n.IdCapacidad,
+                               Capacidad = n.Capacidad,
+                               Estatus = n.Estatus,
+                               Estatus0 = n.Estatus0,
+                               UsuarioAdiciona = n.UsuarioAdiciona,
+                               CreadoPor = n.CreadoPor,
+                               FechaAdiciona = n.FechaAdiciona,
+                               FechaCreado = n.FechaCreado,
+                               UsuarioModifica = n.UsuarioModifica,
+                               ModificadoPor = n.ModificadoPor,
+                               FechaModifica = n.FechaModifica,
+                               FechaModificado = n.FechaModificado,
+                               CantidadRegistros = n.CantidadRegistros
+                           }).ToList();
+            return Colores;
+        }
+        //MANTENIMIENTO DE COLORES
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad MantenimientoCapacidad(DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad Item, string Accion)
+        {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad Mantenimiento = null;
+
+            var Condicion = ObjData.SP_MANTENIMIENTO_CAPACIDAD_ARTICULOS(
+                Item.IdCapacidad,
+                Item.Capacidad,
+                Item.Estatus0,
+                (int)Item.UsuarioAdiciona,
+                Accion);
+            if (Condicion != null)
+            {
+                Mantenimiento = (from n in Condicion
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad
+                                 {
+                                     IdCapacidad = n.IdCapacidad,
+                                     Capacidad = n.Descripcion,
+                                     Estatus0 = n.Estatus,
+                                     UsuarioAdiciona = n.UsuarioAdiciona,
+                                     FechaAdiciona = n.FechaAdiciona,
+                                     UsuarioModifica = n.UsuarioModifica,
+                                     FechaModifica = n.FechaAdiciona
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }
