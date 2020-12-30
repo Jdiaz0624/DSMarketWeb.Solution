@@ -417,9 +417,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void LinkSiguiente_Click(object sender, EventArgs e)
         {
             CurrentPage += 1;
-
             MostrarListadoSuplidores();
-         //   MoverValoresPaginacion((int)OpcionesPaginacionValores.SiguientePagina);
         }
 
         protected void LinkUltimo_Click(object sender, EventArgs e)
