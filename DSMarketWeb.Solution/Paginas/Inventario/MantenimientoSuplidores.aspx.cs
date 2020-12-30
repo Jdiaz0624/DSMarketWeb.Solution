@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.IO;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportSource;
+using CrystalDecisions.Shared;
 
 namespace DSMarketWeb.Solution.Paginas.Inventario
 {
@@ -225,7 +229,33 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
 
         #endregion
-        private void ExportarReporte(decimal IdUsuario, string RutaReporte, string UsuarioBD, string ClaveBD, string NombreArchivo) { }
+        private void ExportarReporte(decimal? IdUsuario, string RutaReporte, string UsuarioBD, string ClaveBD, string NombreArchivo) {
+
+            decimal? _IdTipoSuplidor = ddlSeleccionarTipoSuplidorConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoSuplidorConsulta.SelectedValue) : new Nullable<decimal>();
+            decimal? _IdSUplidor = null;
+            string _NombreSuplidor = string.IsNullOrEmpty(txtNombreSuplidorConsulta.Text.Trim()) ? null : txtNombreSuplidorConsulta.Text.Trim();
+           
+            
+
+            ReportDocument Reporte = new ReportDocument();
+
+            Reporte.Load(RutaReporte);
+            Reporte.Refresh();
+            Reporte.SetParameterValue("@IdTipoSuplidor", _IdTipoSuplidor);
+            Reporte.SetParameterValue("@IdSuplidor", _IdSUplidor);
+            Reporte.SetParameterValue("@Nombre", _NombreSuplidor);
+            Reporte.SetParameterValue("@IdUsuarioGenera", IdUsuario);
+            Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+            if (rbExportarPDF.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+            }
+            else if (rbExportarExcel.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.Excel, Response, true, NombreArchivo);
+            }
+            else if (rbExportarWord.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+            }
+        }
         #endregion
         #region MANTENIMIENTO DE SUPLIDORES
         private void MANSuplidores(decimal IdSuplidor, string Accion) {
@@ -242,6 +272,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             procesar.ProcesarDatosSuplidor();
         }
         #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -251,7 +282,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 ModoConsulta();
                 Consulta_Mantenimiento();
                 divPaginacion.Visible = false;
-
+                rbExportarPDF.Checked = true;
             }
         }
 
@@ -266,6 +297,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Mantenimiento_Consulta();
             btnGaurdar.Visible = true;
             btnModificar.Visible = false;
+            cbEstatusSuplidor.Checked = true;
         }
 
         protected void btnModificarRegistros_Click(object sender, EventArgs e)
@@ -277,7 +309,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnExportarRegistros_Click(object sender, EventArgs e)
         {
-           
+            string _UsuarioBD = "", _ClaveBD = "";
+            var SacaCredencialesBD = ObjdataSeguridad.Value.SacarCredencialesBD(1);
+            foreach (var n in SacaCredencialesBD) {
+                _UsuarioBD = n.Usuario;
+                _ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
+            }
+
+            decimal? _IdUsuario = 0;
+
+            if (Session["IdUsuario"] != null)
+            {
+                _IdUsuario = Convert.ToDecimal(Session["IdUsuario"]);
+            }
+            else {
+                _IdUsuario = 0;
+            }
+
+            ExportarReporte(_IdUsuario, Server.MapPath("ReporteSuplidores.rpt"), _UsuarioBD, _ClaveBD, "Reporte de Suplidores");
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
@@ -317,11 +366,26 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnGaurdar_Click(object sender, EventArgs e)
         {
             MANSuplidores(0, "INSERT");
+            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+            RestablecerPantalla();
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            string _ClaveSeguridad = string.IsNullOrEmpty(txtcla
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadMantenimiento.Text.Trim()) ? null : txtClaveSeguridadMantenimiento.Text.Trim();
+
+            var ValidarClaveSeguridad = ObjdataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (ValidarClaveSeguridad.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadNoValida()", "ClaveSeguridadNoValida();", true);
+            }
+            else {
+                MANSuplidores(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado()", true);
+                RestablecerPantalla();
+            }
         }
 
         protected void LinkPrimeraPagina_Click(object sender, EventArgs e)

@@ -43,8 +43,46 @@
         }
 
         $(document).ready(function () {
-            $("#<%=btnGaurdar.ClientID%>").click(function () { });
-            $("#<%=btnModificar.ClientID%>").click(function () { });
+            $("#<%=btnGaurdar.ClientID%>").click(function () {
+                var TipoSplidorGardar = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                if (TipoSplidorGardar < 1) {
+                    alert("El campo tipo de suplidor no puede estar vacio para guardar este registro");
+                    $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var NombreSuplidorGuardar = $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").val().length;
+                    if (NombreSuplidorGuardar < 1) {
+                        alert("El campo nombre de suplidor no puede estar vacio para guardar este registro, favor de verificar.");
+                        $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                }
+            });
+            $("#<%=btnModificar.ClientID%>").click(function () {
+                var TipoSupldorModificar = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                if (TipoSupldorModificar < 1) {
+                    alert("El campo tipo de suplidor no puede estar vacio para modificar este registro, favor de verificar");
+                    $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var NombreSuplidorModificar = $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").val().length;
+                    if (NombreSuplidorModificar < 1) {
+                        alert("El campo nombre de suplidor no puede estar vacio para modificar este registro, favor de verificar.");
+                        $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var ClaveSeguridadModificar = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                        if (ClaveSeguridadModificar < 1) {
+                            alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar");
+                            $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                    }
+                }
+            });
         })
     </script>
 <div class="container-fluid">
@@ -187,7 +225,8 @@
                 <asp:TextBox ID="txtDirecconMantenimiento" runat="server" MaxLength="8000" TextMode="MultiLine"  AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group col-md-4">
-                <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad"
+                <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtClaveSeguridadMantenimiento" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
         <div class="form-check-inline">
