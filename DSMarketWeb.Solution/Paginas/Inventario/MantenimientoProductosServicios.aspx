@@ -815,7 +815,7 @@
                         <div class="col-md-4 col-md-offset-4" align="center">
                             <asp:Label ID="lbTituloImagen" runat="server" Text="Imagen de Producto" CssClass="Letranegrita"></asp:Label>
                             <br />
-                            <asp:Image ID="IMGProducto" runat="server" Width="200" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <asp:Image ID="IMGProducto" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
                             <br />
                             <br />
                             <asp:Label ID="lbBuscarImagen" runat="server" Text="Subir Imagen" CssClass="Letranegrita"></asp:Label>
