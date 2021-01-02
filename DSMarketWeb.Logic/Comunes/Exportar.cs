@@ -9,7 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 namespace DSMarketWeb.Logic.Comunes
 {
-    public class Exportar
+    public class Exportar 
     {
         public static void exporttoexcel(string filename, object datos)
         {

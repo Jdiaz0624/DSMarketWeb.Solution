@@ -642,6 +642,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Conexion.Close();
 
             //GraTipoProductos.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0,}k";
+      
             GraTipoProductos.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
             GraTipoProductos.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
             GraTipoProductos.ChartAreas["ChartArea1"].AxisX.Interval = 1;
@@ -1151,7 +1152,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// <param name="UsuarioBD"></param>
         /// <param name="ClaveBD"></param>
         /// <param name="NombreArchivo"></param>
-        private void ExportarInformacionProductoEspesifico(decimal IdProducto, decimal NumeroConector, string RutaReporte, string UsuarioBD, string ClaveBD,string NombreArchivo) 
+        private void ExportarInformacionProductoEspesifico(decimal IdUsuarioGenera, decimal IdProducto, decimal NumeroConector, string RutaReporte, string UsuarioBD, string ClaveBD,string NombreArchivo) 
         {
             string _Descripcion = null;
             string _CodigoBarra = null;
@@ -1193,6 +1194,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Reporte.SetParameterValue("@TieneOferta", _TieneOferta);
             Reporte.SetParameterValue("@EstatusProducto", _EstatusProducto);
             Reporte.SetParameterValue("@NumeroSeguimiento", _NumeroSeguimiento);
+            Reporte.SetParameterValue("@GeneradoPor", IdUsuarioGenera);
             Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
             if (rbExportarPDF.Checked == true) {
                 Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
@@ -1447,7 +1449,10 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                     "Reporte de Inventario");
             }
             else {
+                decimal IdUsuarioGenera = Session["IdUsuario"] != null ? Convert.ToDecimal(Session["IdUsuario"]) : 0;
+
                 ExportarInformacionProductoEspesifico(
+                    IdUsuarioGenera,
                     Convert.ToDecimal(lbIdProductoSeleccionado.Text),
                     Convert.ToDecimal(lbNumeroConectorProducto.Text),
                     Server.MapPath("ReporteProductoIndividual.rpt"),

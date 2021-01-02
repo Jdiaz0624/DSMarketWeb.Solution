@@ -57,6 +57,7 @@
     <Compile Include="Comunes\SacarPorcientoDescuentoPrDefectoProductos.cs" />
     <Compile Include="Comunes\SeguridadEncriptacion.cs" />
     <Compile Include="Comunes\UtilidadDrop.cs" />
+    <Compile Include="Comunes\ValidarClaveSeguridad.cs" />
     <Compile Include="Comunes\ValidarConfiguracionGenera.cs" />
     <Compile Include="Comunes\ValidarImagenSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EBuscaImagenesSistema.cs" />

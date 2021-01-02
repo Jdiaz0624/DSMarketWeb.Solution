@@ -634,41 +634,51 @@
 
             <br />
             <!--GRAFICO DE TIPO DE PRODUCTOS-->
-       <div class="col-md-6">
-            <div id="divTipoProducto" runat="server" align="center" >
+       <div align="center">
+            <div id="divTipoProducto" runat="server"  >
 
              <asp:Label ID="lbGraTipoProducto" runat="server"  Text="Estadistica de Tipo de Producto" CssClass="Letranegrita"></asp:Label>
              <br />
             <asp:Chart ID="GraTipoProductos" Width="800px" runat="server" Palette="Excel">
            <Series>
-               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true"></asp:Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" ChartType="Pie"></asp:Series>
+              
            </Series>
+                <Legends>
+                    <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="false" Name="Default" LegendStyle="Row"></asp:Legend>
+                </Legends>
            <ChartAreas>
                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+              
            </ChartAreas>
+                <BorderSkin SkinStyle="Emboss" />
        </asp:Chart>
         </div>
        </div>
 
 
-        <div class="form-group col-md-6">
+        <div align="center">
             <div id="divGraficoMarcas"  runat="server" align="center" >
 
              <asp:Label ID="lbGraficoMarcas" runat="server"  Text="Top 10 Marcas" CssClass="Letranegrita"></asp:Label>
              <br />
             <asp:Chart ID="GraMarcas" Width="800px" runat="server" Palette="Excel">
            <Series>
-               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true"></asp:Series>
+               <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" YValuesPerPoint="6"></asp:Series>
            </Series>
+                 <Legends>
+                    <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="false" Name="Default" LegendStyle="Row"></asp:Legend>
+                </Legends>
            <ChartAreas>
                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
            </ChartAreas>
+                <BorderSkin SkinStyle="Emboss" />
        </asp:Chart>
         </div>
         </div>
 
             
-        <div class="form-group col-md-6">
+        <div align="center">
             <div id="divGraficoServicios" runat="server" align="center" >
 
              <asp:Label ID="lbGraficarServicios" runat="server"  Text="Top 10 Servicios" CssClass="Letranegrita"></asp:Label>
@@ -677,9 +687,13 @@
            <Series>
                <asp:Series Name="Serie" XValueMember="1" YValueMembers="2" IsValueShownAsLabel="true" Label="#VAL{N}"></asp:Series>
            </Series>
+                 <Legends>
+                    <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="false" Name="Default" LegendStyle="Row"></asp:Legend>
+                </Legends>
            <ChartAreas>
                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
            </ChartAreas>
+                <BorderSkin SkinStyle="Emboss" />
        </asp:Chart>
         </div>
         </div>
