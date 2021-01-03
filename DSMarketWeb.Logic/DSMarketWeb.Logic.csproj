@@ -66,6 +66,7 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EClientes.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\EEmpleado.cs" />
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECapacidad.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionClientes.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionEmpleados.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCapacidadEquipos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionColoresEquipos.cs" />
