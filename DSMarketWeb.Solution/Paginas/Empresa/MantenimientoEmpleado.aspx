@@ -213,32 +213,32 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbNombreMantenimiento" runat="server" Text="Nombre" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbNombreMantenimiento" runat="server" Text="Nombre *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtNombreMantenimiento" runat="server" MaxLength="100" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbApellidoMAntenimiento" runat="server" Text="Apellido" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbApellidoMAntenimiento" runat="server" Text="Apellido *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtApellidoMAntenimiento" runat="server" MaxLength="100" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarTipoIdentificacionMantenimiento" runat="server" Text="Seleccionar Tipo de Identificacion" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarTipoIdentificacionMantenimiento" runat="server" Text="Seleccionar Tipo de Identificacion *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarTipoIdentificacionMantenimiento" runat="server" ToolTip="Seleccionar el tipo de identificación del empleado" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbNumeroIdentificacionMantenimiento" runat="server" Text="Numero de Identificación" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbNumeroIdentificacionMantenimiento" runat="server" Text="Numero de Identificación *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtNumeroidentificacionMantenimiento" runat="server" MaxLength="50" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarNAcionalidadMantenimiento" runat="server" Text="Seleccionar Nacionalidad" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarNAcionalidadMantenimiento" runat="server" Text="Seleccionar Nacionalidad *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarNacionalidadMantenimiento" runat="server" ToolTip="Seleccionar Nacionalidad" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbSexoMantenimiento" runat="server" Text="Seleccionar Sexo" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSexoMantenimiento" runat="server" Text="Seleccionar Sexo *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarSexoMantenimiento" runat="server" ToolTip="Seleccionar Sexo" CssClass="form-control"></asp:DropDownList>
                 </div>
 
@@ -253,31 +253,31 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarEstadoCivilMAntenimiento" runat="server" Text="Estado Civil" CssClass="Letranegrita">                      
+                    <asp:Label ID="lbSeleccionarEstadoCivilMAntenimiento" runat="server" Text="Estado Civil *" CssClass="Letranegrita">                      
                     </asp:Label>
                      <asp:DropDownList ID="ddlSeleccionarEstadiCivilMantenimiento" runat="server" ToolTip="Selccionar Estado Civil" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbFechaIngresoMantenimiento" runat="server" Text="Fecha de Ingreso" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbFechaIngresoMantenimiento" runat="server" Text="Fecha de Ingreso *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtFechaIngresoMantenimiento" runat="server" TextMode="Date" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarDepartamentoMantenimiento" runat="server" Text="Seleccionar Departamento" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarDepartamentoMantenimiento" runat="server" Text="Seleccionar Departamento *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarDepartamentoMantenimiento" runat="server" ToolTip="Seleccionar el departamento al que pertenece" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarCargoMantenimiento" runat="server" Text="Seleccionar Cargo" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarCargoMantenimiento" runat="server" Text="Seleccionar Cargo *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarCargoMantenimiento" runat="server" ToolTip="Seleccionar el Cargo al que pertenece" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarTipoEmpleadoMantenimiento" runat="server" Text="Seleccionar Tipo de Empleado" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarTipoEmpleadoMantenimiento" runat="server" Text="Seleccionar Tipo de Empleado *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarTipoEmpleadoMantenimiento" runat="server" ToolTip="Seleccionar el Tipo de Empleado" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarTipoNominaMantenimiento" runat="server" Text="Seleccionar Tipo de Nomina" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarTipoNominaMantenimiento" runat="server" Text="Seleccionar Tipo de Nomina *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarTipoNominaMantenimiento" runat="server" ToolTip="Seleccionar el Tipo de nomina del empleado" CssClass="form-control"></asp:DropDownList>
                 </div>
 
@@ -292,17 +292,17 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbFechaNacimientoMantenimiento" runat="server" Text="FEcha de Nacimiento" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbFechaNacimientoMantenimiento" runat="server" Text="FEcha de Nacimiento *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtFechaNacimientoMantenimiento" runat="server" TextMode="Date" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
                   <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarFormaPagoMantenimiento" runat="server" Text="Seleccionar Tipo de Nomina" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarFormaPagoMantenimiento" runat="server" Text="Seleccionar Tipo de Nomina *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" runat="server" ToolTip="Seleccionar Forma de Pago" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbSueldoMantenimiento" runat="server" Text="Sueldo" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSueldoMantenimiento" runat="server" Text="Sueldo *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtSueldoMantenimiento" runat="server" TextMode="Number" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
@@ -312,22 +312,22 @@
                 </div>
 
                 <div class="form-group col-md-12">
-                    <asp:Label ID="lbDireccionMAnteimiento" runat="server" Text="Otros Ingresos" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbDireccionMAnteimiento" runat="server" Text="Dirección" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtDireccionMAntenimiento" runat="server" TextMode="MultiLine" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbPorcientoComisionServicioMantenimiento" runat="server" Text="% de Comision por servicio" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPorcientoComisionServicioMantenimiento" runat="server" Text="% de Comision por servicio *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtPorcientoComisionServicioMantenimiento" runat="server" TextMode="Number" step="0.01" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbPorcientoComisionVentasMAntenimiento" runat="server" Text="% de Comision por servicio" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPorcientoComisionVentasMAntenimiento" runat="server" Text="% de Comision por servicio *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtPorcientoComisionVentasMantenimiento" runat="server" TextMode="Number" step="0.01" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
                  <div class="form-group col-md-6">
-                    <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbClaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtClaveSeguridadMantenimiento" runat="server" TextMode="Password" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
