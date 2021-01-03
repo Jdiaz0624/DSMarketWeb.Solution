@@ -334,7 +334,7 @@
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
-                    <asp:CheckBox ID="cbEstatus" runat="server" Text="Estatus" ToolTip="Estatus de Empleado" CssClass="form-check-input" />
+                    <asp:CheckBox ID="cbEstatus" runat="server" Text="Estatus" ToolTip="Estatus de Empleado" CssClass="form-check-input" /> 
                      <asp:CheckBox ID="cbAplicaParaComision" runat="server" Text="Aplica Para Comision" ToolTip="Aplica Para Comisión" CssClass="form-check-input" />
                     <asp:CheckBox ID="cbLlevaFoto" runat="server" Text="Lleva Foto" ToolTip="Lleva Foto" CssClass="form-check-input" />
                 </div>
