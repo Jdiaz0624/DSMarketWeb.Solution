@@ -252,7 +252,7 @@ namespace DSMarketWeb.Solution.MasterPage
         protected void LinkEmpleados_Click(object sender, EventArgs e)
         {
             if (Session["IdUsuario"] != null) {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+                Response.Redirect("~/Paginas/Empresa/MantenimientoEmpleado.aspx");
             }
             else
             {
