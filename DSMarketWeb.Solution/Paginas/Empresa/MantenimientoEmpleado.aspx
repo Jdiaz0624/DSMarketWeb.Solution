@@ -30,6 +30,290 @@
         }
     </style>
 
+    <script type="text/javascript">
+        function RegistroGuardado() {
+            alert("Registro guardado con exito.");
+        }
+
+        function RegistroModificado() {
+            alert("Registro Modificado con exito.");
+        }
+
+        function ClaveSeguridadNoValida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar.");
+        }
+
+        function FechaIngresoVacio() {
+            alert("El campo Fecha de Ingreso no puede estar vacio para realizar esta operación, favor de verificar.");
+            $("#<%=txtFechaIngresoMantenimiento.ClientID%>").css("border-color", "red");
+        }
+        function FechaNacimientoVacio() {
+            alert("El campo Fecha de Nacimiento no puede estar vacio para realizar esta operación, favor de verificar");
+            $("#<%=txtFechaNacimientoMantenimiento.ClientID%>").css("border-color", "red");
+        }
+
+        $(document).ready(function () {
+            $("#<%=btnGuardar.ClientID%>").click(function () {
+                var ValidarNombreEmpleado = $("#<%=txtNombreMantenimiento.ClientID%>").val().length;
+                if (ValidarNombreEmpleado < 1) {
+                    alert("El campo nombre no puede estar vacio para guardar este registro, favor de verificar.");
+                    $("#<%=txtNombreMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var ValidarApellido = $("#<%=txtApellidoMAntenimiento.ClientID%>").val().length;
+                    if (ValidarApellido < 1) {
+                        alert("El campo apellido no puede estar vacio para guardar este registro, favor de verificar.");
+                        $("#<%=txtApellidoMAntenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var ValidarTipoIdentificacion = $("#<%=ddlSeleccionarTipoIdentificacionMantenimiento.ClientID%>").val();
+                        if (ValidarTipoIdentificacion < 1) {
+                            alert("El campo tipo de identificación no puede estar vacio para guardar este registro, favor de verificar.");
+                            $("#<%=ddlSeleccionarTipoIdentificacionMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var ValidarNumeroIdentificacion = $("#<%=txtNumeroidentificacionMantenimiento.ClientID%>").val().length;
+                            if (ValidarNumeroIdentificacion < 1) {
+                                alert("El campo numero de identificación no puede estar vacio para guardar este registro, favor de verificar.");
+                                $("#<%=txtNumeroidentificacionMantenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var NAcionalidad = $("#<%=ddlSeleccionarNacionalidadMantenimiento.ClientID%>").val();
+                                if (NAcionalidad < 1) {
+                                    alert("El campo nacionalidad no puede estar vacio para guardar este registro, favor de verificar.");
+                                    $("#<%=ddlSeleccionarNacionalidadMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var Sexo = $("#<%=ddlSeleccionarSexoMantenimiento.ClientID%>").val();
+                                    if (Sexo < 1) {
+                                        alert("El campo sexo no puede estar vacio para guardar estar registro, favor de verificar.");
+                                        $("#<%=ddlSeleccionarSexoMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var EstadoCivil = $("#<%=ddlSeleccionarEstadiCivilMantenimiento.ClientID%>").val();
+                                        if (EstadoCivil < 1) {
+                                            alert("El campo estado civil no puede estar vacio para guardar este registro, favor de verificar.");
+                                            $("#<%=ddlSeleccionarEstadiCivilMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var Departamento = $("#<%=ddlSeleccionarDepartamentoMantenimiento.ClientID%>").val();
+                                            if (Departamento < 1) {
+                                                alert("El campo departamento no puede estar vacio para guardar este registro, favor de verificar.");
+                                                $("#<%=ddlSeleccionarDepartamentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var Cargo = $("#<%=ddlSeleccionarCargoMantenimiento.ClientID%>").val();
+                                                if (Cargo < 1) {
+                                                    alert("El campo cargo no puede estar vacio para guardar este registro, favor de verificar.");
+                                                    $("#<%=ddlSeleccionarCargoMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var TipoEmpleado = $("#<%=ddlSeleccionarTipoEmpleadoMantenimiento.ClientID%>").val();
+                                                    if (TipoEmpleado < 1) {
+                                                        alert("El campo tipo de empleado no puede estar vacio para guardar este registro, favor de verificar.");
+                                                        $("#<%=ddlSeleccionarTipoEmpleadoMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var TipoNomina = $("#<%=ddlSeleccionarTipoNominaMantenimiento.ClientID%>").val();
+                                                        if (TipoNomina < 1) {
+                                                            alert("El campo tipo de nomina no puede estar vacio para guardar este registro, favor de verificar.");
+                                                            $("#<%=ddlSeleccionarTipoNominaMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var FormaPago = $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").val();
+                                                            if (FormaPago < 1) {
+                                                                alert("El campo forma de pago no puede estar vacio para guardar este registro, favor de verificar.");
+                                                                $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var Sueldo = $("#<%=txtSueldoMantenimiento.ClientID%>").val().length;
+                                                                if (Sueldo < 1) {
+                                                                    alert("El campo sueldo no puede estar vacio para guardar este registro, favor de verificar.");
+                                                                    $("#<%=txtSueldoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ComisionServicio = $("#<%=txtPorcientoComisionServicioMantenimiento.ClientID%>").val().length;
+                                                                    if (ComisionServicio < 1) {
+                                                                        alert("El campo comisión por servicio no puede estar vacio para guardar este registro, favor de verificar.");
+                                                                        $("#<%=txtPorcientoComisionServicioMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ComisionVenta = $("#<%=txtPorcientoComisionVentasMantenimiento.ClientID%>").val().length;
+                                                                        if (ComisionVenta < 1) {
+                                                                            alert("El campo comision por ventas no puede estar vacio para guardar este registro, favor de verificar.");
+                                                                            $("#<%=txtPorcientoComisionVentasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                       
+                               
+                               
+                        }
+                    }
+                }
+            });
+
+            $("#<%=btnModificar.ClientID%>").click(function () {
+                var ValidarNombreEmpleado = $("#<%=txtNombreMantenimiento.ClientID%>").val().length;
+                  if (ValidarNombreEmpleado < 1) {
+                      alert("El campo nombre no puede estar vacio para modificar este registro, favor de verificar.");
+                      $("#<%=txtNombreMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var ValidarApellido = $("#<%=txtApellidoMAntenimiento.ClientID%>").val().length;
+                    if (ValidarApellido < 1) {
+                        alert("El campo apellido no puede estar vacio para modificar este registro, favor de verificar.");
+                        $("#<%=txtApellidoMAntenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var ValidarTipoIdentificacion = $("#<%=ddlSeleccionarTipoIdentificacionMantenimiento.ClientID%>").val();
+                        if (ValidarTipoIdentificacion < 1) {
+                            alert("El campo tipo de identificación no puede estar vacio para modificar este registro, favor de verificar.");
+                            $("#<%=ddlSeleccionarTipoIdentificacionMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var ValidarNumeroIdentificacion = $("#<%=txtNumeroidentificacionMantenimiento.ClientID%>").val().length;
+                            if (ValidarNumeroIdentificacion < 1) {
+                                alert("El campo numero de identificación no puede estar vacio para modificar este registro, favor de verificar.");
+                                $("#<%=txtNumeroidentificacionMantenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var NAcionalidad = $("#<%=ddlSeleccionarNacionalidadMantenimiento.ClientID%>").val();
+                                if (NAcionalidad < 1) {
+                                    alert("El campo nacionalidad no puede estar vacio para modificar este registro, favor de verificar.");
+                                    $("#<%=ddlSeleccionarNacionalidadMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var Sexo = $("#<%=ddlSeleccionarSexoMantenimiento.ClientID%>").val();
+                                    if (Sexo < 1) {
+                                        alert("El campo sexo no puede estar vacio para modificar estar registro, favor de verificar.");
+                                        $("#<%=ddlSeleccionarSexoMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var EstadoCivil = $("#<%=ddlSeleccionarEstadiCivilMantenimiento.ClientID%>").val();
+                                        if (EstadoCivil < 1) {
+                                            alert("El campo estado civil no puede estar vacio para modificar este registro, favor de verificar.");
+                                            $("#<%=ddlSeleccionarEstadiCivilMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var Departamento = $("#<%=ddlSeleccionarDepartamentoMantenimiento.ClientID%>").val();
+                                            if (Departamento < 1) {
+                                                alert("El campo departamento no puede estar vacio para modificar este registro, favor de verificar.");
+                                                $("#<%=ddlSeleccionarDepartamentoMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var Cargo = $("#<%=ddlSeleccionarCargoMantenimiento.ClientID%>").val();
+                                                if (Cargo < 1) {
+                                                    alert("El campo cargo no puede estar vacio para modificar este registro, favor de verificar.");
+                                                    $("#<%=ddlSeleccionarCargoMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var TipoEmpleado = $("#<%=ddlSeleccionarTipoEmpleadoMantenimiento.ClientID%>").val();
+                                                    if (TipoEmpleado < 1) {
+                                                        alert("El campo tipo de empleado no puede estar vacio para modificar este registro, favor de verificar.");
+                                                        $("#<%=ddlSeleccionarTipoEmpleadoMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var TipoNomina = $("#<%=ddlSeleccionarTipoNominaMantenimiento.ClientID%>").val();
+                                                        if (TipoNomina < 1) {
+                                                            alert("El campo tipo de nomina no puede estar vacio para modificar este registro, favor de verificar.");
+                                                            $("#<%=ddlSeleccionarTipoNominaMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var FormaPago = $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").val();
+                                                            if (FormaPago < 1) {
+                                                                alert("El campo forma de pago no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var Sueldo = $("#<%=txtSueldoMantenimiento.ClientID%>").val().length;
+                                                                if (Sueldo < 1) {
+                                                                    alert("El campo sueldo no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                    $("#<%=txtSueldoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ComisionServicio = $("#<%=txtPorcientoComisionServicioMantenimiento.ClientID%>").val().length;
+                                                                    if (ComisionServicio < 1) {
+                                                                        alert("El campo comisión por servicio no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                        $("#<%=txtPorcientoComisionServicioMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ComisionVenta = $("#<%=txtPorcientoComisionVentasMantenimiento.ClientID%>").val().length;
+                                                                        if (ComisionVenta < 1) {
+                                                                            alert("El campo comision por ventas no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                            $("#<%=txtPorcientoComisionVentasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                        else {
+                                                                            var ClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                                                                            if (ClaveSeguridad < 1) {
+                                                                                alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                                $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                return false;
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                  }
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+
+                              }
+
+
+
+                          }
+                      }
+                  }
+              });
+
+        })
+    </script>
+
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
             <div class="jumbotron" align="center">
@@ -116,7 +400,7 @@
 
                 <asp:Label ID="Label5" runat="server" Text=" " CssClass="Letranegrita"></asp:Label>
 
-                <asp:Label ID="lbCantidadRegistrosInactivosTitulo" runat="server" Text="Registros Activos" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadRegistrosInactivosTitulo" runat="server" Text="Registros Inactivos" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosInactivosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosInactivosCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
             </div>
@@ -156,7 +440,7 @@
             <div align="center">
                 <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbPaginaActualVariavle" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" de " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadPaginaVAriable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
              <div id="divPaginacion" runat="server" align="center">
@@ -263,7 +547,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <asp:Label ID="lbSeleccionarDepartamentoMantenimiento" runat="server" Text="Seleccionar Departamento *" CssClass="Letranegrita"></asp:Label>
-                    <asp:DropDownList ID="ddlSeleccionarDepartamentoMantenimiento" runat="server" ToolTip="Seleccionar el departamento al que pertenece" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlSeleccionarDepartamentoMantenimiento" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarDepartamentoMantenimiento_SelectedIndexChanged" ToolTip="Seleccionar el departamento al que pertenece" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-6">
@@ -297,7 +581,7 @@
                 </div>
 
                   <div class="form-group col-md-6">
-                    <asp:Label ID="lbSeleccionarFormaPagoMantenimiento" runat="server" Text="Seleccionar Tipo de Nomina *" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbSeleccionarFormaPagoMantenimiento" runat="server" Text="Seleccionar Forma de Pago *" CssClass="Letranegrita"></asp:Label>
                     <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" runat="server" ToolTip="Seleccionar Forma de Pago" CssClass="form-control"></asp:DropDownList>
                 </div>
 
@@ -322,7 +606,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <asp:Label ID="lbPorcientoComisionVentasMAntenimiento" runat="server" Text="% de Comision por servicio *" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbPorcientoComisionVentasMAntenimiento" runat="server" Text="% de Comision por Venta *" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtPorcientoComisionVentasMantenimiento" runat="server" TextMode="Number" step="0.01" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                 </div>
 
