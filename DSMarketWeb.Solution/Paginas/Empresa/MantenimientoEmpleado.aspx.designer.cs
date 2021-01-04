@@ -609,6 +609,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbIdRegistroSeleccionado;
 
         /// <summary>
+        /// lbReporteUnico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbReporteUnico;
+
+        /// <summary>
         /// lbNombreMantenimiento control.
         /// </summary>
         /// <remarks>

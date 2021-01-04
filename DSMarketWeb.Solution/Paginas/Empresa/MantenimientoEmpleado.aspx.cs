@@ -210,6 +210,53 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        #region MANTENIMIENTO DE EMPLEADOS
+        private void MANEmpleados(decimal idEmpleado, string Accion) {
+            if (string.IsNullOrEmpty(txtFechaIngresoMantenimiento.Text.Trim()) || string.IsNullOrEmpty(txtFechaNacimientoMantenimiento.Text.Trim())) {
+                ClientScript.RegisterStartupScript(GetType(), "CamposVacios()", "CamposVacios();", true);
+                if (string.IsNullOrEmpty(txtFechaIngresoMantenimiento.Text.Trim())) {
+                    ClientScript.RegisterStartupScript(GetType(), "FechaIngresoVacio()", "FechaIngresoVacio();", true);
+                }
+                if (string.IsNullOrEmpty(txtFechaNacimientoMantenimiento.Text.Trim())) {
+                    ClientScript.RegisterStartupScript(GetType(), "FechaNacimientoVacio()", "FechaNacimientoVacio();", true);
+                }
+            }
+            else {
+                DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionEmpleados Procesar = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionEmpleados(
+                    idEmpleado,
+                    txtNombreMantenimiento.Text,
+                    txtApellidoMAntenimiento.Text,
+                    Convert.ToDecimal(ddlSeleccionarTipoIdentificacionMantenimiento.SelectedValue),
+                    txtNumeroidentificacionMantenimiento.Text,
+                    Convert.ToDecimal(ddlSeleccionarNacionalidadMantenimiento.SelectedValue),
+                    txtxNSSMantenimiento.Text,
+                    txtDireccionMAntenimiento.Text,
+                    Convert.ToDecimal(ddlSeleccionarTipoEmpleadoMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarTipoNominaMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarDepartamentoMantenimiento.SelectedValue),
+                    Convert.ToDecimal(ddlSeleccionarCargoMantenimiento.SelectedValue),
+                    txtTelefonoMantenimiento.Text,
+                    txtSegundoTelefonoMantenimiento.Text,
+                    txtEmailMantenimiento.Text,
+                    Convert.ToDecimal(ddlSeleccionarEstadiCivilMantenimiento.SelectedValue),
+                    Convert.ToDecimal(txtSueldoMantenimiento.Text),
+                    Convert.ToDecimal(txtOtrosIngresosMantenimiento.Text),
+                    Convert.ToDecimal(ddlSeleccionarFormaPagoMantenimiento.SelectedValue),
+                    Convert.ToDateTime(txtFechaIngresoMantenimiento.Text),
+                    Convert.ToDateTime(txtFechaNacimientoMantenimiento.Text),
+                    cbEstatus.Checked,
+                    cbAplicaParaComision.Checked,
+                    Convert.ToDecimal(txtPorcientoComisionVentasMantenimiento.Text),
+                    Convert.ToDecimal(txtPorcientoComisionServicioMantenimiento.Text),
+                    Convert.ToInt32(ddlSeleccionarSexoMantenimiento.SelectedValue),
+                    cbLlevaFoto.Checked,
+                    Accion);
+                Procesar.ProcesarDatosEmpleados();
+            }
+
+        }
+        #endregion
+
         private void ModoConsulta() {
             btnConsultarRegistros.Enabled = true;
             btnNuevoRegistro.Enabled = true;
@@ -317,6 +364,44 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             GraEstatusEmpleados.Series["Serie"].Points.DataBindXY(NombreEstatus, CantidadRegistros);
 
         }
+
+        private void RestablecerPantalla() {
+            rbTodos.Checked = true;
+            rbExportarPdf.Checked = true;
+            txtCodigoEmpleadoCosulta.Text = string.Empty;
+            txtNombreEmpleadoConsulta.Text = string.Empty;
+            txtNumeroIdentificacionConsulta.Text = string.Empty;
+            txtNSSConsulta.Text = string.Empty;
+            CargarCargosConsulta();
+
+            txtNombreMantenimiento.Text = string.Empty;
+            txtApellidoMAntenimiento.Text = string.Empty;
+            txtNumeroidentificacionMantenimiento.Text = string.Empty;
+            txtxNSSMantenimiento.Text = string.Empty;
+            txtEmailMantenimiento.Text = string.Empty;
+            txtFechaIngresoMantenimiento.Text = string.Empty;
+            txtTelefonoMantenimiento.Text = string.Empty;
+            txtSegundoTelefonoMantenimiento.Text = string.Empty;
+            txtFechaNacimientoMantenimiento.Text = string.Empty;
+            txtSueldoMantenimiento.Text = string.Empty;
+            txtOtrosIngresosMantenimiento.Text = string.Empty;
+            txtDireccionMAntenimiento.Text = string.Empty;
+            txtPorcientoComisionServicioMantenimiento.Text = string.Empty;
+            txtPorcientoComisionVentasMantenimiento.Text = string.Empty;
+            txtClaveSeguridadMantenimiento.Text = string.Empty;
+            CargarListasDesplegablesMantenimiento();
+
+            ModoConsulta();
+            Consulta_Mantenimiento();
+            MostrarListadoEmpleados();
+            lbReporteUnico.Text = "0";
+        }
+
+        enum TipoReporteGenerar
+        {
+            ReporteUnico=1,
+            ListadoGenea=0
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -347,42 +432,114 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             btnModificar.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = false;
             txtClaveSeguridadMantenimiento.Visible = false;
+            cbAplicaParaComision.Checked = false;
+            cbLlevaFoto.Checked = false;
+            DivBloqueImagenEmpleado.Visible = false;
 
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
         {
-
+            MAntenimiento_Consulta();
+            btnGuardar.Visible = false;
+            btnModificar.Visible = true;
+            lbClaveSeguridadMantenimiento.Visible = true;
+            txtClaveSeguridadMantenimiento.Visible = true;
         }
 
         protected void btnExportarRegistro_Click(object sender, EventArgs e)
         {
+            int ReporteGenerar = Convert.ToInt32(lbReporteUnico.Text);
 
+            if (ReporteGenerar == (int)TipoReporteGenerar.ListadoGenea)
+            {
+                //GENERAR EL LISTADO DE TODOS LOS EMPLEADOS
+            }
+            else if (ReporteGenerar == (int)TipoReporteGenerar.ReporteUnico) { 
+            //GENERAMOS EL REPORTE DE UN REGISTRO SELECCIONADO
+            }
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
 
         protected void btnSeleccionarRegistros_Click(object sender, EventArgs e)
         {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdEmpleadoSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdEmpleado")).Value.ToString();
+            lbIdRegistroSeleccionado.Text = hfIdEmpleadoSeleccionado.ToString();
+            lbReporteUnico.Text = "1";
 
+            var BuscarRegistroSeleccionado = ObjDataEmpresa.Value.BuscaEmpleados(
+                lbIdRegistroSeleccionado.Text);
+            lbCantidadregistrosVariable.Text = "1";
+     
+            foreach (var n in BuscarRegistroSeleccionado) {
+                DateTime FechaEntrada = Convert.ToDateTime(n.FechaIngreso0);
+                DateTime FechaNacimiento = Convert.ToDateTime(n.FechaNacimiento0);
+                txtNombreMantenimiento.Text = n.Nombre;
+                txtApellidoMAntenimiento.Text = n.Apellido;
+                CargarListaDespTipoIdentificacionMantenimient();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoIdentificacionMantenimiento, n.IdTipoIdentificacion.ToString());
+                txtNumeroidentificacionMantenimiento.Text = n.NumeroIdentificacion;
+                CargarListaNacionalidadMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarNacionalidadMantenimiento, n.IdNacionalidad.ToString());
+                CargarListaSexoMantenimient();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarSexoMantenimiento, n.IdSexo.ToString());
+                txtxNSSMantenimiento.Text = n.NSS;
+                txtEmailMantenimiento.Text = n.Email;
+                CargarListaEstadoCivilMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarEstadiCivilMantenimiento, n.IdEstadoCivil.ToString());
+                txtFechaIngresoMantenimiento.Text = FechaEntrada.ToString("yyyy-MM-dd");
+                CargarListaDepartamentoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarDepartamentoMantenimiento, n.IdDepartamento.ToString());
+                CargarListaCargosMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarCargoMantenimiento, n.IdCargo.ToString());
+                CargarListaTipoEmpleadoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoEmpleadoMantenimiento, n.IdTipoEmpleado.ToString());
+                CargarListaTipoNominaMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoNominaMantenimiento, n.IdTioNomina.ToString());
+                txtTelefonoMantenimiento.Text = n.Telefono1;
+                txtSegundoTelefonoMantenimiento.Text = n.Telefono2;
+                txtFechaNacimientoMantenimiento.Text = FechaNacimiento.ToString("yyyy-MM-dd");
+                CargarListaFormaPagoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarFormaPagoMantenimiento, n.IdFormaPago.ToString());
+                txtSueldoMantenimiento.Text = n.Sueldo.ToString();
+                txtOtrosIngresosMantenimiento.Text = n.OtrosIngresos.ToString();
+                txtDireccionMAntenimiento.Text = n.Direccion;
+                txtPorcientoComisionVentasMantenimiento.Text = n.PorcientoCOmisionVentas.ToString();
+                txtPorcientoComisionServicioMantenimiento.Text = n.PorcientoComsiionServicio.ToString();
+                cbEstatus.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
+                cbAplicaParaComision.Checked = (n.AplicaParaComision0.HasValue ? n.AplicaParaComision0.Value : false);
+                cbLlevaFoto.Checked = (n.LlevaImagen0.HasValue ? n.LlevaImagen0.Value : false);
+            }
+            Paginar(ref rpListadoEmpleado, BuscarRegistroSeleccionado, 1);
+            HandlePaging(ref dtPaginacion);
+            ModoMantenimiento();
         }
 
         protected void LinkPrimeraPagina_Click(object sender, EventArgs e)
         {
+            CurrentPage = 0;
+            MostrarListadoEmpleados();
 
         }
 
         protected void LinkAnterior_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarListadoEmpleados();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior);
         }
 
         protected void dtPaginacion_ItemCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarListadoEmpleados();
         }
 
         protected void dtPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -392,22 +549,40 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void LinkSiguiente_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            MostrarListadoEmpleados();
         }
 
         protected void LinkUltimo_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarListadoEmpleados();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.UltimaPagina);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            MANEmpleados(0, "INSERT");
+            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadMantenimiento.Text.Trim()) ? null : txtClaveSeguridadMantenimiento.Text.Trim();
 
+            var ValidarClaveSeguridad = ObjDataSeguridad.Value.BuscaClaveSeguridad(
+                new Nullable<decimal>(),
+                null,
+                DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
+            if (ValidarClaveSeguridad.Count() < 1) { }
+            else {
+                MANEmpleados(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                CurrentPage = 0;
+                RestablecerPantalla();
+            }
         }
 
         protected void ddlSeleccionarDepartamentoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
@@ -415,9 +590,37 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             CargarListaCargosMantenimiento();
         }
 
+        protected void cbAplicaParaComision_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAplicaParaComision.Checked == true) {
+                txtPorcientoComisionServicioMantenimiento.Enabled = true;
+                txtPorcientoComisionVentasMantenimiento.Enabled = true;
+
+                txtPorcientoComisionServicioMantenimiento.Text = string.Empty;
+                txtPorcientoComisionVentasMantenimiento.Text = string.Empty;
+            }
+            else {
+                txtPorcientoComisionServicioMantenimiento.Enabled = false;
+                txtPorcientoComisionVentasMantenimiento.Enabled = false;
+                txtPorcientoComisionVentasMantenimiento.Text = "0";
+                txtPorcientoComisionServicioMantenimiento.Text = "0";
+            }
+        }
+
+        protected void cbLlevaFoto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbLlevaFoto.Checked == true) {
+                DivBloqueImagenEmpleado.Visible = true;
+            }
+            else {
+                DivBloqueImagenEmpleado.Visible = false;
+            }
+        }
+
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
     }
 }

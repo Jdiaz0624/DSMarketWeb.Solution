@@ -44,12 +44,13 @@
         }
 
         function FechaIngresoVacio() {
-            alert("El campo Fecha de Ingreso no puede estar vacio para realizar esta operación, favor de verificar.");
             $("#<%=txtFechaIngresoMantenimiento.ClientID%>").css("border-color", "red");
         }
         function FechaNacimientoVacio() {
-            alert("El campo Fecha de Nacimiento no puede estar vacio para realizar esta operación, favor de verificar");
             $("#<%=txtFechaNacimientoMantenimiento.ClientID%>").css("border-color", "red");
+        }
+        function CamposVacios() {
+            alert("Has dejado campos de fecha vacios que son necesarios para realizar esta operación, favor de verificar.");
         }
 
         $(document).ready(function () {
@@ -493,6 +494,7 @@
             <div class="jumbotron" align="center">
                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE EMPLEADOS"></asp:Label>
                 <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
+                <asp:Label ID="lbReporteUnico" runat="server" Text="0" Visible="false"></asp:Label>
             </div>
 
             <div class="form-row">
@@ -619,8 +621,8 @@
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbEstatus" runat="server" Text="Estatus" ToolTip="Estatus de Empleado" CssClass="form-check-input" /> 
-                     <asp:CheckBox ID="cbAplicaParaComision" runat="server" Text="Aplica Para Comision" ToolTip="Aplica Para Comisión" CssClass="form-check-input" />
-                    <asp:CheckBox ID="cbLlevaFoto" runat="server" Text="Lleva Foto" ToolTip="Lleva Foto" CssClass="form-check-input" />
+                     <asp:CheckBox ID="cbAplicaParaComision" runat="server" AutoPostBack="true" OnCheckedChanged="cbAplicaParaComision_CheckedChanged" Text="Aplica Para Comision" ToolTip="Aplica Para Comisión" CssClass="form-check-input" />
+                    <asp:CheckBox ID="cbLlevaFoto" runat="server" Text="Lleva Foto" AutoPostBack="true" OnCheckedChanged="cbLlevaFoto_CheckedChanged" ToolTip="Lleva Foto" CssClass="form-check-input" />
                 </div>
             </div>
 
@@ -648,7 +650,7 @@
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" ToolTip="Modificar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnModificar_Click" />
                 <asp:Button ID="btnVolver" runat="server" Text="Volver" ToolTip="Volver Atras" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnVolver_Click" />
             </div>
-
+            <br />
         </div>
     </div>
 </asp:Content>
