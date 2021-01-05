@@ -75,5 +75,16 @@ namespace DSMarketWeb.Data.Properties {
                 return ((string)(this["DSMarketWebConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.26.24.199;Initial Catalog=DSMarketWeb;Integrated Security=False;U" +
+            "ser ID=sa")]
+        public string DSMarketWebConnectionString2 {
+            get {
+                return ((string)(this["DSMarketWebConnectionString2"]));
+            }
+        }
     }
 }

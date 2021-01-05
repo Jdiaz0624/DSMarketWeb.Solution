@@ -274,6 +274,117 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
             return Validar;
         }
         #endregion
-      
+
+        #region MANTENIMIENTO DE DEPARTAMENTOS
+        //LISTADO DE DEPARTAMENTOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos> BuscaDepartamentos(decimal? IdDepartamento = null, string Departamento = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_DEPARTAMENTOS(IdDepartamento, Departamento)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos
+                           {
+                               IdDepartamento=n.IdDepartamento,
+                               Departamento=n.Departamento,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE DEPARTAMENTOS
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos MantenimientoDepartamentos(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos Mantenimiento = null;
+
+            var Departamento = ObjData.SP_MANTENIMIENTO_DEPARTAMENTOS(
+                Item.IdDepartamento,
+                Item.Departamento,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Departamento != null) {
+                Mantenimiento = (from n in Departamento
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EDepartamentos
+                                 {
+                                     IdDepartamento=n.IdDepartamento,
+                                     Departamento=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+
+        #region MANTENIMIENTO DE CARGOS
+        //LISTADO DE CARGOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos> BuscaCargos(decimal? IdCargo = null, decimal? IdDepartamento = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CARGOS(IdCargo, IdDepartamento, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos
+                           {
+                               IdCargo=n.IdCargo,
+                               IdDepartamento=n.IdDepartamento,
+                               Departamento=n.Departamento,
+                               Cargo=n.Cargo,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+        //MANTENIMIENTO DE CARGOS
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos MantenimientoCargos(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos Mantenimiento = null;
+
+            var Cargos = ObjData.SP_MANTENIMIENTO_CARGOS(
+                Item.IdCargo,
+                Item.IdDepartamento,
+                Item.Cargo,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Cargos != null) {
+                Mantenimiento = (from n in Cargos
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECargos
+                                 {
+                                     IdCargo=n.IdCargo,
+                                     IdDepartamento=n.IdDepartamento,
+                                     Cargo=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+
     }
 }
