@@ -88,6 +88,7 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesEmpresa
 
 		public System.Nullable<decimal> PorcientoComsiionServicio {get;set;}
 		public System.Nullable<int> IdSexo { get; set; }
+		public System.Nullable<decimal> NumeroRegistro { get; set; }
 
 		public string Sexo { get; set; }
 

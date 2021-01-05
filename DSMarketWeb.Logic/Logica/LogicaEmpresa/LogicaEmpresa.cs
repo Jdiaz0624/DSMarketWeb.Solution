@@ -104,6 +104,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
             return Mantenimiento;
         }
         #endregion
+
         #region MANTENIMIENTO DE EMPLEADOS
         //LISTADO DE EMPLEADOS
         public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EEmpleado> BuscaEmpleados(string IdEmpleado = null, string NombreEmpleado = null, string NumeroIdentificacion = null, string NSS = null, DateTime? FechaIngresoDesde = null, DateTime? FechaIngresoHasta = null, bool? Estatus = null, decimal? TipoEmpleado = null, decimal? TipoNomina = null, decimal? IdDepartamento = null, decimal? IdCargo = null, decimal? IdUsuarioProcesa = null) {
@@ -150,6 +151,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                AplicaParaComision=n.AplicaParaComision,
                                LlevaImagen0=n.LlevaImagen0,
                                LlevaImagen=n.LlevaImagen,
+                               IdSexo=n.IdSexo,
+                               Sexo=n.Sexo,
+                               NumeroRegistro=n.NumeroRegistro,
                                PorcientoCOmisionVentas=n.PorcientoCOmisionVentas,
                                PorcientoComsiionServicio=n.PorcientoComsiionServicio,
                                Foto=n.Foto,
@@ -204,6 +208,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                 Item.PorcientoComsiionServicio,
                 Item.IdSexo,
                 Item.LlevaImagen0,
+                Item.NumeroRegistro,
                 Accion);
             if (Empleado != null) {
                 Mantenimiento = (from n in Empleado
@@ -235,11 +240,40 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                      PorcientoCOmisionVentas=n.PorcientoCOmisionVentas,
                                      PorcientoComsiionServicio=n.PorcientoComsiionServicio,
                                      IdSexo=n.IdSexo,
-                                     LlevaImagen0=n.LlevaImagen
+                                     LlevaImagen0=n.LlevaImagen,
+                                     NumeroRegistro=n.NumeroRegistro
                                  }).FirstOrDefault();
             }
             return Mantenimiento;
         }
+
+        //SACAR EL ULTIMO CODIGO GENERADO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ESacarCodigoEmpleadoGenerado> SacarCodigoGenerado(decimal? NumeroRegistro = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Codigo = (from n in ObjData.SP_SACAR_CODIGO_EMPLEADO_GENERADO(NumeroRegistro)
+                          select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ESacarCodigoEmpleadoGenerado
+                          {
+                              IdEmpleado=n.IdEmpleado
+                          }).ToList();
+            return Codigo;
+
+        }
+
+        //VALIDAR FOTO DE EMPLEADO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EValidarFotoEmpleado> ValidarCodigoEmpleado(decimal? IdEmpleado = null, decimal? NumeroRegistro = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Validar = (from n in ObjData.SP_VALIDAR_FOTO_EMPLEADO(IdEmpleado, NumeroRegistro)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EValidarFotoEmpleado
+                           {
+                               IdEmpleado=n.IdEmpleado,
+                               Foto=n.Foto,
+                               NumeroRegistro=n.NumeroRegistro
+                           }).ToList();
+            return Validar;
+        }
         #endregion
+      
     }
 }

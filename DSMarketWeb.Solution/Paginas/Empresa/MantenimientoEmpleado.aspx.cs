@@ -210,8 +210,63 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        #region FOTOS DE EMPLEADOS
+        private void ProcesarFotoEmpleado(decimal IdEmpleado, decimal NumeroRegistro, int Accion) {
+            //int Tamanio = UpImagen.PostedFile.ContentLength;
+            //byte[] ImagenOriginal = new byte[Tamanio];
+            //UpImagen.PostedFile.InputStream.Read(ImagenOriginal, 0, Tamanio);
+            //System.Drawing.Bitmap ImagenOriginalBinaria = new System.Drawing.Bitmap(UpImagen.PostedFile.InputStream);
+
+            ////REDIRECCIONAR LA IMAGEN PARA COLOCARLE UN TAMAñO A VOLUNTAD
+            //System.Drawing.Image ImgThumbNail;
+            //int TamanioThumbNail = 200;
+            //ImgThumbNail = DSMarketWeb.Logic.Comunes.RedimencionarImagen.Redireccionar(ImagenOriginalBinaria, TamanioThumbNail);
+            //System.Drawing.ImageConverter Convertidor = new System.Drawing.ImageConverter();
+            //byte[] bImagenThumbNail = (byte[])Convertidor.ConvertTo(ImgThumbNail, typeof(byte[]));
+
+
+            ////GUARDMOS LA IMAGEN EN BASE DE DATOS
+            //SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            //SqlCommand Comando = new SqlCommand("EXEC [Empresa].[SP_PROCESAR_FOTO_EMPLEADO] @IdEmpleado,@Foto,@NumeroRegistro,@Accion", Conexion);
+
+            //Comando.Parameters.Add("@IdEmpleado", SqlDbType.Decimal).Value = IdEmpleado;
+            //Comando.Parameters.Add("@Foto", SqlDbType.Image).Value = bImagenThumbNail;
+            //Comando.Parameters.Add("@NumeroRegistro", SqlDbType.Decimal).Value = NumeroRegistro;
+            //Comando.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
+
+
+            //Conexion.Open();
+            //Comando.ExecuteNonQuery();
+            //Conexion.Close();
+
+            ////VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
+            //string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
+            //IMGFotoEmpleadoMantenimiento.ImageUrl = ImagenDataUrl64;
+        }
+
+        private void MostrarFotoEmpleadoSeleccionado(ref Image ControlImagen, decimal IdEmpleado, decimal NumeroReferencia) {
+            DSMarketWeb.Logic.Comunes.ValidarImagenSistema Imagen = new Logic.Comunes.ValidarImagenSistema(IdEmpleado, NumeroReferencia);
+            bool Validar = Imagen.ValidarFotoEmpleados();
+            if (Validar == true)
+            {
+                SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                Conexion.Open();
+                string Query = "SELECT Foto FROM [Empresa].[FotoEmpleado] WHERE IdEmpleado = " + IdEmpleado + " AND NumeroRegistro = " + NumeroReferencia;
+                SqlCommand Comando = new SqlCommand(Query, Conexion);
+                Comando.CommandTimeout = 0;
+                byte[] IMGPorDefecto = (byte[])Comando.ExecuteScalar();
+                ControlImagen.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMGPorDefecto);
+                Conexion.Close();
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "ImagenPorDefectoNoEncontrada()", "ImagenPorDefectoNoEncontrada();", true);
+            }
+        }
+        #endregion
+
         #region MANTENIMIENTO DE EMPLEADOS
-        private void MANEmpleados(decimal idEmpleado, string Accion) {
+        private void MANEmpleados(decimal idEmpleado, string Accion, decimal NumeroRegistro) {
             if (string.IsNullOrEmpty(txtFechaIngresoMantenimiento.Text.Trim()) || string.IsNullOrEmpty(txtFechaNacimientoMantenimiento.Text.Trim())) {
                 ClientScript.RegisterStartupScript(GetType(), "CamposVacios()", "CamposVacios();", true);
                 if (string.IsNullOrEmpty(txtFechaIngresoMantenimiento.Text.Trim())) {
@@ -222,6 +277,12 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 }
             }
             else {
+                //GENERAMOS EL NUMERO DE REGISTRO
+                if (Accion == "INSERT" && NumeroRegistro == 0) {
+                    Random Generar = new Random();
+                    NumeroRegistro = Generar.Next(0, 999999999);
+                }
+
                 DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionEmpleados Procesar = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionEmpleados(
                     idEmpleado,
                     txtNombreMantenimiento.Text,
@@ -250,12 +311,75 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                     Convert.ToDecimal(txtPorcientoComisionServicioMantenimiento.Text),
                     Convert.ToInt32(ddlSeleccionarSexoMantenimiento.SelectedValue),
                     cbLlevaFoto.Checked,
+                    NumeroRegistro,
                     Accion);
                 Procesar.ProcesarDatosEmpleados();
+
+                //VERIFICAMOS SI SE VA A AFECTAR LA IMAGEN
+                if (cbLlevaFoto.Checked == true)
+                {
+                    decimal IdEmpleadoCreado = SacarCodigoEmpleadoGenerado(NumeroRegistro);
+                    ProcesarFotoEmpleado(IdEmpleadoCreado, NumeroRegistro, 1);
+                }
+                else {
+                    decimal IdEmpleadoCreado = SacarCodigoEmpleadoGenerado(NumeroRegistro);
+                    ProcesarFotoEmpleado(IdEmpleadoCreado, NumeroRegistro, 2);
+                }
             }
 
         }
         #endregion
+
+        #region MOSTRAR IMAGENES
+        /// <summary>
+        /// Este metodo es para mostrar la imagen por defecto del sistema
+        /// </summary>
+        /// <param name="IdLogoSistema"></param>
+        private void MostrarImagenPorDefectoSistema(ref Image ControlImagen,  decimal IdLogoSistema)
+        {
+            DSMarketWeb.Logic.Comunes.ValidarImagenSistema Imagen = new Logic.Comunes.ValidarImagenSistema(IdLogoSistema);
+            bool Validar = Imagen.ValidarImagenSistemaPorDefecto();
+            if (Validar == true)
+            {
+                SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                Conexion.Open();
+                string Query = "SELECT LogoEmpresa FROM [Configuracion].[ImagenesSistema] WHERE IdLogoEmpresa = " + IdLogoSistema;
+                SqlCommand Comando = new SqlCommand(Query, Conexion);
+                Comando.CommandTimeout = 0;
+                byte[] IMGPorDefecto = (byte[])Comando.ExecuteScalar();
+                ControlImagen.ImageUrl = "data:image/jpg;base64," + Convert.ToBase64String(IMGPorDefecto);
+                Conexion.Close();
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "ImagenPorDefectoNoEncontrada()", "ImagenPorDefectoNoEncontrada();", true);
+            }
+        }
+        #endregion
+
+        private decimal SacarCodigoEmpleadoGenerado(decimal NumeroRegistro) {
+
+            decimal IdEmpleado = 0;
+
+            var SacarID = ObjDataEmpresa.Value.SacarCodigoGenerado(NumeroRegistro);
+            foreach (var n in SacarID) {
+                IdEmpleado = (decimal)n.IdEmpleado;
+            }
+            return IdEmpleado;
+        }
+        private bool ValidarFotoEmpleado(decimal IdEmpleado, decimal NumeroRegistro) {
+            bool TieneFoto = false;
+
+            var ValidarFotoEmpleado = ObjDataEmpresa.Value.ValidarCodigoEmpleado(IdEmpleado, NumeroRegistro);
+            if (ValidarFotoEmpleado.Count() < 1)
+            {
+                TieneFoto = false;
+            }
+            else {
+                TieneFoto = true;
+            }
+            return TieneFoto;
+        }
 
         private void ModoConsulta() {
             btnConsultarRegistros.Enabled = true;
@@ -395,6 +519,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             Consulta_Mantenimiento();
             MostrarListadoEmpleados();
             lbReporteUnico.Text = "0";
+            MostrarImagenPorDefectoSistema(ref IMGFotoEmpleadoSeleccionado, 2);
         }
 
         enum TipoReporteGenerar
@@ -412,6 +537,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 rbExportarPdf.Checked = true;
                 ModoConsulta();
                 Consulta_Mantenimiento();
+                MostrarImagenPorDefectoSistema(ref IMGFotoEmpleadoSeleccionado, 2);
             }
         }
 
@@ -435,7 +561,10 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             cbAplicaParaComision.Checked = false;
             cbLlevaFoto.Checked = false;
             DivBloqueImagenEmpleado.Visible = false;
-
+            txtPorcientoComisionVentasMantenimiento.Text = "0";
+            txtPorcientoComisionServicioMantenimiento.Text = "0";
+            txtPorcientoComisionVentasMantenimiento.Enabled = false;
+            txtPorcientoComisionServicioMantenimiento.Enabled = false;
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
@@ -470,7 +599,12 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfIdEmpleadoSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdEmpleado")).Value.ToString();
+
+            var NumeroRegistroSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroNumeroregistro = ((HiddenField)NumeroRegistroSeleccionado.FindControl("hfNumeroRegistro")).Value.ToString();
+
             lbIdRegistroSeleccionado.Text = hfIdEmpleadoSeleccionado.ToString();
+            lbNumeroRegistroSeleccionado.Text = hfNumeroNumeroregistro.ToString();
             lbReporteUnico.Text = "1";
 
             var BuscarRegistroSeleccionado = ObjDataEmpresa.Value.BuscaEmpleados(
@@ -516,9 +650,17 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 cbAplicaParaComision.Checked = (n.AplicaParaComision0.HasValue ? n.AplicaParaComision0.Value : false);
                 cbLlevaFoto.Checked = (n.LlevaImagen0.HasValue ? n.LlevaImagen0.Value : false);
             }
+            if (cbAplicaParaComision.Checked == false) {
+                txtPorcientoComisionVentasMantenimiento.Text = "0";
+                txtPorcientoComisionServicioMantenimiento.Text = "0";
+                txtPorcientoComisionVentasMantenimiento.Enabled = false;
+                txtPorcientoComisionServicioMantenimiento.Enabled = false;
+            }
             Paginar(ref rpListadoEmpleado, BuscarRegistroSeleccionado, 1);
             HandlePaging(ref dtPaginacion);
             ModoMantenimiento();
+            MostrarFotoEmpleadoSeleccionado(ref IMGFotoEmpleadoSeleccionado, Convert.ToDecimal(hfIdEmpleadoSeleccionado), Convert.ToDecimal(hfNumeroNumeroregistro));
+            MostrarFotoEmpleadoSeleccionado(ref IMGFotoEmpleadoMantenimiento, Convert.ToDecimal(hfIdEmpleadoSeleccionado), Convert.ToDecimal(hfNumeroNumeroregistro));
         }
 
         protected void LinkPrimeraPagina_Click(object sender, EventArgs e)
@@ -562,7 +704,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            MANEmpleados(0, "INSERT");
+            MANEmpleados(0, "INSERT",0);
             ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
             CurrentPage = 0;
             RestablecerPantalla();
@@ -576,9 +718,11 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 new Nullable<decimal>(),
                 null,
                 DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.Encriptar(_ClaveSeguridad));
-            if (ValidarClaveSeguridad.Count() < 1) { }
+            if (ValidarClaveSeguridad.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadNoValida()", "ClaveSeguridadNoValida();", true);
+            }
             else {
-                MANEmpleados(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE");
+                MANEmpleados(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE",Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text));
                 ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
                 CurrentPage = 0;
                 RestablecerPantalla();
@@ -611,6 +755,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             if (cbLlevaFoto.Checked == true) {
                 DivBloqueImagenEmpleado.Visible = true;
+                MostrarImagenPorDefectoSistema(ref IMGFotoEmpleadoMantenimiento, 2);
             }
             else {
                 DivBloqueImagenEmpleado.Visible = false;

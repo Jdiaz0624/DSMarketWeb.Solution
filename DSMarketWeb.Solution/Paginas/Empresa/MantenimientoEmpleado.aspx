@@ -377,7 +377,7 @@
                   <asp:DropDownList ID="ddlSeleccionarCargoConsulta" runat="server" ToolTip="Seleccionar Cargo" CssClass="form-control"></asp:DropDownList>
                </div>
                 <div class="form-group col-md-4">
-                   <asp:Image ID="IMGProducto" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                   <asp:Image ID="IMGFotoEmpleadoSeleccionado" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
                </div>
             </div>
             <div align="center">
@@ -424,6 +424,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <asp:HiddenField ID="hfIdEmpleado" runat="server" Value='<%# Eval("IdEmpleado") %>' />
+                                    <asp:HiddenField ID="hfNumeroRegistro" runat="server" Value='<%# Eval("NumeroRegistro") %>' />
                                     <td style="width:10%"> <asp:Button ID="btnSeleccionarRegistros" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Seleccionar Registros" OnClick="btnSeleccionarRegistros_Click" /> </td>
                                     <td style="width:10%"> <%# Eval("IdEmpleado") %> </td>
                                     <td style="width:30%"> <%# Eval("NombreEmpleado") %> </td>
@@ -495,6 +496,7 @@
                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE EMPLEADOS"></asp:Label>
                 <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
                 <asp:Label ID="lbReporteUnico" runat="server" Text="0" Visible="false"></asp:Label>
+                <asp:Label ID="lbNumeroRegistroSeleccionado" runat="server" Text="Numero de registro" Visible="false"></asp:Label>
             </div>
 
             <div class="form-row">
@@ -632,7 +634,7 @@
                         <div class="col-md-4 col-md-offset-4" align="center">
                             <asp:Label ID="lbTituloImagen" runat="server" Text="Foto de Empleado" CssClass="Letranegrita"></asp:Label>
                             <br />
-                            <asp:Image ID="Image1" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <asp:Image ID="IMGFotoEmpleadoMantenimiento" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
                             <br />
                             <br />
                             <asp:Label ID="lbBuscarImagen" runat="server" Text="Subir Imagen" CssClass="Letranegrita"></asp:Label>
@@ -644,7 +646,7 @@
                 </div>
 
             </div>
-
+            
             <div align="center">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" ToolTip="Guardar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnGuardar_Click" />
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" ToolTip="Modificar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnModificar_Click" />

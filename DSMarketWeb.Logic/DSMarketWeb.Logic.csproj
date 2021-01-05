@@ -67,6 +67,8 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EClientes.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EEmpleado.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ESacarCodigoEmpleadoGenerado.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\EValidarFotoEmpleado.cs" />
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECapacidad.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />

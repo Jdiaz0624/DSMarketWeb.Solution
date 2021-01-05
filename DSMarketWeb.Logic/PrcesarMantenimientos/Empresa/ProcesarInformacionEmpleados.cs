@@ -37,6 +37,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         private decimal PorcientoComsiionServicio = 0;
         private int IdSexo = 0;
         private bool LlevaImagen = false;
+        private decimal NumeroRegistro = 0;
         private string Accion = "";
 
 
@@ -68,6 +69,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         decimal PorcientoComsiionServicioCON,
         int IdSexoCON,
         bool LlevaImagenCON,
+        decimal NumeroRegistroCON,
         string AccionCON)
         {
             IdEmpleado = IdEmpleadoCON;
@@ -97,6 +99,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             PorcientoComsiionServicio = PorcientoComsiionServicioCON;
             IdSexo = IdSexoCON;
             LlevaImagen = LlevaImagenCON;
+            NumeroRegistro = NumeroRegistroCON;
             Accion = AccionCON;
         }
 
@@ -130,6 +133,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             Procesar.PorcientoComsiionServicio = PorcientoComsiionServicio;
             Procesar.IdSexo = IdSexo;
             Procesar.LlevaImagen0 = LlevaImagen;
+            Procesar.NumeroRegistro = NumeroRegistro;
 
             var MAN = ObjData.MantenimientoEmpleado(Procesar, Accion);
         }

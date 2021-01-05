@@ -249,13 +249,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarCargoConsulta;
 
         /// <summary>
-        /// IMGProducto control.
+        /// IMGFotoEmpleadoSeleccionado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image IMGProducto;
+        protected global::System.Web.UI.WebControls.Image IMGFotoEmpleadoSeleccionado;
 
         /// <summary>
         /// btnConsultarRegistros control.
@@ -616,6 +616,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbReporteUnico;
+
+        /// <summary>
+        /// lbNumeroRegistroSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroRegistroSeleccionado;
 
         /// <summary>
         /// lbNombreMantenimiento control.
@@ -1095,13 +1104,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbTituloImagen;
 
         /// <summary>
-        /// Image1 control.
+        /// IMGFotoEmpleadoMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Image IMGFotoEmpleadoMantenimiento;
 
         /// <summary>
         /// lbBuscarImagen control.
