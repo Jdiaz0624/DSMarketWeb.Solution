@@ -838,7 +838,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                     MANEmpleados(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE", Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text));
                     if (cbLlevaFoto.Checked == true)
                     {
-                        ProcesarFotoEmpleado(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text), 1);
+                        DSMarketWeb.Logic.Comunes.ValidarImagenSistema ValidarFoto = new Logic.Comunes.ValidarImagenSistema(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text));
+                        bool ResultadoValidacion = ValidarFoto.ValidarFotoEmpleados();
+                        if (ResultadoValidacion == true) { }
+                        else {
+                            ProcesarFotoEmpleado(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text), 1);
+                        }
+                        
                     }
                     else
                     {
