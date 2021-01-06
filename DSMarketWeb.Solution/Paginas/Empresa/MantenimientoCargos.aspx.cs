@@ -222,7 +222,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             txtCargoManteimiento.Text = string.Empty;
             txtClaveSeguridadMantenimiento.Text = string.Empty;
             cbEstatusMantenimiento.Checked = true;
-
+            Consulta_Mantenimiento();
             ListadoCargos();
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -245,21 +245,46 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            btnGuardar.Visible = true;
+            btnModificar.Visible = false;
+            cbEstatusMantenimiento.Checked = true;
+            lbClaveSeguridadMantenimiento.Visible = false;
+            txtClaveSeguridadMantenimiento.Visible = false;
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            btnGuardar.Visible = false;
+            btnModificar.Visible = true;
+            lbClaveSeguridadMantenimiento.Visible = true;
+            txtClaveSeguridadMantenimiento.Visible = true;
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
 
         protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
         {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdcargo = ((HiddenField)ItemSeleccionado.FindControl("hfIdCargo")).Value.ToString();
+            lbIdRegistroSeleccionado.Text = hfIdcargo.ToString();
+
+            var BuscarregistroSelecionado = ObjDataEmpresa.Value.BuscaCargos(
+                Convert.ToDecimal(hfIdcargo));
+            foreach (var n in BuscarregistroSelecionado) {
+                CargarDepartamentosMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarDepartamentoMantenimiento, n.IdDepartamento.ToString());
+                txtCargoManteimiento.Text = n.Cargo;
+                cbEstatusMantenimiento.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
+            }
+            ModoMantenimiento();
+            Paginar(ref rpListadoCargo, BuscarregistroSelecionado, 1);
+            HandlePaging(ref dtPaginacion);
 
         }
 
@@ -303,17 +328,34 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            MANCargos(0, "INSERT");
+            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadMantenimiento.Text.Trim()) ? null : txtClaveSeguridadMantenimiento.Text.Trim();
 
+            DSMarketWeb.Logic.Comunes.ValidarClaveSeguridad Validar = new Logic.Comunes.ValidarClaveSeguridad(_ClaveSeguridad);
+            bool ResultadoValidacion = Validar.ResultadoClave();
+
+            if (ResultadoValidacion == true) {
+                MANCargos(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                CurrentPage = 0;
+                RestablecerPantalla();
+            }
+            else {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadNoValida()", "ClaveSeguridadNoValida();", true);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            RestablecerPantalla();
         }
     }
 }

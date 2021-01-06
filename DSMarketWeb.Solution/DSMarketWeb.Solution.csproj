@@ -89,6 +89,7 @@
     <Content Include="Paginas\Empresa\MantenimientoClientes.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoDepartamento.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoEmpleado.aspx" />
+    <Content Include="Paginas\Empresa\MantenimientoTipoNomina.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCapacidad.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCategorias.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoColores.aspx" />
@@ -258,6 +259,13 @@
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoEmpleado.aspx.designer.cs">
       <DependentUpon>MantenimientoEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoTipoNomina.aspx.cs">
+      <DependentUpon>MantenimientoTipoNomina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoTipoNomina.aspx.designer.cs">
+      <DependentUpon>MantenimientoTipoNomina.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoCapacidad.aspx.cs">
       <DependentUpon>MantenimientoCapacidad.aspx</DependentUpon>
