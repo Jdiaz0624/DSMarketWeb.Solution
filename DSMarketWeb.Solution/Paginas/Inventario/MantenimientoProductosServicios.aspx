@@ -424,7 +424,7 @@
     <div id="divBloqueConsulta" runat="server">
         <div class="container-fluid">
             <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE PRODUCTOS"></asp:Label>
+                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE INVENTARIO"></asp:Label>
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
