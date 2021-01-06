@@ -96,7 +96,9 @@
     <Compile Include="Logica\LogicaSeguridad\LogicaSeguridad.cs" />
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCargos.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionClientes.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionDepartamento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionEmpleados.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCapacidadEquipos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />

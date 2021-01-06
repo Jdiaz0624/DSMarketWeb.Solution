@@ -86,6 +86,7 @@
     <Content Include="Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="LoginSistema.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoClientes.aspx" />
+    <Content Include="Paginas\Empresa\MantenimientoDepartamento.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoEmpleado.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCapacidad.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCategorias.aspx" />
@@ -235,6 +236,13 @@
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoClientes.aspx.designer.cs">
       <DependentUpon>MantenimientoClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoDepartamento.aspx.cs">
+      <DependentUpon>MantenimientoDepartamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoDepartamento.aspx.designer.cs">
+      <DependentUpon>MantenimientoDepartamento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoEmpleado.aspx.cs">
       <DependentUpon>MantenimientoEmpleado.aspx</DependentUpon>
