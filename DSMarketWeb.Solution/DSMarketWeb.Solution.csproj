@@ -85,6 +85,7 @@
     <Content Include="Estilos\EstilosMaster.css" />
     <Content Include="Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="LoginSistema.aspx" />
+    <Content Include="Paginas\Empresa\MantenimientoCargos.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoClientes.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoDepartamento.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoEmpleado.aspx" />
@@ -229,6 +230,13 @@
     </Compile>
     <Compile Include="MasterPage\PaginaMaestra.Master.designer.cs">
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoCargos.aspx.cs">
+      <DependentUpon>MantenimientoCargos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoCargos.aspx.designer.cs">
+      <DependentUpon>MantenimientoCargos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoClientes.aspx.cs">
       <DependentUpon>MantenimientoClientes.aspx</DependentUpon>
