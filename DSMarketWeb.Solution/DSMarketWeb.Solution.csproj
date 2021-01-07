@@ -87,6 +87,7 @@
     <Content Include="LoginSistema.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoCargos.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoClientes.aspx" />
+    <Content Include="Paginas\Empresa\MantenimientoCompraSuplidores.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoDepartamento.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoEmpleado.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoTipoNomina.aspx" />
@@ -245,6 +246,13 @@
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoClientes.aspx.designer.cs">
       <DependentUpon>MantenimientoClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoCompraSuplidores.aspx.cs">
+      <DependentUpon>MantenimientoCompraSuplidores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Empresa\MantenimientoCompraSuplidores.aspx.designer.cs">
+      <DependentUpon>MantenimientoCompraSuplidores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoDepartamento.aspx.cs">
       <DependentUpon>MantenimientoDepartamento.aspx</DependentUpon>
