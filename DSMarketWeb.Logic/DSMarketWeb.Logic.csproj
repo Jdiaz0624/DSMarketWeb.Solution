@@ -67,6 +67,7 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ECargos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EClientes.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ECompraSuplidores.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EDepartamentos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EEmpleado.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ESacarCodigoEmpleadoGenerado.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCargos.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionClientes.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCompraSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionDepartamento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionEmpleados.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />

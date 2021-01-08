@@ -30,6 +30,18 @@
         }
     </style>
 
+    <script type="text/javascript">
+        function CamposFechaVacios() {
+            alert("Los campos fecha son necesarios para realizar esta consulta, favor de verificar.");
+        }
+        function CampoFechaDesdeVacio() {
+            $("#<%=txtFechaDesde.ClientID%>").css("border-color", "red");
+        }
+        function CampoFechaHastaVacio() {
+            $("#<%=txtFechaHastaConsullta.ClientID%>").css("border-color", "red");
+        }
+    </script>
+
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
             <div class="jumbotron" align="center">
@@ -64,7 +76,7 @@
 
                     <div class="form-group col-md-4">
                         <asp:Label ID="lbSeleccionartipoSupliorCOnsulta" runat="server" Text="Seleccionar Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
-                        <asp:DropDownList ID="ddlSeleccionarTipoSuplidorConsulta" runat="server" ToolTip="Seleccionar el tipo de suplidor" CssClass="form-control"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlSeleccionarTipoSuplidorConsulta" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoSuplidorConsulta_SelectedIndexChanged" ToolTip="Seleccionar el tipo de suplidor" CssClass="form-control"></asp:DropDownList>
                     </div>
 
                     <div class="form-group col-md-4">
