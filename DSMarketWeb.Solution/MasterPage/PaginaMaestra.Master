@@ -20,20 +20,24 @@
 <body>
     <form id="form1" runat="server">
         <br />
-       <div class="container-fluid">
-                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-         
-                        <ul class="navbar-nav">
-                          <li class="nav-item">
-                              <asp:LinkButton ID="lbPaginaInicioSistema" runat="server" CssClass="nav-link active" OnClick="lbPaginaInicioSistema_Click" Text="<%$Resources:Traducciones,Inicio %>"></asp:LinkButton>
-                <%--            <asp:LinkButton ID="LinkInicio" runat="server"  class="nav-link active" Text="Inicio"  <img width="90px" <!--src="../Imagenes/Logo.png"--> /></asp:LinkButton>--%>
-                          </li>
-                          <li class="nav-item">
+        <div class="container">
+            <div class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsiblenavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsiblenavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                             <asp:LinkButton ID="lbPaginaInicioSistema" runat="server" CssClass="nav-link active" OnClick="lbPaginaInicioSistema_Click" Text="<%$Resources:Traducciones,Inicio %>"></asp:LinkButton>
+                        </li>
+                        <li class="nav-item">
                             <asp:LinkButton ID="LinkCitas" runat="server" ForeColor="Red" Text="<%$Resources:Traducciones,Citas %>"  class="nav-link active"></asp:LinkButton>
                           </li>
-                      
-                          <!-- Dropdown -->
-                          <li class="nav-item dropdown">
+
+                         <!--MODULO DE SERVICIO-->
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  href="#" id="navbardrop" data-toggle="dropdown">
                               <asp:Label ID="lbTituloServicio" runat="server" Text="<%$Resources:Traducciones,Servicio %>"></asp:Label>
                             </a>
@@ -44,7 +48,20 @@
                             </div>
                           </li>
 
-                            <li class="nav-item dropdown">
+                        <!--MODULO DE CAJA-->
+                         <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                  Caja
+                                </a>
+                                <div class="dropdown-menu">
+                                    <asp:LinkButton ID="LinkCaja" runat="server" Text="Caja" ToolTip="Caja" OnClick="LinkCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkCuadreCaja" runat="server" Text="Cuadre de Caja" ToolTip="Cuadre de Caja" OnClick="LinkCuadreCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkConfigurarCaja" runat="server" Text="Configurar Caja" ToolTip="Configuración de caja" OnClick="LinkConfigurarCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
+                                </div>
+                              </li>
+
+                        <!--MODULO DE INVENTARIO-->
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                               Inventario
                             </a>
@@ -62,22 +79,8 @@
                             </div>
                           </li>
 
-
-
-                          <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                  Caja
-                                </a>
-                                <div class="dropdown-menu">
-                                    <asp:LinkButton ID="LinkCaja" runat="server" Text="Caja" ToolTip="Caja" OnClick="LinkCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
-                                    <asp:LinkButton ID="LinkCuadreCaja" runat="server" Text="Cuadre de Caja" ToolTip="Cuadre de Caja" OnClick="LinkCuadreCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
-                                    <asp:LinkButton ID="LinkConfigurarCaja" runat="server" Text="Configurar Caja" ToolTip="Configuración de caja" OnClick="LinkConfigurarCaja_Click" CssClass="dropdown-item"></asp:LinkButton>
-                                </div>
-                              </li>
-
-
-
-                              <li class="nav-item dropdown">
+                        <!--MODULO DE EMPRESA-->
+                        <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                       Empresa
                                     </a>
@@ -97,8 +100,9 @@
                                         <asp:LinkButton ID="LinkPorcientoRetenciones" runat="server" Text="Porciento Retencion" ToolTip="Configurar porciento de retenciones" OnClick="LinkPorcientoRetenciones_Click" CssClass="dropdown-item"></asp:LinkButton>
                                     </div>
                                   </li>
-                    
-                                      <li class="nav-item dropdown">
+
+                        <!--MODULO DE CONTABILIDAD-->
+                      <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                               Contabilidad
                                             </a>
@@ -108,6 +112,7 @@
                                             </div>
                                           </li>
 
+                        <!--MODULO DE REPORTES-->
                                           <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                               Reportes
@@ -125,7 +130,7 @@
                                             </div>
                                           </li>
 
-
+                        <!--MODULO DE CONFIGURACION-->
                                             <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                               Configuración
@@ -142,7 +147,7 @@
                                             </div>
                                           </li>
 
-
+                        <!--MODULO DE SEGURIDAD-->
                                            <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                               Seguridad
@@ -153,14 +158,16 @@
                                             <asp:LinkButton ID="LinkClaveSeguridad" runat="server" Text="Clave de Seguridad" ToolTip="Asignar Clave de Seguridad" OnClick="LinkClaveSeguridad_Click" CssClass="dropdown-item"></asp:LinkButton>
                                             </div>
                                           </li>
+
+
                             <li class="nav-item">
                                 <asp:LinkButton ID="linkCerrarCesion" runat="server" ToolTip="Cerrar Sesión" Text="Cerrar Sesión" OnClick="linkCerrarCesion_Click"  class="nav-link active" OnClientClick="return confirm('¿Quieres Cerrar Sesión?');"></asp:LinkButton>
                             </li>
-                        </ul>
-            
-                      </nav>
-               <hr class="hr" />
+                    </ul>
+                </div>
+            </div>
         </div>
+      
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
      

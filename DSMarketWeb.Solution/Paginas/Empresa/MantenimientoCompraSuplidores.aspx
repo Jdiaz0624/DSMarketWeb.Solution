@@ -156,6 +156,140 @@
             </div>
         </div>
 
+        <div id="DivBloqueDetalleRegistroSeleccionado" runat="server">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoSuplidorDetalle" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTipoSuplidordetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbSuplidorDetalle" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtSuplidorDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipIdentificacionDetalle" runat="server" Text="Tipo de Identificación" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTipoIdentificacionDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbNumeroIdentificacionDetalle" runat="server" Text="Numero de Identificación" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNumeroIdentificacion" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoBienesserviciosDetalle" runat="server" Text="Tipo de Bienes y Servicio" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTipoBienesServicios" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbNCFDetalle" runat="server" Text="NCF" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNCFDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbNCFModificadoDetalle" runat="server" Text="NCF Modificado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNCFModificado" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbFechaComprobanteDetalle" runat="server" Text="Fecha de Comprobante" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtFechaComprobante" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbFechaPagoDetalle" runat="server" Text="Fecha de Pago" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtFechaPagoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoFacturadoServicioDetalle" runat="server" Text="Monto Facturado en servicios" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoFacturadoServicioDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoFacturadoBienesDetalle" runat="server" Text="Monto Facturado en Bienes" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoFacturadoBienesDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbTotalMontoFacturadoDetalle" runat="server" Text="Total Monto Facturado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTotalMontoFacturadoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISFacturado" runat="server" Text="ITBIS Facturado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISFacturadoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISRetenidoDetalle" runat="server" Text="ITBIS Retenido" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISRetenidoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBIsSujetoProporcionalidaddesDetalle" runat="server" Text="ITBIS Sujeto a Proporcionalidades (Art. 349)" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBIsSujetoProporcionalidaddesDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISLlevadoCosto" runat="server" Text="ITBIS LLevado al Costo" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISLlevadoCostoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoRetencionISRDetalle" runat="server" Text="Tipo de Retencion ISR" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTipoRetencionISRDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISPorAdelantarDetalle" runat="server" Text="ITBIS Por Adelantar" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISPorAdelantarDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISRetenidoComprasDetalle" runat="server" Text="ITBIS Retenido en Compras" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISRetenidoComprasDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoRetencionVentasDetalle" runat="server" Text="Monto de Retencion Ventas" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoRetencionVentasDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoetencionComprasDetalle" runat="server" Text="Monto de Retencion de Compras" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoRetencionComprasDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbImpuestoSelectivoConsumoDetalle" runat="server" Text="Impuesto Selectivo al Consumo" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtImpuestoSelectivoConsumoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbISRPercibodoComprasDetalle" runat="server" Text="ISRPercibidoCompras" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtISRPercibidoComprasDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbOtrosImpuestosTasaDetalle" runat="server" Text="Otros Impuestos / Tasa" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtOtrosImpuestosTasaDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoPropinaLegalDetalle" runat="server" Text="Monto Propina Legal" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoPropinaLetalDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbFormaPagoDetalle" runat="server" Text="Forma de Pago" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtFormaPAgoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+
 
         
     </div>

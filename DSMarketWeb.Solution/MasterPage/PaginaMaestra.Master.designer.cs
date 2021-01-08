@@ -87,6 +87,33 @@ namespace DSMarketWeb.Solution.MasterPage
         protected global::System.Web.UI.WebControls.LinkButton LinkHistorialFacturacion;
 
         /// <summary>
+        /// LinkCaja control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkCaja;
+
+        /// <summary>
+        /// LinkCuadreCaja control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkCuadreCaja;
+
+        /// <summary>
+        /// LinkConfigurarCaja control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkConfigurarCaja;
+
+        /// <summary>
         /// LinkProductos control.
         /// </summary>
         /// <remarks>
@@ -175,33 +202,6 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkCondicion;
-
-        /// <summary>
-        /// LinkCaja control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkCaja;
-
-        /// <summary>
-        /// LinkCuadreCaja control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkCuadreCaja;
-
-        /// <summary>
-        /// LinkConfigurarCaja control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkConfigurarCaja;
 
         /// <summary>
         /// LinkClientes control.
