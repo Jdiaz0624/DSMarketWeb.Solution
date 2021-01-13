@@ -206,6 +206,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             if (!IsPostBack) {
                 CargarTipoSuplidor();
                 CargarSuplidores();
+                DivBloqueDetalleRegistroSeleccionado.Visible = false;
             }
         }
 
@@ -242,6 +243,52 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnSeleccionar_Click(object sender, EventArgs e)
         {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdCompraSuplidor = ((HiddenField)ItemSeleccionado.FindControl("hfIdCompraSupldor")).Value.ToString();
+
+            var BuscarRegistroSeleccionadp = ObjDataEmpresa.Value.BuscaCompraSuplidores(
+                Convert.ToDecimal(hfIdCompraSuplidor),
+                null, null, null, null, null);
+            Paginar(ref rpListadoCompraSuplidores, BuscarRegistroSeleccionadp, 1);
+            HandlePaging(ref dlPaginacion);
+            foreach (var n in BuscarRegistroSeleccionadp) {
+                txtTipoSuplidordetalle.Text = n.TipoSuplidor;
+                txtSuplidorDetalle.Text = n.Suplidor;
+                txtTipoIdentificacionDetalle.Text = n.TipoIdentificacion;
+                txtNumeroIdentificacion.Text = n.RNCCedula;
+                txtTipoBienesServicios.Text = n.TipoBienesServicios;
+                txtNCFDetalle.Text = n.NCF;
+                txtNCFModificado.Text = n.NCFModificado;
+                txtFechaComprobante.Text = n.FechaComprobante;
+                txtFechaPagoDetalle.Text = n.FechaPago;
+                decimal MontoFacturadoServicio = (decimal)n.MontoFacturadoServicios;
+                txtMontoFacturadoServicioDetalle.Text = MontoFacturadoServicio.ToString("N2");
+                decimal MontoFacturadoBienes = (decimal)n.MontoFacturadoBienes;
+                txtMontoFacturadoBienesDetalle.Text = MontoFacturadoBienes.ToString("N2");
+                decimal TotalMontoFActurado = (decimal)n.TotalMontoFacturado;
+                txtTotalMontoFacturadoDetalle.Text = TotalMontoFActurado.ToString("N2");
+                decimal ITBISFacturado = (decimal)n.ITBISFacturado;
+                txtITBISFacturadoDetalle.Text = ITBISFacturado.ToString("N2");
+                decimal ITBISRetenido = (decimal)n.ITBISRetenido;
+                txtITBISRetenidoDetalle.Text = ITBISRetenido.ToString();
+                decimal ITBISSujetoProporcionalidad = (decimal)n.ITBISSujetoProporcionalidad;
+                txtITBIsSujetoProporcionalidaddesDetalle.Text = ITBISSujetoProporcionalidad.ToString("N2");
+                decimal ITBISLLevadoCosto = (decimal)n.ITBISLlevadoCosto;
+                txtITBISLlevadoCostoDetalle.Text = ITBISLLevadoCosto.ToString("N2");
+                txtTipoRetencionISRDetalle.Text = n.TipoRetencionISR;
+                decimal ITBISPorAdelantar = (decimal)n.ITBISPorAdelantar;
+                txtITBISPorAdelantarDetalle.Text = ITBISPorAdelantar.ToString();
+                decimal ITBISRetenidoCompra = (decimal)n.ITBISRetenido;
+                txtITBISRetenidoComprasDetalle.Text = ITBISRetenidoCompra.ToString("N2");
+//txtMontoRetencionVentasDetalle.Text = n.montofa
+//txtMontoRetencionComprasDetalle.Text =
+//txtImpuestoSelectivoConsumoDetalle.Text =
+//txtISRPercibidoComprasDetalle.Text =
+//txtOtrosImpuestosTasaDetalle.Text =
+//txtMontoPropinaLetalDetalle.Text =
+//txtFormaPAgoDetalle.Text =
+            }
+
 
         }
 
