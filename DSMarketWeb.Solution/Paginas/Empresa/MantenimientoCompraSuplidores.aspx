@@ -303,6 +303,135 @@
         </div>
 
 
+        <div id="DivBloqueMantenimiento" runat="server">
+            <div class="jumbotron" align="center">
+                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE COMPRA A SUPLIDORES"></asp:Label>
+            </div>
+            <div class="form-row">
+                <!--PRIMERA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbRNCCedulaMantenimiento" runat="server" Text="RNC o Cedula" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtRNCCedulaMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="Digite el RNC o Cedula de la persona o negocio de donde se adquirieron los servicios."></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoIDManteniiento" runat="server" Text="Tipo de ID" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarTipoIDMAntenimiento" CssClass="form-control" ToolTip="seleccione el tipo de RNC del suplidor." runat="server"></asp:DropDownList>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoBienesServiciosOmpradosMantenimiento" runat="server" Text="Tipo de Bienes y Servicios Comprados" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarTipoBienesServiciosComprados" runat="server" ToolTip="seleccione la clase de bien oservicio adquirido." CssClass="form-control"></asp:DropDownList>
+                </div>
+                <!--SEGUNDA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbNCFMantenimiento" runat="server" Text="NCF" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNCFMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="coloque el número completo del comprobante fiscal que avala la compra de bienes y/o servicios, incluyendo registro de gastos menores, comprobante de compras y notas de débito o crédito (11 o 13* posiciones alfanuméricas). Cuando informe las retenciones efectuadas y la fecha de pago correspondiente a un comprobante que le hayan emitido antes de mayo 2018, se podrá colocar el NCF con estructura de 19 posiciones. "></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbNCFModificadoMantenimiento" runat="server" Text="NCF o Documento Modificado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtNCFModificadoMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="En “NCF o Documento Modificado” digite el número completo de comprobante fiscal afectado por una nota de débito o crédito (11 o 13* posiciones alfanuméricas). En caso de afectar un NCF reportado antes de mayo 2018, con una Nota de Crédito o Nota de Débito, se podrá colocar un NCF con estructura de 19 posiciones. "></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbFechaComprobanteMantenimiento" runat="server" Text="Fecha de Comprobante" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtFechaComprobanteMantenimiento" runat="server" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Comprobante"></asp:TextBox>
+                </div>
+
+                <!--TERCERA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbFechaPagoMantenimiento" runat="server" Text="Fecha de Pago" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtFechaPagoMantenimiento" runat="server" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Pago"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoFacturadoServiciosMantenimiento" runat="server" Text="Monto Facturado en Servicios" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoFacturadoServiciosMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto del NCF que corresponde a servicios, sin incluir impuestos."></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoFacturadoBienesMantenimiento" runat="server" Text="Monto Facturado en Bienes" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoFacturadoBienesMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto en el NCF que corresponde a bienes, sin incluir impuestos."></asp:TextBox>
+                </div>
+                <!--CUARTA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTotalMontoFActuradoMantenimiento" runat="server" Text="Total Monto Facturado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtTotalMntoFacturadoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Enabled="false" ToolTip="se completará automáticamente al momento de validar el archivo, con la sumatoria de los campos Monto Facturado en Bienes y Monto Facturado en Servicios."></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISFacturadoMantenimiento" runat="server" Text="ITBIS Facturado" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISFacturadoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS generado en el comprobante."></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISRetenidoMantenimiento" runat="server" Text="ITBIS Retenido" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISRetenidoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS que se retuvo producto de la transacción (si aplica). Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago)."></asp:TextBox>
+                </div>
+
+                <!--QUINTA FILA-->
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISSujetoProporcionalidadMantenimiento" runat="server" Text="ITBIS Sujeto a proporcionalidad" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISSujetoProporcionalidadMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En ITBIS sujeto a Proporcionalidad (Art. 349) registre el valor del ITBIS que estará sujeto al cálculo de la proporcionalidad, según el Art. 349 de la Ley No. 11-92. La sumatoria de esta columna será el valor que deberá distribuir en el Anexo A del Formulario de ITBIS como el ITBIS SUJETO A PROPORCIONALIDAD."></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISLlevadoCostoMantenimiento" runat="server" Text="ITBIS Llevado al Costo" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISLlevadoCostoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En “ITBIS llevado al Costo” coloque el valor del ITBIS que es llevado directamente al Costo, es decir, que no se va a deducir como adelanto en la Declaración Jurada de ITBIS y que se utilizará como costo en la Declaración Jurada de Impuesto Sobre la Renta. En esta columna no debe colocar el ITBIS no admitido por Proporcionalidad."></asp:TextBox>
+                </div>
+
+                  <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISPorAdelantarMantenimiento" runat="server" Text="ITBIS Por Adelantar" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISPorAdelantarMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="El campo “ITBIS por Adelantar” se completará automáticamente al momento de validar el archivo. Resulta al restar el valor del campo “ITBIS Facturado” menos el valor del campo “ITBIS llevado al Costo” del mismo registro."></asp:TextBox>
+                </div>
+
+                <!--SEXTA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbITBISPercibidoComprasMantenimiento" runat="server" Text="ITBIS Percibido en Compras" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtITBISPercibidoComprasMantenimiento" runat="server" ToolTip="coloque el monto del ITBIS percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbTipoRetenecionEnISRMantenimiento" runat="server" Text="Tipo Retencion en ISR" CssClass="Letranegrita"></asp:Label>
+                    <asp:DropDownList ID="ddlSeleccionarTipoRetencionISRMantenimiento" runat="server" ToolTip="seleccione el código según el tipo de retención aplicada, para el Impuesto Sobre la Renta. Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago)." CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoRetencionRentaMantenimiento" runat="server" Text="Monto Retencion Renta" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoRetencionRentaMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el monto del Impuesto Sobre la Renta retenido producto de la prestación o locación de servicios. Es el resultado de multiplicar el monto del campo “Servicios” por el porcentaje de la retención según corresponda. Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago). "></asp:TextBox>
+                </div>
+
+                <!--SEPTIMA FILA-->
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbISRPercibidoComprasMantenimiento" runat="server" Text="ISR Percibido en Compras" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtISRPercibidoComprasMantenimiento" runat="server" ToolTip="coloque el monto del ISR percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbImpuestoSelectivoConsumoMantenimiento" runat="server" Text="Impuesto selectivo al consumo" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtImpuestoSelectivoConsumoMantenimiento" runat="server" ToolTip="indique el monto correspondiente al Impuesto Selectivo al Consumo producto de una compra gravada con este impuesto (si aplica)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbOtrosImpuestosTasaMantenimiento" runat="server" Text="Otros Impuestos / Tasa" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtOtrosImpuestosTasaMantenimiento" runat="server" ToolTip="digite cualquier otro impuesto o tasa no especificado en el Formato de Envío y que formen parte del valor del comprobante fiscal. " TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <!--OCTAVA FILA-->
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbMontoPropinaLegalMantenimiento" runat="server" Text="Monto Propina Legal" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtMontoPropinaLegalMantenimiento" runat="server" ToolTip="coloque el monto de la propina establecida por la Ley No. 54-32 (10%)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <asp:Label ID="lbFormaPagoMAntenimiento" runat="server" Text="Forma de Pago" CssClass="Letranegrita"></asp:Label>
+                  <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" runat="server" CssClass="form-control" ToolTip="seleccione el método de pago, según la clasificación establecida."></asp:DropDownList>
+                </div>
+            </div>
+        </div>
+
         
     </div>
 </asp:Content>
