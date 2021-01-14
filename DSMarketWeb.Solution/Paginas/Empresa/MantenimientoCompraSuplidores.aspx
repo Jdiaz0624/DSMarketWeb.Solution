@@ -142,18 +142,7 @@
                                                                         alert("El campo ITBIS por adelantar no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
                                                                         $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").css("border-color", "red");
                                                                         return false;
-                                                                    }
-                                                                    else {
-                                                                        var ITBISPercibidoCompras = $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").val().length;
-                                                                        if (ITBISPercibidoCompras < 1) {
-                                                                            alert("El campo ITBIS Percibido en compras no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
-                                                                            $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
-                                                                            return false;
-                                                                        }
-                                                                     
-                                                                        }
-                                                                    }
-                                                                }
+                                                                    }                                                               }
                                                             }
                                                         }
                                                     }
