@@ -31,6 +31,8 @@
     </style>
 
     <script type="text/javascript">
+
+
         function CamposFechaVacios() {
             alert("Los campos fecha son necesarios para realizar esta consulta, favor de verificar.");
         }
@@ -40,6 +42,136 @@
         function CampoFechaHastaVacio() {
             $("#<%=txtFechaHastaConsullta.ClientID%>").css("border-color", "red");
         }
+
+        $(document).ready(function () {
+            //VALIDAMOS LOS CAMPOS DEL BOTON GUARDAR
+            $("#<%=btnGuardar.ClientID%>").click(function () {
+                var TipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                if (TipoSuplidor < 1) {
+                    alert("El campo tipo de suplidor no puede estar vacio para guardar este registro, favor de verificar.");
+                    $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var Suplidor = $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").val();
+                    if (Suplidor < 1) {
+                        alert("El campo suplidor no puede estar vacio para guardar este registro, favor de verificar.");
+                        $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var RNCCedula = $("#<%=txtRNCCedulaMantenimiento.ClientID%>").val().length;
+                        if (RNCCedula < 1) {
+                            alert("El campo RNC / Cedula no puede estar vacio para guardar este registro, favor de verificar.");
+                            $("#<%=txtRNCCedulaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var TipoID = $("#<%=ddlSeleccionarTipoIDMAntenimiento.ClientID%>").val();
+                            if (TipoID < 1) {
+                                alert("El campo tipo ID no puede estar vacio para guardar este registro, favor de verificar.");
+                                $("#<%=ddlSeleccionarTipoIDMAntenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var TipoBienesServiciosComprados = $("#<%=ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.ClientID%>").val();
+                                if (TipoBienesServiciosComprados < 1) {
+                                    alert("El campo Tipo de Bienes y Servicios Comprados no puede estar vacio para guardar este registro, favor de verificar.");
+                                    $("#<%=ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var NCF = $("#<%=txtNCFMantenimiento.ClientID%>").val().length;
+                                    if (NCF < 1) {
+                                        alert("El campo NCF no puede estar vacio para guardar este registro, favor de verificar.");
+                                        $("#<%=txtNCFMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var NCFModificado = $("#<%=txtNCFModificadoMantenimiento.ClientID%>").val().length;
+                                        if (NCFModificado < 1) {
+                                            alert("El campo NCF Modificado no puede estar vacio para guardar este registro, favor de verificar.");
+                                            $("#<%=txtNCFModificadoMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var MontoFacturadoServicios = $("#<%=txtMontoFacturadoServiciosMantenimiento.ClientID%>").val().length;
+                                            if (MontoFacturadoServicios < 1) {
+                                                alert("El campo Monto Facturado en Servicios no puede estar vacio para guardar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                $("#<%=txtMontoFacturadoServiciosMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var MontoFacturadoBienes = $("#<%=txtMontoFacturadoBienesMantenimiento.ClientID%>").val().length;
+                                                if (MontoFacturadoBienes < 1) {
+                                                    alert("El campo Monto Facturado en Bienes no puede estar vacio para guardar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                    $("#<%=txtMontoFacturadoBienesMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var ITBISFacturado = $("#<%=txtITBISFacturadoMantenimiento.ClientID%>").val().length;
+                                                    if (ITBISFacturado < 1) {
+                                                        alert("El campo ITBIS Facturado no puede estar vacio para guardar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                        $("#<%=txtITBISFacturadoMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var ITBISRetenido = $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").val().length;
+                                                        if (ITBISRetenido < 1) {
+                                                            alert("El campo ITBIS Retenido no puede estar vacio, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                            $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var ITBISSujetoProporcionalidad = $("#<%=txtITBISSujetoProporcionalidadMantenimiento.ClientID%>").val().length;
+                                                            if (ITBISSujetoProporcionalidad < 1) {
+                                                                alert("El campo ITBIS Sujeto a Proporcionalidad no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                $("#<%=txtITBISSujetoProporcionalidadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var ITBISLlevadoCosto = $("#<%=txtITBISLlevadoCostoMantenimiento.ClientID%>").val().length;
+                                                                if (ITBISLlevadoCosto < 1) {
+                                                                    alert("El campo ITBIS llevado al costo no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                    $("#<%=txtITBISLlevadoCostoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ITBISPorAdelantar = $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").val().length;
+                                                                    if (ITBISPorAdelantar < 1) {
+                                                                        alert("El campo ITBIS por adelantar no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                        $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ITBISPercibidoCompras = $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").val().length;
+                                                                        if (ITBISPercibidoCompras < 1) {
+                                                                            alert("El campo ITBIS Percibido en compras no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                            $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                     
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                               
+                            }
+                        }
+                    }
+                    
+                }
+            });
+
+        })
     </script>
 
     <div class="container-fluid">
