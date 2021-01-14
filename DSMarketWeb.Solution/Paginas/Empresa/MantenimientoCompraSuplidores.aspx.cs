@@ -153,6 +153,35 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         private void CargarSuplidores() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarSuplidorConsulta, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidorConsulta.SelectedValue.ToString(), null), true); ;
         }
+
+
+        //---------------------------------------------------------------------------
+        private void CargarListasDesplegablesMantenimiento() {
+            CargarTipoSuplidorMantenimiento();
+            CargarSuplidoreMantenimiento();
+            CargarListaTipoIDMantenimiento();
+            CargarListaTipoBienesServiciosCOmprados();
+            CargarListaTipoRetencionISR();
+            CargarListaFormaPagoMantenimiento();
+        }
+        private void CargarTipoSuplidorMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOSUPLIDOR", null, null));
+        }
+        private void CargarSuplidoreMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue.ToString(), null));
+        }
+        private void CargarListaTipoIDMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoIDMAntenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOIDENTIFICACION", null, null));
+        }
+        private void CargarListaTipoBienesServiciosCOmprados() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoBienesServiciosCompradosMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOBIENESSERVICIOS", null, null));
+        }
+        private void CargarListaTipoRetencionISR() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoRetencionISRMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPORETENCIONISR", null, null));
+        }
+        private void CargarListaFormaPagoMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarFormaPagoMantenimiento, ObjDataConfiguracion.Value.BuscaListas("FORMAPAGO", null, null));
+        }
         #endregion
 
         #region MOSTRAR EL LISTADO DE LAS COMPRAS
@@ -200,13 +229,50 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        private void ModoConsulta() {
+            btnConsultarRegistros.Enabled = true;
+            btnNuevoRegistro.Enabled = true;
+            btnModificarRegistro.Enabled = false;
+            btnEliminarRegistro.Enabled = false;
+            btnExportarRegistro.Enabled = true;
+            btnRestablecerPantalla.Enabled = true;
+        }
+
+        private void ModoMantenimiento() {
+            btnConsultarRegistros.Enabled = false;
+            btnNuevoRegistro.Enabled = false;
+            btnModificarRegistro.Enabled = true;
+            btnEliminarRegistro.Enabled = true;
+            btnExportarRegistro.Enabled = true;
+            btnRestablecerPantalla.Enabled = true;
+        }
+
+        /// <summary>
+        /// Este metodo es para mostrar el bloque de consulta y ocultar los de mantenimiento
+        /// </summary>
+        private void Consulta_Mantenimiento() {
+            DivBloqueConsulta.Visible = true;
+            DivBloqueDetalleRegistroSeleccionado.Visible = false;
+            DivBloqueMantenimiento.Visible = false;
+        }
+        /// <summary>
+        /// Este metodo es para mostrar los bloque de mantenimiento y ocultar los de consulta
+        /// </summary>
+        private void Mantenimiento_Consulta() {
+            DivBloqueConsulta.Visible = false;
+            DivBloqueDetalleRegistroSeleccionado.Visible = false;
+            DivBloqueMantenimiento.Visible = true;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                ModoConsulta();
                 CargarTipoSuplidor();
                 CargarSuplidores();
+                CargarListasDesplegablesMantenimiento();
                 DivBloqueDetalleRegistroSeleccionado.Visible = false;
+                DivBloqueMantenimiento.Visible = false;
             }
         }
 
@@ -214,21 +280,37 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             CurrentPage = 0;
             MostrarListadoCOmpras();
+            DivBloqueDetalleRegistroSeleccionado.Visible = false;
         }
 
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            btnGuardar.Visible = true;
+            btnModificar.Visible = false;
+            btnEliminar.Visible = false;
+            lbClaveSeguridadMantenimiento.Visible = false;
+            txtClaveSeguridadMantenimiento.Visible = false;
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            btnGuardar.Visible = false;
+            btnModificar.Visible = true;
+            btnEliminar.Visible = false;
+            lbClaveSeguridadMantenimiento.Visible = true;
+            txtClaveSeguridadMantenimiento.Visible = true;
         }
 
         protected void btnEliminarRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            btnGuardar.Visible = false;
+            btnModificar.Visible = false;
+            btnEliminar.Visible = true;
+            lbClaveSeguridadMantenimiento.Visible = true;
+            txtClaveSeguridadMantenimiento.Visible = true;
         }
 
         protected void btnExportarRegistro_Click(object sender, EventArgs e)
@@ -252,43 +334,50 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             Paginar(ref rpListadoCompraSuplidores, BuscarRegistroSeleccionadp, 1);
             HandlePaging(ref dlPaginacion);
             foreach (var n in BuscarRegistroSeleccionadp) {
-                txtTipoSuplidordetalle.Text = n.TipoSuplidor;
-//                txtSuplidorDetalle.Text = n.Suplidor;
-//                txtTipoIdentificacionDetalle.Text = n.TipoIdentificacion;
-//                txtNumeroIdentificacion.Text = n.RNCCedula;
-//                txtTipoBienesServicios.Text = n.TipoBienesServicios;
-//                txtNCFDetalle.Text = n.NCF;
-//                txtNCFModificado.Text = n.NCFModificado;
-//                txtFechaComprobante.Text = n.FechaComprobante;
-//                txtFechaPagoDetalle.Text = n.FechaPago;
-//                decimal MontoFacturadoServicios = (decimal)n.MontoFacturadoServicios;
-//                txtMontoFacturadoServicioDetalle.Text = MontoFacturadoServicios.ToString("N2");
-//                decimal MontoFacturadoBoenes = (decimal)n.MontoFacturadoBienes;
-//                txtMontoFacturadoBienesDetalle.Text = MontoFacturadoBoenes.ToString("N2");
-//                decimal TotalMontoFacturado = (decimal)n.TotalMontoFacturado;
-//                txtTotalMontoFacturadoDetalle.Text = TotalMontoFacturado.ToString("N2");
-//                decimal ITBISFActurado = (decimal)n.ITBISFacturado;
-//                txtITBISFacturadoDetalle.Text = ITBISFActurado.ToString("N2");
-//                decimal ITBISRetenido = (decimal)n.ITBISRetenido;
-//                txtITBISRetenidoDetalle.Text = ITBISRetenido.ToString("N2");
-//                decimal ITBISSujetoProporcionalidad = (decimal)n.ITBISSujetoProporcionalidad;
-//                txtITBIsSujetoProporcionalidaddesDetalle.Text = ITBISSujetoProporcionalidad.ToString("N2");
-//                decimal ITBISLlevadoCosto = (decimal)n.ITBISLlevadoCosto;
-//                txtITBISLlevadoCostoDetalle.Text = ITBISLlevadoCosto.ToString("N2");
-//                txtTipoRetencionISRDetalle.Text = n.TipoRetencionISR;
-//                decimal ITBISPorAdelantar = (decimal)n.ITBISPorAdelantar;
-//                txtITBISPorAdelantarDetalle.Text = ITBISPorAdelantar.ToString("N2");
-//                txtITBISRetenidoComprasDetalle.Text = 
-//                txtMontoRetencionVentasDetalle.Text = 
-//txtMontoRetencionComprasDetalle.Text =
-//txtImpuestoSelectivoConsumoDetalle.Text =
-//txtISRPercibidoComprasDetalle.Text =
-//txtOtrosImpuestosTasaDetalle.Text =
-//txtMontoPropinaLetalDetalle.Text =
-//txtFormaPAgoDetalle.Text =
+                txtTipoSuplidorDetalle.Text = n.TipoSuplidor;
+                txtSuplidorDetalle.Text = n.Suplidor;
+                txtRNCCedulaDetalle.Text = n.RNCCedula;
+                txtTipoIDDetalle.Text = n.TipoIdentificacion;
+                txtTipoBienesServiciosCompradosDetalle.Text = n.CodigoTipoBienesServicio;
+                txtNCFDetalle.Text = n.NCF;
+                txtNCFModificadoDetalle.Text = n.NCFModificado;
+                DateTime FechaComprobante = Convert.ToDateTime(n.FechaComprobante0);
+                txtFechaComprobanteDetalle.Text = FechaComprobante.ToString("yyyy-MM-dd");
+                DateTime FechaPago = Convert.ToDateTime(n.FechaPago0);
+                txtFechaPagoDetalle.Text = FechaPago.ToString("yyyy-MM-dd");
+                decimal MontoFacturadoServicio = (decimal)n.MontoFacturadoServicios;
+                txtMontoFacturadoServiciosDetalle.Text = MontoFacturadoServicio.ToString("N2");
+                decimal MontoFacturadoBienes = (decimal)n.MontoFacturadoBienes;
+                txtMontoFacturadoBienesDetalle.Text = MontoFacturadoBienes.ToString("N2");
+                decimal TotalMontoFacturado = (decimal)n.TotalMontoFacturado;
+                txtTotalMntoFacturadoDetalle.Text = TotalMontoFacturado.ToString("N2");
+                decimal ITBISFacturadoDetalle = (decimal)n.ITBISFacturado;
+                txtITBISFacturadoDetalle.Text = ITBISFacturadoDetalle.ToString("N2");
+                decimal ITBISRetenido = (decimal)n.ITBISRetenido;
+                txtITBISRetenidoDetalle.Text = ITBISRetenido.ToString("N2");
+                decimal ITBISSujetoPorporcionalidad = (decimal)n.ITBISSujetoProporcionalidad;
+                txtITBISSujetoProporcionalidadDetalle.Text = ITBISSujetoPorporcionalidad.ToString("N2");
+                decimal ITBISLlevadoAlCosto = (decimal)n.ITBISLlevadoCosto;
+                txtITBISLlevadoCostoDetalle.Text = ITBISLlevadoAlCosto.ToString("N2");
+                decimal ITBISPorAdelantar = (decimal)n.ITBISPorAdelantar;
+                txtITBISPorAdelantarDetalle.Text = ITBISPorAdelantar.ToString("N2");
+                decimal ITBISPercibidoCompras = (decimal)n.ITBISPercibidoCompras;
+                txtITBISPercibidoComprasDetalle.Text = ITBISPercibidoCompras.ToString("N2");
+                txtTipoRetencionISRDetalle.Text = n.TipoRetencionISR;
+                decimal MontoretencionRenta = (decimal)n.MontoRetencionRenta;
+                txtMontoRetencionRentaDetalle.Text = MontoretencionRenta.ToString("N2");
+                decimal ISRPercibidoCompras = (decimal)n.ISRPercibidoCompras;
+                txtISRPercibidoComprasDetalle.Text = ISRPercibidoCompras.ToString("N2");
+                decimal ImpuestoSelecitoConsumo = (decimal)n.ImpuestoSelectivoConsumo;
+                txtImpuestoSelectivoConsumoDetalle.Text = ImpuestoSelecitoConsumo.ToString();
+                decimal OtrosImpuestosTasa = (decimal)n.OtrosImpuestosTasa;
+                txtOtrosImpuestosTasaDetalle.Text = OtrosImpuestosTasa.ToString("N2");
+                decimal Montopropinalegal = (decimal)n.MontoPropinaLegal;
+                txtMontoPropinaLegalDetalle.Text = Montopropinalegal.ToString("N2");
+                txtFormaPagoDetalle.Text = n.FormaPago;
             }
-
-
+            DivBloqueDetalleRegistroSeleccionado.Visible = true;
+            ModoMantenimiento();
         }
 
         protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
@@ -319,6 +408,31 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void LinkUltipaPagina_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarTipoSuplidorMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarSuplidoreMantenimiento();
         }
 
         protected void ddlSeleccionarTipoSuplidorConsulta_SelectedIndexChanged(object sender, EventArgs e)

@@ -429,13 +429,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbTipoSuplidorDetalle;
 
         /// <summary>
-        /// txtTipoSuplidordetalle control.
+        /// txtTipoSuplidorDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoSuplidordetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoSuplidorDetalle;
 
         /// <summary>
         /// lbSuplidorDetalle control.
@@ -456,58 +456,58 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtSuplidorDetalle;
 
         /// <summary>
-        /// lbTipIdentificacionDetalle control.
+        /// lbRNCCedulaDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTipIdentificacionDetalle;
+        protected global::System.Web.UI.WebControls.Label lbRNCCedulaDetalle;
 
         /// <summary>
-        /// txtTipoIdentificacionDetalle control.
+        /// txtRNCCedulaDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoIdentificacionDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtRNCCedulaDetalle;
 
         /// <summary>
-        /// lbNumeroIdentificacionDetalle control.
+        /// lbTipoIDDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNumeroIdentificacionDetalle;
+        protected global::System.Web.UI.WebControls.Label lbTipoIDDetalle;
 
         /// <summary>
-        /// txtNumeroIdentificacion control.
+        /// txtTipoIDDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumeroIdentificacion;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoIDDetalle;
 
         /// <summary>
-        /// lbTipoBienesserviciosDetalle control.
+        /// lbTipoBienesServiciosOmpradosDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTipoBienesserviciosDetalle;
+        protected global::System.Web.UI.WebControls.Label lbTipoBienesServiciosOmpradosDetalle;
 
         /// <summary>
-        /// txtTipoBienesServicios control.
+        /// txtTipoBienesServiciosCompradosDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoBienesServicios;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoBienesServiciosCompradosDetalle;
 
         /// <summary>
         /// lbNCFDetalle control.
@@ -537,13 +537,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbNCFModificadoDetalle;
 
         /// <summary>
-        /// txtNCFModificado control.
+        /// txtNCFModificadoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNCFModificado;
+        protected global::System.Web.UI.WebControls.TextBox txtNCFModificadoDetalle;
 
         /// <summary>
         /// lbFechaComprobanteDetalle control.
@@ -555,13 +555,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbFechaComprobanteDetalle;
 
         /// <summary>
-        /// txtFechaComprobante control.
+        /// txtFechaComprobanteDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaComprobante;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaComprobanteDetalle;
 
         /// <summary>
         /// lbFechaPagoDetalle control.
@@ -582,22 +582,22 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtFechaPagoDetalle;
 
         /// <summary>
-        /// lbMontoFacturadoServicioDetalle control.
+        /// lbMontoFacturadoServiciosDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbMontoFacturadoServicioDetalle;
+        protected global::System.Web.UI.WebControls.Label lbMontoFacturadoServiciosDetalle;
 
         /// <summary>
-        /// txtMontoFacturadoServicioDetalle control.
+        /// txtMontoFacturadoServiciosDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoFacturadoServicioDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtMontoFacturadoServiciosDetalle;
 
         /// <summary>
         /// lbMontoFacturadoBienesDetalle control.
@@ -618,31 +618,31 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtMontoFacturadoBienesDetalle;
 
         /// <summary>
-        /// lbTotalMontoFacturadoDetalle control.
+        /// lbTotalMontoFActuradoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTotalMontoFacturadoDetalle;
+        protected global::System.Web.UI.WebControls.Label lbTotalMontoFActuradoDetalle;
 
         /// <summary>
-        /// txtTotalMontoFacturadoDetalle control.
+        /// txtTotalMntoFacturadoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotalMontoFacturadoDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtTotalMntoFacturadoDetalle;
 
         /// <summary>
-        /// lbITBISFacturado control.
+        /// lbITBISFacturadoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbITBISFacturado;
+        protected global::System.Web.UI.WebControls.Label lbITBISFacturadoDetalle;
 
         /// <summary>
         /// txtITBISFacturadoDetalle control.
@@ -672,31 +672,31 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtITBISRetenidoDetalle;
 
         /// <summary>
-        /// lbITBIsSujetoProporcionalidaddesDetalle control.
+        /// lbITBISSujetoProporcionalidadDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbITBIsSujetoProporcionalidaddesDetalle;
+        protected global::System.Web.UI.WebControls.Label lbITBISSujetoProporcionalidadDetalle;
 
         /// <summary>
-        /// txtITBIsSujetoProporcionalidaddesDetalle control.
+        /// txtITBISSujetoProporcionalidadDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtITBIsSujetoProporcionalidaddesDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtITBISSujetoProporcionalidadDetalle;
 
         /// <summary>
-        /// lbITBISLlevadoCosto control.
+        /// lbITBISLlevadoCostoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbITBISLlevadoCosto;
+        protected global::System.Web.UI.WebControls.Label lbITBISLlevadoCostoDetalle;
 
         /// <summary>
         /// txtITBISLlevadoCostoDetalle control.
@@ -706,24 +706,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtITBISLlevadoCostoDetalle;
-
-        /// <summary>
-        /// lbTipoRetencionISRDetalle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTipoRetencionISRDetalle;
-
-        /// <summary>
-        /// txtTipoRetencionISRDetalle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoRetencionISRDetalle;
 
         /// <summary>
         /// lbITBISPorAdelantarDetalle control.
@@ -744,58 +726,76 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtITBISPorAdelantarDetalle;
 
         /// <summary>
-        /// lbITBISRetenidoComprasDetalle control.
+        /// lbITBISPercibidoComprasDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbITBISRetenidoComprasDetalle;
+        protected global::System.Web.UI.WebControls.Label lbITBISPercibidoComprasDetalle;
 
         /// <summary>
-        /// txtITBISRetenidoComprasDetalle control.
+        /// txtITBISPercibidoComprasDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtITBISRetenidoComprasDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtITBISPercibidoComprasDetalle;
 
         /// <summary>
-        /// lbMontoRetencionVentasDetalle control.
+        /// lbTipoRetenecionEnISRDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbMontoRetencionVentasDetalle;
+        protected global::System.Web.UI.WebControls.Label lbTipoRetenecionEnISRDetalle;
 
         /// <summary>
-        /// txtMontoRetencionVentasDetalle control.
+        /// txtTipoRetencionISRDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoRetencionVentasDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoRetencionISRDetalle;
 
         /// <summary>
-        /// lbMontoetencionComprasDetalle control.
+        /// lbMontoRetencionRentaDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbMontoetencionComprasDetalle;
+        protected global::System.Web.UI.WebControls.Label lbMontoRetencionRentaDetalle;
 
         /// <summary>
-        /// txtMontoRetencionComprasDetalle control.
+        /// txtMontoRetencionRentaDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoRetencionComprasDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtMontoRetencionRentaDetalle;
+
+        /// <summary>
+        /// lbISRPercibidoComprasDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbISRPercibidoComprasDetalle;
+
+        /// <summary>
+        /// txtISRPercibidoComprasDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtISRPercibidoComprasDetalle;
 
         /// <summary>
         /// lbImpuestoSelectivoConsumoDetalle control.
@@ -814,24 +814,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImpuestoSelectivoConsumoDetalle;
-
-        /// <summary>
-        /// lbISRPercibodoComprasDetalle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbISRPercibodoComprasDetalle;
-
-        /// <summary>
-        /// txtISRPercibidoComprasDetalle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtISRPercibidoComprasDetalle;
 
         /// <summary>
         /// lbOtrosImpuestosTasaDetalle control.
@@ -861,13 +843,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbMontoPropinaLegalDetalle;
 
         /// <summary>
-        /// txtMontoPropinaLetalDetalle control.
+        /// txtMontoPropinaLegalDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoPropinaLetalDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtMontoPropinaLegalDetalle;
 
         /// <summary>
         /// lbFormaPagoDetalle control.
@@ -879,13 +861,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbFormaPagoDetalle;
 
         /// <summary>
-        /// txtFormaPAgoDetalle control.
+        /// txtFormaPagoDetalle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFormaPAgoDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtFormaPagoDetalle;
 
         /// <summary>
         /// DivBloqueMantenimiento control.
@@ -904,6 +886,42 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbTituloMantenimiento;
+
+        /// <summary>
+        /// LbSeleccionarTipoSuplidorMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbSeleccionarTipoSuplidorMantenimiento;
+
+        /// <summary>
+        /// ddlSeleccionarTipoSuplidorMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarTipoSuplidorMantenimiento;
+
+        /// <summary>
+        /// lbSeleccionarSuplidormantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSeleccionarSuplidormantenimiento;
+
+        /// <summary>
+        /// ddlSeleccionarSuplidorMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarSuplidorMantenimiento;
 
         /// <summary>
         /// lbRNCCedulaMantenimiento control.
@@ -951,13 +969,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbTipoBienesServiciosOmpradosMantenimiento;
 
         /// <summary>
-        /// ddlSeleccionarTipoBienesServiciosComprados control.
+        /// ddlSeleccionarTipoBienesServiciosCompradosMantenimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarTipoBienesServiciosComprados;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarTipoBienesServiciosCompradosMantenimiento;
 
         /// <summary>
         /// lbNCFMantenimiento control.
@@ -1318,5 +1336,59 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarFormaPagoMantenimiento;
+
+        /// <summary>
+        /// lbClaveSeguridadMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridadMantenimiento;
+
+        /// <summary>
+        /// txtClaveSeguridadMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridadMantenimiento;
+
+        /// <summary>
+        /// btnGuardar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+
+        /// <summary>
+        /// btnModificar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificar;
+
+        /// <summary>
+        /// btnEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminar;
+
+        /// <summary>
+        /// btnVolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
     }
 }
