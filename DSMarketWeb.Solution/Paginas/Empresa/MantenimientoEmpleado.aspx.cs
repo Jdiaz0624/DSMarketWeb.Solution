@@ -427,6 +427,8 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             }
         }
         #endregion
+
+      
         private decimal SacarCodigoEmpleadoGenerado(decimal NumeroRegistro) {
 
             decimal IdEmpleado = 0;

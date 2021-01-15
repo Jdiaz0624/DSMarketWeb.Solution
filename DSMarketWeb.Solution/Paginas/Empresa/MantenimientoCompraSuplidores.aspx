@@ -32,7 +32,9 @@
 
     <script type="text/javascript">
 
-
+        function ClaveSeguridadInvalida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar.");
+        }
         function CamposFechaVacios() {
             alert("Los campos fecha son necesarios para realizar esta consulta, favor de verificar.");
         }
@@ -42,6 +44,27 @@
         function CampoFechaHastaVacio() {
             $("#<%=txtFechaHastaConsullta.ClientID%>").css("border-color", "red");
         }
+
+        function CamposFechaVaciosMantenimiento() {
+            alert("Los campos Fecha de Comprobante y Fecha de Pagos No pueden estar vacios para realizar esta operación, favor de verificar.");
+        }
+        function CampoFechaComprobanteVacio() {
+            $("#<%=txtFechaComprobanteMantenimiento.ClientID%>").css("border-color", "red");
+        }
+        function CampoFechaPagoVacio() {
+            $("#<%=txtFechaPagoMantenimiento.ClientID%>").css("border-color", "red");
+        }
+
+        function RegistroGuardado() {
+            alert("Registro guardado con exito");
+        }
+        function RegistroModificado() {
+            alert("Registro modificado con exito");
+        }
+        function RegistroEliminado() {
+            alert("Registro Eliminado con exito");
+        }
+
 
         $(document).ready(function () {
             //VALIDAMOS LOS CAMPOS DEL BOTON GUARDAR
@@ -692,8 +715,13 @@
         <div id="DivBloqueMantenimiento" runat="server">
             <div class="jumbotron" align="center">
                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE COMPRA A SUPLIDORES"></asp:Label>
+                <asp:Label ID="lbIdregistroSeleccionado" runat="server" Text="IdCOmpraSuplidor" Visible="false"></asp:Label>
+                <asp:Label ID="lbReporteUnico" runat="server" Text="ReporteUnico" Visible="false"></asp:Label>
             </div>
-            <div class="form-row">
+            <asp:ScriptManager ID="ScripManagerMantenimiento" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanelMantenimiento" runat="server">
+                <ContentTemplate>
+                    <div class="form-row">
                 <!--FILA CERO-->
                 <div class="form-group col-md-6">
                     <asp:Label ID="LbSeleccionarTipoSuplidorMantenimiento" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>
@@ -746,12 +774,12 @@
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoFacturadoServiciosMantenimiento" runat="server" Text="Monto Facturado en Servicios" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoFacturadoServiciosMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto del NCF que corresponde a servicios, sin incluir impuestos."></asp:TextBox>
+                    <asp:TextBox ID="txtMontoFacturadoServiciosMantenimiento" runat="server" AutoPostBack="true" OnTextChanged="txtMontoFacturadoServiciosMantenimiento_TextChanged" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto del NCF que corresponde a servicios, sin incluir impuestos."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoFacturadoBienesMantenimiento" runat="server" Text="Monto Facturado en Bienes" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoFacturadoBienesMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto en el NCF que corresponde a bienes, sin incluir impuestos."></asp:TextBox>
+                    <asp:TextBox ID="txtMontoFacturadoBienesMantenimiento" runat="server" AutoPostBack="true" OnTextChanged="txtMontoFacturadoBienesMantenimiento_TextChanged" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto en el NCF que corresponde a bienes, sin incluir impuestos."></asp:TextBox>
                 </div>
                 <!--CUARTA FILA-->
                 <div class="form-group col-md-4">
@@ -834,6 +862,8 @@
                     <asp:TextBox ID="txtClaveSeguridadMantenimiento" runat="server" ToolTip="Ingresar la clave de seguridad para completar esta operación." TextMode="Password" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <br />
 
             <div align="center">

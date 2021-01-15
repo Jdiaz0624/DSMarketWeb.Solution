@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace DSMarketWeb.Solution.Paginas.Empresa
 {
@@ -229,6 +231,116 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        #region MANTENIMIENTO DE COMPRA DE SUPLIDORES
+        private void MANCompraSuplidores(decimal IdCompraSuplidor, string Accion) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCompraSuplidores Procesar = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCompraSuplidores(
+                IdCompraSuplidor,
+                Convert.ToDecimal(ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarSuplidorMantenimiento.SelectedValue),
+                txtRNCCedulaMantenimiento.Text,
+                Convert.ToDecimal(ddlSeleccionarTipoIDMAntenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.SelectedValue),
+                txtNCFMantenimiento.Text,
+                txtNCFModificadoMantenimiento.Text,
+                Convert.ToDateTime(txtFechaComprobanteMantenimiento.Text),
+                Convert.ToDateTime(txtFechaPagoMantenimiento.Text),
+                Convert.ToDecimal(txtMontoFacturadoServiciosMantenimiento.Text),
+                Convert.ToDecimal(txtMontoFacturadoBienesMantenimiento.Text),
+                Convert.ToDecimal(txtTotalMntoFacturadoMantenimiento.Text),
+                Convert.ToDecimal(txtITBISFacturadoMantenimiento.Text),
+                Convert.ToDecimal(txtITBISRetenidoMantenimiento.Text),
+                Convert.ToDecimal(txtITBISSujetoProporcionalidadMantenimiento.Text),
+                Convert.ToDecimal(txtITBISLlevadoCostoMantenimiento.Text),
+                Convert.ToDecimal(txtITBISPorAdelantarMantenimiento.Text),
+                Convert.ToDecimal(txtITBISPercibidoComprasMantenimiento.Text),
+                Convert.ToDecimal(ddlSeleccionarTipoRetencionISRMantenimiento.SelectedValue),
+                Convert.ToDecimal(txtMontoRetencionRentaMantenimiento.Text),
+                Convert.ToDecimal(txtISRPercibidoComprasMantenimiento.Text),
+                Convert.ToDecimal(txtImpuestoSelectivoConsumoMantenimiento.Text),
+                Convert.ToDecimal(txtOtrosImpuestosTasaMantenimiento.Text),
+                Convert.ToDecimal(txtMontoPropinaLegalMantenimiento.Text),
+                Convert.ToDecimal(ddlSeleccionarFormaPagoMantenimiento.SelectedValue),
+                Convert.ToDecimal(Session["IdUsuario"]),
+                DateTime.Now,
+                Accion);
+            Procesar.ProcesarDataCompraSuplidores();
+        }
+        #endregion
+
+        #region GENERAR REPORTE
+        private void GenerarReporte(decimal IdUsuario, string RutaReporte, string NombreArchivo, int ReporteUnico)
+        {
+            string UsuarioBD = "";
+            string ClaveBD = "";
+            var SacarCredencialesBD = ObjDataSeguridad.Value.SacarCredencialesBD(1);
+            foreach (var n in SacarCredencialesBD) {
+                UsuarioBD = n.Usuario;
+                ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
+            }
+
+            decimal? IdCompraSuplidor = null;
+            string _NumeroIdentificacion = string.IsNullOrEmpty(txtNumeroIdentificacionConsulta.Text.Trim()) ? null : txtNumeroIdentificacionConsulta.Text.Trim();
+            decimal? _TipoSuplidor = ddlSeleccionarTipoSuplidorConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoSuplidorConsulta.SelectedValue) : new Nullable<decimal>();
+            decimal? _Suplir = ddlSeleccionarSuplidorConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarSuplidorConsulta.SelectedValue) : new Nullable<decimal>();
+
+            ReportDocument Reporte = new ReportDocument();
+            Reporte.Load(RutaReporte);
+            Reporte.Refresh();
+
+
+            if (ReporteUnico == 1) {
+                Reporte.SetParameterValue("@IdCompraSuplidor", Convert.ToDecimal(lbIdregistroSeleccionado.Text));
+                Reporte.SetParameterValue("@IdTipoSuplidor", null);
+                Reporte.SetParameterValue("@IdSuplidor", null);
+                Reporte.SetParameterValue("@RNCCedula", null);
+                Reporte.SetParameterValue("@FechaCreadoDesde", null);
+                Reporte.SetParameterValue("@FechaCreadoHasta", null);
+                Reporte.SetParameterValue("@UsuarioProcesa", IdUsuario);
+            }
+            else if (ReporteUnico == 0) {
+                Reporte.SetParameterValue("@IdCompraSuplidor", IdCompraSuplidor);
+                Reporte.SetParameterValue("@IdTipoSuplidor", _TipoSuplidor);
+                Reporte.SetParameterValue("@IdSuplidor", _Suplir);
+                Reporte.SetParameterValue("@RNCCedula", _NumeroIdentificacion);
+                Reporte.SetParameterValue("@FechaCreadoDesde", Convert.ToDateTime(txtFechaDesde.Text));
+                Reporte.SetParameterValue("@FechaCreadoHasta", Convert.ToDateTime(txtFechaHastaConsullta.Text));
+                Reporte.SetParameterValue("@UsuarioProcesa", IdUsuario);
+            }
+
+            Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+            if (rbExprtarPDF.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+            }
+            else if (rbExprtarWOrd.Checked == true) {
+                Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+            }
+        }
+        #endregion
+
+        private decimal CalcularTotalMontoFacturado(decimal TotalMontoFacturadoBienes, decimal TotalMontoFacturadoServicio) {
+            decimal TotalMontoFacturado = 0;
+
+            TotalMontoFacturado = TotalMontoFacturadoBienes + TotalMontoFacturadoServicio;
+            return TotalMontoFacturado;
+        }
+
+        private void CalcularTotalMontoFacturadoProceso() {
+            try
+            {
+                if (string.IsNullOrEmpty(txtMontoFacturadoBienesMantenimiento.Text.Trim()))
+                {
+                    txtMontoFacturadoBienesMantenimiento.Text = "0";
+                }
+                if (string.IsNullOrEmpty(txtMontoFacturadoServiciosMantenimiento.Text.Trim()))
+                {
+                    txtMontoFacturadoServiciosMantenimiento.Text = "0";
+                }
+
+                txtTotalMntoFacturadoMantenimiento.Text = CalcularTotalMontoFacturado(Convert.ToDecimal(txtMontoFacturadoServiciosMantenimiento.Text), Convert.ToDecimal(txtMontoFacturadoBienesMantenimiento.Text)).ToString();
+            }
+            catch { }
+        }
+
         private void DeshabilitarControles() {
             ddlSeleccionarTipoSuplidorMantenimiento.Enabled = false;
             ddlSeleccionarSuplidorMantenimiento.Enabled = false;
@@ -343,6 +455,40 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             DivBloqueDetalleRegistroSeleccionado.Visible = false;
             DivBloqueMantenimiento.Visible = true;
         }
+
+        private void RestablecerPantalla() {
+            CargarTipoSuplidor();
+            CargarSuplidores();
+            CargarListasDesplegablesMantenimiento();
+            txtNumeroIdentificacionConsulta.Text = string.Empty;
+            Consulta_Mantenimiento();
+            ModoConsulta();
+
+            txtRNCCedulaMantenimiento.Text = string.Empty;
+            txtNCFMantenimiento.Text = string.Empty;
+            txtNCFModificadoMantenimiento.Text = string.Empty;
+            txtFechaComprobanteMantenimiento.Text = string.Empty;
+            txtFechaPagoMantenimiento.Text = string.Empty;
+            txtMontoFacturadoServiciosMantenimiento.Text = string.Empty;
+            txtMontoFacturadoBienesMantenimiento.Text = string.Empty;
+            txtTotalMntoFacturadoMantenimiento.Text = string.Empty;
+            txtITBISFacturadoMantenimiento.Text = string.Empty;
+            txtITBISRetenidoMantenimiento.Text = string.Empty;
+            txtITBISSujetoProporcionalidadMantenimiento.Text = string.Empty;
+            txtITBISLlevadoCostoMantenimiento.Text = string.Empty;
+            txtITBISPorAdelantarMantenimiento.Text = string.Empty;
+            txtITBISPercibidoComprasMantenimiento.Text = string.Empty;
+            txtMontoRetencionRentaMantenimiento.Text = string.Empty;
+            txtISRPercibidoComprasMantenimiento.Text = string.Empty;
+            txtImpuestoSelectivoConsumoMantenimiento.Text = string.Empty;
+            txtOtrosImpuestosTasaMantenimiento.Text = string.Empty;
+            txtMontoPropinaLegalMantenimiento.Text = string.Empty;
+            txtClaveSeguridadMantenimiento.Text = string.Empty;
+            rpListadoCompraSuplidores.DataSource = null;
+            rpListadoCompraSuplidores.DataBind();
+            lbReporteUnico.Text = "0";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -353,6 +499,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 CargarListasDesplegablesMantenimiento();
                 DivBloqueDetalleRegistroSeleccionado.Visible = false;
                 DivBloqueMantenimiento.Visible = false;
+                lbReporteUnico.Text = "0";
             }
         }
 
@@ -372,7 +519,22 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             btnEliminar.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = false;
             txtClaveSeguridadMantenimiento.Visible = false;
-            
+
+            txtMontoFacturadoServiciosMantenimiento.Text = "0";
+            txtMontoFacturadoBienesMantenimiento.Text = "0";
+            txtTotalMntoFacturadoMantenimiento.Text = "0";
+            txtITBISFacturadoMantenimiento.Text = "0";
+            txtITBISRetenidoMantenimiento.Text = "0";
+            txtITBISSujetoProporcionalidadMantenimiento.Text = "0";
+            txtITBISLlevadoCostoMantenimiento.Text = "0";
+            txtITBISPorAdelantarMantenimiento.Text = "0";
+            txtITBISPercibidoComprasMantenimiento.Text = "0";
+            txtMontoRetencionRentaMantenimiento.Text = "0";
+            txtISRPercibidoComprasMantenimiento.Text = "0";
+            txtImpuestoSelectivoConsumoMantenimiento.Text = "0";
+            txtOtrosImpuestosTasaMantenimiento.Text = "0";
+            txtMontoPropinaLegalMantenimiento.Text = "0";
+            CalcularTotalMontoFacturadoProceso();
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
@@ -384,6 +546,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             btnEliminar.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = true;
             txtClaveSeguridadMantenimiento.Visible = true;
+           // CalcularTotalMontoFacturadoProceso();
         }
 
         protected void btnEliminarRegistro_Click(object sender, EventArgs e)
@@ -399,19 +562,39 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnExportarRegistro_Click(object sender, EventArgs e)
         {
+            int ReporteUnico = Convert.ToInt32(lbReporteUnico.Text);
 
+            if (ReporteUnico == 1) { }
+            else {
+                if (string.IsNullOrEmpty(txtFechaDesde.Text.Trim()) || string.IsNullOrEmpty(txtFechaHastaConsullta.Text.Trim()))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "CamposFechaVacios()", "CamposFechaVacios();", true);
+                    if (string.IsNullOrEmpty(txtFechaDesde.Text.Trim())) {
+                        ClientScript.RegisterStartupScript(GetType(), "CampoFechaDesdeVacio()", "CampoFechaDesdeVacio();", true);
+                    }
+                    if (string.IsNullOrEmpty(txtFechaHastaConsullta.Text.Trim())) {
+                        ClientScript.RegisterStartupScript(GetType(), "CampoFechaHastaVacio()", "CampoFechaHastaVacio();", true);
+                    }
+                }
+                else {
+                    //GENERAR
+             
+                    decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+                    GenerarReporte(IdUsuario, Server.MapPath("CompraSuplidoresDetalle.rpt"), "Compra Suplidores Detalle", 0);
+                }
+            }
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
         {
-
+            RestablecerPantalla();
         }
 
         protected void btnSeleccionar_Click(object sender, EventArgs e)
         {
             var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfIdCompraSuplidor = ((HiddenField)ItemSeleccionado.FindControl("hfIdCompraSupldor")).Value.ToString();
-
+            lbIdregistroSeleccionado.Text = hfIdCompraSuplidor.ToString();
             var BuscarRegistroSeleccionadp = ObjDataEmpresa.Value.BuscaCompraSuplidores(
                 Convert.ToDecimal(hfIdCompraSuplidor),
                 null, null, null, null, null);
@@ -474,9 +657,9 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtNCFMantenimiento.Text = n.NCF;
                 txtNCFModificadoMantenimiento.Text = n.NCFModificado;
                 DateTime FechaComprobanteMantenimiento = Convert.ToDateTime(n.FechaComprobante0);
-                txtFechaComprobanteDetalle.Text = FechaComprobanteMantenimiento.ToString("yyyy-MM-dd");
+                txtFechaComprobanteMantenimiento.Text = FechaComprobanteMantenimiento.ToString("yyyy-MM-dd");
                 DateTime FechaPagoMantenimiento = Convert.ToDateTime(n.FechaPago0);
-                txtFechaPagoDetalle.Text = FechaPagoMantenimiento.ToString("yyyy-MM-dd");
+                txtFechaPagoMantenimiento.Text = FechaPagoMantenimiento.ToString("yyyy-MM-dd");
                 txtMontoFacturadoServiciosMantenimiento.Text = n.MontoFacturadoServicios.ToString();
                 txtMontoFacturadoBienesMantenimiento.Text = n.MontoFacturadoBienes.ToString();
                 txtTotalMntoFacturadoMantenimiento.Text = n.TotalMontoFacturado.ToString();
@@ -498,21 +681,27 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             }
             DivBloqueDetalleRegistroSeleccionado.Visible = true;
             ModoMantenimiento();
+            lbReporteUnico.Text = "1";
         }
 
         protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            MostrarListadoCOmpras();
         }
 
         protected void LinkPaginaAnterior_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarListadoCOmpras();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior);
         }
 
         protected void dlPaginacion_CancelCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarListadoCOmpras();
         }
 
         protected void dlPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -522,37 +711,103 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void LinkPaginaSiguiente_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            MostrarListadoCOmpras();
         }
 
         protected void LinkUltipaPagina_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarListadoCOmpras();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.UltimaPagina);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(txtFechaComprobanteMantenimiento.Text.Trim()) || string.IsNullOrEmpty(txtFechaPagoMantenimiento.Text.Trim())) {
+                ClientScript.RegisterStartupScript(GetType(), "CamposFechaVaciosMantenimiento()", "CamposFechaVaciosMantenimiento();", true);
+                if (string.IsNullOrEmpty(txtFechaComprobanteMantenimiento.Text.Trim())) {
+                    ClientScript.RegisterStartupScript(GetType(), "CampoFechaComprobanteVacio()", "CampoFechaComprobanteVacio();", true);
+                }
+                if (string.IsNullOrEmpty(txtFechaPagoMantenimiento.Text.Trim())) {
+                    ClientScript.RegisterStartupScript(GetType(), "CampoFechaPagoVacio()", "CampoFechaPagoVacio();", true);
+                }
+            }
+            else {
+                MANCompraSuplidores(0, "INSERT");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+                RestablecerPantalla();
+            }
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtFechaComprobanteMantenimiento.Text.Trim()) || string.IsNullOrEmpty(txtFechaPagoMantenimiento.Text.Trim()))
+            {
+                ClientScript.RegisterStartupScript(GetType(), "CamposFechaVaciosMantenimiento()", "CamposFechaVaciosMantenimiento();", true);
+                if (string.IsNullOrEmpty(txtFechaComprobanteMantenimiento.Text.Trim()))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "CampoFechaComprobanteVacio()", "CampoFechaComprobanteVacio();", true);
+                }
+                if (string.IsNullOrEmpty(txtFechaPagoMantenimiento.Text.Trim()))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "CampoFechaPagoVacio()", "CampoFechaPagoVacio();", true);
+                }
+            }
+            else {
+                //VALIDAMOS LA CLAVE DE SEGURIDAD
+                string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadMantenimiento.Text.Trim()) ? null : txtClaveSeguridadMantenimiento.Text.Trim();
 
+                DSMarketWeb.Logic.Comunes.ValidarClaveSeguridad Validar = new Logic.Comunes.ValidarClaveSeguridad(_ClaveSeguridad);
+                bool Respuesta = Validar.ResultadoClave();
+                if (Respuesta == true) {
+                    MANCompraSuplidores(Convert.ToDecimal(lbIdregistroSeleccionado.Text), "UPDATE");
+                    ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                    RestablecerPantalla();
+                }
+                else {
+                    ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadInvalida()", "ClaveSeguridadInvalida();", true);
+                }
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            //VALIDAMOS LA CLAVE DE SEGURIDAD
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridadMantenimiento.Text.Trim()) ? null : txtClaveSeguridadMantenimiento.Text.Trim();
 
+            DSMarketWeb.Logic.Comunes.ValidarClaveSeguridad Validar = new Logic.Comunes.ValidarClaveSeguridad(_ClaveSeguridad);
+            bool Respuesta = Validar.ResultadoClave();
+            if (Respuesta == true)
+            {
+                MANCompraSuplidores(Convert.ToDecimal(lbIdregistroSeleccionado.Text), "DELETE");
+                ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                RestablecerPantalla();
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "RegistroEliminado()", "RegistroEliminado();", true);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-
+            RestablecerPantalla();
         }
 
         protected void ddlSeleccionarTipoSuplidorMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarSuplidoreMantenimiento();
+        }
+
+        protected void txtMontoFacturadoServiciosMantenimiento_TextChanged(object sender, EventArgs e)
+        {
+            CalcularTotalMontoFacturadoProceso();
+        }
+
+        protected void txtMontoFacturadoBienesMantenimiento_TextChanged(object sender, EventArgs e)
+        {
+            CalcularTotalMontoFacturadoProceso();
         }
 
         protected void ddlSeleccionarTipoSuplidorConsulta_SelectedIndexChanged(object sender, EventArgs e)

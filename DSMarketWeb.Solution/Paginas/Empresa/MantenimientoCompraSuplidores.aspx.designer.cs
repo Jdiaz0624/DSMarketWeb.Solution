@@ -888,6 +888,42 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbTituloMantenimiento;
 
         /// <summary>
+        /// lbIdregistroSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbIdregistroSeleccionado;
+
+        /// <summary>
+        /// lbReporteUnico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbReporteUnico;
+
+        /// <summary>
+        /// ScripManagerMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScripManagerMantenimiento;
+
+        /// <summary>
+        /// UpdatePanelMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelMantenimiento;
+
+        /// <summary>
         /// LbSeleccionarTipoSuplidorMantenimiento control.
         /// </summary>
         /// <remarks>

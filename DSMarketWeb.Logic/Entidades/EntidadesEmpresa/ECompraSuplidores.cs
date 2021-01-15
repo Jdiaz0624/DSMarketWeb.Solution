@@ -89,6 +89,25 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesEmpresa
 		public System.Nullable<System.DateTime> FechaCreado0 {get;set;}
 
 		public string FechaCreado {get;set;}
+		public string GeneradoPor { get; set; }
+
+		public string NombreEmpresa { get; set; }
+
+		public string RNC { get; set; }
+
+		public string Direccion { get; set; }
+
+		public string Telefonos { get; set; }
+
+		public string Email { get; set; }
+
+		public string Email2 { get; set; }
+
+		public string Facebook { get; set; }
+
+		public string Instagran { get; set; }
+
+		public System.Data.Linq.Binary LogoEmpresa { get; set; }
 
 		public System.Nullable<int> CantidadRegistros {get;set;}
 	}

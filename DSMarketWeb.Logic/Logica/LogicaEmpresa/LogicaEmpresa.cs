@@ -443,10 +443,10 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
 
         #region MANTENIMIENTO DE COMPRA A SUPLIDORES
         //LISTADO DE COMPRA DE SUPLIDORES
-        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECompraSuplidores> BuscaCompraSuplidores(decimal? IdCompraSuplidor = null, decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string RNCCedula = null, DateTime? FechaCreadoDesde = null, DateTime? FechaCreadoHasta = null) {
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECompraSuplidores> BuscaCompraSuplidores(decimal? IdCompraSuplidor = null, decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string RNCCedula = null, DateTime? FechaCreadoDesde = null, DateTime? FechaCreadoHasta = null,decimal? UsuarioProcesa = 0) {
             ObjData.CommandTimeout = 999999999;
 
-            var Listado = (from n in ObjData.SP_BUSCA_REGISTROS_COMPRA_SUPLIDORES(IdCompraSuplidor, IdTipoSuplidor, IdSuplidor, RNCCedula, FechaCreadoDesde, FechaCreadoHasta)
+            var Listado = (from n in ObjData.SP_BUSCA_REGISTROS_COMPRA_SUPLIDORES(IdCompraSuplidor, IdTipoSuplidor, IdSuplidor, RNCCedula, FechaCreadoDesde, FechaCreadoHasta, UsuarioProcesa)
                            select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECompraSuplidores
                            {
                                IdCompraSuplidor=n.IdCompraSuplidor,
@@ -490,6 +490,16 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                CreadoPor=n.CreadoPor,
                                FechaCreado0=n.FechaCreado0,
                                FechaCreado=n.FechaCreado,
+                               GeneradoPor=n.GeneradoPor,
+                               NombreEmpresa=n.NombreEmpresa,
+                               RNC=n.RNC,
+                               Direccion=n.Direccion,
+                               Telefonos=n.Telefonos,
+                               Email=n.Email,
+                               Email2=n.Email2,
+                               Instagran=n.Instagran,
+                               Facebook=n.Facebook,
+                               LogoEmpresa=n.LogoEmpresa,
                                CantidadRegistros=n.CantidadRegistros
                            }).ToList();
             return Listado;
