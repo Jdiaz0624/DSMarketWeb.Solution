@@ -118,7 +118,7 @@
                                                     else {
                                                         var ITBISRetenido = $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").val().length;
                                                         if (ITBISRetenido < 1) {
-                                                            alert("El campo ITBIS Retenido no puede estar vacio, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                            alert("El campo ITBIS Retenido no puede estar vacio para guardar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
                                                             $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").css("border-color", "red");
                                                             return false;
                                                         }
@@ -142,7 +142,72 @@
                                                                         alert("El campo ITBIS por adelantar no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
                                                                         $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").css("border-color", "red");
                                                                         return false;
-                                                                    }                                                               }
+                                                                    }
+                                                                    else {
+                                                                        var ITBISPercibidoCompras = $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").val().length;
+                                                                        if (ITBISPercibidoCompras < 1) {
+                                                                            alert("El campo ITBIS Percibido en compras no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                            $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                        else {
+                                                                            var TipoRetencionISR = $("#<%=ddlSeleccionarTipoRetencionISRMantenimiento.ClientID%>").val();
+                                                                            if (TipoRetencionISR < 1) {
+                                                                                alert("El campo Tipo de Retención ISR no puede estar vacio para guardar este registro, favor de verificar.");
+                                                                                $("#<%=ddlSeleccionarTipoRetencionISRMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                return false;
+                                                                            }
+                                                                            else {
+                                                                                var MontoRetencionRenta = $("#<%=txtMontoRetencionRentaMantenimiento.ClientID%>").val().length;
+                                                                                if (MontoRetencionRenta < 1) {
+                                                                                    alert("El campo Mono de retencion Renta no puede esta vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                    $("#<%=txtMontoRetencionRentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                    return false;
+                                                                                }
+                                                                                else {
+                                                                                    var ISRPercibidoCompras = $("#<%=txtISRPercibidoComprasMantenimiento.ClientID%>").val().length;
+                                                                                    if (ISRPercibidoCompras < 1) {
+                                                                                        alert("El campo ISR percibido en compras no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                        $("#<%=txtISRPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                        return false;
+                                                                                    }
+                                                                                    else {
+                                                                                        var ImpuestoSelectivoConsumo = $("#<%=txtImpuestoSelectivoConsumoMantenimiento.ClientID%>").val().length;
+                                                                                        if (ImpuestoSelectivoConsumo < 1) {
+                                                                                            alert("El campo Impuesto selectivo al consumo no puede estar vacio para guardar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                            $("#<%=txtImpuestoSelectivoConsumoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                            return false;
+                                                                                        }
+                                                                                        else {
+                                                                                            var OtrodImpuestosTasa = $("#<%=txtOtrosImpuestosTasaMantenimiento.ClientID%>").val().length;
+                                                                                            if (OtrodImpuestosTasa < 1) {
+                                                                                                alert("El campo otros impuestos tasa no puede estar vacio para guardar este registro, en caso de no usar colocar un 0 como registro.");
+                                                                                                $("#<%=txtOtrosImpuestosTasaMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                return false;
+                                                                                            }
+                                                                                            else {
+                                                                                                var MontoPropinaLegal = $("#<%=txtMontoPropinaLegalMantenimiento.ClientID%>").val().length;
+                                                                                                if (MontoPropinaLegal < 1) {
+                                                                                                    alert("El campo Monto Propina Legal no puede estar vacio para guardar este registro, en caso de no usar colocar un 0 como registro.");
+                                                                                                    $("#<%=txtMontoPropinaLegalMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                    return false;
+                                                                                                }
+                                                                                                else {
+                                                                                                    var FormaPago = $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").val();
+                                                                                                    if (FormaPago < 1) {
+                                                                                                        alert("El campo forma de pago no puede estar vacio para guardar este registro, favor de verifiar.");
+                                                                                                        $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                        return false;
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -160,6 +225,204 @@
                 }
             });
 
+            //VALIDAMOS LOS CAMPOS DEL BOTON MODIFICAR
+            $("#<%=btnModificar.ClientID%>").click(function () {
+                var TipoSuplidor = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                 if (TipoSuplidor < 1) {
+                     alert("El campo tipo de suplidor no puede estar vacio para modificar este registro, favor de verificar.");
+                     $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var Suplidor = $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").val();
+                    if (Suplidor < 1) {
+                        alert("El campo suplidor no puede estar vacio para modificar este registro, favor de verificar.");
+                        $("#<%=ddlSeleccionarSuplidorMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        var RNCCedula = $("#<%=txtRNCCedulaMantenimiento.ClientID%>").val().length;
+                        if (RNCCedula < 1) {
+                            alert("El campo RNC / Cedula no puede estar vacio para modificar este registro, favor de verificar.");
+                            $("#<%=txtRNCCedulaMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var TipoID = $("#<%=ddlSeleccionarTipoIDMAntenimiento.ClientID%>").val();
+                            if (TipoID < 1) {
+                                alert("El campo tipo ID no puede estar vacio para modificar este registro, favor de verificar.");
+                                $("#<%=ddlSeleccionarTipoIDMAntenimiento.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var TipoBienesServiciosComprados = $("#<%=ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.ClientID%>").val();
+                                if (TipoBienesServiciosComprados < 1) {
+                                    alert("El campo Tipo de Bienes y Servicios Comprados no puede estar vacio para modificar este registro, favor de verificar.");
+                                    $("#<%=ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    var NCF = $("#<%=txtNCFMantenimiento.ClientID%>").val().length;
+                                    if (NCF < 1) {
+                                        alert("El campo NCF no puede estar vacio para modificar este registro, favor de verificar.");
+                                        $("#<%=txtNCFMantenimiento.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        var NCFModificado = $("#<%=txtNCFModificadoMantenimiento.ClientID%>").val().length;
+                                        if (NCFModificado < 1) {
+                                            alert("El campo NCF Modificado no puede estar vacio para modificar este registro, favor de verificar.");
+                                            $("#<%=txtNCFModificadoMantenimiento.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            var MontoFacturadoServicios = $("#<%=txtMontoFacturadoServiciosMantenimiento.ClientID%>").val().length;
+                                            if (MontoFacturadoServicios < 1) {
+                                                alert("El campo Monto Facturado en Servicios no puede estar vacio para modificar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                $("#<%=txtMontoFacturadoServiciosMantenimiento.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                var MontoFacturadoBienes = $("#<%=txtMontoFacturadoBienesMantenimiento.ClientID%>").val().length;
+                                                if (MontoFacturadoBienes < 1) {
+                                                    alert("El campo Monto Facturado en Bienes no puede estar vacio para modificar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                    $("#<%=txtMontoFacturadoBienesMantenimiento.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    var ITBISFacturado = $("#<%=txtITBISFacturadoMantenimiento.ClientID%>").val().length;
+                                                    if (ITBISFacturado < 1) {
+                                                        alert("El campo ITBIS Facturado no puede estar vacio para modificar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                        $("#<%=txtITBISFacturadoMantenimiento.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        var ITBISRetenido = $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").val().length;
+                                                        if (ITBISRetenido < 1) {
+                                                            alert("El campo ITBIS Retenido no puede estar vacio para modificar este registro, en caso de no usarlo favor de colocar un 0 como registro.");
+                                                            $("#<%=txtITBISRetenidoMantenimiento.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            var ITBISSujetoProporcionalidad = $("#<%=txtITBISSujetoProporcionalidadMantenimiento.ClientID%>").val().length;
+                                                            if (ITBISSujetoProporcionalidad < 1) {
+                                                                alert("El campo ITBIS Sujeto a Proporcionalidad no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                $("#<%=txtITBISSujetoProporcionalidadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var ITBISLlevadoCosto = $("#<%=txtITBISLlevadoCostoMantenimiento.ClientID%>").val().length;
+                                                                if (ITBISLlevadoCosto < 1) {
+                                                                    alert("El campo ITBIS llevado al costo no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                    $("#<%=txtITBISLlevadoCostoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    var ITBISPorAdelantar = $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").val().length;
+                                                                    if (ITBISPorAdelantar < 1) {
+                                                                        alert("El campo ITBIS por adelantar no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                        $("#<%=txtITBISPorAdelantarMantenimiento.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        var ITBISPercibidoCompras = $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").val().length;
+                                                                        if (ITBISPercibidoCompras < 1) {
+                                                                            alert("El campo ITBIS Percibido en compras no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                            $("#<%=txtITBISPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                        else {
+                                                                            var TipoRetencionISR = $("#<%=ddlSeleccionarTipoRetencionISRMantenimiento.ClientID%>").val();
+                                                                            if (TipoRetencionISR < 1) {
+                                                                                alert("El campo Tipo de Retención ISR no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                                $("#<%=ddlSeleccionarTipoRetencionISRMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                return false;
+                                                                            }
+                                                                            else {
+                                                                                var MontoRetencionRenta = $("#<%=txtMontoRetencionRentaMantenimiento.ClientID%>").val().length;
+                                                                                if (MontoRetencionRenta < 1) {
+                                                                                    alert("El campo Mono de retencion Renta no puede esta vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                    $("#<%=txtMontoRetencionRentaMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                    return false;
+                                                                                }
+                                                                                else {
+                                                                                    var ISRPercibidoCompras = $("#<%=txtISRPercibidoComprasMantenimiento.ClientID%>").val().length;
+                                                                                    if (ISRPercibidoCompras < 1) {
+                                                                                        alert("El campo ISR percibido en compras no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                        $("#<%=txtISRPercibidoComprasMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                        return false;
+                                                                                    }
+                                                                                    else {
+                                                                                        var ImpuestoSelectivoConsumo = $("#<%=txtImpuestoSelectivoConsumoMantenimiento.ClientID%>").val().length;
+                                                                                        if (ImpuestoSelectivoConsumo < 1) {
+                                                                                            alert("El campo Impuesto selectivo al consumo no puede estar vacio para modificar este registro, en caso de no usarlo colocar un 0 como registro.");
+                                                                                            $("#<%=txtImpuestoSelectivoConsumoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                            return false;
+                                                                                        }
+                                                                                        else {
+                                                                                            var OtrodImpuestosTasa = $("#<%=txtOtrosImpuestosTasaMantenimiento.ClientID%>").val().length;
+                                                                                            if (OtrodImpuestosTasa < 1) {
+                                                                                                alert("El campo otros impuestos tasa no puede estar vacio para modificar este registro, en caso de no usar colocar un 0 como registro.");
+                                                                                                $("#<%=txtOtrosImpuestosTasaMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                return false;
+                                                                                            }
+                                                                                            else {
+                                                                                                var MontoPropinaLegal = $("#<%=txtMontoPropinaLegalMantenimiento.ClientID%>").val().length;
+                                                                                                if (MontoPropinaLegal < 1) {
+                                                                                                    alert("El campo Monto Propina Legal no puede estar vacio para modificar este registro, en caso de no usar colocar un 0 como registro.");
+                                                                                                    $("#<%=txtMontoPropinaLegalMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                    return false;
+                                                                                                }
+                                                                                                else {
+                                                                                                    var FormaPago = $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").val();
+                                                                                                    if (FormaPago < 1) {
+                                                                                                        alert("El campo forma de pago no puede estar vacio para modificar este registro, favor de verifiar.");
+                                                                                                        $("#<%=ddlSeleccionarFormaPagoMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                        return false;
+                                                                                                    }
+                                                                                                    else {
+                                                                                                        var ClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                                                                                                        if (ClaveSeguridad < 1) {
+                                                                                                            alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar.");
+                                                                                                            $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                                                                                                            return false;
+                                                                                                        }
+                                                                                                    }
+                                                                                                 }
+                                                                                             }
+                                                                                         }
+                                                                                     }
+                                                                                 }
+                                                                             }
+                                                                         }
+                                                                     }
+                                                                 }
+                                                             }
+                                                         }
+                                                     }
+                                                 }
+                                             }
+
+                                         }
+                                     }
+                                 }
+
+                             }
+                         }
+                     }
+
+                 }
+            });
+
+            //VALIDAMOS LOS CAMPOS DEL BOTON ELIMINAR
+            $("#<%=btnEliminar.ClientID%>").click(function () {
+                var ClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                if (ClaveSeguridad < 1) {
+                    alert("El campo clave de seguridad no puede estar vacio para eliminar este registro, favor de verificar.");
+                    $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
         })
     </script>
 
@@ -447,7 +710,7 @@
                 <!--PRIMERA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbRNCCedulaMantenimiento" runat="server" Text="RNC o Cedula" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtRNCCedulaMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="Digite el RNC o Cedula de la persona o negocio de donde se adquirieron los servicios."></asp:TextBox>
+                    <asp:TextBox ID="txtRNCCedulaMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100" ToolTip="Digite el RNC o Cedula de la persona o negocio de donde se adquirieron los servicios."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -462,70 +725,70 @@
                 <!--SEGUNDA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbNCFMantenimiento" runat="server" Text="NCF" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtNCFMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="coloque el número completo del comprobante fiscal que avala la compra de bienes y/o servicios, incluyendo registro de gastos menores, comprobante de compras y notas de débito o crédito (11 o 13* posiciones alfanuméricas). Cuando informe las retenciones efectuadas y la fecha de pago correspondiente a un comprobante que le hayan emitido antes de mayo 2018, se podrá colocar el NCF con estructura de 19 posiciones. "></asp:TextBox>
+                    <asp:TextBox ID="txtNCFMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100" ToolTip="coloque el número completo del comprobante fiscal que avala la compra de bienes y/o servicios, incluyendo registro de gastos menores, comprobante de compras y notas de débito o crédito (11 o 13* posiciones alfanuméricas). Cuando informe las retenciones efectuadas y la fecha de pago correspondiente a un comprobante que le hayan emitido antes de mayo 2018, se podrá colocar el NCF con estructura de 19 posiciones. "></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbNCFModificadoMantenimiento" runat="server" Text="NCF o Documento Modificado" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtNCFModificadoMantenimiento" runat="server" CssClass="form-control" MaxLength="100" ToolTip="En “NCF o Documento Modificado” digite el número completo de comprobante fiscal afectado por una nota de débito o crédito (11 o 13* posiciones alfanuméricas). En caso de afectar un NCF reportado antes de mayo 2018, con una Nota de Crédito o Nota de Débito, se podrá colocar un NCF con estructura de 19 posiciones. "></asp:TextBox>
+                    <asp:TextBox ID="txtNCFModificadoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100" ToolTip="En “NCF o Documento Modificado” digite el número completo de comprobante fiscal afectado por una nota de débito o crédito (11 o 13* posiciones alfanuméricas). En caso de afectar un NCF reportado antes de mayo 2018, con una Nota de Crédito o Nota de Débito, se podrá colocar un NCF con estructura de 19 posiciones. "></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbFechaComprobanteMantenimiento" runat="server" Text="Fecha de Comprobante" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtFechaComprobanteMantenimiento" runat="server" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Comprobante"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaComprobanteMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Comprobante"></asp:TextBox>
                 </div>
 
                 <!--TERCERA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbFechaPagoMantenimiento" runat="server" Text="Fecha de Pago" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtFechaPagoMantenimiento" runat="server" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Pago"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaPagoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Date" ToolTip="Fecha de Pago"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoFacturadoServiciosMantenimiento" runat="server" Text="Monto Facturado en Servicios" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoFacturadoServiciosMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto del NCF que corresponde a servicios, sin incluir impuestos."></asp:TextBox>
+                    <asp:TextBox ID="txtMontoFacturadoServiciosMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto del NCF que corresponde a servicios, sin incluir impuestos."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoFacturadoBienesMantenimiento" runat="server" Text="Monto Facturado en Bienes" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoFacturadoBienesMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto en el NCF que corresponde a bienes, sin incluir impuestos."></asp:TextBox>
+                    <asp:TextBox ID="txtMontoFacturadoBienesMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="coloque la proporción del monto en el NCF que corresponde a bienes, sin incluir impuestos."></asp:TextBox>
                 </div>
                 <!--CUARTA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbTotalMontoFActuradoMantenimiento" runat="server" Text="Total Monto Facturado" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtTotalMntoFacturadoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Enabled="false" ToolTip="se completará automáticamente al momento de validar el archivo, con la sumatoria de los campos Monto Facturado en Bienes y Monto Facturado en Servicios."></asp:TextBox>
+                    <asp:TextBox ID="txtTotalMntoFacturadoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" Enabled="false" ToolTip="se completará automáticamente al momento de validar el archivo, con la sumatoria de los campos Monto Facturado en Bienes y Monto Facturado en Servicios."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISFacturadoMantenimiento" runat="server" Text="ITBIS Facturado" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISFacturadoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS generado en el comprobante."></asp:TextBox>
+                    <asp:TextBox ID="txtITBISFacturadoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS generado en el comprobante."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISRetenidoMantenimiento" runat="server" Text="ITBIS Retenido" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISRetenidoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS que se retuvo producto de la transacción (si aplica). Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago)."></asp:TextBox>
+                    <asp:TextBox ID="txtITBISRetenidoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el valor del ITBIS que se retuvo producto de la transacción (si aplica). Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago)."></asp:TextBox>
                 </div>
 
                 <!--QUINTA FILA-->
                   <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISSujetoProporcionalidadMantenimiento" runat="server" Text="ITBIS Sujeto a proporcionalidad" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISSujetoProporcionalidadMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En ITBIS sujeto a Proporcionalidad (Art. 349) registre el valor del ITBIS que estará sujeto al cálculo de la proporcionalidad, según el Art. 349 de la Ley No. 11-92. La sumatoria de esta columna será el valor que deberá distribuir en el Anexo A del Formulario de ITBIS como el ITBIS SUJETO A PROPORCIONALIDAD."></asp:TextBox>
+                    <asp:TextBox ID="txtITBISSujetoProporcionalidadMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En ITBIS sujeto a Proporcionalidad (Art. 349) registre el valor del ITBIS que estará sujeto al cálculo de la proporcionalidad, según el Art. 349 de la Ley No. 11-92. La sumatoria de esta columna será el valor que deberá distribuir en el Anexo A del Formulario de ITBIS como el ITBIS SUJETO A PROPORCIONALIDAD."></asp:TextBox>
                 </div>
 
                   <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISLlevadoCostoMantenimiento" runat="server" Text="ITBIS Llevado al Costo" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISLlevadoCostoMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En “ITBIS llevado al Costo” coloque el valor del ITBIS que es llevado directamente al Costo, es decir, que no se va a deducir como adelanto en la Declaración Jurada de ITBIS y que se utilizará como costo en la Declaración Jurada de Impuesto Sobre la Renta. En esta columna no debe colocar el ITBIS no admitido por Proporcionalidad."></asp:TextBox>
+                    <asp:TextBox ID="txtITBISLlevadoCostoMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="En “ITBIS llevado al Costo” coloque el valor del ITBIS que es llevado directamente al Costo, es decir, que no se va a deducir como adelanto en la Declaración Jurada de ITBIS y que se utilizará como costo en la Declaración Jurada de Impuesto Sobre la Renta. En esta columna no debe colocar el ITBIS no admitido por Proporcionalidad."></asp:TextBox>
                 </div>
 
                   <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISPorAdelantarMantenimiento" runat="server" Text="ITBIS Por Adelantar" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISPorAdelantarMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="El campo “ITBIS por Adelantar” se completará automáticamente al momento de validar el archivo. Resulta al restar el valor del campo “ITBIS Facturado” menos el valor del campo “ITBIS llevado al Costo” del mismo registro."></asp:TextBox>
+                    <asp:TextBox ID="txtITBISPorAdelantarMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="El campo “ITBIS por Adelantar” se completará automáticamente al momento de validar el archivo. Resulta al restar el valor del campo “ITBIS Facturado” menos el valor del campo “ITBIS llevado al Costo” del mismo registro."></asp:TextBox>
                 </div>
 
                 <!--SEXTA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbITBISPercibidoComprasMantenimiento" runat="server" Text="ITBIS Percibido en Compras" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtITBISPercibidoComprasMantenimiento" runat="server" ToolTip="coloque el monto del ITBIS percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtITBISPercibidoComprasMantenimiento" runat="server" AutoCompleteType="Disabled" ToolTip="coloque el monto del ITBIS percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -535,35 +798,35 @@
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoRetencionRentaMantenimiento" runat="server" Text="Monto Retencion Renta" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoRetencionRentaMantenimiento" runat="server" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el monto del Impuesto Sobre la Renta retenido producto de la prestación o locación de servicios. Es el resultado de multiplicar el monto del campo “Servicios” por el porcentaje de la retención según corresponda. Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago). "></asp:TextBox>
+                    <asp:TextBox ID="txtMontoRetencionRentaMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" step="0.01" ToolTip="digite el monto del Impuesto Sobre la Renta retenido producto de la prestación o locación de servicios. Es el resultado de multiplicar el monto del campo “Servicios” por el porcentaje de la retención según corresponda. Siempre que se llene este campo, debe haber completado la casilla 7 (fecha pago). "></asp:TextBox>
                 </div>
 
                 <!--SEPTIMA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbISRPercibidoComprasMantenimiento" runat="server" Text="ISR Percibido en Compras" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtISRPercibidoComprasMantenimiento" runat="server" ToolTip="coloque el monto del ISR percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtISRPercibidoComprasMantenimiento" runat="server"  AutoCompleteType="Disabled" ToolTip="coloque el monto del ISR percibido por terceros al momento de la facturación de las operaciones." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbImpuestoSelectivoConsumoMantenimiento" runat="server" Text="Impuesto selectivo al consumo" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtImpuestoSelectivoConsumoMantenimiento" runat="server" ToolTip="indique el monto correspondiente al Impuesto Selectivo al Consumo producto de una compra gravada con este impuesto (si aplica)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtImpuestoSelectivoConsumoMantenimiento" runat="server" AutoCompleteType="Disabled" ToolTip="indique el monto correspondiente al Impuesto Selectivo al Consumo producto de una compra gravada con este impuesto (si aplica)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbOtrosImpuestosTasaMantenimiento" runat="server" Text="Otros Impuestos / Tasa" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtOtrosImpuestosTasaMantenimiento" runat="server" ToolTip="digite cualquier otro impuesto o tasa no especificado en el Formato de Envío y que formen parte del valor del comprobante fiscal. " TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtOtrosImpuestosTasaMantenimiento" runat="server" AutoCompleteType="Disabled" ToolTip="digite cualquier otro impuesto o tasa no especificado en el Formato de Envío y que formen parte del valor del comprobante fiscal. " TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <!--OCTAVA FILA-->
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbMontoPropinaLegalMantenimiento" runat="server" Text="Monto Propina Legal" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtMontoPropinaLegalMantenimiento" runat="server" ToolTip="coloque el monto de la propina establecida por la Ley No. 54-32 (10%)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtMontoPropinaLegalMantenimiento" runat="server" AutoCompleteType="Disabled" ToolTip="coloque el monto de la propina establecida por la Ley No. 54-32 (10%)." TextMode="Number" step="0.01" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbFormaPagoMAntenimiento" runat="server" Text="Forma de Pago" CssClass="Letranegrita"></asp:Label>
-                  <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" runat="server" CssClass="form-control" ToolTip="seleccione el método de pago, según la clasificación establecida."></asp:DropDownList>
+                  <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" AutoCompleteType="Disabled" runat="server" CssClass="form-control" ToolTip="seleccione el método de pago, según la clasificación establecida."></asp:DropDownList>
                 </div>
 
                 <div class="form-group col-md-4">

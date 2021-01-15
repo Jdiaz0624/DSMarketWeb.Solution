@@ -229,6 +229,86 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        private void DeshabilitarControles() {
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = false;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = false;
+            txtRNCCedulaMantenimiento.Enabled = false;
+            ddlSeleccionarTipoIDMAntenimiento.Enabled = false;
+            ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.Enabled = false;
+            txtNCFMantenimiento.Enabled = false;
+            txtNCFModificadoMantenimiento.Enabled = false;
+            txtFechaComprobanteMantenimiento.Enabled = false;
+            txtFechaPagoMantenimiento.Enabled = false;
+            txtMontoFacturadoServiciosMantenimiento.Enabled = false;
+            txtMontoFacturadoBienesMantenimiento.Enabled = false;
+            //txtTotalMntoFacturadoMantenimiento.Enabled = false;
+            txtITBISFacturadoMantenimiento.Enabled = false;
+            txtITBISRetenidoMantenimiento.Enabled = false;
+            txtITBISSujetoProporcionalidadMantenimiento.Enabled = false;
+            txtITBISLlevadoCostoMantenimiento.Enabled = false;
+            txtITBISPorAdelantarMantenimiento.Enabled = false;
+            txtITBISPercibidoComprasMantenimiento.Enabled = false;
+            ddlSeleccionarTipoRetencionISRMantenimiento.Enabled = false;
+            txtMontoRetencionRentaMantenimiento.Enabled = false;
+            txtISRPercibidoComprasMantenimiento.Enabled = false;
+            txtImpuestoSelectivoConsumoMantenimiento.Enabled = false;
+            txtOtrosImpuestosTasaMantenimiento.Enabled = false;
+            txtMontoPropinaLegalMantenimiento.Enabled = false;
+            ddlSeleccionarFormaPagoMantenimiento.Enabled = false;
+            //txtClaveSeguridadMantenimiento.Enabled = false;
+        }
+        private void HabilitarControles() {
+            ddlSeleccionarTipoSuplidorMantenimiento.Enabled = true;
+            ddlSeleccionarSuplidorMantenimiento.Enabled = true;
+            txtRNCCedulaMantenimiento.Enabled = true;
+            ddlSeleccionarTipoIDMAntenimiento.Enabled = true;
+            ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.Enabled = true;
+            txtNCFMantenimiento.Enabled = true;
+            txtNCFModificadoMantenimiento.Enabled = true;
+            txtFechaComprobanteMantenimiento.Enabled = true;
+            txtFechaPagoMantenimiento.Enabled = true;
+            txtMontoFacturadoServiciosMantenimiento.Enabled = true;
+            txtMontoFacturadoBienesMantenimiento.Enabled = true;
+            //txtTotalMntoFacturadoMantenimiento.Enabled = true;
+            txtITBISFacturadoMantenimiento.Enabled = true;
+            txtITBISRetenidoMantenimiento.Enabled = true;
+            txtITBISSujetoProporcionalidadMantenimiento.Enabled = true;
+            txtITBISLlevadoCostoMantenimiento.Enabled = true;
+            txtITBISPorAdelantarMantenimiento.Enabled = true;
+            txtITBISPercibidoComprasMantenimiento.Enabled = true;
+            ddlSeleccionarTipoRetencionISRMantenimiento.Enabled = true;
+            txtMontoRetencionRentaMantenimiento.Enabled = true;
+            txtISRPercibidoComprasMantenimiento.Enabled = true;
+            txtImpuestoSelectivoConsumoMantenimiento.Enabled = true;
+            txtOtrosImpuestosTasaMantenimiento.Enabled = true;
+            txtMontoPropinaLegalMantenimiento.Enabled = true;
+            ddlSeleccionarFormaPagoMantenimiento.Enabled = true;
+          //  txtClaveSeguridadMantenimiento.Enabled = true;
+        }
+
+        private void LimpiarControlesMantenimiento() {
+            txtRNCCedulaMantenimiento.Text = string.Empty;
+            txtNCFMantenimiento.Text = string.Empty;
+            txtNCFModificadoMantenimiento.Text = string.Empty;
+            txtFechaComprobanteMantenimiento.Text = string.Empty;
+            txtFechaPagoMantenimiento.Text = string.Empty;
+            txtMontoFacturadoServiciosMantenimiento.Text = string.Empty;
+            txtMontoFacturadoBienesMantenimiento.Text = string.Empty;
+            txtTotalMntoFacturadoMantenimiento.Text = string.Empty;
+            txtITBISFacturadoMantenimiento.Text = string.Empty;
+            txtITBISRetenidoMantenimiento.Text = string.Empty;
+            txtITBISSujetoProporcionalidadMantenimiento.Text = string.Empty;
+            txtITBISLlevadoCostoMantenimiento.Text = string.Empty;
+            txtITBISPorAdelantarMantenimiento.Text = string.Empty;
+            txtITBISPercibidoComprasMantenimiento.Text = string.Empty;
+            txtMontoRetencionRentaMantenimiento.Text = string.Empty;
+            txtISRPercibidoComprasMantenimiento.Text = string.Empty;
+            txtImpuestoSelectivoConsumoMantenimiento.Text = string.Empty;
+            txtOtrosImpuestosTasaMantenimiento.Text = string.Empty;
+            txtMontoPropinaLegalMantenimiento.Text = string.Empty;
+            txtClaveSeguridadMantenimiento.Text = string.Empty;
+            CargarListasDesplegablesMantenimiento();
+        }
         private void ModoConsulta() {
             btnConsultarRegistros.Enabled = true;
             btnNuevoRegistro.Enabled = true;
@@ -286,16 +366,19 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
         {
             Mantenimiento_Consulta();
+            HabilitarControles();
             btnGuardar.Visible = true;
             btnModificar.Visible = false;
             btnEliminar.Visible = false;
             lbClaveSeguridadMantenimiento.Visible = false;
             txtClaveSeguridadMantenimiento.Visible = false;
+            
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
         {
             Mantenimiento_Consulta();
+            HabilitarControles();
             btnGuardar.Visible = false;
             btnModificar.Visible = true;
             btnEliminar.Visible = false;
@@ -306,6 +389,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void btnEliminarRegistro_Click(object sender, EventArgs e)
         {
             Mantenimiento_Consulta();
+            DeshabilitarControles();
             btnGuardar.Visible = false;
             btnModificar.Visible = false;
             btnEliminar.Visible = true;
@@ -338,7 +422,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtSuplidorDetalle.Text = n.Suplidor;
                 txtRNCCedulaDetalle.Text = n.RNCCedula;
                 txtTipoIDDetalle.Text = n.TipoIdentificacion;
-                txtTipoBienesServiciosCompradosDetalle.Text = n.CodigoTipoBienesServicio;
+                txtTipoBienesServiciosCompradosDetalle.Text = n.TipoBienesServicios;
                 txtNCFDetalle.Text = n.NCF;
                 txtNCFModificadoDetalle.Text = n.NCFModificado;
                 DateTime FechaComprobante = Convert.ToDateTime(n.FechaComprobante0);
@@ -375,6 +459,42 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 decimal Montopropinalegal = (decimal)n.MontoPropinaLegal;
                 txtMontoPropinaLegalDetalle.Text = Montopropinalegal.ToString("N2");
                 txtFormaPagoDetalle.Text = n.FormaPago;
+
+                //////////////////////////////////
+                ///
+                CargarTipoSuplidorMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoSuplidorMantenimiento, n.IdTipoSuplidor.ToString());
+                CargarSuplidoreMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarSuplidorMantenimiento, n.IdSuplidor.ToString());
+                txtRNCCedulaMantenimiento.Text = n.RNCCedula;
+                CargarListaTipoIDMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoIDMAntenimiento, n.IdTipoIdentificacion.ToString());
+                CargarListaTipoBienesServiciosCOmprados();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoBienesServiciosCompradosMantenimiento, n.IdTipoBienesServicios.ToString());
+                txtNCFMantenimiento.Text = n.NCF;
+                txtNCFModificadoMantenimiento.Text = n.NCFModificado;
+                DateTime FechaComprobanteMantenimiento = Convert.ToDateTime(n.FechaComprobante0);
+                txtFechaComprobanteDetalle.Text = FechaComprobanteMantenimiento.ToString("yyyy-MM-dd");
+                DateTime FechaPagoMantenimiento = Convert.ToDateTime(n.FechaPago0);
+                txtFechaPagoDetalle.Text = FechaPagoMantenimiento.ToString("yyyy-MM-dd");
+                txtMontoFacturadoServiciosMantenimiento.Text = n.MontoFacturadoServicios.ToString();
+                txtMontoFacturadoBienesMantenimiento.Text = n.MontoFacturadoBienes.ToString();
+                txtTotalMntoFacturadoMantenimiento.Text = n.TotalMontoFacturado.ToString();
+                txtITBISFacturadoMantenimiento.Text = n.ITBISFacturado.ToString();
+                txtITBISRetenidoMantenimiento.Text = n.ITBISRetenido.ToString();
+                txtITBISSujetoProporcionalidadMantenimiento.Text = n.ITBISSujetoProporcionalidad.ToString();
+                txtITBISLlevadoCostoMantenimiento.Text = n.ITBISLlevadoCosto.ToString();
+                txtITBISPorAdelantarMantenimiento.Text = n.ITBISPorAdelantar.ToString();
+                txtITBISPercibidoComprasMantenimiento.Text = n.ITBISPercibidoCompras.ToString();
+                CargarListaTipoRetencionISR();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRetencionISRMantenimiento, n.IdTipoRetencionISR.ToString());
+                txtMontoRetencionRentaMantenimiento.Text = n.MontoRetencionRenta.ToString();
+                txtISRPercibidoComprasMantenimiento.Text = n.ISRPercibidoCompras.ToString();
+                txtImpuestoSelectivoConsumoMantenimiento.Text = n.ImpuestoSelectivoConsumo.ToString();
+                txtOtrosImpuestosTasaMantenimiento.Text = n.OtrosImpuestosTasa.ToString();
+                txtMontoPropinaLegalMantenimiento.Text = n.MontoPropinaLegal.ToString();
+                CargarListaFormaPagoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarFormaPagoMantenimiento, n.IdFormaPago.ToString());
             }
             DivBloqueDetalleRegistroSeleccionado.Visible = true;
             ModoMantenimiento();
