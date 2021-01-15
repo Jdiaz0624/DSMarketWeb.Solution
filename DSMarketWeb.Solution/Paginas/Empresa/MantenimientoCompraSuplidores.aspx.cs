@@ -500,6 +500,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 DivBloqueDetalleRegistroSeleccionado.Visible = false;
                 DivBloqueMantenimiento.Visible = false;
                 lbReporteUnico.Text = "0";
+                rbExprtarPDF.Checked = true;
             }
         }
 
