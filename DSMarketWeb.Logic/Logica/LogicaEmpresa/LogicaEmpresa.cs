@@ -490,6 +490,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                CreadoPor=n.CreadoPor,
                                FechaCreado0=n.FechaCreado0,
                                FechaCreado=n.FechaCreado,
+                               ActividadEconomica=n.ActividadEconomica,
                                GeneradoPor=n.GeneradoPor,
                                NombreEmpresa=n.NombreEmpresa,
                                RNC=n.RNC,
@@ -500,7 +501,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                Instagran=n.Instagran,
                                Facebook=n.Facebook,
                                LogoEmpresa=n.LogoEmpresa,
-                               CantidadRegistros=n.CantidadRegistros
+                               CantidadRegistros=n.CantidadRegistros,
+                               ValidadoDesde=n.ValidadoDesde,
+                               ValidadoHasta=n.ValidadoHasta
                            }).ToList();
             return Listado;
         }
@@ -540,6 +543,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                 Item.IdFormaPago,
                 Item.UsuarioAdiciona,
                 Item.FechaCreado0,
+                Item.ActividadEconomica,
                 Accion);
             if (CompraSuplidores != null) {
                 Mantenimiento = (from n in CompraSuplidores

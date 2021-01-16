@@ -708,6 +708,11 @@
                     <asp:Label ID="lbFormaPagoDetalle" runat="server" Text="Forma de Pago" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtFormaPagoDetalle" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                 </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbActividadEconomicaDetalle" runat="server" Text="Actividad Economica" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtActividadEconomicaDetale" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                </div>
             </div>
         </div>
 
@@ -738,7 +743,7 @@
                 <!--PRIMERA FILA-->
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbRNCCedulaMantenimiento" runat="server" Text="RNC o Cedula" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtRNCCedulaMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100" ToolTip="Digite el RNC o Cedula de la persona o negocio de donde se adquirieron los servicios."></asp:TextBox>
+                    <asp:TextBox ID="txtRNCCedulaMantenimiento" runat="server" Enabled="false" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100" ToolTip="Digite el RNC o Cedula de la persona o negocio de donde se adquirieron los servicios."></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -855,6 +860,11 @@
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbFormaPagoMAntenimiento" runat="server" Text="Forma de Pago" CssClass="Letranegrita"></asp:Label>
                   <asp:DropDownList ID="ddlSeleccionarFormaPagoMantenimiento" AutoCompleteType="Disabled" runat="server" CssClass="form-control" ToolTip="seleccione el método de pago, según la clasificación establecida."></asp:DropDownList>
+                </div>
+
+                         <div class="form-group col-md-4">
+                    <asp:Label ID="lbActividaEconomicaMantenimiento" runat="server" Text="Actividad Economica" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtActividadEconomicaMantenimiento" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">

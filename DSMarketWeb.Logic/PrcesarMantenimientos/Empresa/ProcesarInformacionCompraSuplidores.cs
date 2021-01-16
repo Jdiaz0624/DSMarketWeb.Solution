@@ -38,6 +38,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         private decimal IdFormaPago = 0;
         private decimal UsuarioAdiciona = 0;
         private DateTime FechaCreado = DateTime.Now;
+        private string ActividadEconomica = "";
         private string Accion = "";
 
         public ProcesarInformacionCompraSuplidores(
@@ -69,6 +70,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         decimal IdFormaPagoCON,
         decimal UsuarioAdicionaCON,
         DateTime FechaCreadoCON,
+        string ActividadEconomicaCON,
         string AccionCON)
         {
             IdCompraSuplidor = IdCompraSuplidorCON;
@@ -99,6 +101,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             IdFormaPago = IdFormaPagoCON;
             UsuarioAdiciona = UsuarioAdicionaCON;
             FechaCreado = FechaCreadoCON;
+            ActividadEconomica = ActividadEconomicaCON;
             Accion = AccionCON;
         }
         public void ProcesarDataCompraSuplidores() {
@@ -132,6 +135,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             Procesar.IdFormaPago = IdFormaPago;
             Procesar.UsuarioAdiciona = UsuarioAdiciona;
             Procesar.FechaCreado0 = FechaCreado;
+            Procesar.ActividadEconomica = ActividadEconomica;
 
             var MAN = oJdATA.MantenimientoCompraSuplidores(Procesar, Accion);
 

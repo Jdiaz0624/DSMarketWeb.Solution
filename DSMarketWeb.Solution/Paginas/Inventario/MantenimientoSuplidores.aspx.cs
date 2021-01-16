@@ -261,6 +261,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
         }
         #endregion
+
         #region MANTENIMIENTO DE SUPLIDORES
         private void MANSuplidores(decimal IdSuplidor, string Accion) {
             DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionSuplidores procesar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionSuplidores(

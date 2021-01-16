@@ -15,7 +15,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         Lazy<DSMarketWeb.Logic.Logica.LogicaEmpresa.LogicaEmpresa> ObjDataEmpresa = new Lazy<Logic.Logica.LogicaEmpresa.LogicaEmpresa>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
-
+        Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
         int _PrimeraPagina, _UltimaPagina;
@@ -168,9 +168,21 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         private void CargarTipoSuplidorMantenimiento() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOSUPLIDOR", null, null));
+
         }
         private void CargarSuplidoreMantenimiento() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue.ToString(), null));
+
+
+            var SacarSacarDatosSuplidor = ObjDataInventario.Value.BuscaSuplidores(
+                null,
+                Convert.ToDecimal(ddlSeleccionarSuplidorMantenimiento.SelectedValue),
+                null, null, null);
+            foreach (var n in SacarSacarDatosSuplidor)
+            {
+                txtRNCCedulaMantenimiento.Text = n.RNCSuplidor;
+                txtActividadEconomicaMantenimiento.Text = n.ActividadEconomica;
+            }
         }
         private void CargarListaTipoIDMantenimiento() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoIDMAntenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOIDENTIFICACION", null, null));
@@ -262,6 +274,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 Convert.ToDecimal(ddlSeleccionarFormaPagoMantenimiento.SelectedValue),
                 Convert.ToDecimal(Session["IdUsuario"]),
                 DateTime.Now,
+                txtActividadEconomicaMantenimiento.Text,
                 Accion);
             Procesar.ProcesarDataCompraSuplidores();
         }
@@ -344,7 +357,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         private void DeshabilitarControles() {
             ddlSeleccionarTipoSuplidorMantenimiento.Enabled = false;
             ddlSeleccionarSuplidorMantenimiento.Enabled = false;
-            txtRNCCedulaMantenimiento.Enabled = false;
+           // txtRNCCedulaMantenimiento.Enabled = false;
             ddlSeleccionarTipoIDMAntenimiento.Enabled = false;
             ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.Enabled = false;
             txtNCFMantenimiento.Enabled = false;
@@ -372,7 +385,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         private void HabilitarControles() {
             ddlSeleccionarTipoSuplidorMantenimiento.Enabled = true;
             ddlSeleccionarSuplidorMantenimiento.Enabled = true;
-            txtRNCCedulaMantenimiento.Enabled = true;
+          //  txtRNCCedulaMantenimiento.Enabled = true;
             ddlSeleccionarTipoIDMAntenimiento.Enabled = true;
             ddlSeleccionarTipoBienesServiciosCompradosMantenimiento.Enabled = true;
             txtNCFMantenimiento.Enabled = true;
@@ -398,29 +411,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
           //  txtClaveSeguridadMantenimiento.Enabled = true;
         }
 
-        private void LimpiarControlesMantenimiento() {
-            txtRNCCedulaMantenimiento.Text = string.Empty;
-            txtNCFMantenimiento.Text = string.Empty;
-            txtNCFModificadoMantenimiento.Text = string.Empty;
-            txtFechaComprobanteMantenimiento.Text = string.Empty;
-            txtFechaPagoMantenimiento.Text = string.Empty;
-            txtMontoFacturadoServiciosMantenimiento.Text = string.Empty;
-            txtMontoFacturadoBienesMantenimiento.Text = string.Empty;
-            txtTotalMntoFacturadoMantenimiento.Text = string.Empty;
-            txtITBISFacturadoMantenimiento.Text = string.Empty;
-            txtITBISRetenidoMantenimiento.Text = string.Empty;
-            txtITBISSujetoProporcionalidadMantenimiento.Text = string.Empty;
-            txtITBISLlevadoCostoMantenimiento.Text = string.Empty;
-            txtITBISPorAdelantarMantenimiento.Text = string.Empty;
-            txtITBISPercibidoComprasMantenimiento.Text = string.Empty;
-            txtMontoRetencionRentaMantenimiento.Text = string.Empty;
-            txtISRPercibidoComprasMantenimiento.Text = string.Empty;
-            txtImpuestoSelectivoConsumoMantenimiento.Text = string.Empty;
-            txtOtrosImpuestosTasaMantenimiento.Text = string.Empty;
-            txtMontoPropinaLegalMantenimiento.Text = string.Empty;
-            txtClaveSeguridadMantenimiento.Text = string.Empty;
-            CargarListasDesplegablesMantenimiento();
-        }
         private void ModoConsulta() {
             btnConsultarRegistros.Enabled = true;
             btnNuevoRegistro.Enabled = true;
@@ -484,6 +474,8 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             txtOtrosImpuestosTasaMantenimiento.Text = string.Empty;
             txtMontoPropinaLegalMantenimiento.Text = string.Empty;
             txtClaveSeguridadMantenimiento.Text = string.Empty;
+            txtActividadEconomicaDetale.Text = string.Empty;
+            txtActividadEconomicaMantenimiento.Text = string.Empty;
             rpListadoCompraSuplidores.DataSource = null;
             rpListadoCompraSuplidores.DataBind();
             lbReporteUnico.Text = "0";
@@ -564,8 +556,10 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void btnExportarRegistro_Click(object sender, EventArgs e)
         {
             int ReporteUnico = Convert.ToInt32(lbReporteUnico.Text);
-
-            if (ReporteUnico == 1) { }
+            decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+            if (ReporteUnico == 1) {
+                GenerarReporte(IdUsuario, Server.MapPath("ReporteCompraSuplidorUnico.rpt"), "Reporte de Compra a Suplidor", 1);
+            }
             else {
                 if (string.IsNullOrEmpty(txtFechaDesde.Text.Trim()) || string.IsNullOrEmpty(txtFechaHastaConsullta.Text.Trim()))
                 {
@@ -580,7 +574,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 else {
                     //GENERAR
              
-                    decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+                  
                     GenerarReporte(IdUsuario, Server.MapPath("CompraSuplidoresDetalle.rpt"), "Compra Suplidores Detalle", 0);
                 }
             }
@@ -642,6 +636,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtOtrosImpuestosTasaDetalle.Text = OtrosImpuestosTasa.ToString("N2");
                 decimal Montopropinalegal = (decimal)n.MontoPropinaLegal;
                 txtMontoPropinaLegalDetalle.Text = Montopropinalegal.ToString("N2");
+                txtActividadEconomicaDetale.Text = n.ActividadEconomica;
                 txtFormaPagoDetalle.Text = n.FormaPago;
 
                 //////////////////////////////////
@@ -650,7 +645,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoSuplidorMantenimiento, n.IdTipoSuplidor.ToString());
                 CargarSuplidoreMantenimiento();
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarSuplidorMantenimiento, n.IdSuplidor.ToString());
-                txtRNCCedulaMantenimiento.Text = n.RNCCedula;
+              //  txtRNCCedulaMantenimiento.Text = n.RNCCedula;
                 CargarListaTipoIDMantenimiento();
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoIDMAntenimiento, n.IdTipoIdentificacion.ToString());
                 CargarListaTipoBienesServiciosCOmprados();
@@ -679,6 +674,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtMontoPropinaLegalMantenimiento.Text = n.MontoPropinaLegal.ToString();
                 CargarListaFormaPagoMantenimiento();
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarFormaPagoMantenimiento, n.IdFormaPago.ToString());
+              //  txtActividadEconomicaMantenimiento.Text = n.ActividadEconomica;
             }
             DivBloqueDetalleRegistroSeleccionado.Visible = true;
             ModoMantenimiento();

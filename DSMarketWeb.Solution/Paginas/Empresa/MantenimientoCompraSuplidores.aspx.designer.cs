@@ -870,6 +870,24 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtFormaPagoDetalle;
 
         /// <summary>
+        /// lbActividadEconomicaDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbActividadEconomicaDetalle;
+
+        /// <summary>
+        /// txtActividadEconomicaDetale control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActividadEconomicaDetale;
+
+        /// <summary>
         /// DivBloqueMantenimiento control.
         /// </summary>
         /// <remarks>
@@ -1372,6 +1390,24 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarFormaPagoMantenimiento;
+
+        /// <summary>
+        /// lbActividaEconomicaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbActividaEconomicaMantenimiento;
+
+        /// <summary>
+        /// txtActividadEconomicaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActividadEconomicaMantenimiento;
 
         /// <summary>
         /// lbClaveSeguridadMantenimiento control.

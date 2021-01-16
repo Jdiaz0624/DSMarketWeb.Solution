@@ -57,28 +57,61 @@
                         $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").css("border-color", "red");
                         return false;
                     }
+                    else {
+                        var RNCSuplidor = $("#<%=txtRNCMantenimiento.ClientID%>").val().length;
+                        if (RNCSuplidor < 1) {
+                            alert("El campo RNC no puede estar vacio para guardar este registro, favor de verificar.");
+                            $("#<%=txtRNCMantenimiento.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            var ActividadEconomica = $("#<%=txtActividadEconomica.ClientID%>").val().length;
+                            if (ActividadEconomica < 1) {
+                                alert("El campo Actividad Economica no puede estar vacio para guardar este registro, favor de verificar.");
+                                $("#<%=txtActividadEconomica.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                        }
+                    }
                 }
             });
+
             $("#<%=btnModificar.ClientID%>").click(function () {
-                var TipoSupldorModificar = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
-                if (TipoSupldorModificar < 1) {
-                    alert("El campo tipo de suplidor no puede estar vacio para modificar este registro, favor de verificar");
+                var TipoSplidorGardar = $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").val();
+                if (TipoSplidorGardar < 1) {
+                    alert("El campo tipo de suplidor no puede estar vacio para modificar este registro");
                     $("#<%=ddlSeleccionarTipoSuplidorMantenimiento.ClientID%>").css("border-color", "red");
                     return false;
                 }
                 else {
-                    var NombreSuplidorModificar = $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").val().length;
-                    if (NombreSuplidorModificar < 1) {
+                    var NombreSuplidorGuardar = $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").val().length;
+                    if (NombreSuplidorGuardar < 1) {
                         alert("El campo nombre de suplidor no puede estar vacio para modificar este registro, favor de verificar.");
                         $("#<%=txtNombreSuplidorMantenimiento.ClientID%>").css("border-color", "red");
                         return false;
                     }
                     else {
-                        var ClaveSeguridadModificar = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
-                        if (ClaveSeguridadModificar < 1) {
-                            alert("El campo clave de seguridad no puede estar vacio para modificar este registro, favor de verificar");
-                            $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                        var RNCSuplidor = $("#<%=txtRNCMantenimiento.ClientID%>").val().length;
+                        if (RNCSuplidor < 1) {
+                            alert("El campo RNC no puede estar vacio para modificar este registro, favor de verificar.");
+                            $("#<%=txtRNCMantenimiento.ClientID%>").css("border-color", "red");
                             return false;
+                        }
+                        else {
+                            var ActividadEconomica = $("#<%=txtActividadEconomica.ClientID%>").val().length;
+                            if (ActividadEconomica < 1) {
+                                alert("El campo Actividad Economica no puede estar vacio para modificar este registro, favor de verificar.");
+                                $("#<%=txtActividadEconomica.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                var ClaveSeguridad = $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").val().length;
+                                if (ClaveSeguridad < 1) {
+                                    alert("El campo Clave de seguridad no puede estar vacio para modificar este registro, favor de verificar.");
+                                    $("#<%=txtClaveSeguridadMantenimiento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                            }
                         }
                     }
                 }
