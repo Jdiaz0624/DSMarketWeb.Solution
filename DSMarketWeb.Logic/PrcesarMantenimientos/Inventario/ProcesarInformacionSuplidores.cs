@@ -18,6 +18,8 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
         private string Direccion = "";
         private bool Estatus = false;
         private decimal UsuarioProcesa = 0;
+        private string RNC = "";
+        private string ActividadEconomica = "";
         private string Accion = "";
 
         public ProcesarInformacionSuplidores(
@@ -29,6 +31,8 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
         string DireccionCON,
         bool EstatusCON,
         decimal UsuarioProcesaCON,
+        string RNCCON,
+        string ActividadEconomicaCON,
         string AccionCON)
         {
             IdTipoSuplidor = IdTipoSuplidorCON;
@@ -39,6 +43,8 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Direccion = DireccionCON;
             Estatus = EstatusCON;
             UsuarioProcesa = UsuarioProcesaCON;
+            RNC = RNCCON;
+            ActividadEconomica = ActividadEconomicaCON;
             Accion = AccionCON;
         }
         public void ProcesarDatosSuplidor() {
@@ -55,6 +61,8 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.FechaAdiciona = DateTime.Now;
             Procesar.UsuarioModifica = UsuarioProcesa;
             Procesar.FechaModifica = DateTime.Now;
+            Procesar.RNC = RNC;
+            Procesar.ActividadEconomica = ActividadEconomica;
 
             var MAN = ObjData.MantenimientoSupoSuplidores(Procesar, Accion);
         }

@@ -69,6 +69,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.TextBox txtNombreSuplidorConsulta;
 
         /// <summary>
+        /// lbRNCConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbRNCConsulta;
+
+        /// <summary>
+        /// txtRNCConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRNCConsulta;
+
+        /// <summary>
         /// lbExportarA control.
         /// </summary>
         /// <remarks>
@@ -204,13 +222,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Label lbSuplidorHeaderRepeater;
 
         /// <summary>
-        /// lbTelefonoHeaderRepeater control.
+        /// lbContactoHEaderRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTelefonoHeaderRepeater;
+        protected global::System.Web.UI.WebControls.Label lbContactoHEaderRepeater;
 
         /// <summary>
         /// lbEmailHeaderRepeater control.
@@ -222,13 +240,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.Label lbEmailHeaderRepeater;
 
         /// <summary>
-        /// lbContactoHEaderRepeater control.
+        /// lbTelefonoHeaderRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbContactoHEaderRepeater;
+        protected global::System.Web.UI.WebControls.Label lbTelefonoHeaderRepeater;
 
         /// <summary>
         /// lbEstatusHeaderRepeater control.
@@ -400,6 +418,42 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreSuplidorMantenimiento;
+
+        /// <summary>
+        /// lbRNCMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbRNCMantenimiento;
+
+        /// <summary>
+        /// txtRNCMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRNCMantenimiento;
+
+        /// <summary>
+        /// lbActividadEconominaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbActividadEconominaMantenimiento;
+
+        /// <summary>
+        /// txtActividadEconomica control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActividadEconomica;
 
         /// <summary>
         /// lbTelefonoSuplidorMantenimiento control.

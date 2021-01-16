@@ -100,6 +100,11 @@
                     <asp:Label ID="lbNombreSuplidorConsulta" runat="server" Text="Nombre de Suplidor" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtNombreSuplidorConsulta" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
+
+                 <div class="form-group col-md-4">
+                    <asp:Label ID="lbRNCConsulta" runat="server" Text="RNC" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtRNCConsulta" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
             </div>
         <div class="form-check-inline">
             <div class="form-group form-check">
@@ -130,10 +135,10 @@
                         <tr>
                             <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarheaderRepeater" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:15%" align="left"> <asp:Label ID="lbTipoSuplidorHeaderRepeater" runat="server" Text="Tipo de Suplidor" CssClass="Letranegrita"></asp:Label> </th>
-                            <th style="width:35%" align="left"> <asp:Label ID="lbSuplidorHeaderRepeater" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label> </th>
+                            <th style="width:25%" align="left"> <asp:Label ID="lbSuplidorHeaderRepeater" runat="server" Text="Suplidor" CssClass="Letranegrita"></asp:Label> </th>
+                            <th style="width:10%" align="left"> <asp:Label ID="lbContactoHEaderRepeater" runat="server" Text="RNC" CssClass="Letranegrita"></asp:Label> </th>
+                            <th style="width:20%" align="left"> <asp:Label ID="lbEmailHeaderRepeater" runat="server" Text="Actividad Economica" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:10%" align="left"> <asp:Label ID="lbTelefonoHeaderRepeater" runat="server" Text="Telefono" CssClass="Letranegrita"></asp:Label> </th>
-                            <th style="width:10%" align="left"> <asp:Label ID="lbEmailHeaderRepeater" runat="server" Text="Email" CssClass="Letranegrita"></asp:Label> </th>
-                            <th style="width:10%" align="left"> <asp:Label ID="lbContactoHEaderRepeater" runat="server" Text="Contacto" CssClass="Letranegrita"></asp:Label> </th>
                             <th style="width:10%" align="left"> <asp:Label ID="lbEstatusHeaderRepeater" runat="server" Text="Estatus" CssClass="Letranegrita"></asp:Label> </th>
 
                         </tr>
@@ -146,9 +151,9 @@
                                     <td style="width:10%" align="left"> <asp:Button ID="btnSeleccionarRegistroBodyRepeater" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Seleccionar Registros" OnClick="btnSeleccionarRegistroBodyRepeater_Click" /> </td>
                                     <td style="width:15%" align="left"> <asp:Label ID="lbTipoSuplidorBodyRepeater" runat="server" Text='<%# Eval("TipoSuplidor") %>'></asp:Label> </td>
                                     <td style="width:35%" align="left"> <asp:Label ID="lbSuplidorBodyRepeater" runat="server" Text='<%# Eval("Suplidor") %>'></asp:Label> </td>
+                                    <td style="width:10%" align="left"> <asp:Label ID="lbRNCBodyRepeater" runat="server" Text='<%# Eval("RNCSuplidor") %>'></asp:Label> </td>
+                                    <td style="width:10%" align="left"> <asp:Label ID="lbActividadEconomicaBodyrepeater" runat="server" Text='<%# Eval("ActividadEconomica") %>'></asp:Label> </td>
                                     <td style="width:10%" align="left"> <asp:Label ID="lbTelefonoBodyRepeater" runat="server" Text='<%# Eval("Telefono") %>'></asp:Label> </td>
-                                    <td style="width:10%" align="left"> <asp:Label ID="lbEmailBodyRepeater" runat="server" Text='<%# Eval("Email") %>'></asp:Label> </td>
-                                    <td style="width:10%" align="left"> <asp:Label ID="lbContactoBodyRepeater" runat="server" Text='<%# Eval("Contacto") %>'></asp:Label> </td>
                                     <td style="width:10%" align="left"> <asp:Label ID="lbEstatusBodyRepeater" runat="server" Text='<%# Eval("Estatus") %>'></asp:Label> </td>
                                 </tr>
                             </ItemTemplate>
@@ -203,6 +208,16 @@
                 <asp:Label ID="lbNombreSuplidorMantenimiento" runat="server" Text="Nombre de Suplidor" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtNombreSuplidorMantenimiento" runat="server" CssClass="form-control" MaxLength="100" AutoCompleteType="Disabled"></asp:TextBox>
             </div>
+
+             <div class="form-group col-md-4">
+                    <asp:Label ID="lbRNCMantenimiento" runat="server" Text="RNC" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtRNCMantenimiento" AutoCompleteType="Disabled" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+
+             <div class="form-group col-md-4">
+                    <asp:Label ID="lbActividadEconominaMantenimiento" runat="server" Text="Actividad Economica" CssClass="Letranegrita"></asp:Label>
+                    <asp:TextBox ID="txtActividadEconomica" AutoCompleteType="Disabled" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbTelefonoSuplidorMantenimiento" runat="server" Text="Telefono" CssClass="Letranegrita"></asp:Label>

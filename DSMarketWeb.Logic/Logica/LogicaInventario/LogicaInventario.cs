@@ -500,10 +500,10 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
         #endregion
         #region MANTENIMIENTO DE SUPLIDORES
         //LISTADO DE SUPLIDORES
-        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores> BuscaSuplidores(decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string Nombre = null, decimal? IdUsuarioProcesa = null) {
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores> BuscaSuplidores(decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string Nombre = null,string RNC = null, decimal? IdUsuarioProcesa = null) {
             ObjData.CommandTimeout = 999999999;
 
-            var Listado = (from n in ObjData.SP_BUSCA_SUPLIDORES(IdTipoSuplidor, IdSuplidor, Nombre, IdUsuarioProcesa)
+            var Listado = (from n in ObjData.SP_BUSCA_SUPLIDORES(IdTipoSuplidor, IdSuplidor, Nombre, RNC, IdUsuarioProcesa)
                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ESuplidores
                            {
                                IdTipoSuplidor=n.IdTipoSuplidor,
@@ -525,7 +525,16 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                ModificadoPor=n.ModificadoPor,
                                FechaModificado=n.FechaModificado,
                                CantidadRegistros=n.CantidadRegistros,
-                               GeneradoPor=n.GeneradoPor
+                               GeneradoPor=n.GeneradoPor,
+                               RNC=n.RNC,
+                               ActividadEconomica=n.ActividadEconomica,
+                               DireccionSuplidor=n.DireccionSuplidor,
+                               NombreEmpresa=n.NombreEmpresa,
+                               RNCSuplidor=n.RNCSuplidor,
+                               Telefonos=n.Telefonos,
+                               Facebook=n.Facebook,
+                               Instagran=n.Instagran,
+                               LogoEmpresa=n.LogoEmpresa
                            }).ToList();
             return Listado;
         }
@@ -546,6 +555,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                 Item.Contacto,
                 Item.Estatus0,
                Item.UsuarioAdiciona,
+               Item.RNC,
+               Item.ActividadEconomica,
                 Accion);
             if (Suplidor != null) {
                 Mantenimiento = (from n in Suplidor
@@ -562,7 +573,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                      UsuarioAdiciona=n.UsuarioAdiciona,
                                      FechaAdiciona=n.FechaAdiciona,
                                      UsuarioModifica=n.UsuarioModifica,
-                                     FechaModifica=n.FechaModifica
+                                     FechaModifica=n.FechaModifica,
+                                     RNCSuplidor=n.RNC,
+                                     ActividadEconomica=n.ActividadEconomica
                                  }).FirstOrDefault();
             }
             return Mantenimiento;

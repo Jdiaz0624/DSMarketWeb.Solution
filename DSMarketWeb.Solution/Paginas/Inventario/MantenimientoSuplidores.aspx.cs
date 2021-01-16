@@ -205,11 +205,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
            
             decimal? _IdTipoSuplidor = ddlSeleccionarTipoSuplidorConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoSuplidorConsulta.SelectedValue) : new Nullable<decimal>();
             string _NombreSuplidor = string.IsNullOrEmpty(txtNombreSuplidorConsulta.Text.Trim()) ? null : txtNombreSuplidorConsulta.Text.Trim();
+            string _RNC = string.IsNullOrEmpty(txtRNCConsulta.Text.Trim()) ? null : txtRNCConsulta.Text.Trim();
 
             var BuscarRegistros = ObjdataInventario.Value.BuscaSuplidores(
                 _IdTipoSuplidor,
                 new Nullable<decimal>(),
                 _NombreSuplidor,
+                _RNC,
                 Convert.ToDecimal(Session["IdUsuario"]));
             int CantidadRegistros = 0;
             if (BuscarRegistros.Count() < 1) {
@@ -234,6 +236,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             decimal? _IdTipoSuplidor = ddlSeleccionarTipoSuplidorConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoSuplidorConsulta.SelectedValue) : new Nullable<decimal>();
             decimal? _IdSUplidor = null;
             string _NombreSuplidor = string.IsNullOrEmpty(txtNombreSuplidorConsulta.Text.Trim()) ? null : txtNombreSuplidorConsulta.Text.Trim();
+            string _RNC = string.IsNullOrEmpty(txtRNCConsulta.Text.Trim()) ? null : txtRNCConsulta.Text.Trim();
            
             
 
@@ -244,6 +247,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Reporte.SetParameterValue("@IdTipoSuplidor", _IdTipoSuplidor);
             Reporte.SetParameterValue("@IdSuplidor", _IdSUplidor);
             Reporte.SetParameterValue("@Nombre", _NombreSuplidor);
+            Reporte.SetParameterValue("@RNC", _RNC);
             Reporte.SetParameterValue("@IdUsuarioGenera", IdUsuario);
             Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
             if (rbExportarPDF.Checked == true) {
@@ -268,6 +272,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtDirecconMantenimiento.Text,
                 cbEstatusSuplidor.Checked,
                 Convert.ToDecimal(Session["IdUsuario"]),
+                txtRNCMantenimiento.Text,
+                txtActividadEconomica.Text,
                 Accion);
             procesar.ProcesarDatosSuplidor();
         }
@@ -355,7 +361,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txttelefonoSuplidorMantenimiento.Text = n.Telefono;
                 txtEmailMantenimiento.Text = n.Email;
                 txtCntactoMantenimento.Text = n.Telefono;
-                txtDirecconMantenimiento.Text = n.Direccion;
+                txtDirecconMantenimiento.Text = n.DireccionSuplidor;
+                txtRNCMantenimiento.Text = n.RNCSuplidor;
+                txtActividadEconomica.Text = n.ActividadEconomica;
                 cbEstatusSuplidor.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
             }
             Paginar(ref rpListadoSuplidores, BuscarRegistro, 10);

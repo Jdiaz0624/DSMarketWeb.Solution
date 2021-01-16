@@ -215,20 +215,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			return ((ISingleResult<SP_MANTENIMIENTO_TIPO_SUPLIDORResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_SUPLIDORES")]
-		public ISingleResult<SP_BUSCA_SUPLIDORESResult> SP_BUSCA_SUPLIDORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioGenera", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuarioGenera)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoSuplidor, idSuplidor, nombre, idUsuarioGenera);
-			return ((ISingleResult<SP_BUSCA_SUPLIDORESResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_MANTENIMIENTO_SUPLIDORES")]
-		public ISingleResult<SP_MANTENIMIENTO_SUPLIDORESResult> SP_MANTENIMIENTO_SUPLIDORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(30)")] string telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(8000)")] string direccion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Contacto", DbType="VarChar(100)")] string contacto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoSuplidor, idSuplidor, nombre, telefono, email, direccion, contacto, estatus, idUsuario, accion);
-			return ((ISingleResult<SP_MANTENIMIENTO_SUPLIDORESResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_COLORES_EQUIPOS")]
 		public ISingleResult<SP_BUSCA_COLORES_EQUIPOSResult> SP_BUSCA_COLORES_EQUIPOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdColor", DbType="Decimal(20,0)")] System.Nullable<decimal> idColor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion)
 		{
@@ -269,6 +255,20 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCapacidad, descripcion, estatus, usuarioAdiciona, accion);
 			return ((ISingleResult<SP_MANTENIMIENTO_CAPACIDAD_ARTICULOSResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_MANTENIMIENTO_SUPLIDORES")]
+		public ISingleResult<SP_MANTENIMIENTO_SUPLIDORESResult> SP_MANTENIMIENTO_SUPLIDORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(30)")] string telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(8000)")] string direccion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Contacto", DbType="VarChar(100)")] string contacto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RNC", DbType="VarChar(50)")] string rNC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActividadEconomica", DbType="VarChar(200)")] string actividadEconomica, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoSuplidor, idSuplidor, nombre, telefono, email, direccion, contacto, estatus, idUsuario, rNC, actividadEconomica, accion);
+			return ((ISingleResult<SP_MANTENIMIENTO_SUPLIDORESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_SUPLIDORES")]
+		public ISingleResult<SP_BUSCA_SUPLIDORESResult> SP_BUSCA_SUPLIDORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RNC", DbType="VarChar(50)")] string rNC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioGenera", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuarioGenera)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoSuplidor, idSuplidor, nombre, rNC, idUsuarioGenera);
+			return ((ISingleResult<SP_BUSCA_SUPLIDORESResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -4514,598 +4514,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		}
 	}
 	
-	public partial class SP_BUSCA_SUPLIDORESResult
-	{
-		
-		private System.Nullable<decimal> _IdTipoSuplidor;
-		
-		private string _TipoSuplidor;
-		
-		private decimal _IdSuplidor;
-		
-		private string _Suplidor;
-		
-		private string _Telefono;
-		
-		private string _Email;
-		
-		private string _Direccion;
-		
-		private string _Contacto;
-		
-		private System.Nullable<bool> _Estatus0;
-		
-		private string _Estatus;
-		
-		private System.Nullable<decimal> _UsuarioAdiciona;
-		
-		private string _CreadoPor;
-		
-		private System.Nullable<System.DateTime> _FechaAdiciona;
-		
-		private string _FechaCreado;
-		
-		private System.Nullable<decimal> _UsuarioModifica;
-		
-		private string _ModificadoPor;
-		
-		private System.Nullable<System.DateTime> _FechaModifica;
-		
-		private string _FechaModificado;
-		
-		private System.Nullable<int> _CantidadRegistros;
-		
-		private string _GeneradoPor;
-		
-		public SP_BUSCA_SUPLIDORESResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoSuplidor", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdTipoSuplidor
-		{
-			get
-			{
-				return this._IdTipoSuplidor;
-			}
-			set
-			{
-				if ((this._IdTipoSuplidor != value))
-				{
-					this._IdTipoSuplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoSuplidor", DbType="VarChar(100)")]
-		public string TipoSuplidor
-		{
-			get
-			{
-				return this._TipoSuplidor;
-			}
-			set
-			{
-				if ((this._TipoSuplidor != value))
-				{
-					this._TipoSuplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSuplidor", DbType="Decimal(20,0) NOT NULL")]
-		public decimal IdSuplidor
-		{
-			get
-			{
-				return this._IdSuplidor;
-			}
-			set
-			{
-				if ((this._IdSuplidor != value))
-				{
-					this._IdSuplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Suplidor", DbType="VarChar(100)")]
-		public string Suplidor
-		{
-			get
-			{
-				return this._Suplidor;
-			}
-			set
-			{
-				if ((this._Suplidor != value))
-				{
-					this._Suplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(30)")]
-		public string Telefono
-		{
-			get
-			{
-				return this._Telefono;
-			}
-			set
-			{
-				if ((this._Telefono != value))
-				{
-					this._Telefono = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(8000)")]
-		public string Direccion
-		{
-			get
-			{
-				return this._Direccion;
-			}
-			set
-			{
-				if ((this._Direccion != value))
-				{
-					this._Direccion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacto", DbType="VarChar(100)")]
-		public string Contacto
-		{
-			get
-			{
-				return this._Contacto;
-			}
-			set
-			{
-				if ((this._Contacto != value))
-				{
-					this._Contacto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
-		public System.Nullable<bool> Estatus0
-		{
-			get
-			{
-				return this._Estatus0;
-			}
-			set
-			{
-				if ((this._Estatus0 != value))
-				{
-					this._Estatus0 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-		public string Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this._Estatus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioAdiciona
-		{
-			get
-			{
-				return this._UsuarioAdiciona;
-			}
-			set
-			{
-				if ((this._UsuarioAdiciona != value))
-				{
-					this._UsuarioAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreadoPor", DbType="VarChar(100)")]
-		public string CreadoPor
-		{
-			get
-			{
-				return this._CreadoPor;
-			}
-			set
-			{
-				if ((this._CreadoPor != value))
-				{
-					this._CreadoPor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaAdiciona
-		{
-			get
-			{
-				return this._FechaAdiciona;
-			}
-			set
-			{
-				if ((this._FechaAdiciona != value))
-				{
-					this._FechaAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreado", DbType="NVarChar(4000)")]
-		public string FechaCreado
-		{
-			get
-			{
-				return this._FechaCreado;
-			}
-			set
-			{
-				if ((this._FechaCreado != value))
-				{
-					this._FechaCreado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioModifica
-		{
-			get
-			{
-				return this._UsuarioModifica;
-			}
-			set
-			{
-				if ((this._UsuarioModifica != value))
-				{
-					this._UsuarioModifica = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModificadoPor", DbType="VarChar(100)")]
-		public string ModificadoPor
-		{
-			get
-			{
-				return this._ModificadoPor;
-			}
-			set
-			{
-				if ((this._ModificadoPor != value))
-				{
-					this._ModificadoPor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaModifica
-		{
-			get
-			{
-				return this._FechaModifica;
-			}
-			set
-			{
-				if ((this._FechaModifica != value))
-				{
-					this._FechaModifica = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModificado", DbType="NVarChar(4000)")]
-		public string FechaModificado
-		{
-			get
-			{
-				return this._FechaModificado;
-			}
-			set
-			{
-				if ((this._FechaModificado != value))
-				{
-					this._FechaModificado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadRegistros", DbType="Int")]
-		public System.Nullable<int> CantidadRegistros
-		{
-			get
-			{
-				return this._CantidadRegistros;
-			}
-			set
-			{
-				if ((this._CantidadRegistros != value))
-				{
-					this._CantidadRegistros = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GeneradoPor", DbType="VarChar(100)")]
-		public string GeneradoPor
-		{
-			get
-			{
-				return this._GeneradoPor;
-			}
-			set
-			{
-				if ((this._GeneradoPor != value))
-				{
-					this._GeneradoPor = value;
-				}
-			}
-		}
-	}
-	
-	public partial class SP_MANTENIMIENTO_SUPLIDORESResult
-	{
-		
-		private System.Nullable<decimal> _IdTipoSuplidor;
-		
-		private System.Nullable<decimal> _IdSuplidor;
-		
-		private string _Nombre;
-		
-		private string _Telefono;
-		
-		private string _Email;
-		
-		private string _Direccion;
-		
-		private string _Contacto;
-		
-		private System.Nullable<bool> _Estatus;
-		
-		private System.Nullable<decimal> _UsuarioAdiciona;
-		
-		private System.Nullable<System.DateTime> _FechaAdiciona;
-		
-		private System.Nullable<decimal> _UsuarioModifica;
-		
-		private System.Nullable<System.DateTime> _FechaModifica;
-		
-		public SP_MANTENIMIENTO_SUPLIDORESResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoSuplidor", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdTipoSuplidor
-		{
-			get
-			{
-				return this._IdTipoSuplidor;
-			}
-			set
-			{
-				if ((this._IdTipoSuplidor != value))
-				{
-					this._IdTipoSuplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSuplidor", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdSuplidor
-		{
-			get
-			{
-				return this._IdSuplidor;
-			}
-			set
-			{
-				if ((this._IdSuplidor != value))
-				{
-					this._IdSuplidor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(100)")]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this._Nombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(30)")]
-		public string Telefono
-		{
-			get
-			{
-				return this._Telefono;
-			}
-			set
-			{
-				if ((this._Telefono != value))
-				{
-					this._Telefono = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(8000)")]
-		public string Direccion
-		{
-			get
-			{
-				return this._Direccion;
-			}
-			set
-			{
-				if ((this._Direccion != value))
-				{
-					this._Direccion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacto", DbType="VarChar(100)")]
-		public string Contacto
-		{
-			get
-			{
-				return this._Contacto;
-			}
-			set
-			{
-				if ((this._Contacto != value))
-				{
-					this._Contacto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
-		public System.Nullable<bool> Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this._Estatus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioAdiciona
-		{
-			get
-			{
-				return this._UsuarioAdiciona;
-			}
-			set
-			{
-				if ((this._UsuarioAdiciona != value))
-				{
-					this._UsuarioAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaAdiciona
-		{
-			get
-			{
-				return this._FechaAdiciona;
-			}
-			set
-			{
-				if ((this._FechaAdiciona != value))
-				{
-					this._FechaAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioModifica
-		{
-			get
-			{
-				return this._UsuarioModifica;
-			}
-			set
-			{
-				if ((this._UsuarioModifica != value))
-				{
-					this._UsuarioModifica = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaModifica
-		{
-			get
-			{
-				return this._FechaModifica;
-			}
-			set
-			{
-				if ((this._FechaModifica != value))
-				{
-					this._FechaModifica = value;
-				}
-			}
-		}
-	}
-	
 	public partial class SP_BUSCA_COLORES_EQUIPOSResult
 	{
 		
@@ -6229,6 +5637,796 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._FechaModifica != value))
 				{
 					this._FechaModifica = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_MANTENIMIENTO_SUPLIDORESResult
+	{
+		
+		private System.Nullable<decimal> _IdTipoSuplidor;
+		
+		private System.Nullable<decimal> _IdSuplidor;
+		
+		private string _Nombre;
+		
+		private string _Telefono;
+		
+		private string _Email;
+		
+		private string _Direccion;
+		
+		private string _Contacto;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		private System.Nullable<decimal> _UsuarioAdiciona;
+		
+		private System.Nullable<System.DateTime> _FechaAdiciona;
+		
+		private System.Nullable<decimal> _UsuarioModifica;
+		
+		private System.Nullable<System.DateTime> _FechaModifica;
+		
+		private string _RNC;
+		
+		private string _ActividadEconomica;
+		
+		public SP_MANTENIMIENTO_SUPLIDORESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoSuplidor", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdTipoSuplidor
+		{
+			get
+			{
+				return this._IdTipoSuplidor;
+			}
+			set
+			{
+				if ((this._IdTipoSuplidor != value))
+				{
+					this._IdTipoSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSuplidor", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdSuplidor
+		{
+			get
+			{
+				return this._IdSuplidor;
+			}
+			set
+			{
+				if ((this._IdSuplidor != value))
+				{
+					this._IdSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(100)")]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(30)")]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this._Telefono = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(8000)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this._Direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacto", DbType="VarChar(100)")]
+		public string Contacto
+		{
+			get
+			{
+				return this._Contacto;
+			}
+			set
+			{
+				if ((this._Contacto != value))
+				{
+					this._Contacto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioAdiciona
+		{
+			get
+			{
+				return this._UsuarioAdiciona;
+			}
+			set
+			{
+				if ((this._UsuarioAdiciona != value))
+				{
+					this._UsuarioAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaAdiciona
+		{
+			get
+			{
+				return this._FechaAdiciona;
+			}
+			set
+			{
+				if ((this._FechaAdiciona != value))
+				{
+					this._FechaAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioModifica
+		{
+			get
+			{
+				return this._UsuarioModifica;
+			}
+			set
+			{
+				if ((this._UsuarioModifica != value))
+				{
+					this._UsuarioModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaModifica
+		{
+			get
+			{
+				return this._FechaModifica;
+			}
+			set
+			{
+				if ((this._FechaModifica != value))
+				{
+					this._FechaModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RNC", DbType="VarChar(50)")]
+		public string RNC
+		{
+			get
+			{
+				return this._RNC;
+			}
+			set
+			{
+				if ((this._RNC != value))
+				{
+					this._RNC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActividadEconomica", DbType="VarChar(200)")]
+		public string ActividadEconomica
+		{
+			get
+			{
+				return this._ActividadEconomica;
+			}
+			set
+			{
+				if ((this._ActividadEconomica != value))
+				{
+					this._ActividadEconomica = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_SUPLIDORESResult
+	{
+		
+		private System.Nullable<decimal> _IdTipoSuplidor;
+		
+		private string _TipoSuplidor;
+		
+		private decimal _IdSuplidor;
+		
+		private string _Suplidor;
+		
+		private string _Telefono;
+		
+		private string _Email;
+		
+		private string _DireccionSuplidor;
+		
+		private string _Contacto;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		private System.Nullable<decimal> _UsuarioAdiciona;
+		
+		private string _CreadoPor;
+		
+		private System.Nullable<System.DateTime> _FechaAdiciona;
+		
+		private string _FechaCreado;
+		
+		private System.Nullable<decimal> _UsuarioModifica;
+		
+		private string _ModificadoPor;
+		
+		private System.Nullable<System.DateTime> _FechaModifica;
+		
+		private string _FechaModificado;
+		
+		private string _ActividadEconomica;
+		
+		private string _RNCSuplidor;
+		
+		private System.Nullable<int> _CantidadRegistros;
+		
+		private string _GeneradoPor;
+		
+		private string _NombreEmpresa;
+		
+		private string _RNC;
+		
+		private string _Direccion;
+		
+		private string _Telefonos;
+		
+		private string _Instagran;
+		
+		private string _Facebook;
+		
+		private System.Data.Linq.Binary _LogoEmpresa;
+		
+		public SP_BUSCA_SUPLIDORESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoSuplidor", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdTipoSuplidor
+		{
+			get
+			{
+				return this._IdTipoSuplidor;
+			}
+			set
+			{
+				if ((this._IdTipoSuplidor != value))
+				{
+					this._IdTipoSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoSuplidor", DbType="VarChar(100)")]
+		public string TipoSuplidor
+		{
+			get
+			{
+				return this._TipoSuplidor;
+			}
+			set
+			{
+				if ((this._TipoSuplidor != value))
+				{
+					this._TipoSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSuplidor", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdSuplidor
+		{
+			get
+			{
+				return this._IdSuplidor;
+			}
+			set
+			{
+				if ((this._IdSuplidor != value))
+				{
+					this._IdSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Suplidor", DbType="VarChar(100)")]
+		public string Suplidor
+		{
+			get
+			{
+				return this._Suplidor;
+			}
+			set
+			{
+				if ((this._Suplidor != value))
+				{
+					this._Suplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(30)")]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this._Telefono = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DireccionSuplidor", DbType="VarChar(8000)")]
+		public string DireccionSuplidor
+		{
+			get
+			{
+				return this._DireccionSuplidor;
+			}
+			set
+			{
+				if ((this._DireccionSuplidor != value))
+				{
+					this._DireccionSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacto", DbType="VarChar(100)")]
+		public string Contacto
+		{
+			get
+			{
+				return this._Contacto;
+			}
+			set
+			{
+				if ((this._Contacto != value))
+				{
+					this._Contacto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioAdiciona
+		{
+			get
+			{
+				return this._UsuarioAdiciona;
+			}
+			set
+			{
+				if ((this._UsuarioAdiciona != value))
+				{
+					this._UsuarioAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreadoPor", DbType="VarChar(100)")]
+		public string CreadoPor
+		{
+			get
+			{
+				return this._CreadoPor;
+			}
+			set
+			{
+				if ((this._CreadoPor != value))
+				{
+					this._CreadoPor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaAdiciona
+		{
+			get
+			{
+				return this._FechaAdiciona;
+			}
+			set
+			{
+				if ((this._FechaAdiciona != value))
+				{
+					this._FechaAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreado", DbType="NVarChar(4000)")]
+		public string FechaCreado
+		{
+			get
+			{
+				return this._FechaCreado;
+			}
+			set
+			{
+				if ((this._FechaCreado != value))
+				{
+					this._FechaCreado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioModifica
+		{
+			get
+			{
+				return this._UsuarioModifica;
+			}
+			set
+			{
+				if ((this._UsuarioModifica != value))
+				{
+					this._UsuarioModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModificadoPor", DbType="VarChar(100)")]
+		public string ModificadoPor
+		{
+			get
+			{
+				return this._ModificadoPor;
+			}
+			set
+			{
+				if ((this._ModificadoPor != value))
+				{
+					this._ModificadoPor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaModifica
+		{
+			get
+			{
+				return this._FechaModifica;
+			}
+			set
+			{
+				if ((this._FechaModifica != value))
+				{
+					this._FechaModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModificado", DbType="NVarChar(4000)")]
+		public string FechaModificado
+		{
+			get
+			{
+				return this._FechaModificado;
+			}
+			set
+			{
+				if ((this._FechaModificado != value))
+				{
+					this._FechaModificado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActividadEconomica", DbType="VarChar(200)")]
+		public string ActividadEconomica
+		{
+			get
+			{
+				return this._ActividadEconomica;
+			}
+			set
+			{
+				if ((this._ActividadEconomica != value))
+				{
+					this._ActividadEconomica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RNCSuplidor", DbType="VarChar(50)")]
+		public string RNCSuplidor
+		{
+			get
+			{
+				return this._RNCSuplidor;
+			}
+			set
+			{
+				if ((this._RNCSuplidor != value))
+				{
+					this._RNCSuplidor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadRegistros", DbType="Int")]
+		public System.Nullable<int> CantidadRegistros
+		{
+			get
+			{
+				return this._CantidadRegistros;
+			}
+			set
+			{
+				if ((this._CantidadRegistros != value))
+				{
+					this._CantidadRegistros = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GeneradoPor", DbType="VarChar(100)")]
+		public string GeneradoPor
+		{
+			get
+			{
+				return this._GeneradoPor;
+			}
+			set
+			{
+				if ((this._GeneradoPor != value))
+				{
+					this._GeneradoPor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreEmpresa", DbType="VarChar(100)")]
+		public string NombreEmpresa
+		{
+			get
+			{
+				return this._NombreEmpresa;
+			}
+			set
+			{
+				if ((this._NombreEmpresa != value))
+				{
+					this._NombreEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RNC", DbType="VarChar(20)")]
+		public string RNC
+		{
+			get
+			{
+				return this._RNC;
+			}
+			set
+			{
+				if ((this._RNC != value))
+				{
+					this._RNC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(8000)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this._Direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefonos", DbType="VarChar(200)")]
+		public string Telefonos
+		{
+			get
+			{
+				return this._Telefonos;
+			}
+			set
+			{
+				if ((this._Telefonos != value))
+				{
+					this._Telefonos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Instagran", DbType="VarChar(50)")]
+		public string Instagran
+		{
+			get
+			{
+				return this._Instagran;
+			}
+			set
+			{
+				if ((this._Instagran != value))
+				{
+					this._Instagran = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Facebook", DbType="VarChar(50)")]
+		public string Facebook
+		{
+			get
+			{
+				return this._Facebook;
+			}
+			set
+			{
+				if ((this._Facebook != value))
+				{
+					this._Facebook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoEmpresa", DbType="Image", CanBeNull=true)]
+		public System.Data.Linq.Binary LogoEmpresa
+		{
+			get
+			{
+				return this._LogoEmpresa;
+			}
+			set
+			{
+				if ((this._LogoEmpresa != value))
+				{
+					this._LogoEmpresa = value;
 				}
 			}
 		}
