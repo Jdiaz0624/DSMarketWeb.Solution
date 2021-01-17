@@ -258,6 +258,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
         {
+            CurrentPage = 0;
             var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfIdTipoEMpleado = ((HiddenField)ItemSeleccionado.FindControl("hfIdTipoEmpleado")).Value.ToString();
             lbIdRegistroSeleccionado.Text = hfIdTipoEMpleado.ToString();
