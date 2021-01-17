@@ -584,5 +584,113 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
         }
         #endregion
 
+        #region MANTENIMIENTO DE TIPO DE EMPLEADO
+        //LISTADO DE TIPO DE EMPLEADO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado> BucaTipoEmpleado(decimal? IdTipoEmpleado = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_TIPO_EMPLEADO(IdTipoEmpleado, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado
+                           {
+                               IdTipoEmpleado=n.IdTipoEmpleado,
+                               TipoEmpleado = n.TipoEmpleado,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE TIPO DE EMPLEADO
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado MantenimientoTipoEmpleado(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado Mantenimiento = null;
+
+            var TipoEmpleado = ObjData.SP_MANTENIMIENTO_TIPO_EMPLEADO(
+                Item.IdTipoEmpleado,
+                Item.TipoEmpleado,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (TipoEmpleado != null) {
+                Mantenimiento = (from n in TipoEmpleado
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoEmpleado
+                                 {
+                                     IdTipoEmpleado=n.IdTipoEmpleado,
+                                     TipoEmpleado=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+
+        #region MANTENIMIENTO DE TIPO DE MOVIMIENTO
+        //LISTADO DE TIPO DE TIPO DE MOVIMIENTOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento> BuscaTipoMovimiento(decimal? IdTipoMovimiento = null, string Descripcion=  null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_TIPO_MOVIMIENTO(IdTipoMovimiento, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento
+                           {
+                               IdTipoMovimiento=n.IdTipoMovimiento,
+                               TipoMovimiento=n.TipoMovimiento,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModificado=n.FechaModificado,
+                               FechaModifica=n.FechaModifica,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE TIPO DE MOVIMIENTO
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento MantenimientoTipoMovimiento(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento Mantenimiento = null;
+
+            var TipoEmpleado = ObjData.SP_MANTENIMIENTO_TIPO_MOVIMIENTO(
+                Item.IdTipoMovimiento,
+                Item.TipoMovimiento,
+                Item.Estatus0,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (TipoEmpleado != null) {
+                Mantenimiento = (from n in TipoEmpleado
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ETipoMovimiento
+                                 {
+                                     IdTipoMovimiento=n.IdTipoMovimiento,
+                                     TipoMovimiento=n.Descripcion,
+                                     Estatus0=n.Estatus,
+                                     UsuarioAdiciona=n.UsuarioAdiciona,
+                                     FechaAdiciona=n.FechaAdiciona,
+                                     UsuarioModifica=n.UsuarioModifica,
+                                     FechaModifica=n.FechaModifica
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
+
     }
 }

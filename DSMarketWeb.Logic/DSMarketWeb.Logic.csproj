@@ -71,6 +71,8 @@
     <Compile Include="Entidades\EntidadesEmpresa\EDepartamentos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EEmpleado.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ESacarCodigoEmpleadoGenerado.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ETipoEmpleado.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ETipoMovimiento.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ETipoNomina.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EValidarFotoEmpleado.cs" />
     <Compile Include="Entidades\EntidadesInventario\EBuscaFotoProducto.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCompraSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionDepartamento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionEmpleados.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoEmpleado.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoMovimiento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCapacidadEquipos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
