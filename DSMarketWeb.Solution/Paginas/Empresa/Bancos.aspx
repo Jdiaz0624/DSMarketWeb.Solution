@@ -197,17 +197,17 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbNombreBancoMantenimiento" runat="server" Text="Nombre de Banco" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtNombreBancoMantenimiento" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtNombreBancoMantenimiento" runat="server" AutoCompleteType="Disabled" MaxLength="100" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbCuentaContableMantenimiento" runat="server" Text="Cuenta de Contable" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtCuentaContableMantenimiento" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtCuentaContableMantenimiento" runat="server" AutoCompleteType="Disabled" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbAuxiliarMantenimiento" runat="server" Text="Auxiliar" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtAuxiliarMantenimiento" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtAuxiliarMantenimiento" runat="server" AutoCompleteType="Disabled" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
