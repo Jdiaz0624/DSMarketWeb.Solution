@@ -270,12 +270,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            ListadoRetenciones();
         }
 
         protected void LinkPaginaAnterior_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            ListadoRetenciones();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior);
         }
 
         protected void dlPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -285,32 +288,52 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacion_CancelCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            ListadoRetenciones();
         }
 
         protected void LinkPaginaSiguiente_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            ListadoRetenciones();
         }
 
         protected void LinkUltipaPagina_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            ListadoRetenciones();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.UltimaPagina);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            MANRetenciones(0, "INSERT");
+            ClientScript.RegisterStartupScript(GetType(), "GuardarRegistro()", "GuardarRegistro();", true);
+            CurrentPage = 0;
+            Restablecerpantalla();
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-
+            string _ClaveSeguridad = string.IsNullOrEmpty(txtClaveSeguridad.Text.Trim()) ? null : txtClaveSeguridad.Text.Trim();
+            DSMarketWeb.Logic.Comunes.ValidarClaveSeguridad Validar = new Logic.Comunes.ValidarClaveSeguridad(_ClaveSeguridad);
+            bool Respuesta = Validar.ResultadoClave();
+            if (Respuesta == true) {
+                MANRetenciones(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), "UPDATE");
+                ClientScript.RegisterStartupScript(GetType(), "ModificarRegistro()", "ModificarRegistro();", true);
+                CurrentPage = 0;
+                Restablecerpantalla();
+            }
+            else {
+                ClientScript.RegisterStartupScript(GetType(), "ClaveSeguridadNoValida()", "ClaveSeguridadNoValida();", true);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            Restablecerpantalla();
         }
     }
 }
