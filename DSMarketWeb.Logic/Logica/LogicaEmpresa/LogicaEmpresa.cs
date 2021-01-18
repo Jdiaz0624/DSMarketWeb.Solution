@@ -775,6 +775,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                CantidadRegistros=n.CantidadRegistros
 
                            }).ToList();
+            return Listado;
         }
 
         //MANTENIMIENTO DE RETENCIONES
