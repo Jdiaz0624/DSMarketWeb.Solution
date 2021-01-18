@@ -183,8 +183,9 @@
                             <th style="width:50%" align="center"> <asp:Label ID="lbRetencionHeader" runat="server" Text="Retención" CssClass="Letranegrita"></asp:Label>  </th>
                             <th style="width:10%" align="center"> <asp:Label ID="lbMontoinicialHEader" runat="server" Text="Monto Inicial" CssClass="Letranegrita"></asp:Label>  </th>
                             <th style="width:10%" align="center"> <asp:Label ID="lbMontoFinalHEader" runat="server" Text="Monto Final" CssClass="Letranegrita"></asp:Label>  </th>
-                            <th style="width:10%" align="center"> <asp:Label ID="lbEstatusHeader" runat="server" Text="Estatus" CssClass="Letranegrita"></asp:Label>  </th>
+                            
                             <th style="width:10%" align="center"> <asp:Label ID="lbPorcientoEmpleadoHeader" runat="server" Text="% Empleado" CssClass="Letranegrita"></asp:Label>  </th>
+                            <th style="width:10%" align="center"> <asp:Label ID="lbEstatusHeader" runat="server" Text="Estatus" CssClass="Letranegrita"></asp:Label>  </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -243,6 +244,7 @@
             <div class="jumbotron" align="center">
                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE % DE RETENCION" CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
+                <asp:Label ID="lbSecuenciaSeleccionada" runat="server" Text="SecuenciaSeleccionada" Visible="false"></asp:Label>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -282,13 +284,13 @@
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
-                    <asp:Label ID="cbEstatusMantenimiento" runat="server" Text="Estatus" ToolTip="Estatus de Porciento de Retención" CssClass="form-check-input"></asp:Label>
+                    <asp:CheckBox ID="cbEstatusMantenimiento" runat="server" Text="Estatus" ToolTip="Estatus de Porciento de Retención" CssClass="form-check-input"></asp:CheckBox>
                 </div>
             </div>
             <div align="center">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Guardar Registro" OnClick="btnGuardar_Click" />
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Modificar Registro" OnClick="btnModificar_Click" />
-                <asp:Button ID="btnVolver" runat="server" Text="btnVolver" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Volver Atras" OnClick="btnVolver_Click" />
+                <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Volver Atras" OnClick="btnVolver_Click" />
             </div>
             <br />
         </div>

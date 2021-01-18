@@ -215,6 +215,8 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 Consulta_Mantenimiento();
                 CurrentPage = 0;
                 ListadoRetenciones();
+                btnNuevoRegistro.Visible = false;
+                btnModificarRegistro.Visible = false;
             }
         }
 

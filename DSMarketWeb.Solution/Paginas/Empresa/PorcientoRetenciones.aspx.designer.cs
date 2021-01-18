@@ -150,15 +150,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbMontoFinalHEader;
 
         /// <summary>
-        /// lbEstatusHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbEstatusHeader;
-
-        /// <summary>
         /// lbPorcientoEmpleadoHeader control.
         /// </summary>
         /// <remarks>
@@ -166,6 +157,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbPorcientoEmpleadoHeader;
+
+        /// <summary>
+        /// lbEstatusHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbEstatusHeader;
 
         /// <summary>
         /// rpListadoPorcientoRetencion control.
@@ -292,6 +292,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbIdRegistroSeleccionado;
+
+        /// <summary>
+        /// lbSecuenciaSeleccionada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSecuenciaSeleccionada;
 
         /// <summary>
         /// lbSeleccionarretencionMantenimiento control.
@@ -426,7 +435,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cbEstatusMantenimiento;
+        protected global::System.Web.UI.WebControls.CheckBox cbEstatusMantenimiento;
 
         /// <summary>
         /// btnGuardar control.
