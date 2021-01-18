@@ -71,6 +71,8 @@
     <Compile Include="Entidades\EntidadesEmpresa\ECompraSuplidores.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EDepartamentos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EEmpleado.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\EPorcientoRetenciones.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ERetenciones.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ESacarCodigoEmpleadoGenerado.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ETipoEmpleado.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ETipoMovimiento.cs" />
@@ -107,6 +109,8 @@
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCompraSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionDepartamento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionEmpleados.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionPorcientoRetenciones.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionRetenciones.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoEmpleado.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoMovimiento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />
