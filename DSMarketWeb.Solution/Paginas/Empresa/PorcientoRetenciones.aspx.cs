@@ -13,5 +13,75 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
 
         }
+
+        protected void btnConsularRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNuevoregistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificarRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRestablecer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaAnterior_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacion_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaSiguiente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltipaPagina_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
