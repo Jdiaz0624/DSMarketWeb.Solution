@@ -307,5 +307,13 @@
             <br />
         </div>
 
+
+
+
+         <div id="DivBloqueMantenimieto" runat="server"></div>
     </div>
+
+
+
+   
 </asp:Content>

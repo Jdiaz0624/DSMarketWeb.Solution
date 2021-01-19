@@ -850,5 +850,14 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.DataVisualization.Charting.Chart GraEstatusCitas;
+
+        /// <summary>
+        /// DivBloqueMantenimieto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBloqueMantenimieto;
     }
 }
