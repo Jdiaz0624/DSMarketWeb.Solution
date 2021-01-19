@@ -13,5 +13,95 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
 
         }
+
+        protected void btnConsultarRegistros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNuevoRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEditarRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminarRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnReporte_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeraPaginaCitasEncabezado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaAnteriorCitasEncabezado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionCitasEncabezado_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionCitasEncabezado_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkPaginaSiguienteCitasEncabezado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltipaPaginaCitasEncabezado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeroCitaDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorCitaDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionCitaDetalle_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionCitaDetalle_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteCitaDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoSiguienteDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

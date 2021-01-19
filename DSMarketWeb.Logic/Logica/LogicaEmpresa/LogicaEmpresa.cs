@@ -881,5 +881,112 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
             return Mantenimiento;
         }
         #endregion
+
+
+        #region MANTENIMIENTO DE CITAS
+        //LISTADO DE CITAS ENCABEZADO
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado> BuscaCitasEncabezado(string IdCIta = null, decimal? IdEmpleado = null, DateTime? FechaCitaDesde = null, DateTime? FechaCitaHasta = null, string NombreCliente = null, string NumeroIdentificacion = null, bool? Estatus = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CITAS_ENCABEZADO(IdCIta, IdEmpleado, FechaCitaDesde, FechaCitaHasta, NombreCliente, NumeroIdentificacion, Estatus)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado
+                           {
+                               IdCitas=n.IdCitas,
+                               IdEmpleado=n.IdEmpleado,
+                               Empleado=n.Empleado,
+                               FechaCita0=n.FechaCita0,
+                               FechaCita=n.FechaCita,
+                               Hora=n.Hora,
+                               NombreCliente=n.NombreCliente,
+                               Telefono=n.Telefono,
+                               Direccion=n.Direccion,
+                               NumeroIdentificacion=n.NumeroIdentificacion,
+                               NumeroConectorCita=n.NumeroConectorCita,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               CantidadRegistros=n.CantidadRegistros
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE ENCABEZADO DE CITAS
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado MantenimientoCitaEncabeZado(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado Mantenimiento = null;
+
+            var CitaEncabezado = ObjData.SP_MANTENIMIENTO_CITAS_ENCABEZADO(
+                Item.IdCitas,
+                Item.IdEmpleado,
+                Item.FechaCita0,
+                Item.Hora,
+                Item.NombreCliente,
+                Item.Telefono,
+                Item.Direccion,
+                Item.NumeroIdentificacion,
+                Item.NumeroConectorCita,
+                Item.Estatus0,
+                Accion);
+            if (CitaEncabezado != null) {
+                Mantenimiento = (from n in CitaEncabezado
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasEncabezado
+                                 {
+                                     IdCitas=n.IdCitas,
+                                     IdEmpleado=n.IdEmpleado,
+                                     FechaCita0=n.FechaCita,
+                                     Hora=n.Hora,
+                                     NombreCliente=n.NombreCliente,
+                                     Telefono=n.Telefono,
+                                     Direccion=n.Direccion,
+                                     NumeroIdentificacion=n.NumeroIdentificacion,
+                                     NumeroConectorCita=n.NumeroConectorCita,
+                                     Estatus0=n.Estatus
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+
+        //LISTADO DE CITA DETALLE
+        public List<DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle> BuscaCitasDetalle(decimal? NumeroConector = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CITAS_DETALLE(NumeroConector)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle
+                           {
+                               NumeroConectorCita=n.NumeroConectorCita,
+                               IdProducto=n.IdProducto,
+                               Precio=n.Precio,
+                               DescripcionProducto=n.DescripcionProducto,
+                               CantidadRegistros=n.CantidadRegistros,
+                               Total=n.Total
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE CITAS DETALLE
+        public DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle MantenimientoCitasDetalle(DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle Mantenimiento = null;
+
+            var CitasDetalle = ObjData.SP_MANTENIMIENTO_DATOS_CITAS_DETALLE(
+                Item.NumeroConectorCita,
+                Item.IdProducto,
+                Item.Precio,
+                Item.DescripcionProducto,
+                Accion);
+            if (CitasDetalle != null) {
+                Mantenimiento = (from n in CitasDetalle
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.ECitasDetalle
+                                 {
+                                     NumeroConectorCita=n.NumeroConector,
+                                     IdProducto=n.IdProducto,
+                                     Precio=n.Precio,
+                                     DescripcionProducto=n.DescripcionProducto
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }

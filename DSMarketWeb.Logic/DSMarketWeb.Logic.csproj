@@ -67,6 +67,8 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EBancos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ECargos.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ECitasDetalle.cs" />
+    <Compile Include="Entidades\EntidadesEmpresa\ECitasEncabezado.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EClientes.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ECompraSuplidores.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EDepartamentos.cs" />
@@ -105,6 +107,8 @@
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionBancos.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCargos.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCitaEncabezado.cs" />
+    <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCitasDetalle.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionClientes.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCompraSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionDepartamento.cs" />
