@@ -103,5 +103,85 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
 
         }
+
+        protected void btnBuscarServicios_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSeleccionarServicio_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeroServicioAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorServicioAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionServicioAgregar_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionServicioAgregar_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteServicioAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoServicioAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeroQuitar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorQuitar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionQuitar_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dlPaginacionQuitar_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteQuitar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoQuitar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnGuardarCita_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
