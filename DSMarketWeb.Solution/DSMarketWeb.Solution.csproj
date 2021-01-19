@@ -86,6 +86,7 @@
     <Content Include="Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="LoginSistema.aspx" />
     <Content Include="Paginas\Empresa\Bancos.aspx" />
+    <Content Include="Paginas\Empresa\Citas.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoCargos.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoClientes.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoCompraSuplidores.aspx" />
@@ -244,6 +245,13 @@
     </Compile>
     <Compile Include="Paginas\Empresa\Bancos.aspx.designer.cs">
       <DependentUpon>Bancos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Empresa\Citas.aspx.cs">
+      <DependentUpon>Citas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Empresa\Citas.aspx.designer.cs">
+      <DependentUpon>Citas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Empresa\MantenimientoCargos.aspx.cs">
       <DependentUpon>MantenimientoCargos.aspx</DependentUpon>

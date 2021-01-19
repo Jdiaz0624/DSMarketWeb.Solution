@@ -33,7 +33,7 @@
                              <asp:LinkButton ID="lbPaginaInicioSistema" runat="server" CssClass="nav-link active" OnClick="lbPaginaInicioSistema_Click" Text="<%$Resources:Traducciones,Inicio %>"></asp:LinkButton>
                         </li>
                         <li class="nav-item">
-                            <asp:LinkButton ID="LinkCitas" runat="server" ForeColor="Red" Text="<%$Resources:Traducciones,Citas %>"  class="nav-link active"></asp:LinkButton>
+                            <asp:LinkButton ID="LinkCitas" runat="server" ForeColor="Red" Text="<%$Resources:Traducciones,Citas %>" OnClick="LinkCitas_Click" class="nav-link active"></asp:LinkButton>
                           </li>
 
                          <!--MODULO DE SERVICIO-->
