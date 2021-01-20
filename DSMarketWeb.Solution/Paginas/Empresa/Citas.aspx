@@ -84,7 +84,7 @@
 
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarDepartamentoConsulta" runat="server" Text="Seleccionar Departamento" CssClass="Letranegrita"></asp:Label>
-                    <asp:DropDownList ID="ddlSeleccionarDepartamentoConsulta" runat="server" ToolTip="Seleccionar Departamento" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlSeleccionarDepartamentoConsulta" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarDepartamentoConsulta_SelectedIndexChanged" ToolTip="Seleccionar Departamento" CssClass="form-control"></asp:DropDownList>
                 </div>
 
                  <div class="form-group col-md-4">
@@ -362,7 +362,7 @@
 
                   <div class="form-group col-md-4">
                      <asp:Label ID="lbSeleccionarDepartamentoMantenimiento" runat="server" Text="Seleccionar Departamento" CssClass="Letranegrita"></asp:Label>
-                     <asp:DropDownList ID="ddlSeleccionarDepartamentoMantenimiento" runat="server" ToolTip="Seleccionar Departamento" CssClass="form-control"></asp:DropDownList>
+                     <asp:DropDownList ID="ddlSeleccionarDepartamentoMantenimiento" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarDepartamentoMantenimiento_SelectedIndexChanged" ToolTip="Seleccionar Departamento" CssClass="form-control"></asp:DropDownList>
                  </div>
 
                  <div class="form-group col-md-4">
