@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DSMarketWeb.Solution.Paginas.Empresa
 {
@@ -176,13 +177,25 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             btnReporte.Enabled = true;
         }
 
-        private void ModificarMantenimiento() {
+        private void ModoMantenimiento() {
             btnConsultarRegistros.Enabled = false;
             btnNuevoRegistro.Enabled = false;
             btnEditarRegistro.Enabled = true;
             btnEliminarRegistro.Enabled = true;
             btnRestablecerPantalla.Enabled = true;
             btnReporte.Enabled = true;
+        }
+
+        private void Consulta_Mantenimiento() {
+            DivBloqueCOnsulta.Visible = true;
+            DivBloqueDetalleCita.Visible = false;
+            DivBloqueMantenimieto.Visible = false;
+        }
+
+        private void Mantenimiento_Consulta() {
+            DivBloqueCOnsulta.Visible = false;
+            DivBloqueDetalleCita.Visible = false;
+            DivBloqueMantenimieto.Visible = true;
         }
 
         private void ListadoCitas() {
@@ -221,6 +234,8 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                     if (Listado.Count() < 1)
                     {
                         lbCantidadRegistrosVariable.Text = "0";
+                        rpListadoCitasEncabezado.DataSource = null;
+                        rpListadoCitasEncabezado.DataBind();
                     }
                     else
                     {
@@ -260,7 +275,47 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                     lbCantidadRegistrosVariable.Text = CantidadRegistros.ToString("N0");
                 }
             }
-          
+            GenerarGrafico();
+        }
+
+        private void GenerarGrafico() {
+            int[] CantidadRegistros = new int[2];
+            string[] Nombre = new string[2];
+            int Contador = 0;
+
+            //FILTROS
+            string _NumeroCita = string.IsNullOrEmpty(txtNumeroCitaConsulta.Text.Trim()) ? "N/A" : txtNumeroCitaConsulta.Text.Trim();
+            string _NombreCliente = string.IsNullOrEmpty(txtNombreClienteConsulta.Text.Trim()) ? "N/A" : txtNombreClienteConsulta.Text.Trim();
+            string _NumeroIdentificacion = string.IsNullOrEmpty(txtNumeroIdentificacionConsulta.Text.Trim()) ? "N/A" : txtNumeroIdentificacionConsulta.Text.Trim();
+            decimal? _Empleado = ddlSeleccionarEmpleadoConsulta.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarEmpleadoConsulta.SelectedValue) : 0;
+            DateTime? _FechaDesde = string.IsNullOrEmpty(txtFechaDesde.Text.Trim()) ? Convert.ToDateTime("1942-01-01") : Convert.ToDateTime(txtFechaDesde.Text);
+            DateTime? _FechaHasta = string.IsNullOrEmpty(txtFechaHasta.Text.Trim()) ? Convert.ToDateTime("1942-01-01") : Convert.ToDateTime(txtFechaHasta.Text);
+
+            SqlConnection conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            SqlCommand comando = new SqlCommand("EXEC [Empresa].[SP_GRAFICOS_CITAS_ENCABEZADO] @IdCIta,@IdEmpleado,@FechaCitaDesde,@FechaCitaHasta,@NombreCliente,@NumeroIdentificacion", conexion);
+
+            comando.Parameters.AddWithValue("@IdCIta", SqlDbType.VarChar).Value = _NumeroCita;
+            comando.Parameters.AddWithValue("@IdEmpleado", SqlDbType.Decimal).Value = _Empleado;
+            comando.Parameters.AddWithValue("@FechaCitaDesde", SqlDbType.Date).Value = _FechaDesde;
+            comando.Parameters.AddWithValue("@FechaCitaHasta", SqlDbType.Date).Value = _FechaHasta;
+            comando.Parameters.AddWithValue("@NombreCliente", SqlDbType.VarChar).Value = _NombreCliente;
+            comando.Parameters.AddWithValue("@NumeroIdentificacion", SqlDbType.VarChar).Value = _NumeroIdentificacion;
+
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read()) {
+                CantidadRegistros[Contador] = Convert.ToInt32(reader.GetInt32(1));
+                Nombre[Contador] = reader.GetString(0);
+                Contador++;
+            }
+            reader.Close();
+            conexion.Close();
+
+            GraEstatusCitas.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            GraEstatusCitas.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+            GraEstatusCitas.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            GraEstatusCitas.Series["Serie"].Points.DataBindXY(Nombre, CantidadRegistros);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
