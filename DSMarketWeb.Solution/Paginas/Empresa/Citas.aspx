@@ -44,6 +44,16 @@
             $("#<%=txtFechaCitaMantenimiento.ClientID%>").css("border-color", "red");
         }
 
+        function RegistroGuardado() {
+            alert("Registro guardado con exito.");
+        }
+        function RegistroModificado() {
+            alert("Registro modificado con exito.");
+        }
+        function RegistroEliminado() {
+            alert("Registro eliminado con exito.");
+        }
+
         $(document).ready(function () {
             $("#<%=btnGuardarCita.ClientID%>").click(function () {
                 var NombreCliente = $("#<%=txtNombreClienteMantenimiento.ClientID%>").val().length;
@@ -397,7 +407,7 @@
                  </div>
 
                  <div class="form-group col-md-12">
-                     <asp:Label ID="lbSireccionMantenimiento" runat="server" Text="Seleccionar Departamento" CssClass="Letranegrita"></asp:Label>
+                     <asp:Label ID="lbSireccionMantenimiento" runat="server" Text="Dirección" CssClass="Letranegrita"></asp:Label>
                      <asp:TextBox ID="txtDireccionMantenimiento" runat="server" MaxLength="8000" CssClass="form-control"></asp:TextBox>
                  </div>
              </div>

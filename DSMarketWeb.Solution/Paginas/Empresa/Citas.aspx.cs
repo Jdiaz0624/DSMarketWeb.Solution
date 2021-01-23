@@ -146,6 +146,42 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         }
         #endregion
 
+        private void RestablecerPantalla() {
+            Consulta_Mantenimiento();
+            CargarListasDesplegablesConsulta();
+            CargarListaDesplegableMantenimiento();
+            rbTodos.Checked = true;
+            rbExportarPDF.Checked = true;
+            DivBloqueDetalleCita.Visible = false;
+            DivBloqueMantenimieto.Visible = false;
+            ModoConsulta();
+            
+
+            txtBuscarServicio.Text = string.Empty;
+            txtClienteDetalle.Text = string.Empty;
+            txtDireccionClienteDetalle.Text = string.Empty;
+            txtDireccionMantenimiento.Text = string.Empty;
+            txtEmpleadoDetalle.Text = string.Empty;
+            txtEstatusDetalle.Text = string.Empty;
+            txtFechaCitaDetalle.Text = string.Empty;
+            txtFechaCitaMantenimiento.Text = string.Empty;
+            txtFechaDesde.Text = string.Empty;
+            txtFechaHasta.Text = string.Empty;
+            txtHoraCitaDetalle.Text = string.Empty;
+            txtHoraCitaMantenimiento.Text = string.Empty;
+            txtNombreClienteConsulta.Text = string.Empty;
+            txtNombreClienteMantenimiento.Text = string.Empty;
+            txtNumeroCitaConsulta.Text = string.Empty;
+            txtNumeroCitaDetalle.Text = string.Empty;
+            txtNumeroIdentificacionConsulta.Text = string.Empty;
+            txtNumeroIdentificacionDetalle.Text = string.Empty;
+            txtNumeroIdentificacionMantenimiento.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            txtTelefonoDetalle.Text = string.Empty;
+            CurrentPage = 0;
+            ListadoCitas();
+        }
+
         private void CargarListasDesplegablesConsulta() {
             CargarDepartamentosConsulta();
             CargarTcnicoConsulta();
@@ -329,6 +365,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtTelefono.Text,
                 txtDireccionMantenimiento.Text,
                 txtNumeroIdentificacionMantenimiento.Text,
+                Convert.ToDecimal(lbNumeroConectorseleccionado.Text),
                 cbEstatus.Checked,
                 Accion);
             ProcesarCitaEncabezado.ProcesarInformacion();
@@ -366,7 +403,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
                 CargarListasDesplegablesConsulta();
-                CargarListaDesplegableMantenimiento();
+                CargarListaDesplegableMantenimiento(); 
                 rbTodos.Checked = true;
                 rbExportarPDF.Checked = true;
                 DivBloqueDetalleCita.Visible = false;
@@ -389,6 +426,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             Mantenimiento_Consulta();
             GenerarNumerConector();
             lbAccionMantenimiento.Text = "INSERT";
+            cbEstatus.Checked = true;
         }
 
         protected void btnEditarRegistro_Click(object sender, EventArgs e)
@@ -408,7 +446,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
         {
-
+            RestablecerPantalla();
         }
 
         protected void LinkPrimeraPaginaCitasEncabezado_Click(object sender, EventArgs e)
@@ -491,6 +529,14 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             GuardarServicios(Convert.ToDecimal(lbNumeroConectorseleccionado.Text), Convert.ToDecimal(hfIdProductoSeleccionado), Convert.ToDecimal(hfPrecioServicioSeleccionado), hfDescripcionSericio.ToString(), "INSERT");
 
             var MostrarServiciosAgregados = ObjDataLogica.Value.BuscaCitasDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            int CantidadRegistros = 0;
+            decimal Total = 0;
+            foreach (var n in MostrarServiciosAgregados) {
+                CantidadRegistros = (int)n.CantidadRegistros;
+                Total = (decimal)n.Total;
+            }
+            lbCantidadServiciosAgregadosMantenimientoVariable.Text = CantidadRegistros.ToString("N0");
+            lbTotalServicioMantenimientoVariable.Text = Total.ToString("N2");
             Paginar(ref rpListadoServiciosAgregadosDetalle, MostrarServiciosAgregados, 10, ref lbCantidadPaginaVariableQuitar, ref LinkPrimeroQuitar, ref LinkAnteriorQuitar, ref LinkSiguienteQuitar, ref LinkUltimoQuitar);
             HandlePaging(ref dlPaginacionQuitar, ref lbPaginaActualVariableQuitar);
         }
@@ -571,7 +617,29 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 }
                 else
                 {
+                    //GUARDAMOS la cita
+                    string Accion = lbAccionMantenimiento.Text;
 
+                    switch (Accion) {
+                        case "INSERT":
+                            MANCitas(0, "INSERT");
+                            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+                            RestablecerPantalla();
+                            break;
+
+                        case "UPDATE":
+                            MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "UPDATE");
+                            ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                            RestablecerPantalla();
+                            break;
+
+                        case "DELETE":
+                            MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "DELETE");
+                            ClientScript.RegisterStartupScript(GetType(), "RegistroEliminado()", "RegistroEliminado();", true);
+                            RestablecerPantalla();
+                            break;
+
+                    }
                 }
             }
           
@@ -579,7 +647,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-
+            RestablecerPantalla();
         }
 
         protected void ddlSeleccionarDepartamentoConsulta_SelectedIndexChanged(object sender, EventArgs e)

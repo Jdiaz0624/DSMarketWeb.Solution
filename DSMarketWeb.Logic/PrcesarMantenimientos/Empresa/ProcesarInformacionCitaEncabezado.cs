@@ -18,6 +18,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         private string Telefono = "";
         private string Direccion = "";
         private string NumeroIdentificacion = "";
+        private decimal NumeroConectorCita = 0;
         private bool Estatus = false;
         private string Accion = "";
 
@@ -30,6 +31,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         string TelefonoCON,
         string DireccionCON,
         string NumeroIdentificacionCON,
+        decimal NumeroConectorCON,
         bool EstatusCON,
         string AccionCON)
         {
@@ -41,6 +43,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             Telefono = TelefonoCON;
             Direccion = DireccionCON;
             NumeroIdentificacion = NumeroIdentificacionCON;
+            NumeroConectorCita = NumeroConectorCON;
             Estatus = EstatusCON;
             Accion = AccionCON;
         }
@@ -59,6 +62,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             Procesar.Telefono = Telefono;
             Procesar.Direccion = Direccion;
             Procesar.NumeroIdentificacion = NumeroIdentificacion;
+            Procesar.NumeroConectorCita = NumeroConectorCita;
             Procesar.Estatus0 = Estatus;
 
             var MAN = Objdata.MantenimientoCitaEncabeZado(Procesar, Accion);
