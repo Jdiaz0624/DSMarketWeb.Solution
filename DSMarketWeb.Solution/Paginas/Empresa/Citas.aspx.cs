@@ -13,6 +13,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaEmpresa.LogicaEmpresa> ObjDataLogica = new Lazy<Logic.Logica.LogicaEmpresa.LogicaEmpresa>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
 
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
@@ -317,12 +318,55 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
             GraEstatusCitas.Series["Serie"].Points.DataBindXY(Nombre, CantidadRegistros);
         }
+
+        private void MANCitas(decimal IdCita, string Accion) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado ProcesarCitaEncabezado = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado(
+                IdCita,
+                Convert.ToDecimal(ddlSeleccionarEmpleadoMantenimiento.SelectedValue),
+                Convert.ToDateTime(txtFechaCitaMantenimiento.Text),
+                txtHoraCitaMantenimiento.Text,
+                txtNombreClienteMantenimiento.Text,
+                txtTelefono.Text,
+                txtDireccionMantenimiento.Text,
+                txtNumeroIdentificacionMantenimiento.Text,
+                cbEstatus.Checked,
+                Accion);
+            ProcesarCitaEncabezado.ProcesarInformacion();
+        }
+
+        private void GuardarServicios(decimal NumeroConector, decimal IdProducto, decimal Precio, string Descripcion, string Accion) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitasDetalle GuardarDetalleCita = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitasDetalle(
+                NumeroConector,
+                IdProducto,
+                Precio,
+                Descripcion,
+                Accion);
+            GuardarDetalleCita.ProcesarInformacion();
+        }
+        private void MostrarServicios() {
+            string _NombreServicio = string.IsNullOrEmpty(txtBuscarServicio.Text.Trim()) ? null : txtBuscarServicio.Text.Trim();
+
+            var BuscarServicio = ObjDataInventario.Value.BuscaProductos(
+                new Nullable<decimal>(),
+                null,
+                _NombreServicio,
+                null, null, null, null, 2, null, null, null, null, null, null, null, null, null, null, null);
+            Paginar(ref rpListadoServiciosAgregar, BuscarServicio, 10, ref lbCantidadPaginaVariableAgregarServicio, ref LinkPrimeroServicioAgregar, ref LinkAnteriorServicioAgregar, ref LinkSiguienteServicioAgregar, ref LinkUltimoServicioAgregar);
+            HandlePaging(ref dtPaginacionServicioAgregar, ref lbPaginaActualVariableAgregarServicio);
+        }
+
+        private void GenerarNumerConector() {
+            Random NumeroConector = new Random();
+            int Numero = NumeroConector.Next(0, 999999999);
+            lbNumeroConectorseleccionado.Text = Numero.ToString();
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
                 CargarListasDesplegablesConsulta();
-                CargarListaDepartamentoMantenimiento();
+                CargarListaDesplegableMantenimiento();
                 rbTodos.Checked = true;
                 rbExportarPDF.Checked = true;
                 DivBloqueDetalleCita.Visible = false;
@@ -337,11 +381,14 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             CurrentPage = 0;
             ListadoCitas();
+            DivBloqueDetalleCita.Visible = false;
         }
 
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            GenerarNumerConector();
+            lbAccionMantenimiento.Text = "INSERT";
         }
 
         protected void btnEditarRegistro_Click(object sender, EventArgs e)
@@ -426,12 +473,26 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void btnBuscarServicios_Click(object sender, EventArgs e)
         {
-
+            MostrarServicios();
         }
 
         protected void btnSeleccionarServicio_Click(object sender, EventArgs e)
         {
+            var IdProductoSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProductoSeleccionado = ((HiddenField)IdProductoSeleccionado.FindControl("hfIdProductoSeleccionado")).Value.ToString();
 
+            var PrecioServicioSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfPrecioServicioSeleccionado = ((HiddenField)PrecioServicioSeleccionado.FindControl("hfPrecioServicio")).Value.ToString();
+
+            var DescripcionSericio = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfDescripcionSericio = ((HiddenField)DescripcionSericio.FindControl("hfDescripcionServicio")).Value.ToString();
+
+
+            GuardarServicios(Convert.ToDecimal(lbNumeroConectorseleccionado.Text), Convert.ToDecimal(hfIdProductoSeleccionado), Convert.ToDecimal(hfPrecioServicioSeleccionado), hfDescripcionSericio.ToString(), "INSERT");
+
+            var MostrarServiciosAgregados = ObjDataLogica.Value.BuscaCitasDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            Paginar(ref rpListadoServiciosAgregadosDetalle, MostrarServiciosAgregados, 10, ref lbCantidadPaginaVariableQuitar, ref LinkPrimeroQuitar, ref LinkAnteriorQuitar, ref LinkSiguienteQuitar, ref LinkUltimoQuitar);
+            HandlePaging(ref dlPaginacionQuitar, ref lbPaginaActualVariableQuitar);
         }
 
         protected void LinkPrimeroServicioAgregar_Click(object sender, EventArgs e)
@@ -497,6 +558,23 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void btnGuardarCita_Click(object sender, EventArgs e)
         {
 
+            if (string.IsNullOrEmpty(txtFechaCitaMantenimiento.Text.Trim()))
+            {
+                ClientScript.RegisterStartupScript(GetType(), "CampoFechaCitaVacio()", "CampoFechaCitaVacio();", true);
+            }
+            else {
+                //VALIDAMOS SI HAY SERVICIOS AGREGADOS
+                var ValidarServicios = ObjDataLogica.Value.BuscaCitasDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+                if (ValidarServicios.Count() < 1)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "RegistrosNoEncontrados()", "RegistrosNoEncontrados();", true);
+                }
+                else
+                {
+
+                }
+            }
+          
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -507,6 +585,41 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected void ddlSeleccionarDepartamentoConsulta_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarTcnicoConsulta();
+        }
+
+        protected void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdCitaSeleccionada = ((HiddenField)ItemSeleccionado.FindControl("hfIdCitaSeleccionada")).Value.ToString();
+
+            var NumeroConectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConector = ((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConector")).Value.ToString();
+
+            string NumeroCita = hfIdCitaSeleccionada.ToString();
+            decimal NumeroConector = Convert.ToDecimal(hfNumeroConector);
+
+            DivBloqueDetalleCita.Visible = true;
+            var BuscarDetalle = ObjDataLogica.Value.BuscaCitasEncabezado(
+                NumeroCita,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+            foreach (var n in BuscarDetalle) {
+                txtNumeroCitaDetalle.Text = n.IdCitas.ToString();
+                txtEmpleadoDetalle.Text = n.Empleado;
+                txtClienteDetalle.Text = n.NombreCliente;
+                txtNumeroIdentificacionDetalle.Text = n.NumeroIdentificacion;
+                txtFechaCitaDetalle.Text = n.FechaCita;
+                txtHoraCitaDetalle.Text = n.Hora;
+                txtTelefonoDetalle.Text = n.Telefono;
+                txtEstatusDetalle.Text = n.Estatus;
+                txtDireccionClienteDetalle.Text = n.Direccion;
+            }
+            Paginar(ref rpListadoCitasEncabezado, BuscarDetalle, 1, ref lbCantidadPaginaVariableCitaEncabezado, ref LinkPrimeraPaginaCitasEncabezado, ref LinkPaginaAnteriorCitasEncabezado, ref LinkPaginaSiguienteCitasEncabezado, ref LinkUltipaPaginaCitasEncabezado);
+            HandlePaging(ref dlPaginacionCitasEncabezado, ref lbPaginaActualVariableCitaEncabezado);
         }
 
         protected void ddlSeleccionarDepartamentoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)

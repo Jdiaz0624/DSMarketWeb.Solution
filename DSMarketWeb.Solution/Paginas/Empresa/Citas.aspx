@@ -35,6 +35,15 @@
             alert("Registro guardado con exito.");
         }
 
+        function RegistrosNoEncontrados() {
+            alert("No se puede guardar este registro por que no se asignarón servicios para la cita, favor de agregar al menos 1 para guardar.");
+        }
+
+        function CampoFechaCitaVacio() {
+            alert("El campo Fecha de Cita no puede estar vacio para guardar este registro, favor de verificar.");
+            $("#<%=txtFechaCitaMantenimiento.ClientID%>").css("border-color", "red");
+        }
+
         $(document).ready(function () {
             $("#<%=btnGuardarCita.ClientID%>").click(function () {
                 var NombreCliente = $("#<%=txtNombreClienteMantenimiento.ClientID%>").val().length;
@@ -42,6 +51,14 @@
                     alert("El campo nombre de cliente no puede estar vacio para guardar este registro, favor de verificar.");
                     $("#<%=txtNombreClienteMantenimiento.ClientID%>").css("border-color", "red");
                     return false;
+                }
+                else {
+                    var Hora = $("#<%=txtHoraCitaMantenimiento.ClientID%>").val().length;
+                    if (Hora < 1) {
+                        alert("El campo hora no puede estar vacio para guardar este registro, favor de verificar.");
+                        $("#<%=txtHoraCitaMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
                 }
             });
         })
@@ -139,7 +156,7 @@
                                     <asp:HiddenField ID="hfIdCitaSeleccionada" runat="server" Value=<%# Eval("IdCitas") %> />
                                     <asp:HiddenField ID="hfNumeroConector" runat="server" Value=<%# Eval("NumeroConectorCita") %> />
 
-                                    <td style="width:10%"> <asp:Button ID="btnSeleccionar" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Seleccionar Registros" /> </td>
+                                    <td style="width:10%"> <asp:Button ID="btnSeleccionar" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnSeleccionar_Click" ToolTip="Seleccionar Registros" /> </td>
                                     <td style="width:10%"> <%# Eval("IdCitas") %> </td>
                                     <td style="width:25%"> <%# Eval("NombreCliente") %> </td>
                                     <td style="width:10%"> <%# Eval("FechaCita") %> </td>
@@ -332,6 +349,7 @@
                  <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE CITAS" CssClass="Letranegrita"></asp:Label>
                  <asp:Label ID="lbIdCitaSeleccionada" runat="server" Text="IdCita" Visible="false" CssClass="Letranegrita"></asp:Label>
                  <asp:Label ID="lbNumeroConectorseleccionado" runat="server" Text="NumeroConector" Visible="false" CssClass="Letranegrita"></asp:Label>
+                 <asp:Label ID="lbAccionMantenimiento" runat="server" Text="Accion" Visible="false" CssClass="Letranegrita"></asp:Label>
              </div>
 
              <div class="form-row">
@@ -403,7 +421,7 @@
                  <table class="table table-hover">
                      <thead>
                          <tr>
-                             <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarProductoHEader" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
+                             <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarProductoHEader" runat="server" Text="Agregar" CssClass="Letranegrita"></asp:Label> </th>
                              <th style="width:70%" align="left"><asp:Label ID="lbServicioHeaderAgregar" runat="server" Text="Servicio" CssClas="Letranegrita"></asp:Label> </th>
                              <th style="width:20%" align="left"> <asp:Label ID="lbPrecioServicioHeader" runat="server" Text="Precio" CssClas="Letranegrita"></asp:Label> </th>
                          </tr>
@@ -413,8 +431,10 @@
                              <ItemTemplate>
                                  <tr>
                                      <asp:HiddenField ID="hfIdProductoSeleccionado" runat="server" Value='<%# Eval("IdProducto") %>' />
+                                     <asp:HiddenField ID="hfPrecioServicio" runat="server" Value='<%# Eval("PrecioVenta") %>' />
+                                     <asp:HiddenField ID="hfDescripcionServicio" runat="server" Value='<%# Eval("Producto") %>' />
 
-                                     <td style="width:10%"> <asp:Button ID="btnSeleccionarServicio" runat="server" Text="Seleccionar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Seleccionar Servicio" OnClick="btnSeleccionarServicio_Click" /> </td>
+                                     <td style="width:10%"> <asp:Button ID="btnSeleccionarServicio" runat="server" Text="Agregar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Agregar Servicio" OnClientClick="return confirm('¿Quieres Agregar Este Servicio?');" OnClick="btnSeleccionarServicio_Click" /> </td>
                                      <td style="width:10%"> <%# Eval("Producto") %> </td>
                                      <td style="width:10%"> <%#string.Format("{0:n2}", Eval("PrecioVenta")) %> </td>
                                  </tr>
