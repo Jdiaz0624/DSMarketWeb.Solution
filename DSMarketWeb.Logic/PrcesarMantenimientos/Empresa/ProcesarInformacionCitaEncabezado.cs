@@ -20,6 +20,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         private string NumeroIdentificacion = "";
         private decimal NumeroConectorCita = 0;
         private bool Estatus = false;
+        private string Comentario = "";
         private string Accion = "";
 
         public ProcesarInformacionCitaEncabezado(
@@ -33,6 +34,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
         string NumeroIdentificacionCON,
         decimal NumeroConectorCON,
         bool EstatusCON,
+        string ComentarioCON,
         string AccionCON)
         {
             IdCita = IdCitaCON;
@@ -45,6 +47,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             NumeroIdentificacion = NumeroIdentificacionCON;
             NumeroConectorCita = NumeroConectorCON;
             Estatus = EstatusCON;
+            Comentario = ComentarioCON;
             Accion = AccionCON;
         }
 
@@ -64,6 +67,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Empresa
             Procesar.NumeroIdentificacion = NumeroIdentificacion;
             Procesar.NumeroConectorCita = NumeroConectorCita;
             Procesar.Estatus0 = Estatus;
+            Procesar.Comentario = Comentario;
 
             var MAN = Objdata.MantenimientoCitaEncabeZado(Procesar, Accion);
         }

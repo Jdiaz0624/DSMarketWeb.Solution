@@ -33,6 +33,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.Label lbTituloConsultaCitas;
 
         /// <summary>
+        /// lbTipoReporte control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoReporte;
+
+        /// <summary>
         /// cbAgregarRangoFechaConsulta control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbEcportarExcel;
+
+        /// <summary>
+        /// cbExportarTodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbExportarTodo;
 
         /// <summary>
         /// lbNumeroCitaConsulta control.
@@ -627,6 +645,24 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.WebControls.TextBox txtEstatusDetalle;
 
         /// <summary>
+        /// lbComentarioCitaDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbComentarioCitaDetalle;
+
+        /// <summary>
+        /// txtComentarioCitaDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComentarioCitaDetalle;
+
+        /// <summary>
         /// lbDireccionClienteDetalle control.
         /// </summary>
         /// <remarks>
@@ -1021,6 +1057,24 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarEmpleadoMantenimiento;
+
+        /// <summary>
+        /// lbComentarioMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbComentarioMantenimiento;
+
+        /// <summary>
+        /// txtComentarioMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComentarioMantenimiento;
 
         /// <summary>
         /// lbSireccionMantenimiento control.

@@ -35,5 +35,6 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesEmpresa
 		public string Estatus { get; set; }
 
 		public System.Nullable<int> CantidadRegistros { get; set; }
+		public string Comentario { get; set; }
 	}
 }

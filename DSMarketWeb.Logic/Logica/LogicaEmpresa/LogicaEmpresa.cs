@@ -904,7 +904,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                                NumeroConectorCita=n.NumeroConectorCita,
                                Estatus0=n.Estatus0,
                                Estatus=n.Estatus,
-                               CantidadRegistros=n.CantidadRegistros
+                               CantidadRegistros=n.CantidadRegistros,
+                               Comentario=n.Comentario
                            }).ToList();
             return Listado;
         }
@@ -926,6 +927,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
                 Item.NumeroIdentificacion,
                 Item.NumeroConectorCita,
                 Item.Estatus0,
+                Item.Comentario,
                 Accion);
             if (CitaEncabezado != null) {
                 Mantenimiento = (from n in CitaEncabezado

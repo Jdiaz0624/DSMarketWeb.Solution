@@ -54,6 +54,17 @@
             alert("Registro eliminado con exito.");
         }
 
+        function CamposFechaVaciosReporte() {
+            alert("Los campos fecha no pueden estar vacios para generar este reporte, en caso de querer generar todo el historial favor de marcar la casilla de Exportar Todo."); 
+        }
+
+        function CampoFechaDesdeVacio() {
+            $("#<%=txtFechaDesde.ClientID%>").css("border-color", "red");
+        }
+        function CampoFechaHAstaVacio() {
+            $("#<%=txtFechaHasta.ClientID%>").css("border-color", "red");
+        }
+
         $(document).ready(function () {
             $("#<%=btnGuardarCita.ClientID%>").click(function () {
                 var NombreCliente = $("#<%=txtNombreClienteMantenimiento.ClientID%>").val().length;
@@ -78,6 +89,7 @@
         <div id="DivBloqueCOnsulta" runat="server">
             <div class="jumbotron" align="center">
                 <asp:Label ID="lbTituloConsultaCitas" runat="server" Text="CONSULTA DE CITAS" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbTipoReporte" runat="server" Text="1" CssClass="Letranegrita" Visible="false"></asp:Label>
             </div>
 
             <div class="form-check-inline">
@@ -90,6 +102,7 @@
                     <asp:RadioButton ID="rbExportarPDF" runat="server" Text="PDF" ToolTip="Exportar Registros a PDF" CssClass="form-check-input Letranegrita" GroupName="Exportar" />
                     <asp:RadioButton ID="rbExportarWord" runat="server" Text="Word" ToolTip="Exportar Registros a Word" CssClass="form-check-input Letranegrita" GroupName="Exportar" />
                     <asp:RadioButton ID="rbEcportarExcel" runat="server" Text="Excel" ToolTip="Exportar Registros a Excel" CssClass="form-check-input Letranegrita" GroupName="Exportar" />
+                    <asp:CheckBox ID="cbExportarTodo" runat="server" Text="Exportar Todo" CssClass="form-check-input Letranegrita" ToolTip="Exportar todas las citas en general" />
                 </div>
             </div>
 
@@ -253,7 +266,8 @@
                     </div>
 
                     <div class="form-group col-md-4">
-
+                        <asp:Label ID="lbComentarioCitaDetalle" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtComentarioCitaDetalle" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                     </div>
 
                     <div class="form-group col-md-12">
@@ -398,13 +412,12 @@
                      <asp:DropDownList ID="ddlSeleccionarEmpleadoMantenimiento" runat="server" ToolTip="Seleccionar Empleado" CssClass="form-control"></asp:DropDownList>
                  </div>
 
-                 <div class="form-group col-md-4">
-                   
+                 <div class="form-group col-md-8">
+                    <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtComentarioMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                  </div>
 
-                 <div class="form-group col-md-4">
-                     
-                 </div>
+        
 
                  <div class="form-group col-md-12">
                      <asp:Label ID="lbSireccionMantenimiento" runat="server" Text="Dirección" CssClass="Letranegrita"></asp:Label>
@@ -511,7 +524,7 @@
                                      <tr>
                                          <asp:HiddenField ID="hfIdProductoQuitar" runat="server" Value='<%# Eval("IdProducto") %>' />
                                          <asp:HiddenField ID="hfNumeroConectorQuitar" runat="server" Value='<%# Eval("NumeroConectorCita") %>' />
-                                         <td style="width:10%"> <asp:Button ID="btnQuitarServicio" runat="server" Text="Quitar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Quitar Servicio seleccionado" /> </td>
+                                         <td style="width:10%"> <asp:Button ID="btnQuitarServicio" runat="server" Text="Quitar" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnQuitarServicio_Click" ToolTip="Quitar Servicio seleccionado" /> </td>
                                          <td style="width:70%"> <%# Eval("DescripcionProducto") %> </td>
                                          <td style="width:20%"> <%#string.Format("{0:n2}", Eval("Precio")) %> </td>
                                      </tr>

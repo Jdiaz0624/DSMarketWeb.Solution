@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace DSMarketWeb.Solution.Paginas.Empresa
 {
@@ -13,8 +15,109 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaEmpresa.LogicaEmpresa> ObjDataLogica = new Lazy<Logic.Logica.LogicaEmpresa.LogicaEmpresa>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
 
+        #region GENERAR REPORTE DE CITAS
+        private void GenerarReporteCita(decimal IdUsuarioGenera, string RutaReporte, string NombreArchivo, int TipoReporte) {
+
+            //SACAMOS LAS CREDENCIALES DE LA BASE DE ATOS
+            string UsuarioBD = "";
+            string ClaveBD = "";
+
+            var SacarCredenciales = ObjDataSeguridad.Value.SacarCredencialesBD(1);
+            foreach (var n in SacarCredenciales) {
+                UsuarioBD = n.Usuario;
+                ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
+            }
+
+            if (TipoReporte == 1) {
+                if (cbExportarTodo.Checked == true)
+                {
+                    ReportDocument Reporte = new ReportDocument();
+                    Reporte.Load(RutaReporte);
+                    Reporte.Refresh();
+                    Reporte.SetParameterValue("@IdCita", null);
+                    Reporte.SetParameterValue("@FechaDesde", null);
+                    Reporte.SetParameterValue("@FechaHasta", null);
+                    Reporte.SetParameterValue("@UsuarioGenera", IdUsuarioGenera);
+                    Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+                    if (rbExportarPDF.Checked == true)
+                    {
+                        Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+                    }
+                    else if (rbExportarWord.Checked == true)
+                    {
+                        Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+                    }
+                    else if (rbEcportarExcel.Checked == true)
+                    {
+                        Reporte.ExportToHttpResponse(ExportFormatType.Excel, Response, true, NombreArchivo);
+                    }
+
+                }
+                else {
+                    if (string.IsNullOrEmpty(txtFechaDesde.Text.Trim()) || string.IsNullOrEmpty(txtFechaHasta.Text.Trim()))
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "CamposFechaVaciosReporte()", "CamposFechaVaciosReporte();", true);
+                        if (string.IsNullOrEmpty(txtFechaDesde.Text.Trim())) {
+                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaDesdeVacio()", "CampoFechaDesdeVacio();", true);
+                        }
+                        if (string.IsNullOrEmpty(txtFechaHasta.Text.Trim())) {
+                            ClientScript.RegisterStartupScript(GetType(), "CampoFechaHAstaVacio()", "CampoFechaHAstaVacio();", true);
+                        }
+                    }
+                    else {
+                        string _NumeroCita = string.IsNullOrEmpty(txtNumeroCitaConsulta.Text.Trim()) ? null : txtNumeroCitaConsulta.Text.Trim();
+
+                        ReportDocument Reporte = new ReportDocument();
+                        Reporte.Load(RutaReporte);
+                        Reporte.Refresh();
+                        Reporte.SetParameterValue("@IdCita", _NumeroCita);
+                        Reporte.SetParameterValue("@FechaDesde", Convert.ToDateTime(txtFechaDesde.Text));
+                        Reporte.SetParameterValue("@FechaHasta", Convert.ToDateTime(txtFechaHasta.Text));
+                        Reporte.SetParameterValue("@UsuarioGenera", IdUsuarioGenera);
+                        Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+                        if (rbExportarPDF.Checked == true)
+                        {
+                            Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+                        }
+                        else if (rbExportarWord.Checked == true)
+                        {
+                            Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+                        }
+                        else if (rbEcportarExcel.Checked == true)
+                        {
+                            Reporte.ExportToHttpResponse(ExportFormatType.Excel, Response, true, NombreArchivo);
+                        }
+                    }
+                }
+            }
+            else if(TipoReporte==2){
+                ReportDocument Reporte = new ReportDocument();
+                Reporte.Load(RutaReporte);
+                Reporte.Refresh();
+                Reporte.SetParameterValue("@IdCita", lbIdCitaSeleccionada.Text);
+                Reporte.SetParameterValue("@FechaDesde", null);
+                Reporte.SetParameterValue("@FechaHasta", null);
+                Reporte.SetParameterValue("@UsuarioGenera", IdUsuarioGenera);
+                Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
+                if (rbExportarPDF.Checked == true)
+                {
+                    Reporte.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, NombreArchivo);
+                }
+                else if (rbExportarWord.Checked == true)
+                {
+                    Reporte.ExportToHttpResponse(ExportFormatType.WordForWindows, Response, true, NombreArchivo);
+                }
+                else if (rbEcportarExcel.Checked == true)
+                {
+                    Reporte.ExportToHttpResponse(ExportFormatType.Excel, Response, true, NombreArchivo);
+                }
+            }
+        
+        }
+        #endregion
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
         int _PrimeraPagina, _UltimaPagina;
@@ -145,6 +248,54 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         }
         #endregion
+        private void BloquearControlesMantenimiento() {
+            txtNombreClienteMantenimiento.Enabled = false;
+            txtNumeroIdentificacionMantenimiento.Enabled = false;
+            txtTelefono.Enabled = false;
+            txtFechaCitaMantenimiento.Enabled = false;
+            txtHoraCitaMantenimiento.Enabled = false;
+            ddlSeleccionarDepartamentoMantenimiento.Enabled = false;
+            ddlSeleccionarEmpleadoMantenimiento.Enabled = false;
+            txtDireccionMantenimiento.Enabled = false;
+            cbEstatus.Enabled = false;
+            txtBuscarServicio.Enabled = false;
+            LinkPrimeroServicioAgregar.Enabled = false;
+            LinkAnteriorServicioAgregar.Enabled = false;
+            dtPaginacionServicioAgregar.Enabled = false;
+            LinkSiguienteServicioAgregar.Enabled = false;
+            LinkUltimoServicioAgregar.Enabled = false;
+            LinkPrimeroQuitar.Enabled = false;
+            LinkAnteriorQuitar.Enabled = false;
+            dlPaginacionQuitar.Enabled = false;
+            LinkSiguienteQuitar.Enabled = false;
+            LinkUltimoQuitar.Enabled = false;
+            btnBuscarServicios.Enabled = false;
+            txtComentarioMantenimiento.Enabled = false;
+        }
+        private void DesbloquearControlesMantenimiento() {
+            txtNombreClienteMantenimiento.Enabled = true;
+            txtNumeroIdentificacionMantenimiento.Enabled = true;
+            txtTelefono.Enabled = true;
+            txtFechaCitaMantenimiento.Enabled = true;
+            txtHoraCitaMantenimiento.Enabled = true;
+            ddlSeleccionarDepartamentoMantenimiento.Enabled = true;
+            ddlSeleccionarEmpleadoMantenimiento.Enabled = true;
+            txtDireccionMantenimiento.Enabled = true;
+            cbEstatus.Enabled = true;
+            txtBuscarServicio.Enabled = true;
+            LinkPrimeroServicioAgregar.Enabled = true;
+            LinkAnteriorServicioAgregar.Enabled = true;
+            dtPaginacionServicioAgregar.Enabled = true;
+            LinkSiguienteServicioAgregar.Enabled = true;
+            LinkUltimoServicioAgregar.Enabled = true;
+            LinkPrimeroQuitar.Enabled = true;
+            LinkAnteriorQuitar.Enabled = true;
+            dlPaginacionQuitar.Enabled = true;
+            LinkSiguienteQuitar.Enabled = true;
+            LinkUltimoQuitar.Enabled = true;
+            btnBuscarServicios.Enabled = true;
+            txtComentarioMantenimiento.Enabled = true;
+        }
 
         private void RestablecerPantalla() {
             Consulta_Mantenimiento();
@@ -180,6 +331,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             txtTelefonoDetalle.Text = string.Empty;
             CurrentPage = 0;
             ListadoCitas();
+            lbTipoReporte.Text = "1";
         }
 
         private void CargarListasDesplegablesConsulta() {
@@ -355,6 +507,21 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             GraEstatusCitas.Series["Serie"].Points.DataBindXY(Nombre, CantidadRegistros);
         }
 
+        private void MostrarServiciosAgregados(decimal NumeroConector) {
+            var MostrarServiciosAgregados = ObjDataLogica.Value.BuscaCitasDetalle(NumeroConector);
+            int CantidadRegistros = 0;
+            decimal Total = 0;
+            foreach (var n in MostrarServiciosAgregados)
+            {
+                CantidadRegistros = (int)n.CantidadRegistros;
+                Total = (decimal)n.Total;
+            }
+            lbCantidadServiciosAgregadosMantenimientoVariable.Text = CantidadRegistros.ToString("N0");
+            lbTotalServicioMantenimientoVariable.Text = Total.ToString("N2");
+            Paginar(ref rpListadoServiciosAgregadosDetalle, MostrarServiciosAgregados, 10, ref lbCantidadPaginaVariableQuitar, ref LinkPrimeroQuitar, ref LinkAnteriorQuitar, ref LinkSiguienteQuitar, ref LinkUltimoQuitar);
+            HandlePaging(ref dlPaginacionQuitar, ref lbPaginaActualVariableQuitar);
+        }
+
         private void MANCitas(decimal IdCita, string Accion) {
             DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado ProcesarCitaEncabezado = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado(
                 IdCita,
@@ -367,6 +534,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtNumeroIdentificacionMantenimiento.Text,
                 Convert.ToDecimal(lbNumeroConectorseleccionado.Text),
                 cbEstatus.Checked,
+                txtComentarioMantenimiento.Text,
                 Accion);
             ProcesarCitaEncabezado.ProcesarInformacion();
         }
@@ -411,6 +579,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 ModoConsulta();
                 CurrentPage = 0;
                 ListadoCitas();
+                lbTipoReporte.Text = "1";
             }
         }
 
@@ -427,21 +596,44 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             GenerarNumerConector();
             lbAccionMantenimiento.Text = "INSERT";
             cbEstatus.Checked = true;
+            DesbloquearControlesMantenimiento();
+            btnGuardarCita.Text = "Guardar";
         }
 
         protected void btnEditarRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            lbAccionMantenimiento.Text = "UPDATE";
+            DesbloquearControlesMantenimiento();
+            btnGuardarCita.Text = "Modificar";
         }
 
         protected void btnEliminarRegistro_Click(object sender, EventArgs e)
         {
-
+            Mantenimiento_Consulta();
+            lbAccionMantenimiento.Text = "DELETE";
+            BloquearControlesMantenimiento();
+            btnGuardarCita.Text = "Eliminar";
         }
 
         protected void btnReporte_Click(object sender, EventArgs e)
         {
-
+            string Nombrearchivo = "";
+            string ReprteGenerar = "";
+            if (lbTipoReporte.Text == "1")
+            {
+                Nombrearchivo = "Reporte de Citas General";
+                ReprteGenerar = "ReporteCitasGeneral.rpt";
+            }
+            else {
+                Nombrearchivo = "Reporte de Citas";
+                ReprteGenerar = "ReporteCitasUnico.rpt";
+            }
+            GenerarReporteCita(
+                (decimal)Session["IdUsuario"],
+                Server.MapPath(ReprteGenerar),
+                Nombrearchivo,
+                Convert.ToInt32(lbTipoReporte.Text));
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
@@ -451,12 +643,12 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void LinkPrimeraPaginaCitasEncabezado_Click(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void LinkPaginaAnteriorCitasEncabezado_Click(object sender, EventArgs e)
         {
-
+       
         }
 
         protected void dlPaginacionCitasEncabezado_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -466,27 +658,28 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacionCitasEncabezado_CancelCommand(object source, DataListCommandEventArgs e)
         {
+          
 
         }
 
         protected void LinkPaginaSiguienteCitasEncabezado_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void LinkUltipaPaginaCitasEncabezado_Click(object sender, EventArgs e)
         {
-
+         
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------
         protected void LinkPrimeroCitaDetalle_Click(object sender, EventArgs e)
         {
-
+         
         }
 
         protected void LinkAnteriorCitaDetalle_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void dlPaginacionCitaDetalle_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -496,17 +689,17 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacionCitaDetalle_CancelCommand(object source, DataListCommandEventArgs e)
         {
-
+           
         }
 
         protected void LinkSiguienteCitaDetalle_Click(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void LinkUltimoSiguienteDetalle_Click(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void btnBuscarServicios_Click(object sender, EventArgs e)
@@ -528,27 +721,19 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
             GuardarServicios(Convert.ToDecimal(lbNumeroConectorseleccionado.Text), Convert.ToDecimal(hfIdProductoSeleccionado), Convert.ToDecimal(hfPrecioServicioSeleccionado), hfDescripcionSericio.ToString(), "INSERT");
 
-            var MostrarServiciosAgregados = ObjDataLogica.Value.BuscaCitasDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
-            int CantidadRegistros = 0;
-            decimal Total = 0;
-            foreach (var n in MostrarServiciosAgregados) {
-                CantidadRegistros = (int)n.CantidadRegistros;
-                Total = (decimal)n.Total;
-            }
-            lbCantidadServiciosAgregadosMantenimientoVariable.Text = CantidadRegistros.ToString("N0");
-            lbTotalServicioMantenimientoVariable.Text = Total.ToString("N2");
-            Paginar(ref rpListadoServiciosAgregadosDetalle, MostrarServiciosAgregados, 10, ref lbCantidadPaginaVariableQuitar, ref LinkPrimeroQuitar, ref LinkAnteriorQuitar, ref LinkSiguienteQuitar, ref LinkUltimoQuitar);
-            HandlePaging(ref dlPaginacionQuitar, ref lbPaginaActualVariableQuitar);
-        }
 
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         protected void LinkPrimeroServicioAgregar_Click(object sender, EventArgs e)
         {
+         
 
         }
 
         protected void LinkAnteriorServicioAgregar_Click(object sender, EventArgs e)
         {
-
+        
         }
 
         protected void dtPaginacionServicioAgregar_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -558,17 +743,18 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dtPaginacionServicioAgregar_CancelCommand(object source, DataListCommandEventArgs e)
         {
-
+          
         }
 
         protected void LinkSiguienteServicioAgregar_Click(object sender, EventArgs e)
         {
+         
 
         }
 
         protected void LinkUltimoServicioAgregar_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void LinkPrimeroQuitar_Click(object sender, EventArgs e)
@@ -609,37 +795,30 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 ClientScript.RegisterStartupScript(GetType(), "CampoFechaCitaVacio()", "CampoFechaCitaVacio();", true);
             }
             else {
-                //VALIDAMOS SI HAY SERVICIOS AGREGADOS
-                var ValidarServicios = ObjDataLogica.Value.BuscaCitasDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
-                if (ValidarServicios.Count() < 1)
+                //GUARDAMOS la cita
+                string Accion = lbAccionMantenimiento.Text;
+
+                switch (Accion)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "RegistrosNoEncontrados()", "RegistrosNoEncontrados();", true);
-                }
-                else
-                {
-                    //GUARDAMOS la cita
-                    string Accion = lbAccionMantenimiento.Text;
+                    case "INSERT":
+                        MANCitas(0, "INSERT");
+                        ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
+                        RestablecerPantalla();
+                        break;
 
-                    switch (Accion) {
-                        case "INSERT":
-                            MANCitas(0, "INSERT");
-                            ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
-                            RestablecerPantalla();
-                            break;
+                    case "UPDATE":
+                        MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "UPDATE");
+                        ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
+                        RestablecerPantalla();
+                        break;
 
-                        case "UPDATE":
-                            MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "UPDATE");
-                            ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
-                            RestablecerPantalla();
-                            break;
+                    case "DELETE":
+                        MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "DELETE");
+                        GuardarServicios(Convert.ToDecimal(lbNumeroConectorseleccionado.Text), 0, 0, "", "DELETEALL");
+                        ClientScript.RegisterStartupScript(GetType(), "RegistroEliminado()", "RegistroEliminado();", true);
+                        RestablecerPantalla();
+                        break;
 
-                        case "DELETE":
-                            MANCitas(Convert.ToDecimal(lbIdCitaSeleccionada.Text), "DELETE");
-                            ClientScript.RegisterStartupScript(GetType(), "RegistroEliminado()", "RegistroEliminado();", true);
-                            RestablecerPantalla();
-                            break;
-
-                    }
                 }
             }
           
@@ -665,6 +844,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
             string NumeroCita = hfIdCitaSeleccionada.ToString();
             decimal NumeroConector = Convert.ToDecimal(hfNumeroConector);
+            decimal IdDepartamento = 0;
 
             DivBloqueDetalleCita.Visible = true;
             var BuscarDetalle = ObjDataLogica.Value.BuscaCitasEncabezado(
@@ -685,9 +865,47 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtTelefonoDetalle.Text = n.Telefono;
                 txtEstatusDetalle.Text = n.Estatus;
                 txtDireccionClienteDetalle.Text = n.Direccion;
+                txtComentarioCitaDetalle.Text = n.Comentario;
+
+                var SacarDepartamentoEmpleado = ObjDataLogica.Value.BuscaEmpleados(n.IdEmpleado.ToString(), null, null, null, null, null, null, null, null, null, null, null);
+                foreach (var nDepartamento in SacarDepartamentoEmpleado) {
+                    IdDepartamento = (decimal)nDepartamento.IdDepartamento;
+                }
+
+                //SACAMOS LOS DATOS DE LA PARTE DEL MANTENIMIENTO
+                txtNombreClienteMantenimiento.Text = n.NombreCliente;
+                txtNumeroIdentificacionMantenimiento.Text = n.NumeroIdentificacion;
+                txtTelefono.Text = n.Telefono;
+                DateTime FechaCita = (DateTime)n.FechaCita0;
+                txtFechaCitaMantenimiento.Text = FechaCita.ToString("yyyy-MM-dd");
+                txtHoraCitaMantenimiento.Text = n.Hora;
+                CargarListaDepartamentoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarDepartamentoMantenimiento, IdDepartamento.ToString());
+                CargarTecnicoMantenimiento();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarEmpleadoMantenimiento, n.IdEmpleado.ToString());
+                txtDireccionMantenimiento.Text = n.Direccion;
+                cbEstatus.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
+                lbNumeroConectorseleccionado.Text = n.NumeroConectorCita.ToString();
+                lbIdCitaSeleccionada.Text = n.IdCitas.ToString();
+                txtComentarioMantenimiento.Text = n.Comentario;
             }
             Paginar(ref rpListadoCitasEncabezado, BuscarDetalle, 1, ref lbCantidadPaginaVariableCitaEncabezado, ref LinkPrimeraPaginaCitasEncabezado, ref LinkPaginaAnteriorCitasEncabezado, ref LinkPaginaSiguienteCitasEncabezado, ref LinkUltipaPaginaCitasEncabezado);
             HandlePaging(ref dlPaginacionCitasEncabezado, ref lbPaginaActualVariableCitaEncabezado);
+            ModoMantenimiento();
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            lbTipoReporte.Text = "2";
+        }
+
+        protected void btnQuitarServicio_Click(object sender, EventArgs e)
+        {
+            var IdProductoSeleccionadoQuitar = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProductoSeleccionadoQuitar = ((HiddenField)IdProductoSeleccionadoQuitar.FindControl("hfIdProductoQuitar")).Value.ToString();
+
+            var NumeroConectorSeleccionadoQUitar = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorSeleccionadoQuitar = ((HiddenField)NumeroConectorSeleccionadoQUitar.FindControl("hfNumeroConectorQuitar")).Value.ToString();
+
+            GuardarServicios(Convert.ToDecimal(hfNumeroConectorSeleccionadoQuitar), Convert.ToDecimal(hfIdProductoSeleccionadoQuitar), 0, "", "DELETE");
+            MostrarServiciosAgregados(Convert.ToDecimal(hfNumeroConectorSeleccionadoQuitar));
         }
 
         protected void ddlSeleccionarDepartamentoMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
