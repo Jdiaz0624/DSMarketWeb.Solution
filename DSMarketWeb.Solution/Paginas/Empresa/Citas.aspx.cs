@@ -522,6 +522,21 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             HandlePaging(ref dlPaginacionQuitar, ref lbPaginaActualVariableQuitar);
         }
 
+        private void MostrarServiciosAgregadosDetalle(decimal NumeroConector) {
+            var MostrarServiciosAgregados = ObjDataLogica.Value.BuscaCitasDetalle(NumeroConector);
+            int CantidadRegistros = 0;
+            decimal Total = 0;
+            foreach (var n in MostrarServiciosAgregados)
+            {
+                CantidadRegistros = (int)n.CantidadRegistros;
+                Total = (decimal)n.Total;
+            }
+            lbCantidadServiciosVariable.Text = CantidadRegistros.ToString("N0");
+            lbTotalMontoVariable.Text = Total.ToString("N2");
+            Paginar(ref rpListadoCitaDetalle, MostrarServiciosAgregados, 10, ref lbCantidadPaginaVariableCitaDetalle, ref LinkPrimeroCitaDetalle, ref LinkAnteriorCitaDetalle, ref LinkSiguienteCitaDetalle, ref LinkUltimoSiguienteDetalle);
+            HandlePaging(ref dlPaginacionCitaDetalle, ref lbPaginaActualVariableCitaDetalle);
+        }
+
         private void MANCitas(decimal IdCita, string Accion) {
             DSMarketWeb.Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado ProcesarCitaEncabezado = new Logic.PrcesarMantenimientos.Empresa.ProcesarInformacionCitaEncabezado(
                 IdCita,
@@ -643,12 +658,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void LinkPrimeraPaginaCitasEncabezado_Click(object sender, EventArgs e)
         {
-          
+            CurrentPage = 0;
+            ListadoCitas();
         }
 
         protected void LinkPaginaAnteriorCitasEncabezado_Click(object sender, EventArgs e)
         {
-       
+            CurrentPage += -1;
+            ListadoCitas();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableCitaEncabezado, ref lbCantidadPaginaVariableCitaEncabezado);
         }
 
         protected void dlPaginacionCitasEncabezado_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -658,28 +676,36 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacionCitasEncabezado_CancelCommand(object source, DataListCommandEventArgs e)
         {
-          
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            ListadoCitas();
 
         }
 
         protected void LinkPaginaSiguienteCitasEncabezado_Click(object sender, EventArgs e)
         {
-           
+            CurrentPage += 1;
+            ListadoCitas();
         }
 
         protected void LinkUltipaPaginaCitasEncabezado_Click(object sender, EventArgs e)
         {
-         
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            ListadoCitas();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableCitaEncabezado, ref lbCantidadPaginaVariableCitaEncabezado);
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------
         protected void LinkPrimeroCitaDetalle_Click(object sender, EventArgs e)
         {
-         
+            CurrentPage = 0;
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkAnteriorCitaDetalle_Click(object sender, EventArgs e)
         {
-           
+            CurrentPage += -1;
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableCitaDetalle, ref lbCantidadPaginaVariableCitaDetalle);
         }
 
         protected void dlPaginacionCitaDetalle_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -689,17 +715,22 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacionCitaDetalle_CancelCommand(object source, DataListCommandEventArgs e)
         {
-           
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkSiguienteCitaDetalle_Click(object sender, EventArgs e)
         {
-          
+            CurrentPage += 1;
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkUltimoSiguienteDetalle_Click(object sender, EventArgs e)
         {
-          
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableCitaDetalle, ref lbCantidadPaginaVariableCitaDetalle);
         }
 
         protected void btnBuscarServicios_Click(object sender, EventArgs e)
@@ -727,13 +758,16 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         protected void LinkPrimeroServicioAgregar_Click(object sender, EventArgs e)
         {
-         
+            CurrentPage = 0;
+            MostrarServicios();
 
         }
 
         protected void LinkAnteriorServicioAgregar_Click(object sender, EventArgs e)
         {
-        
+            CurrentPage += -1;
+            MostrarServicios();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableAgregarServicio, ref lbCantidadPaginaVariableAgregarServicio);
         }
 
         protected void dtPaginacionServicioAgregar_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -743,28 +777,36 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dtPaginacionServicioAgregar_CancelCommand(object source, DataListCommandEventArgs e)
         {
-          
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarServicios();
         }
 
         protected void LinkSiguienteServicioAgregar_Click(object sender, EventArgs e)
         {
-         
 
+            CurrentPage += 1;
+            MostrarServicios();
         }
 
         protected void LinkUltimoServicioAgregar_Click(object sender, EventArgs e)
         {
-           
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarServicios();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableAgregarServicio, ref lbCantidadPaginaVariableAgregarServicio);
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         protected void LinkPrimeroQuitar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkAnteriorQuitar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableQuitar, ref lbCantidadPaginaVariableQuitar);
         }
 
         protected void dlPaginacionQuitar_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -774,17 +816,22 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
         protected void dlPaginacionQuitar_CancelCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkSiguienteQuitar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
         }
 
         protected void LinkUltimoQuitar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariableQuitar, ref lbCantidadPaginaVariableQuitar);
         }
 
         protected void btnGuardarCita_Click(object sender, EventArgs e)
@@ -894,6 +941,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             ModoMantenimiento();
             MostrarServiciosAgregados(Convert.ToDecimal(lbNumeroConectorseleccionado.Text));
             lbTipoReporte.Text = "2";
+            MostrarServiciosAgregadosDetalle(Convert.ToDecimal(hfNumeroConector));
         }
 
         protected void btnQuitarServicio_Click(object sender, EventArgs e)
