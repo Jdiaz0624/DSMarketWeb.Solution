@@ -95,7 +95,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             RptGrid.DataBind();
 
 
-            divPaginacion.Visible = true;
+            divPaginacionClienteConsulta.Visible = true;
+            divPaginacionProductoAgregar.Visible = true;
         }
         enum OpcionesPaginacionValores
         {
@@ -219,6 +220,116 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         {
             CurrentPage += 1;
             MostrarClientesRegistrados();
+        }
+
+        protected void ddlSeleccionarTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarCategria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSeleccionarProductoAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeraPaginaProductoAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorProductoAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductoAgregar_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductoAgregar_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteProductoAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoProductoAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregarRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEditarRegistroAgregado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminarRegistroAgregado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRestablecerVistaPrevia_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSeleccionarRegistrosAgregadosHeaderRepeater_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkPrimeraPaginaProductosAgregados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorProductosAgregados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductosAgregados_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductosAgregados_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteProductosAgregados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoProductosAgregados_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)

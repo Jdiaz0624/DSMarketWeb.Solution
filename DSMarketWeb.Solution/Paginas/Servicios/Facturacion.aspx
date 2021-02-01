@@ -138,7 +138,7 @@
                 <asp:Label ID="lbCantidadPaginaTituloClienteConsulta" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadPaginaVAriableClienteConsulta" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
-             <div id="divPaginacion" runat="server" align="center">
+             <div id="divPaginacionClienteConsulta" runat="server" align="center">
         <div style="margin-top: 20px;">
             <table style="width: 600px">
                 <tr>
@@ -162,6 +162,321 @@
                  </asp:UpdatePanel>
                 </div>
             </div>
+
+        <div class="form-check-inline">
+            <div class="form-group form-check">
+                <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
+                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" CssClass="form-check-input" ToolTip="Agregar Fecha Manual" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbSeleccionarComprobante" runat="server" Text="Comprobante" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarComprobante" runat="server" CssClass="form-control" ToolTip="Seleccionar Comprobante"></asp:DropDownList>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbNombreCliente" runat="server" Text="Cliente" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtNombreCliente" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="200"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbSeleccionarTipoRNC" runat="server" Text="Tipo de RNC" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarTipoRNC" runat="server" CssClass="form-control" ToolTip="Seleccionar RNC"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbRNCCliente" runat="server" Text="RNC" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtRNCCliente" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbTelefonoCliente" runat="server" Text="Telefono" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtTelefonoCliente" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbEmailCliente" runat="server" Text="Mail" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtMailCliente" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbDireccionCliente" runat="server" Text="Dirección" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbComentario" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
+            </div>
+        </div>
        <br />
+           <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnAgegarProductosServicios" data-toggle="collapse" data-target="#AgegarProductosServicios" aria-expanded="false" aria-controls="collapseExample">
+                    AGREGAR PRODUCTOS / SERVICIOS
+                     </button><br />
+       <div class="collapse" id="AgegarProductosServicios">
+                <div class="card card-body">
+                 <asp:UpdatePanel ID="UpdatePanelAgregarServiciosProductos" runat="server">
+                     <ContentTemplate>
+                         <div class="form-row">
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbSeleccionarTipoProducto" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+                                 <asp:DropDownList ID="ddlSeleccionarTipoProducto" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoProducto_SelectedIndexChanged" ToolTip="Seleccionar el Tipo de Producto" CssClass="form-control"></asp:DropDownList>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbSeleccionarCategoria" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                                 <asp:DropDownList ID="ddlSeleccionarCategria" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarCategria_SelectedIndexChanged" ToolTip="Seleccionar la Categria" CssClass="form-control"></asp:DropDownList>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbSeleccionarMarca" runat="server" Text="Marca" CssClass="Letranegrita"></asp:Label>
+                                 <asp:DropDownList ID="ddlSeleccionarMarca" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarMarca_SelectedIndexChanged" ToolTip="Seleccionar Marca" CssClass="form-control"></asp:DropDownList>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbSeleccionarModelo" runat="server" Text="Modelo" CssClass="Letranegrita"></asp:Label>
+                                 <asp:DropDownList ID="ddlSeleccionarModelo" runat="server" ToolTip="Seleccionar Modelo" CssClass="form-control"></asp:DropDownList>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbDescripcion" runat="server" Text="Descripción" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtDescripcion" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbCodigoBarras" runat="server" Text="Codigo de Barras" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtCodigoBarras" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbReferencia" runat="server" Text="Referencia" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtReferencia" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                             </div>
+                         </div>
+                         <div align="center">
+                             <asp:Button ID="btnBuscarProducto" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Buscar Producto" OnClick="btnBuscarProducto_Click" />
+                             <br />
+                             <asp:Label ID="lbCantidadRegistrosProductosTitulo" runat="server" Text="Cantidad de Registros ( " CssClass="Letranegrita"></asp:Label>
+                             <asp:Label ID="lbCantidadRegistrosProductosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                             <asp:Label ID="lbCantidadRegistrosProductosCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
+                         </div>
+                         <br />
+                         <div class="table-responsive">
+                             <table class="table table-hover">
+                                 <thead>
+                                     <tr>
+                                          <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarRegistro" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
+                                          <th style="width:10%" align="left"> <asp:Label ID="lbTipoProducto" runat="server" Text="Tipo Producto" CssClass="Letranegrita"></asp:Label> </th>
+                                          <th style="width:60%" align="left"> <asp:Label ID="lbProdcto" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label> </th>
+                                          <th style="width:10%" align="left"> <asp:Label ID="lbCantidad" runat="server" Text="Cantidad" CssClass="Letranegrita"></asp:Label> </th>
+                                          <th style="width:10%" align="left"> <asp:Label ID="lbPrecio" runat="server" Text="Precio" CssClass="Letranegrita"></asp:Label> </th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <asp:Repeater ID="rpListadoProductosAgregar" runat="server">
+                                         <ItemTemplate>
+                                             <tr>
+                                                 <asp:HiddenField ID="hfIdProductoAgregar" runat="server" Value='<%# Eval("IdProducto") %>' />
+                                                  <asp:HiddenField ID="hfNumeroConectorProductoAgregar" runat="server" Value='<%# Eval("NumeroConector") %>' />
+
+                                                 <td style="width:10%"> <asp:Button ID="btnSeleccionarProductoAgregar" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registro para agregarlo a factura" OnClick="btnSeleccionarProductoAgregar_Click" /> </td>
+                                                 <td style="width:10%"> <%# Eval("TipoProducto") %> </td>
+                                                 <td style="width:60%"> <%# Eval("Producto") %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n0}", Eval("Stock")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("PrecioVenta")) %> </td>
+                                             </tr>
+                                         </ItemTemplate>
+                                     </asp:Repeater>
+                                 </tbody>
+                             </table>
+                         </div>
+                                          <!--PAGINACION DEL REPEATER-->
+            <div align="center">
+                <asp:Label ID="lbPaginaActualTituloProductoAgregar" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualVariavleProductoAgregar" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTituloProductoAgregar" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVAriableProductoAgregar" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+            </div>
+             <div id="divPaginacionProductoAgregar" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductoAgregar" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductoAgregar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnteriorProductoAgregar" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductoAgregar_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacionProductoAgregar" runat="server" OnItemCommand="dtPaginacionProductoAgregar_ItemCommand" OnItemDataBound="dtPaginacionProductoAgregar_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentralClienteConsulta" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguienteProductoAgregar" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductoAgregar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimoProductoAgregar" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductoAgregar_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+                         <div class="form-row">
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbTipoProductoVistaPrevia" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtTipoProductoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbCategoriaVistaPrevia" runat="server" Text="Categoria" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtCategoriaVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                               <div class="form-group col-md-3">
+                                 <asp:Label ID="lbAcumulativoVistaPrevia" runat="server" Text="Acumulativo" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtAcumulativoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                               <div class="form-group col-md-3">
+                                 <asp:Label ID="lbPrecioVistaPrevia" runat="server" Text="Precio" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtPrecioVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-6">
+                                 <asp:Label ID="lbProductoVistaPrevia" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtProductoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbCantidadDisponibleVistaPrevia" runat="server" Text="Cantidad Disponible" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtCantidadDisponibleVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbCantidadUsarVistaPrevia" runat="server" Text="Cantidad Usar" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtCantidadUsarVistaPrevia" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbPorcientoDescuentoVistaPrevia" runat="server" Text="% de Descuento" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtPorcientoDescuentoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbDescuentoVistaPrevia" runat="server" Text="Descuento" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtDescuentoVistaPrevia" runat="server" CssClass="form-control" TextMode="Number" step="0.01"></asp:TextBox>
+                             </div>
+
+                              <div class="form-group col-md-3">
+                                 <asp:Label ID="lbImpuestoVistaPrevia" runat="server" Text="Impuesto" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtImpuestoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                             </div>
+                         </div>
+
+                         <div class="form-check-inline">
+                             <div class="form-group form-check">
+                                 <asp:CheckBox ID="cbANoplicaGarantia" runat="server" Text="No Aplica Garantia" CssClass="form-check-input" ToolTip="Espesificar si este articulo no tiene garantia" />
+                             </div>
+                         </div>
+                         <div align="center">
+                             <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />
+                             <asp:Button ID="btnEditarRegistroAgregado" runat="server" Text="Editar" ToolTip="Editar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnEditarRegistroAgregado_Click" />
+                             <asp:Button ID="btnEliminarRegistroAgregado" runat="server" Text="Eliminar" ToolTip="Eliminar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnEliminarRegistroAgregado_Click" />
+                             <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Restablecer" ToolTip="Restablecer Vista Previa" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
+                             <br /><br />
+                             <asp:Label ID="lbCantidadRegistrosAgregadosTitulo" runat="server" Text="Cantidad de Registros Agregados ( " CssClass="Letranegrita"></asp:Label>
+                             <asp:Label ID="lbCantidadRegistrosAgregadosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                             <asp:Label ID="lbCantidadRegistrosAgregadosCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
+                         </div>
+                         <br />
+                         <div class="table-responsive">
+                             <table class="table table-hover">
+                               <thead>
+                                     <tr>
+                                     <th style="width:10%" align="left"> <asp:Label ID="lbSeleccionarProductoAgregadoHeaderepeater" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
+                                     <th style="width:50%" align="left"> <asp:Label ID="lbDescripcionProductoAgregadoHEaderRepeater" runat="server" Text="Producto" CssClass="Letranegrita"></asp:Label> </th>
+                                     <th style="width:10%" align="left"> <asp:Label ID="lbPrecioProductoAgregadoHeaderRepeater" runat="server" Text="Precio" CssClass="Letranegrita"></asp:Label> </th>
+                                     <th style="width:10%" align="left"> <asp:Label ID="lbDescuentoProductoAgregadoHEaderRepeater" runat="server" Text="Descuento" CssClass="Letranegrita"></asp:Label> </th>
+                                     <th style="width:10%" align="left"> <asp:Label ID="lbCantidadProductoAgregadoHeaderRepeater" runat="server" Text="Cantidad" CssClass="Letranegrita"></asp:Label> </th>
+                                     <th style="width:10%" align="left"> <asp:Label ID="lbTotalProductoAgregadoHeaderRepeater" runat="server" Text="Total" CssClass="Letranegrita"></asp:Label> </th>
+                                 </tr>
+                               </thead>
+                                 <tbody>
+                                     <asp:Repeater ID="rpListadoProductosAgregados" runat="server">
+                                         <ItemTemplate>
+                                             <tr>
+                                                 <th style="width:10%"> <asp:Button ID="btnSeleccionarRegistrosAgregadosHeaderRepeater" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registros Agregados" OnClick="btnSeleccionarRegistrosAgregadosHeaderRepeater_Click" CssClass="btn btn-outline-secondary btn-sm" /> </th>
+                                                 <th style="width:50%"> <%# Eval("") %> </th>
+                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
+                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
+                                                 <th style="width:10%"> <%#string.Format("{0:n0}", Eval("")) %> </th>
+                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
+                                             </tr>
+                                         </ItemTemplate>
+                                     </asp:Repeater>
+                                 </tbody>
+                             </table>
+                             
+                         </div>
+                                                      <!--PAGINACION DEL REPEATER-->
+            <div align="center">
+                <asp:Label ID="lbPaginaActualTituloProductosAgregados" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualVariavleProductosAgregados" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTituloProductosAgregados" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVAriableProductosAgregados" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+            </div>
+             <div id="divPaginacionProductosAgregados" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductosAgregados" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductosAgregados_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnteriorProductosAgregados" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductosAgregados_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacionProductosAgregados" runat="server" OnItemCommand="dtPaginacionProductosAgregados_ItemCommand" OnItemDataBound="dtPaginacionProductosAgregados_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentralProductosAgregados" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguienteProductosAgregados" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductosAgregados_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimoProductosAgregados" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductosAgregados_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+                     </ContentTemplate>
+                 </asp:UpdatePanel>
+                </div>
+            </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbTipoGarantiaCalculos" runat="server" Text="Tipo de Garantia" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarTipoGarantiaCalculos" runat="server" ToolTip="Seleccionar el Tipo de Garantia" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbTiempoGarantiaCalculos" runat="server" Text="Tiempo de Garantia" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTiempoGarantiaCalculos" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbTipoIngresoCalculos" runat="server" Text="Tipo de Ingreso" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarTipoIngreso" runat="server" ToolTip="Seleccionar el tipo de ingreso" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadProductos" runat="server" Text="Total de Productos" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTotalProductosCalculos" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadServicios" runat="server" Text="Total de Servicios" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCantidadServicios" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadArticulos" runat="server" Text="Total Articulos" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCantidadArticulos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
     </div>
 </asp:Content>
