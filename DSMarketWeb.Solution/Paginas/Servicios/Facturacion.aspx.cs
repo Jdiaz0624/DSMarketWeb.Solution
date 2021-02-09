@@ -332,6 +332,36 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         }
 
+        protected void LinkPrimeraPaginaProductosFacturar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkAnteriorProductosFacturar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductosFacturar_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacionProductosFacturar_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+
+        }
+
+        protected void LinkSiguienteProductosFacturar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkUltimoProductosFacturar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)
         {
             CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
