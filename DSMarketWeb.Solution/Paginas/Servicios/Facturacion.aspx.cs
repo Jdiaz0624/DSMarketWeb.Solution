@@ -13,6 +13,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
     public partial class Facturacion : System.Web.UI.Page
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaEmpresa.LogicaEmpresa> ObjdataEmpresa = new Lazy<Logic.Logica.LogicaEmpresa.LogicaEmpresa>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
 
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
@@ -172,12 +173,70 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         }
         #endregion
+
+        #region CARLAR LAS LISTAS DESPLEGABLES DE LA PANTALLA
+        /// <summary>
+        /// Este metodo muestra todos los comprobantes activos, por ejemplo todos aquellos comprobantes disponibles para su uso.
+        /// </summary>
+        private void MostrarComprobantesFiscalesActivos() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarComprobante, ObjDataConfiguracion.Value.BuscaListas("NCFACTIVOS", null, null));
+        }
+        /// <summary>
+        /// Este metodo es para mostrar el comprobante por defecto N/A en caso de que no se requiera usar algun tipo de comprobante fiscal.
+        /// </summary>
+        private void MostrarComprobantesFiscalesSinUso()
+        {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarComprobante, ObjDataConfiguracion.Value.BuscaListas("NCFSINUSO", null, null));
+        }
+
+        private void CargarTipoProductos() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoProducto, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null), true);
+        }
+        private void CargarCategoias() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategria, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoProducto.SelectedValue.ToString(), null), true);
+        }
+        private void CargarMarcas() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarca, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProducto.SelectedValue.ToString(), ddlSeleccionarCategria.SelectedValue.ToString()), true);
+        }
+        private void CargarModelos() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProducto.SelectedValue.ToString(), ddlSeleccionarCategria.SelectedValue.ToString(), ddlSeleccionarMarca.SelectedValue.ToString()), true);
+        }
+        private void CargarTipoGarantia() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoGarantiaCalculos, ObjDataConfiguracion.Value.BuscaListas("TIEMPOGARANTIA", null, null));
+        }
+        private void CargarTipoIngreso() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoIngreso, ObjDataConfiguracion.Value.BuscaListas("TIPOINGRESOS", null, null));
+        }
+        private void CargarTipoPago() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlTipoPago, ObjDataConfiguracion.Value.BuscaListas("TIPOPAGOFACTURACION", null, null));
+        }
+
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
                 rbFacturacion.Checked = true;
                 rbContado.Checked = true;
+                int IdConfiguracionComprobante = (int)DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera.ConceptoConfiguracionGeneral.USAR_COMPROBANTES_FISCALES;
+                bool EstatusComprobantes = false;
+                DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera Validar = new Logic.Comunes.ValidarConfiguracionGenera(IdConfiguracionComprobante);
+                EstatusComprobantes = Validar.SacarEstatusConfiguracionGeneral();
+                if (EstatusComprobantes == true) {
+                    cbAgregarComprobante.Checked = true;
+                    MostrarComprobantesFiscalesActivos();
+                }
+                else {
+                    cbAgregarComprobante.Checked = false;
+                    MostrarComprobantesFiscalesSinUso();
+                }
+                CargarTipoProductos();
+                CargarCategoias();
+                CargarMarcas();
+                CargarModelos();
+                CargarTipoGarantia();
+                CargarTipoIngreso();
+                CargarTipoPago();
             }
         }
 
@@ -224,17 +283,20 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void ddlSeleccionarTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CargarCategoias();
+            CargarMarcas();
+            CargarModelos();
         }
 
         protected void ddlSeleccionarCategria_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CargarMarcas();
+            CargarModelos();
         }
 
         protected void ddlSeleccionarMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CargarModelos();
         }
 
         protected void btnBuscarProducto_Click(object sender, EventArgs e)
@@ -360,6 +422,16 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void LinkUltimoProductosFacturar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void cbAgregarComprobante_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAgregarComprobante.Checked == true) {
+                MostrarComprobantesFiscalesActivos();
+            }
+            else if (cbAgregarComprobante.Checked == false) {
+                MostrarComprobantesFiscalesSinUso();
+            }
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)
