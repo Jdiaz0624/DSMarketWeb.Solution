@@ -30,7 +30,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
              bool EstatusCON,
              decimal UsuarioAdicionaCON,
              DateTime FechaAdicionaCON,
-             decimal UsuarioModificaCON
+             decimal UsuarioModificaCON,
              DateTime FechaModificaCON,
              bool BloqueaMontoCON,
              bool ImpuestoAdicionalCON,

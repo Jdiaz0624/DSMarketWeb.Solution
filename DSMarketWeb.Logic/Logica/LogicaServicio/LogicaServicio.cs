@@ -65,7 +65,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                  select new DSMarketWeb.Logic.Entidades.EntidadesServicio.ETipoPago
                                  {
                                      IdTipoPago=n.IdTipoPago,
-                                     TipoPago=n.IdTipoPago,
+                                     TipoPago=n.Descripcion,
                                      Estatus0=n.Estatus,
                                      UsuarioAdiciona=n.UsuarioAdiciona,
                                      FechaAdiciona=n.FechaAdiciona,
