@@ -97,6 +97,7 @@
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
+    <Compile Include="Entidades\EntidadesServicio\ETipoPago.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
     <Compile Include="Logica\LogicaCaja\LogicaCaja.cs" />
     <Compile Include="Logica\LogicaConfiguracion\LogicaConfiguracion.cs" />
@@ -130,12 +131,12 @@
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionUnidadMedida.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
+    <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionTipoPago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entidades\EntidadesCaja\" />
     <Folder Include="Entidades\EntidadesContabilidad\" />
-    <Folder Include="Entidades\EntidadesServicio\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSMarketWeb.Data\DSMarketWeb.Data.csproj">

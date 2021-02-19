@@ -166,7 +166,7 @@
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarComprobante_CheckedChanged" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
-                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" CssClass="form-check-input" ToolTip="Agregar Fecha Manual" />
+                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarFechaManual_CheckedChanged" ToolTip="Agregar Fecha Manual" />
             </div>
         </div>
         <div class="form-row">
@@ -585,6 +585,7 @@
                 </tr>
             </table>
         </div>
+                 <br />
         </div>
     </div>
 </asp:Content>

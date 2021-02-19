@@ -237,6 +237,9 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
+                cbAgregarFechaManual.Checked = false;
+                txtFechaManual.Enabled = false;
+                
             }
         }
 
@@ -431,6 +434,17 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             }
             else if (cbAgregarComprobante.Checked == false) {
                 MostrarComprobantesFiscalesSinUso();
+            }
+        }
+
+        protected void cbAgregarFechaManual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAgregarFechaManual.Checked == true) {
+                txtFechaManual.Enabled = true;
+            }
+            else if(cbAgregarFechaManual.Checked==false) {
+                txtFechaManual.Enabled = false;
+                txtFechaManual.Text = string.Empty;
             }
         }
 
