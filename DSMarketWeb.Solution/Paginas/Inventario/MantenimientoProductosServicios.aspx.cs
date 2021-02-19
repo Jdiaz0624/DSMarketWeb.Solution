@@ -41,7 +41,8 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
 
         }
-        
+
+
 
         #region CARGAR LAS LISTAS DESPLEGABLES EN LA PANTALLA DE CONSULTA
         private void CargarTipoProductosConsultas() {

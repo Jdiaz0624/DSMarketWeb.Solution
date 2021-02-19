@@ -14,6 +14,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaEmpresa.LogicaEmpresa> ObjdataEmpresa = new Lazy<Logic.Logica.LogicaEmpresa.LogicaEmpresa>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaServicio.LogicaServicio> ObjDataServicio = new Lazy<Logic.Logica.LogicaServicio.LogicaServicio>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
 
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
@@ -148,7 +150,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
 
         #endregion
-
         #region MOSTRAR EL LISTADO DE LOS CLIENTES REGISTRADOS
         private void MostrarClientesRegistrados() {
             string _CodigoCliente = string.IsNullOrEmpty(txtCodigoClienteConsulta.Text.Trim()) ? null : txtCodigoClienteConsulta.Text.Trim();
@@ -173,7 +174,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         }
         #endregion
-
         #region CARLAR LAS LISTAS DESPLEGABLES DE LA PANTALLA
         /// <summary>
         /// Este metodo muestra todos los comprobantes activos, por ejemplo todos aquellos comprobantes disponibles para su uso.
@@ -212,6 +212,63 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         }
 
         #endregion
+        #region VALIDAR EL TIPO DE PAGO 
+        private void ValidarCampoTipoPago(decimal IdTipoPago) {
+
+            bool BloqueaMonto = false;
+            bool ImpuestoAdicional = false;
+            bool PorcentajeENtero = false;
+
+            var ValidarTipoPago = ObjDataServicio.Value.BuscaTipoPagos(IdTipoPago, null);
+            foreach (var n in ValidarTipoPago) {
+                BloqueaMonto = (bool)n.BloqueaMonto0;
+                ImpuestoAdicional = (bool)n.ImpuestoAdicional0;
+                PorcentajeENtero = (bool)n.PorcentajeEntero0;
+            }
+
+            if (BloqueaMonto == true)
+            {
+                txtMontoPagar.Enabled = true;
+                txtMontoPagar.Text = "0";
+            }
+            else if (BloqueaMonto == false) {
+                txtMontoPagar.Enabled = false;
+                
+            }
+        }
+        #endregion
+        #region MOSTRAR LOS PRODUCTOS A FACTURAR
+        private void MostrarProductos() {
+            //FILTROS
+            decimal? _TipoProducto = ddlSeleccionarTipoProducto.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarTipoProducto.SelectedValue) : new Nullable<decimal>();
+            decimal? _Categoria = ddlSeleccionarCategria.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarCategria.SelectedValue) : new Nullable<decimal>();
+            decimal? _Marca = ddlSeleccionarMarca.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarMarca.SelectedValue) : new Nullable<decimal>();
+            decimal? _Modelo = ddlSeleccionarModelo.SelectedValue != "-1" ? Convert.ToDecimal(ddlSeleccionarModelo.SelectedValue) : new Nullable<decimal>();
+            string _Descripcion = string.IsNullOrEmpty(txtDescripcion.Text.Trim()) ? null : txtDescripcion.Text.Trim();
+            string _CodigoBarras = string.IsNullOrEmpty(txtCodigoBarras.Text.Trim()) ? null : txtCodigoBarras.Text.Trim();
+            string _Referencia = string.IsNullOrEmpty(txtReferencia.Text.Trim()) ? null : txtReferencia.Text.Trim();
+
+            var BuscarRegistros = ObjDataInventario.Value.BuscaProductos(
+                new Nullable<decimal>(),
+                null,
+                _Descripcion,
+                _CodigoBarras,
+                _Referencia,
+                null, null,
+                _TipoProducto,
+                _Categoria,
+                null,
+                _Marca,
+                _Modelo,
+                null, null, null, null, null, null, null);
+            int CantidadRegistros = BuscarRegistros.Count;
+            lbCantidadRegistrosProductosVariable.Text = CantidadRegistros.ToString("N0");
+            Paginar(ref rpListadoProductosAgregar, BuscarRegistros, 10, ref lbCantidadPaginaVAriableProductoAgregar, ref LinkPrimeraPaginaProductoAgregar, ref LinkAnteriorProductoAgregar, ref LinkSiguienteProductoAgregar, ref LinkUltimoProductoAgregar);
+            HandlePaging(ref dtPaginacionProductoAgregar, ref lbPaginaActualVariavleProductoAgregar);
+        }
+        #endregion
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -246,6 +303,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnConsultarClientes_Click(object sender, EventArgs e)
         {
             MostrarClientesRegistrados();
+          //  MostrarListadoCLientes();
         }
 
         protected void btnSeleccioanrCliente_Click(object sender, EventArgs e)
@@ -304,7 +362,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnBuscarProducto_Click(object sender, EventArgs e)
         {
-
+            MostrarProductos();
         }
 
         protected void btnSeleccionarProductoAgregar_Click(object sender, EventArgs e)
@@ -446,6 +504,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 txtFechaManual.Enabled = false;
                 txtFechaManual.Text = string.Empty;
             }
+        }
+
+        protected void ddlTipoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidarCampoTipoPago(Convert.ToDecimal(ddlTipoPago.SelectedValue));
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)

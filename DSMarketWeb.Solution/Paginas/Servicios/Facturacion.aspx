@@ -280,7 +280,7 @@
                                                  <asp:HiddenField ID="hfIdProductoAgregar" runat="server" Value='<%# Eval("IdProducto") %>' />
                                                   <asp:HiddenField ID="hfNumeroConectorProductoAgregar" runat="server" Value='<%# Eval("NumeroConector") %>' />
 
-                                                 <td style="width:10%"> <asp:Button ID="btnSeleccionarProductoAgregar" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registro para agregarlo a factura" OnClick="btnSeleccionarProductoAgregar_Click" /> </td>
+                                                 <td style="width:10%"> <asp:Button ID="btnSeleccionarProductoAgregar" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registro para agregarlo a factura" CssClass="btn btn-outline-primary btn-sm" OnClick="btnSeleccionarProductoAgregar_Click" /> </td>
                                                  <td style="width:10%"> <%# Eval("TipoProducto") %> </td>
                                                  <td style="width:60%"> <%# Eval("Producto") %> </td>
                                                  <td style="width:10%"> <%#string.Format("{0:n0}", Eval("Stock")) %> </td>
@@ -525,7 +525,7 @@
 
              <div class="form-group col-md-4">
                 <asp:Label ID="lbTipoPago" runat="server" Text="Tipo de Pago" CssClass="Letranegrita"></asp:Label>
-                <asp:DropDownList ID="ddlTipoPago" runat="server" ToolTip="Seleccionar el Tipo de Pago" CssClass="form-control"></asp:DropDownList>
+                <asp:DropDownList ID="ddlTipoPago" runat="server" ToolTip="Seleccionar el Tipo de Pago" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoPago_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
             </div>
         </div>
         <br />
