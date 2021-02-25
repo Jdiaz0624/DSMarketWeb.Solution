@@ -367,7 +367,50 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnSeleccionarProductoAgregar_Click(object sender, EventArgs e)
         {
+            var IdProductoSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProductosSeleccionado = ((HiddenField)IdProductoSeleccionado.FindControl("hfIdProductoAgregar")).Value.ToString();
 
+            var NumeroConectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorSeleccionado = ((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConectorProductoAgregar")).Value.ToString();
+
+
+            var SacarRegistro = ObjDataInventario.Value.BuscaProductos(
+                Convert.ToDecimal(hfIdProductosSeleccionado),
+                Convert.ToDecimal(hfNumeroConectorSeleccionado),
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            foreach (var n in SacarRegistro) {
+                txtTipoProductoVistaPrevia.Text = n.TipoProducto;
+                txtCategoriaVistaPrevia.Text = n.Categoria;
+                txtAcumulativoVistaPrevia.Text = n.ProductoAcumulativo;
+                decimal PrecioVenta = (decimal)n.PrecioVenta;
+                txtPrecioVistaPrevia.Text = PrecioVenta.ToString("N2");
+                txtProductoVistaPrevia.Text = n.Producto;
+                int CantidadDIsponible = (int)n.Stock;
+                txtCantidadDisponibleVistaPrevia.Text = CantidadDIsponible.ToString("N0");
+                txtCantidadUsarVistaPrevia.Text = "1";
+                txtPorcientoDescuentoVistaPrevia.Text = n.PorcientoDescuento.ToString();
+                txtDescuentoVistaPrevia.Text = "0";
+                bool AplicaImpuesto = (bool)n.AplicaParaImpuesto0;
+                if (AplicaImpuesto == true) {
+
+                    int PorcientoDescuento = 0;
+                    bool Operacion = false;
+                    decimal PrecioVentaImpuesto = (decimal)n.PrecioVenta;
+                  
+
+                    var SacarInformacionImpuestoVenta = ObjDataConfiguracion.Value.BuscaImpuestoVenta(1);
+                    foreach (var nImpuesto in SacarInformacionImpuestoVenta) {
+                        PorcientoDescuento = (int)nImpuesto.PorcientoImpuesto;
+                        Operacion = (bool)nImpuesto.Operacion0;
+                    }
+                    decimal Impuesto = PrecioVentaImpuesto * (PorcientoDescuento / 100);
+                    txtImpuesto.Text = Impuesto.ToString("N2");
+
+                }
+                else {
+                    txtImpuesto.Text = "0";
+                }
+            }
         }
 
         protected void LinkPrimeraPaginaProductoAgregar_Click(object sender, EventArgs e)

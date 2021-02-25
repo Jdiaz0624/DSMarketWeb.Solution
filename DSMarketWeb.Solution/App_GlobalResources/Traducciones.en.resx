@@ -117,47 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CambiarClave" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="Citas" xml:space="preserve">
-    <value>Quotes</value>
-  </data>
-  <data name="Clave" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="ConfirmarClave" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
-  <data name="Facturacion" xml:space="preserve">
-    <value>Billing</value>
-  </data>
-  <data name="HistorialFacturacion" xml:space="preserve">
-    <value>Billing History</value>
-  </data>
-  <data name="Ingresar" xml:space="preserve">
-    <value>Enter</value>
-  </data>
-  <data name="IngresarSistema" xml:space="preserve">
-    <value>Login To the System</value>
-  </data>
-  <data name="Inicio" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="NuevaClave" xml:space="preserve">
-    <value>New Password</value>
-  </data>
-  <data name="Seleccionar" xml:space="preserve">
-    <value>Select</value>
-    <comment>Seleccion de los drop.</comment>
-  </data>
-  <data name="Servicio" xml:space="preserve">
-    <value>Service</value>
-  </data>
-  <data name="TipoPago" xml:space="preserve">
-    <value>Payment Type</value>
-  </data>
-  <data name="Usuario" xml:space="preserve">
-    <value>User</value>
-  </data>
 </root>

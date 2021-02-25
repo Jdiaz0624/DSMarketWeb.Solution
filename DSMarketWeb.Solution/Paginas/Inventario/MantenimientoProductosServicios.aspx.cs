@@ -943,32 +943,32 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// <param name="IdProducto"></param>
         /// <param name="NumeroConector"></param>
         private void GuardarImagenProdicto(decimal IdProducto, decimal NumeroConector) {
-            int Tamanio = UpImagen.PostedFile.ContentLength;
-            byte[] ImagenOriginal = new byte[Tamanio];
-            UpImagen.PostedFile.InputStream.Read(ImagenOriginal, 0, Tamanio);
-            Bitmap ImagenOriginalBinaria = new Bitmap(UpImagen.PostedFile.InputStream);
+            //int Tamanio = UpImagen.PostedFile.ContentLength;
+            //byte[] ImagenOriginal = new byte[Tamanio];
+            //UpImagen.PostedFile.InputStream.Read(ImagenOriginal, 0, Tamanio);
+            //Bitmap ImagenOriginalBinaria = new Bitmap(UpImagen.PostedFile.InputStream);
 
-            //REDIRECCIONAR LA IMAGEN PARA COLOCARLE UN TAMAñO A VOLUNTAD
-            System.Drawing.Image ImgThumbNail;
-            int TamanioThumbNail = 200;
-            ImgThumbNail = DSMarketWeb.Logic.Comunes.RedimencionarImagen.Redireccionar(ImagenOriginalBinaria, TamanioThumbNail);
-            ImageConverter Convertidor = new ImageConverter();
-            byte[] bImagenThumbNail = (byte[])Convertidor.ConvertTo(ImgThumbNail, typeof(byte[]));
+            ////REDIRECCIONAR LA IMAGEN PARA COLOCARLE UN TAMAñO A VOLUNTAD
+            //System.Drawing.Image ImgThumbNail;
+            //int TamanioThumbNail = 200;
+            //ImgThumbNail = DSMarketWeb.Logic.Comunes.RedimencionarImagen.Redireccionar(ImagenOriginalBinaria, TamanioThumbNail);
+            //ImageConverter Convertidor = new ImageConverter();
+            //byte[] bImagenThumbNail = (byte[])Convertidor.ConvertTo(ImgThumbNail, typeof(byte[]));
 
 
-            //GUARDMOS LA IMAGEN EN BASE DE DATOS
-            SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
-            SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_GUARDAR_FOTO_PRODUCTO] @IdProducto,@NumeroConector,@FotoProducto", Conexion);
-            Comando.Parameters.Add("@IdProducto", SqlDbType.Decimal).Value = IdProducto;
-            Comando.Parameters.Add("@NumeroConector", SqlDbType.Decimal).Value = NumeroConector;
-            Comando.Parameters.Add("@FotoProducto", SqlDbType.Image).Value = bImagenThumbNail;
-            Conexion.Open();
-            Comando.ExecuteNonQuery();
-            Conexion.Close();
+            ////GUARDMOS LA IMAGEN EN BASE DE DATOS
+            //SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+            //SqlCommand Comando = new SqlCommand("EXEC [Inventario].[SP_GUARDAR_FOTO_PRODUCTO] @IdProducto,@NumeroConector,@FotoProducto", Conexion);
+            //Comando.Parameters.Add("@IdProducto", SqlDbType.Decimal).Value = IdProducto;
+            //Comando.Parameters.Add("@NumeroConector", SqlDbType.Decimal).Value = NumeroConector;
+            //Comando.Parameters.Add("@FotoProducto", SqlDbType.Image).Value = bImagenThumbNail;
+            //Conexion.Open();
+            //Comando.ExecuteNonQuery();
+            //Conexion.Close();
 
-            //VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
-            string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
-            IMGProducto.ImageUrl = ImagenDataUrl64;
+            ////VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
+            //string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
+            //IMGProducto.ImageUrl = ImagenDataUrl64;
         }
         #endregion
         #region MOSTRAR LA FOTO DEL PROEUCTO SELECCIONADO
@@ -1776,8 +1776,10 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtDescripcionMantenimiento.Text = Seleccionar.Producto;
                 txtCodigoBarraMantenimiento.Text = Seleccionar.CodigoBarra;
                 txtReferenciaMantenimiento.Text = Seleccionar.Referencia;
-                txtPrecioCompraMantenimiento.Text = Seleccionar.PrecioCompra.ToString();
-                txtPrecioVentaMantenimiento.Text = Seleccionar.PrecioVenta.ToString();
+                decimal PrecioCompra = (decimal)Seleccionar.PrecioCompra;
+                decimal PrecioVenta = (decimal)Seleccionar.PrecioVenta;
+                txtPrecioCompraMantenimiento.Text = PrecioCompra.ToString();
+                txtPrecioVentaMantenimiento.Text = PrecioVenta.ToString();
                 txtStockMantenimiento.Text = Seleccionar.Stock.ToString();
                 txtStockMinimoMantenimiento.Text = Seleccionar.StockMinimo.ToString();
                 txtPorcientoDescuentoMantenimiento.Text = Seleccionar.PorcientoDescuento.ToString();
@@ -1792,7 +1794,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 cbProductoAcumulativoMantenimiento.Checked = (Seleccionar.ProductoAcumulativo0.HasValue ? Seleccionar.ProductoAcumulativo0.Value : false);
                 cbAplicaImpuestoMantenimiento.Checked = (Seleccionar.AplicaParaImpuesto0.HasValue ? Seleccionar.AplicaParaImpuesto0.Value : false);
                 cbAgregarImagenArticulo.Checked = (Seleccionar.LlevaImagen0.HasValue ? Seleccionar.LlevaImagen0.Value : false);
-
+          
                 
             }
 
@@ -1972,6 +1974,11 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 ClientScript.RegisterStartupScript(GetType(), "ProcesoCompletadoCOnExito()", "ProcesoCompletadoCOnExito();", true);
                 RestablecerPantallaCOnsulta();
             }
+        }
+
+        protected void txtPrecioVentaMantenimiento_TextChanged(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "filterFloat()", "filterFloat();", true);
         }
 
         protected void lbLast_Click(object sender, EventArgs e)

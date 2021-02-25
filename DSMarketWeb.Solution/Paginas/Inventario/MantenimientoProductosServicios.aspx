@@ -42,6 +42,43 @@
     </style>
 
     <script type="text/javascript">
+
+
+        function filterFloat(evt, input) {
+            // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
+            var key = window.Event ? evt.which : evt.keyCode;
+            var chark = String.fromCharCode(key);
+            var tempValue = input.value + chark;
+            if (key >= 48 && key <= 57) {
+                if (filter(tempValue) === false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (key == 8 || key == 13 || key == 0) {
+                    return true;
+                } else if (key == 46) {
+                    if (filter(tempValue) === false) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+        function filter(__val__) {
+            var preg = /^([0-9]+\.?[0-9]{0,2})$/;
+            if (preg.test(__val__) === true) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+        -->
         function CamposFechaVAcios() {
             alert("Los campos fecha no pueden estar vacios para buscar registros mediante este metodo.");
         }
@@ -89,6 +126,12 @@
 
 
         $(document).ready(function () {
+            $('.solo-numero').keyup(function () {
+                this.value = (this.value + '').replace(/[^0-9]/g, '');
+            });
+
+            $(".numeric").numeric();
+
             //VALIDAMOS LOS CAMPOS EN EL EVENTO DEL BOTON GUARDAR
             $("#<%=btnProcesarMantenimiento.ClientID%>").click(function () {
                 //TIPO DE PRODUCTO
@@ -761,11 +804,12 @@
                  <div class="form-group col-md-4">
                     <asp:Label ID="lbPrecioCompraMantenimiento" runat="server" Text="Precio de Compra" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtPrecioCompraMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
+
                 </div>
 
                  <div class="form-group col-md-4">
                     <asp:Label ID="lbPrecioVentaMantenimiento" runat="server" Text="Precio de Venta" CssClass="Letranegrita"></asp:Label>
-                    <asp:TextBox ID="txtPrecioVentaMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
+                    <asp:TextBox ID="txtPrecioVentaMantenimiento" runat="server" AutoCompleteType="Disabled"   CssClass="form-control" TextMode="Number" Step="0.01"></asp:TextBox>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -812,12 +856,14 @@
                     <asp:TextBox ID="txtclaveSeguridadMantenimiento" runat="server" TextMode="Password" Visible="false" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
                 </div>
 
+               
+
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbProductoAcumulativoMantenimiento_CheckedChanged" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
                     <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
-                    <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server" Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />
+                    <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server" Visible="false" Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />
                     <asp:CheckBox ID="cbNoLimpiarPantalla" runat="server" Text="No Limpiar Pantalla" CssClass="form-check-input" ToolTip="No limpiar Pantalla al momento de realizar el mantenimiento" />
                 </div>
             </div>
@@ -829,11 +875,11 @@
                         <div class="col-md-4 col-md-offset-4" align="center">
                             <asp:Label ID="lbTituloImagen" runat="server" Text="Imagen de Producto" CssClass="Letranegrita"></asp:Label>
                             <br />
-                            <asp:Image ID="IMGProducto" runat="server" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <asp:Image ID="IMGProducto" runat="server" Visible="false" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
                             <br />
                             <br />
                             <asp:Label ID="lbBuscarImagen" runat="server" Text="Subir Imagen" CssClass="Letranegrita"></asp:Label>
-                            <asp:FileUpload ID="UpImagen" runat="server" accept=".jpg" CssClass="form-control" />
+                            <asp:FileUpload ID="UpImagen" runat="server" Visible="false" accept=".jpg" CssClass="form-control" />
                             <br />
                             <br />
                         </div>
@@ -971,7 +1017,7 @@
                 </div>
 
             </div>
-            <div id="BloqueImagenProductoSeleccionado" runat="server">
+            <div id="BloqueImagenProductoSeleccionado" visible="false" runat="server">
                  <div align="center">
                      <asp:Image ID="IMGFotoProducto" runat="server" />
                  </div>

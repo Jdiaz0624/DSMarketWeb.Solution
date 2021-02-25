@@ -19,17 +19,17 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             var Buscar = (from n in ObjData.SP_SACAR_INFORMACION_EMPRESA()
                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EInformacionEmpresa
                           {
-                              IdInformacionEmpresa=n.IdInformacionEmpresa,
-                              NombreEmpresa=n.NombreEmpresa,
-                              RNC=n.RNC,
-                              Direccion=n.Direccion,
-                              Email=n.Email,
-                              Email2=n.Email2,
-                              Facebook=n.Facebook,
-                              Instagran=n.Instagran,
-                              Telefonos=n.Telefonos,
-                              IdLogoEmpresa=n.IdLogoEmpresa,
-                              LogoEmpresa=n.LogoEmpresa
+                              IdInformacionEmpresa = n.IdInformacionEmpresa,
+                              NombreEmpresa = n.NombreEmpresa,
+                              RNC = n.RNC,
+                              Direccion = n.Direccion,
+                              Email = n.Email,
+                              Email2 = n.Email2,
+                              Facebook = n.Facebook,
+                              Instagran = n.Instagran,
+                              Telefonos = n.Telefonos,
+                              IdLogoEmpresa = n.IdLogoEmpresa,
+                              LogoEmpresa = n.LogoEmpresa
                           }).ToList();
             return Buscar;
 
@@ -57,16 +57,16 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
                 Informacion = (from n in Actualziar
                                select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EInformacionEmpresa
                                {
-                                   IdInformacionEmpresa=n.IdInformacionEMpres,
-                                   NombreEmpresa=n.NombreEmpresa,
-                                   RNC=n.RNC,
-                                   Direccion=n.Direccion,
-                                   Email=n.Email,
-                                   Email2=n.Email2,
-                                   Facebook=n.Facebook,
-                                   Instagran=n.Instagram,
-                                   Telefonos=n.Telefonos,
-                                   IdLogoEmpresa=n.IdLogoEmpresa
+                                   IdInformacionEmpresa = n.IdInformacionEMpres,
+                                   NombreEmpresa = n.NombreEmpresa,
+                                   RNC = n.RNC,
+                                   Direccion = n.Direccion,
+                                   Email = n.Email,
+                                   Email2 = n.Email2,
+                                   Facebook = n.Facebook,
+                                   Instagran = n.Instagram,
+                                   Telefonos = n.Telefonos,
+                                   IdLogoEmpresa = n.IdLogoEmpresa
                                }).FirstOrDefault();
             }
             return Informacion;
@@ -80,10 +80,10 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             var Listado = (from n in ObjData.SP_BUSCA_LISTAS_WEB(NombreLista, PrimerFiltro, SegundoFiltro, TercerFiltro, CuartoFiltro, QuintoFiltro)
                            select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EListas
                            {
-                               Descripcion=n.Descripcion,
-                               PrimerValor=n.PrimerValor,
-                               SegundoValor=n.SegundoValor,
-                               TerceValor=n.TerceValor
+                               Descripcion = n.Descripcion,
+                               PrimerValor = n.PrimerValor,
+                               SegundoValor = n.SegundoValor,
+                               TerceValor = n.TerceValor
                            }).ToList();
             return Listado;
         }
@@ -96,8 +96,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             var Listado = (from n in ObjData.SP_BUSCA_PORCIENTO_DESCUENTO_PRODUCTO_POR_DEFECTO(IdPorcientoDescuento)
                            select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPorcientoDescuentoProductoPorDefecto
                            {
-                               IdPorcientoDescuento=n.IdPorcientoDescuento,
-                               PorcientoDescuento=n.PorcientoDescuento
+                               IdPorcientoDescuento = n.IdPorcientoDescuento,
+                               PorcientoDescuento = n.PorcientoDescuento
                            }).ToList();
             return Listado;
         }
@@ -111,12 +111,12 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             var Listado = (from n in ObjData.SP_BUSCA_CONFIGURACION_GENERAL(IdConfiguracionGeneral)
                            select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral
                            {
-                               IdConfiguracionGeneral=n.IdConfiguracionGeneral,
-                               Descripcion=n.Descripcion,
-                               Estatus0=n.Estatus0,
-                               Estatus=n.Estatus,
-                               CantidadActivos=n.CantidadActivos,
-                               CantidadInactivos=n.CantidadInactivos
+                               IdConfiguracionGeneral = n.IdConfiguracionGeneral,
+                               Descripcion = n.Descripcion,
+                               Estatus0 = n.Estatus0,
+                               Estatus = n.Estatus,
+                               CantidadActivos = n.CantidadActivos,
+                               CantidadInactivos = n.CantidadInactivos
                            }).ToList();
             return Listado;
         }
@@ -135,9 +135,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
                 Mantenimiento = (from n in ConfguracionGeneral
                                  select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionGeneral
                                  {
-                                     IdConfiguracionGeneral=n.IdConfiguracionGeneral,
-                                     Descripcion=n.Descripcion,
-                                     Estatus0=n.Estatus
+                                     IdConfiguracionGeneral = n.IdConfiguracionGeneral,
+                                     Descripcion = n.Descripcion,
+                                     Estatus0 = n.Estatus
                                  }).FirstOrDefault();
             }
             return Mantenimiento;
@@ -151,11 +151,54 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             var Listado = (from n in ObjData.SP_BUSCAR_IMAGENES_DEL_SISTEMA(IdLogoSistema)
                            select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EBuscaImagenesSistema
                            {
-                               IdLogoEmpresa=n.IdLogoEmpresa,
-                               Nombre=n.Nombre,
-                               LogoEmpresa=n.LogoEmpresa
+                               IdLogoEmpresa = n.IdLogoEmpresa,
+                               Nombre = n.Nombre,
+                               LogoEmpresa = n.LogoEmpresa
                            }).ToList();
             return Listado;
+        }
+        #endregion
+
+        #region MANTENIMIENTO DE IMPUESTOS DE VENTA
+        //LISTADO DE IMPUESTOS DE VENTAS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta> BuscaImpuestoVenta(int? IdImpuesto = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_IMPUESTO_VENTA(IdImpuesto)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta
+                           {
+                               IdImpuesto=n.IdImpuesto,
+                               Descripcion=n.Descripcion,
+                               PorcientoImpuesto=n.PorcientoImpuesto,
+                               Operacion0=n.Operacion0,
+                               Operacion=n.Operacion
+                           }).ToList();
+            return Listado;
+        }
+
+        //MANTENIMIENTO DE IMPUESTO DE VENTA
+        public DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta ModificarImpuestoVenta(DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta Modificar = null;
+
+            var ImpuestoVenta = ObjData.SP_MODIFICAR_IMPUESTO_VENTA(
+                Item.IdImpuesto,
+                Item.Descripcion,
+                Item.PorcientoImpuesto,
+                Item.Operacion0,
+                Accion);
+            if (ImpuestoVenta != null) {
+                Modificar = (from n in ImpuestoVenta
+                             select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EImpuestoVenta
+                             {
+                                 IdImpuesto=n.IdImpuesto,
+                                 Descripcion=n.Descripcion,
+                                 PorcientoImpuesto=n.PorcientoImpuesto,
+                                 Operacion0=n.Operacion
+                             }).FirstOrDefault();
+            }
+            return Modificar;
         }
         #endregion
     }
