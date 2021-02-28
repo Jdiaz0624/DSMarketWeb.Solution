@@ -978,6 +978,15 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected global::System.Web.UI.WebControls.TextBox txtPorcientoDescuentoVistaPrevia;
 
         /// <summary>
+        /// DivDescuento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivDescuento;
+
+        /// <summary>
         /// lbDescuentoVistaPrevia control.
         /// </summary>
         /// <remarks>
@@ -994,6 +1003,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescuentoVistaPrevia;
+
+        /// <summary>
+        /// lbDescuentoMaximoVistaPrevia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDescuentoMaximoVistaPrevia;
+
+        /// <summary>
+        /// txtDescuentoMaximoVistaPrevia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescuentoMaximoVistaPrevia;
 
         /// <summary>
         /// lbImpuestoVistaPrevia control.
@@ -1021,6 +1048,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbANoplicaGarantia;
+
+        /// <summary>
+        /// DivLetreroRojo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivLetreroRojo;
+
+        /// <summary>
+        /// lbLetreroRojos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbLetreroRojos;
 
         /// <summary>
         /// btnAgregarRegistro control.

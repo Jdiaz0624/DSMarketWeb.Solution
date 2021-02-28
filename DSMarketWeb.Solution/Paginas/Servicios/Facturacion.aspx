@@ -35,6 +35,14 @@
           }
     </style>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#<%=btnAgregarRegistro.ClientID%>").click(function () {
+                alert("d");
+            });
+        })
+    </script>
+
     <div class="container-fluid">
         <div class="jumbotron" align="center">
             <asp:Label ID="lbTitulo" runat="server" Text="Facturación" CssClass="Letranegrita"></asp:Label>
@@ -351,7 +359,7 @@
 
                              <div class="form-group col-md-3">
                                  <asp:Label ID="lbCantidadUsarVistaPrevia" runat="server" Text="Cantidad Usar" CssClass="Letranegrita"></asp:Label>
-                                 <asp:TextBox ID="txtCantidadUsarVistaPrevia" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                 <asp:TextBox ID="txtCantidadUsarVistaPrevia" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtCantidadUsarVistaPrevia_TextChanged" TextMode="Number"></asp:TextBox>
                              </div>
 
                               <div class="form-group col-md-3">
@@ -359,9 +367,14 @@
                                  <asp:TextBox ID="txtPorcientoDescuentoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                              </div>
 
-                             <div class="form-group col-md-3">
+                             <div class="form-group col-md-3" runat="server" id="DivDescuento" >
                                  <asp:Label ID="lbDescuentoVistaPrevia" runat="server" Text="Descuento" CssClass="Letranegrita"></asp:Label>
                                  <asp:TextBox ID="txtDescuentoVistaPrevia" runat="server" CssClass="form-control" TextMode="Number" step="0.01"></asp:TextBox>
+                             </div>
+
+                             <div class="form-group col-md-3">
+                                 <asp:Label ID="lbDescuentoMaximoVistaPrevia" runat="server" Text="Descuento Maximo" CssClass="Letranegrita"></asp:Label>
+                                 <asp:TextBox ID="txtDescuentoMaximoVistaPrevia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                              </div>
 
                               <div class="form-group col-md-3">
@@ -372,8 +385,12 @@
 
                          <div class="form-check-inline">
                              <div class="form-group form-check">
-                                 <asp:CheckBox ID="cbANoplicaGarantia" runat="server" Text="No Aplica Garantia" CssClass="form-check-input" ToolTip="Espesificar si este articulo no tiene garantia" />
+                                 <asp:CheckBox ID="cbANoplicaGarantia" runat="server" Text="No Aplica Garantia" CssClass="form-check-input" ToolTip="Espesificar si este articulo no tiene garantia" /><br />
+                                 
                              </div>
+                         </div>
+                         <div id="DivLetreroRojo" runat="server" visible="false"  align="center">
+                             <asp:Label ID="lbLetreroRojos" runat="server" align="center" Text="La cantidad que quieres procesar supera la cantidad disponible en almacen, favor de verificar" CssClass="Letranegrita"></asp:Label>
                          </div>
                          <div align="center">
                              <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />

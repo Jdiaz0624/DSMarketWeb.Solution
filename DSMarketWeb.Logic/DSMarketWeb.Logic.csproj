@@ -90,6 +90,7 @@
     <Compile Include="Entidades\EntidadesInventario\EMarcas.cs" />
     <Compile Include="Entidades\EntidadesInventario\EModelos.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProducto.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EProductosFacturar.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESacarIDProductoCreado.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESuplidores.cs" />
     <Compile Include="Entidades\EntidadesInventario\ETipoSuplidores.cs" />

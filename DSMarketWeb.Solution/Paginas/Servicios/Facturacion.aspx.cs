@@ -248,23 +248,47 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             string _CodigoBarras = string.IsNullOrEmpty(txtCodigoBarras.Text.Trim()) ? null : txtCodigoBarras.Text.Trim();
             string _Referencia = string.IsNullOrEmpty(txtReferencia.Text.Trim()) ? null : txtReferencia.Text.Trim();
 
-            var BuscarRegistros = ObjDataInventario.Value.BuscaProductos(
+            var BuscarProductosFacturar = ObjDataInventario.Value.BuscaProductosFacturar(
                 new Nullable<decimal>(),
                 null,
                 _Descripcion,
                 _CodigoBarras,
                 _Referencia,
-                null, null,
                 _TipoProducto,
-                _Categoria,
+                null,
                 null,
                 _Marca,
                 _Modelo,
-                null, null, null, null, null, null, null);
-            int CantidadRegistros = BuscarRegistros.Count;
+                null, null, null, null);
+            int CantidadRegistros = BuscarProductosFacturar.Count;
             lbCantidadRegistrosProductosVariable.Text = CantidadRegistros.ToString("N0");
-            Paginar(ref rpListadoProductosAgregar, BuscarRegistros, 10, ref lbCantidadPaginaVAriableProductoAgregar, ref LinkPrimeraPaginaProductoAgregar, ref LinkAnteriorProductoAgregar, ref LinkSiguienteProductoAgregar, ref LinkUltimoProductoAgregar);
+            Paginar(ref rpListadoProductosAgregar, BuscarProductosFacturar, 10, ref lbCantidadPaginaVAriableProductoAgregar, ref LinkPrimeraPaginaProductoAgregar, ref LinkAnteriorProductoAgregar, ref LinkSiguienteProductoAgregar, ref LinkUltimoProductoAgregar);
             HandlePaging(ref dtPaginacionProductoAgregar, ref lbPaginaActualVariavleProductoAgregar);
+        }
+        #endregion
+        #region FUNCIONES PARA BLOQUEAR Y DESBLOQUER CONTROLES
+        private void BloquearDesbloquearCampoDescuento(decimal PorcientoDescuento) {
+
+            if (PorcientoDescuento == 0) {
+                DivDescuento.Visible = false;
+            }
+            else {
+                DivDescuento.Visible = true;
+            }
+        }
+        private void CalcularDescuentoMAximoProducto(int Cantidad, decimal PorcientoDescuento) {
+
+            try {
+                decimal DescuentoMaximo = 0;
+                decimal PorcientoDescuentoProcesado = PorcientoDescuento / 100;
+                decimal PrecioProducto = Convert.ToDecimal(txtPrecioVistaPrevia.Text);
+                DescuentoMaximo = (PorcientoDescuentoProcesado * PrecioProducto) * Cantidad;
+                txtDescuentoMaximoVistaPrevia.Text = Math.Round(DescuentoMaximo, 2).ToString("N2");
+            }
+            catch (Exception) {
+                txtDescuentoMaximoVistaPrevia.Text = "ERROR EN CAMPO CANTIDAD";
+            }
+
         }
         #endregion
 
@@ -373,12 +397,14 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             var NumeroConectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfNumeroConectorSeleccionado = ((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConectorProductoAgregar")).Value.ToString();
 
+            bool ProductoAcumulativo = false;
 
             var SacarRegistro = ObjDataInventario.Value.BuscaProductos(
                 Convert.ToDecimal(hfIdProductosSeleccionado),
                 Convert.ToDecimal(hfNumeroConectorSeleccionado),
                 null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
             foreach (var n in SacarRegistro) {
+                ProductoAcumulativo = (bool)n.ProductoAcumulativo0;
                 txtTipoProductoVistaPrevia.Text = n.TipoProducto;
                 txtCategoriaVistaPrevia.Text = n.Categoria;
                 txtAcumulativoVistaPrevia.Text = n.ProductoAcumulativo;
@@ -411,6 +437,19 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                     txtImpuesto.Text = "0";
                 }
             }
+
+            if (ProductoAcumulativo == true)
+            {
+                txtCantidadUsarVistaPrevia.Enabled = true;
+                txtCantidadUsarVistaPrevia.Text = "1";
+            }
+            else if (ProductoAcumulativo == false) {
+                txtCantidadUsarVistaPrevia.Enabled = false;
+            }
+
+            decimal PorcientoDescuentoProcesar = Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text);
+            BloquearDesbloquearCampoDescuento(PorcientoDescuentoProcesar);
+            CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
         }
 
         protected void LinkPrimeraPaginaProductoAgregar_Click(object sender, EventArgs e)
@@ -445,6 +484,60 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtCantidadUsarVistaPrevia.Text.Trim())) {
+                txtCantidadUsarVistaPrevia.Text = "1";
+            }
+            if (string.IsNullOrEmpty(txtDescuentoVistaPrevia.Text.Trim())) {
+                txtDescuentoVistaPrevia.Text = "0";
+            }
+            CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
+
+            int CantidadDisponible = Convert.ToInt32(txtCantidadDisponibleVistaPrevia.Text);
+            int CantidadUsar = Convert.ToInt32(txtCantidadUsarVistaPrevia.Text);
+
+            if (CantidadUsar > CantidadDisponible || CantidadUsar ==0 || CantidadUsar <0)
+            {
+                DivLetreroRojo.Visible = true;
+                if (CantidadUsar == 0)
+                {
+                    lbLetreroRojos.Text = "La cantidad a procesar no puede ser igual a cero, favor de verificar.";
+                }
+                else if (CantidadUsar < 0) {
+                    lbLetreroRojos.Text = "La cantidad que intentas procesar es menor a cero, favor de verificar.";
+                }
+                else
+                {
+
+                    lbLetreroRojos.Text = "La cantidad que intentas procesar supera la cantidad disponible en almacen, favor de verificar.";
+
+                }
+                lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+            }
+            else {
+                DivLetreroRojo.Visible = false;
+
+                decimal DescuentoAplicado = Convert.ToDecimal(txtDescuentoVistaPrevia.Text);
+                decimal DescuentoMAximo = Convert.ToDecimal(txtDescuentoMaximoVistaPrevia.Text);
+
+                if (DescuentoAplicado > DescuentoMAximo || DescuentoAplicado < 0) {
+
+                    DivLetreroRojo.Visible = true;
+
+                    if (DescuentoAplicado < 0) {
+                        lbLetreroRojos.Text = "El descuento aplicado no puede ser un numero menor a cero, favor de verificar.";
+                    }
+                    else {
+                        lbLetreroRojos.Text = "El descuento no puede ser mayor al descuento maximo aplicado por el sistema, favor de verificar.";
+                    }
+                    lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+                }
+                else {
+                    DivLetreroRojo.Visible = false;
+
+                    //PROCESAR
+                }
+
+            }
 
         }
 
@@ -552,6 +645,16 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void ddlTipoPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             ValidarCampoTipoPago(Convert.ToDecimal(ddlTipoPago.SelectedValue));
+        }
+
+        protected void txtCantidadUsarVistaPrevia_TextChanged(object sender, EventArgs e)
+        {
+            try {
+                CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
+            }
+            catch (Exception) {
+                txtDescuentoMaximoVistaPrevia.Text = "ERROR EN CAMPO CANTIDAD";
+            }
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)

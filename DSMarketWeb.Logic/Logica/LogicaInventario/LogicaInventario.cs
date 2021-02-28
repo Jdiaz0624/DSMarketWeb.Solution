@@ -743,5 +743,66 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region PRODUCTOS PARA FACTURAR
+        //BUSCA PRODUCTOS PARA FACTURAR
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductosFacturar> BuscaProductosFacturar(decimal? IdProducto = null, decimal? NumeroConector = null, string Descripcion = null, string CodigoBarra = null, string Referencia = null, decimal? IdTipoProducto = null, string IdCategoria = null, decimal? IdUnidadMedida = null, decimal? IdMarca = null, decimal? IdModelo = null, decimal? IdColor = null, decimal? IdCapacidad = null, decimal? IdCondicion = null, string NumeroSeguimiento = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Buscar = (from n in ObjData.SP_BUSCA_PRODUCTO_WEB_PARA_FACTURAR(IdProducto, NumeroConector, Descripcion, CodigoBarra, Referencia, IdTipoProducto, IdCapacidad, IdUnidadMedida, IdMarca, IdModelo, IdColor, IdCapacidad, IdCondicion, NumeroSeguimiento)
+                          select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductosFacturar
+                          {
+                              IdProducto = n.IdProducto,
+                              IdMarca = n.IdMarca,
+                              Marca = n.Marca,
+                              IdModelo = n.IdModelo,
+                              Modelo = n.Modelo,
+                              IdColor = n.IdColor,
+                              Color = n.Color,
+                              IdCapacidad = n.IdCapacidad,
+                              Capacidad = n.Capacidad,
+                              IdCondicion = n.IdCondicion,
+                              Condicion = n.Condicion,
+                              NumeroConector = n.NumeroConector,
+                              IdTipoProducto = n.IdTipoProducto,
+                              Producto = n.Producto,
+                              Referencia = n.Referencia,
+                              TipoProducto = n.TipoProducto,
+                              IdCategoria = n.IdCategoria,
+                              Categoria = n.Categoria,
+                              IdUnidadMedida = n.IdUnidadMedida,
+                              UnidadMedida = n.UnidadMedida,
+                              IdTipoSuplidor = n.IdTipoSuplidor,
+                              TipoSuplidor = n.TipoSuplidor,
+                              IdSuplidor = n.IdSuplidor,
+                              Suplidor = n.Suplidor,
+                              CodigoBarra = n.CodigoBarra,
+                              PrecioCompra = n.PrecioCompra,
+                              PrecioVenta = n.PrecioVenta,
+                              Stock = n.Stock,
+                              StockMinimo = n.StockMinimo,
+                              PorcientoDescuento = n.PorcientoDescuento,
+                              AfectaOferta0 = n.AfectaOferta0,
+                              AceptaOferta = n.AceptaOferta,
+                              ProductoAcumulativo0 = n.ProductoAcumulativo0,
+                              ProductoAcumulativo = n.ProductoAcumulativo,
+                              LlevaImagen0 = n.LlevaImagen0,
+                              LlevaImagen = n.LlevaImagen,
+                              UsuarioAdicion = n.UsuarioAdicion,
+                              FechaAdiciona = n.FechaAdiciona,
+                              FechaCreado = n.FechaCreado,
+                              UsuarioModifica = n.UsuarioModifica,
+                              FechaModifica = n.FechaModifica,
+                              FechaModificado = n.FechaModificado,
+                              Fecha = n.Fecha,
+                              AplicaParaImpuesto0 = n.AplicaParaImpuesto0,
+                              EstatusProducto0 = n.EstatusProducto0,
+                              EstatusProducto = n.EstatusProducto,
+                              AplicaParaImpuesto = n.AplicaParaImpuesto,
+                              NumeroSeguimiento = n.NumeroSeguimiento,
+                              Comentario = n.Comentario
+                          }).ToList();
+            return Buscar;
+        }
+        #endregion
     }
 }
