@@ -85,6 +85,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Estilos\EstilosMaster.css" />
+    <Content Include="Estilos\EstilosMenu.css" />
     <Content Include="Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="LoginSistema.aspx" />
     <Content Include="Paginas\Empresa\Bancos.aspx" />

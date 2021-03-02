@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/PaginaMaestra.Master" AutoEventWireup="true" CodeBehind="MenuPrincipal.aspx.cs" Inherits="DSMarketWeb.Solution.Paginas.MenuPrincipal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <style type="text/css">
+       <style type="text/css">
         .jumbotron{
             color:#000000; 
             background:#1E90FF;
@@ -20,12 +21,17 @@
         font-weight:bold;
         }
     </style>
+    <link href="../Estilos/EstilosMenu.css" rel="stylesheet" type="text/css" />
 
-    <div class="container-fluid">
-        <div class="jumbotron" align="center">
-            <asp:Label ID="lbUsuarioConectado" runat="server" Text="Usuario Conectado"></asp:Label>
+    <div class="d-flex" id="wrapper">
+        <div  id="page-content-wrapper">
+               <div class="container-fluid" >
+       <asp:Label ID="lbUsuarioConectado" runat="server" Text="Usuario Conectado"></asp:Label>
             <asp:Label ID="lbNivelAcceso" runat="server" Text="Usuario Nivel"></asp:Label>
-          
+    </div>
         </div>
+
+
+     
     </div>
 </asp:Content>
