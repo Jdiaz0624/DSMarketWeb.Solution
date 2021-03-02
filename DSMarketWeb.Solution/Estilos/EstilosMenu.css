@@ -1,5 +1,6 @@
 ﻿#wrapper {
     overflow-x: hidden;
+    color: #12093D;
 }
 
 #sidebar-wrapper {
@@ -40,5 +41,9 @@
 
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
+    }
+
+    .sidebar-heading {
+    color:white;
     }
 }

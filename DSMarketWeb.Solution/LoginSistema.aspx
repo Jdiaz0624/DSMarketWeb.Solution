@@ -271,7 +271,7 @@ body { background-color: #465268; }
                          <!--TEXBOX-->
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <asp:TextBox ID="txtUsuarioLogin" AutoCompleteType="Disabled" runat="server" Placeholder="<%$ Resources:Traducciones,Usuario %>" CssClass="form-control" MaxLength="20"></asp:TextBox>
+                                <asp:TextBox ID="txtUsuarioLogin" AutoCompleteType="Disabled"  runat="server" Placeholder="<%$ Resources:Traducciones,Usuario %>" CssClass="form-control" MaxLength="20"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-12">
                                 <asp:TextBox ID="txtClaveLogin" runat="server" Placeholder="<%$ Resources:Traducciones,Clave %>" TextMode="Password" CssClass="form-control" MaxLength="40"></asp:TextBox>

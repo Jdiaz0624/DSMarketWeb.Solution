@@ -747,5 +747,10 @@ namespace DSMarketWeb.Solution.MasterPage
         {
 
         }
+
+        protected void LinkPerfilesUsuarios_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
