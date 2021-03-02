@@ -742,5 +742,10 @@ namespace DSMarketWeb.Solution.MasterPage
                 FormsAuthentication.RedirectToLoginPage();
             }
         }
+
+        protected void LinkHistorialCotizaciones_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

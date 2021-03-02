@@ -26,8 +26,10 @@
     <div class="d-flex" id="wrapper">
         <div  id="page-content-wrapper">
                <div class="container-fluid" >
-       <asp:Label ID="lbUsuarioConectado" runat="server" Text="Usuario Conectado"></asp:Label>
+      <div class="jumbotron" align="center">
+           <asp:Label ID="lbUsuarioConectado" runat="server" Text="Usuario Conectado"></asp:Label>
             <asp:Label ID="lbNivelAcceso" runat="server" Text="Usuario Nivel"></asp:Label>
+      </div>
     </div>
         </div>
 
