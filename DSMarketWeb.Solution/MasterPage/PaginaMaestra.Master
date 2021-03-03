@@ -189,14 +189,18 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <%--  <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
+              <asp:Label ID="lbNombreUsuarioConectado" runat="server" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" Text="Usuario Conectado"></asp:Label>
+          
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <asp:Label ID="lbNivelAccesoUsuarioConectado" runat="server" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" Text="Nivel de Acceso"></asp:Label>
             </li>
-            <li class="nav-item dropdown">
+
+              <li class="nav-item">
+              <asp:Label ID="lbPantallaPosicionada" runat="server" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" Text="Pantalla Actual"></asp:Label>
+            </li>
+           <%-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown
               </a>
@@ -206,8 +210,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
-            </li>
-          </ul>--%>
+            </li>--%>
+          </ul>
         </div>
       </nav>
 

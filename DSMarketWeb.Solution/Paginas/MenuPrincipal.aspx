@@ -23,7 +23,7 @@
     </style>
     <link href="../Estilos/EstilosMenu.css" rel="stylesheet" type="text/css" />
 
-    <div class="d-flex" id="wrapper">
+  <%--  <div class="d-flex" id="wrapper">
         <div  id="page-content-wrapper">
                <div class="container-fluid" >
       <div class="jumbotron" align="center">
@@ -35,5 +35,5 @@
 
 
      
-    </div>
+    </div>--%>
 </asp:Content>
