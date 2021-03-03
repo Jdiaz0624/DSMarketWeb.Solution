@@ -25,7 +25,7 @@ namespace DSMarketWeb.Solution.Paginas
                         Usuario = n.Persona;
                         NivelAcceso = n.Nivel;
                     }
-                    Label lbUsuarioConectadoMasterPage = (Label)this.Master.FindControl("lbNombreUsuarioConectado");
+                    Label lbUsuarioConectadoMasterPage = (Label)this.Master.FindControl("lbNombreUsuarioConectado"); 
                     lbUsuarioConectadoMasterPage.Text = Usuario;
 
                     Label lbNivelAccesoMasterPage = (Label)this.Master.FindControl("lbNivelAccesoUsuarioConectado");
