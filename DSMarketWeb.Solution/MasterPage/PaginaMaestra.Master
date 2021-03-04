@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PaginaMaestra.master.cs" Inherits="DSMarketWeb.Solution.MasterPage.PaginaMaestra" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true"  CodeBehind="PaginaMaestra.master.cs" Inherits="DSMarketWeb.Solution.MasterPage.PaginaMaestra" %>
 
 <!DOCTYPE html>
 

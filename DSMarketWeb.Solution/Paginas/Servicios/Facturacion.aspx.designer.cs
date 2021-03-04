@@ -15,15 +15,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
     {
 
         /// <summary>
-        /// ScripManagerFActuracion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScripManagerFActuracion;
-
-        /// <summary>
         /// lbNumeroConectorFacturacion control.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,51 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCredito;
+
+        /// <summary>
+        /// divDiasCotizacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDiasCotizacion;
+
+        /// <summary>
+        /// cbAgregarDiasCotizacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAgregarDiasCotizacion;
+
+        /// <summary>
+        /// lbCantidadDiasCotizacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCantidadDiasCotizacion;
+
+        /// <summary>
+        /// txtDiasCotizacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDiasCotizacion;
+
+        /// <summary>
+        /// ScripManagerFActuracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScripManagerFActuracion;
 
         /// <summary>
         /// UpdatePanelBuscarClientes control.
@@ -517,6 +553,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComentario;
+
+        /// <summary>
+        /// DivBotonQuitarCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBotonQuitarCliente;
+
+        /// <summary>
+        /// btnQuitar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnQuitar;
 
         /// <summary>
         /// UpdatePanelAgregarServiciosProductos control.
@@ -1390,6 +1444,15 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulos;
+
+        /// <summary>
+        /// divFechaManual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFechaManual;
 
         /// <summary>
         /// lbFechaManual control.

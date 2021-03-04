@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using System.Web.Security;
 
 namespace DSMarketWeb.Solution.Paginas.Servicios
 {
@@ -211,6 +212,10 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlTipoPago, ObjDataConfiguracion.Value.BuscaListas("TIPOPAGOFACTURACION", null, null));
         }
 
+        private void CargarTipoIdentificacion() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoRNC, ObjDataConfiguracion.Value.BuscaListas("TIPOIDENTIFICACION", null, null));
+        }
+
         #endregion
         #region VALIDAR EL TIPO DE PAGO 
         private void ValidarCampoTipoPago(decimal IdTipoPago) {
@@ -293,12 +298,22 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         #endregion
         #region LETRERO
         private void EncabezadoPantalla(string NombreEncabezado) {
-            DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
-            Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
-            lbUsuarioConectado.Text = Nombre.SacarNombre();
+            decimal IdUsuario = Session["Idusuario"] != null ? (decimal)Session["IdUsuario"] : 0;
 
-            Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
-            lbPantallaActual.Text = NombreEncabezado;
+            if (IdUsuario == 0) {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+            else {
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+                Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbPantallaActual.Text = NombreEncabezado;
+            }
+
+           
         }
         #endregion
 
@@ -323,6 +338,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                     cbAgregarComprobante.Checked = false;
                     MostrarComprobantesFiscalesSinUso();
                 }
+                CargarTipoIdentificacion();
                 CargarTipoProductos();
                 CargarCategoias();
                 CargarMarcas();
@@ -344,7 +360,27 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnSeleccioanrCliente_Click(object sender, EventArgs e)
         {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdClienteSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdClienteConsulta")).Value.ToString();
 
+
+            //BUSCAMOS EL CLIENTE Y SACAMOS LOS DATOS
+            var SeleccionarCliente = ObjdataEmpresa.Value.BuscaClientes(hfIdClienteSeleccionado.ToString());
+            Paginar(ref rpListadoClientesConsulta, SeleccionarCliente, 10, ref lbCantidadPaginaVAriableClienteConsulta, ref LinkPrimeraPaginaClienteConsulta, ref LinkAnteriorClienteConsulta, ref LinkSiguienteClienteConsulta, ref LinkUltimoClienteConsulta);
+            HandlePaging(ref dtPaginacionClienteConsulta, ref lbPaginaActualVariavleClienteConsulta);
+            cbAgregarComprobante.Checked = true;
+            MostrarComprobantesFiscalesActivos();
+            foreach (var n in SeleccionarCliente) {
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarComprobante, n.IdComprobante.ToString());
+                txtNombreCliente.Text = n.Nombre;
+                CargarTipoIdentificacion();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRNC, n.IdTipoIdentificacion.ToString());
+                txtRNCCliente.Text = n.RNC;
+                txtTelefonoCliente.Text = n.Telefono;
+                txtMailCliente.Text = n.Email;
+                txtDireccion.Text = n.Direccion;
+                DivBotonQuitarCliente.Visible = true;
+            }
         }
 
         protected void LinkPrimeraPaginaClienteConsulta_Click(object sender, EventArgs e)
@@ -672,16 +708,50 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void rbFacturacion_CheckedChanged(object sender, EventArgs e)
         {
             EncabezadoPantalla("FACTURACION");
+            divDiasCotizacion.Visible = false;
         }
 
         protected void rbConduce_CheckedChanged(object sender, EventArgs e)
         {
             EncabezadoPantalla("CONDUCE");
+            divDiasCotizacion.Visible = false;
         }
 
         protected void rbCotizar_CheckedChanged(object sender, EventArgs e)
         {
             EncabezadoPantalla("COTIZACION");
+            divDiasCotizacion.Visible = true;
+        }
+
+        protected void btnQuitar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnClienteSeleccionar_Click(object sender, EventArgs e)
+        {
+            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdClienteSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdClienteConsulta")).Value.ToString();
+
+
+            //BUSCAMOS EL CLIENTE Y SACAMOS LOS DATOS
+            var SeleccionarCliente = ObjdataEmpresa.Value.BuscaClientes(hfIdClienteSeleccionado.ToString());
+            Paginar(ref rpListadoClientesConsulta, SeleccionarCliente, 10, ref lbCantidadPaginaVAriableClienteConsulta, ref LinkPrimeraPaginaClienteConsulta, ref LinkAnteriorClienteConsulta, ref LinkSiguienteClienteConsulta, ref LinkUltimoClienteConsulta);
+            HandlePaging(ref dtPaginacionClienteConsulta, ref lbPaginaActualVariavleClienteConsulta);
+            cbAgregarComprobante.Checked = true;
+            MostrarComprobantesFiscalesActivos();
+            foreach (var n in SeleccionarCliente)
+            {
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarComprobante, n.IdComprobante.ToString());
+                txtNombreCliente.Text = n.Nombre;
+                CargarTipoIdentificacion();
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRNC, n.IdTipoIdentificacion.ToString());
+                txtRNCCliente.Text = n.RNC;
+                txtTelefonoCliente.Text = n.Telefono;
+                txtMailCliente.Text = n.Email;
+                txtDireccion.Text = n.Direccion;
+                DivBotonQuitarCliente.Visible = true;
+            }
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)

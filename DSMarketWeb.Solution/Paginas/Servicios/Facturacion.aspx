@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/PaginaMaestra.Master" AutoEventWireup="true" CodeBehind="Facturacion.aspx.cs" Inherits="DSMarketWeb.Solution.Paginas.Servicios.Facturacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/PaginaMaestra.Master"  AutoEventWireup="true" CodeBehind="Facturacion.aspx.cs" Inherits="DSMarketWeb.Solution.Paginas.Servicios.Facturacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -42,7 +42,7 @@
             });
         })
     </script>
-    <asp:ScriptManager ID="ScripManagerFActuracion" runat="server"></asp:ScriptManager>
+    
     <div class="container-fluid">
         <br /><br />
          
@@ -64,6 +64,21 @@
                 <asp:RadioButton ID="rbCredito" runat="server" Text="Credito" CssClass="form-check-input" GroupName="TipoVenta" ToolTip="Realizar Venta a Credito" />
             </div>
         </div>
+        <br />
+        
+         <div  id="divDiasCotizacion" runat="server" visible="false" >
+             
+             <div class="form-check-inline">
+            <asp:CheckBox ID="cbAgregarDiasCotizacion" runat="server" Text="Agregar Dias de Vigencia de Cotizacion" CssClass="form-check-input Letranegrita" />
+           
+        </div>
+             <div class="form-row">
+                 <div class="form-group col-md-2">
+                     <asp:Label ID="lbCantidadDiasCotizacion" runat="server" Text="Cantidad de Dias"></asp:Label>
+                     <asp:TextBox ID="txtDiasCotizacion" runat="server" Text="1" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                 </div>
+             </div>
+         </div>
 
 
        <%-- <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
@@ -74,12 +89,13 @@
                  CONTROLES AQUI
                 </div>
             </div>--%>
-       
+       <asp:ScriptManager ID="ScripManagerFActuracion" runat="server"></asp:ScriptManager>
          <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
                     BUSCAR CLIENTES REGISTRADOS PARA FACTURAR
                      </button><br />
        <div class="collapse" id="InformacionCliente">
                 <div class="card card-body">
+                    
                  <asp:UpdatePanel ID="UpdatePanelBuscarClientes" runat="server">
                      <ContentTemplate>
                          <div class="form-row">
@@ -126,7 +142,7 @@
                                              <tr>
                                          <asp:HiddenField ID="hfIdClienteConsulta" runat="server" Value='<%# Eval("IdCliente") %>' />
 
-                                         <td style="width:10%"> <asp:Button ID="btnSeleccioanrCliente" runat="server" Text="Seleccionar" ToolTip="Seleccionar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnSeleccioanrCliente_Click" /> </td>
+                                         <td style="width:10%"> <asp:Button ID="btnClienteSeleccionar" runat="server" Text="Seleccionar" ToolTip="Seleccionar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnClienteSeleccionar_Click" /> </td>
                                          <td style="width:10%"> <%# Eval("IdCliente") %> </td>
                                          <td style="width:30%"> <%# Eval("Nombre") %> </td>
                                          <td style="width:10%"> <%# Eval("Comprobante") %> </td>
@@ -174,7 +190,7 @@
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarComprobante_CheckedChanged" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
-                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarFechaManual_CheckedChanged" ToolTip="Agregar Fecha Manual" />
+                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" Visible="false" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarFechaManual_CheckedChanged" ToolTip="Agregar Fecha Manual" />
             </div>
         </div>
         <div class="form-row">
@@ -217,6 +233,9 @@
                 <asp:Label ID="lbComentario" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
                  <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
             </div>
+        </div>
+        <div align="center" visible="false" id="DivBotonQuitarCliente" runat="server">
+            <asp:Button ID="btnQuitar" runat="server" Text="Quitar" ToolTip="Quitar Cliente Seleccionado" OnClick="btnQuitar_Click" CssClass="btn btn-outline-secondary btn-sm" />
         </div>
        <br />
            <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnAgegarProductosServicios" data-toggle="collapse" data-target="#AgegarProductosServicios" aria-expanded="false" aria-controls="collapseExample">
@@ -495,7 +514,7 @@
                 <asp:TextBox ID="txtCantidadArticulos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
             </div>
 
-             <div class="form-group col-md-3">
+             <div class="form-group col-md-3" runat="server" visible="false" id="divFechaManual">
                 <asp:Label ID="lbFechaManual" runat="server" Text="Fecha Manual" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtFechaManual" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
             </div>
