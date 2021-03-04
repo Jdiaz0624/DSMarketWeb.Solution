@@ -54,6 +54,7 @@
     <Compile Include="Comunes\Mail.cs" />
     <Compile Include="Comunes\RedimencionarImagen.cs" />
     <Compile Include="Comunes\SacarIdCreadoProducto.cs" />
+    <Compile Include="Comunes\SacarNombreUsuario.cs" />
     <Compile Include="Comunes\SacarPorcientoDescuentoPrDefectoProductos.cs" />
     <Compile Include="Comunes\SeguridadEncriptacion.cs" />
     <Compile Include="Comunes\UtilidadDrop.cs" />

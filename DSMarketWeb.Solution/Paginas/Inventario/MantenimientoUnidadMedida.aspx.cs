@@ -206,6 +206,12 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+                Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbPantallaActual.Text = "UNIDAD DE MEDIDA";
                 divPaginacionUnidadMedida.Visible = false;
                 ModoConsulta();
                 OcultarControles();

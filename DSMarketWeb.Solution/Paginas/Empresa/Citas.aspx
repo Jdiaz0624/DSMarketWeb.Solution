@@ -87,11 +87,9 @@
 
     <div class="container-fluid">
         <div id="DivBloqueCOnsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsultaCitas" runat="server" Text="CONSULTA DE CITAS" CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbTipoReporte" runat="server" Text="1" CssClass="Letranegrita" Visible="false"></asp:Label>
-            </div>
+            <br /><br />
 
+            <asp:Label ID="lbTipoReporte" runat="server" Text="1" CssClass="Letranegrita" Visible="false"></asp:Label>
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbAgregarRangoFechaConsulta" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de fecha a la consulta" /><br />

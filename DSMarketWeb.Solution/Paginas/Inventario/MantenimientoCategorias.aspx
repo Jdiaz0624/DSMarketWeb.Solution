@@ -77,9 +77,7 @@
 
     <div class="container-fluid">
         <div id="divBloqueConsulta" runat="server">
-              <div class="jumbotron" align="center">
-            <asp:Label ID="lbTitulo" runat="server" Text="Consulta de Categorias"></asp:Label>
-        </div>
+            <br /><br />
         <div class="form-row">
             <div class="form-group col-md-3">
                 <asp:Label ID="lbTipoProducto" runat="server" Text="Seleccionar Tipo de Producto" CssClass="Letranegrita"></asp:Label>

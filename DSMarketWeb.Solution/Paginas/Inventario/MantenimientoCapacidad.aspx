@@ -75,9 +75,7 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-               <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE CAPACIDAD"></asp:Label>
-            </div>
+            <br /><br />
 
         <div class="form-row">
                     <div class="form-group col-md-4">

@@ -71,9 +71,7 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-               <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE COLORES"></asp:Label>
-            </div>
+            <br /><br />
             <div class="form-row">
                <div class="form-group col-md-4">
                     <asp:Label ID="lbColorConsulta" runat="server" Text="Color" CssClass="Letranegrita"></asp:Label>

@@ -103,9 +103,7 @@
     </script>
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" Text="CONSULTA DE MARCAS" runat="server"></asp:Label>
-            </div>
+           <br /><br />
 
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -194,6 +192,7 @@
                     </table>
                 </div>
             </div>
+            <br />
         </div>     
 
 

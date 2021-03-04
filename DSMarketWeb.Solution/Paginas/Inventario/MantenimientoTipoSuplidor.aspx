@@ -75,9 +75,7 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloTipoSuplidor" runat="server" Text="CONSULTA DE TIPO DE SUPLIDORES"></asp:Label>
-            </div>
+            <br /><br />
 
             <!--CONTROLES DE FILTROS Y BOTONES-->
             <div class="form-row">
@@ -158,6 +156,7 @@
                     </table>
                 </div>
             </div>
+            <br />
         </div>
 
 

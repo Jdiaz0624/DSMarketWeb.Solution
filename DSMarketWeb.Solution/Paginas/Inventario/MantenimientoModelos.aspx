@@ -126,9 +126,7 @@
 
     <div class="container-fluid">
 <div id="idBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-            <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE MODELOS"></asp:Label>
-        </div>
+            <br /><br />
 
         <div class="form-row">
 

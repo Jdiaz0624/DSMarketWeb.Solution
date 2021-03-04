@@ -120,9 +120,7 @@
     </script>
 <div class="container-fluid">
         <div id="DivBloqueConsulta"  runat="server">
-        <div class="jumbotron" align="center">
-            <asp:Label ID="lbIdSuplidor" runat="server" Text="CONSULTA DE SUPLIDORES"></asp:Label>
-        </div>
+      <br /><br />
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarTipoSulidorConsulta" runat="server" Text="Seleccionar Tipo de Suplidor" CssClass="Letranegrita"></asp:Label>

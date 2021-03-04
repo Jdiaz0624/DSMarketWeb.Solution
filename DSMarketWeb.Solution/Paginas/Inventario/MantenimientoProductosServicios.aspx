@@ -78,7 +78,7 @@
             }
 
         }
-        -->
+     
         function CamposFechaVAcios() {
             alert("Los campos fecha no pueden estar vacios para buscar registros mediante este metodo.");
         }
@@ -466,9 +466,7 @@
 
     <div id="divBloqueConsulta" runat="server">
         <div class="container-fluid">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE INVENTARIO"></asp:Label>
-            </div>
+         <br /><br />
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de Fecha a la Consulta" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFecha_CheckedChanged" />

@@ -585,6 +585,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+                Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbPantallaActual.Text = "CONSULTA DE CITAS";
+               
                 CargarListasDesplegablesConsulta();
                 CargarListaDesplegableMantenimiento(); 
                 rbTodos.Checked = true;

@@ -44,11 +44,8 @@
     </script>
 
     <div class="container-fluid">
-        <div class="jumbotron" align="center">
-            <asp:Label ID="lbTitulo" runat="server" Text="Facturación" CssClass="Letranegrita"></asp:Label>
-            <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
-        </div>
-
+        <br /><br />
+        <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:Label ID="lbTipoProcesoFacturacion" runat="server" Text="Tipo de Proceso: " CssClass="Letranegrita"></asp:Label>

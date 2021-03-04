@@ -77,9 +77,7 @@
        
 
         <div id="DivBloqueConsulta" runat="server">
-             <div class="jumbotron" align="center">
-            <asp:Label ID="lbTituloConsulta" runat="server" Text="Consulta de Unidad de Medida"></asp:Label>
-        </div>
+            <br /><br />
         <div class="form-row">
             <div class="form-group col-md-3">
                 <asp:Label ID="lbUnidadMedidaConsulta" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>

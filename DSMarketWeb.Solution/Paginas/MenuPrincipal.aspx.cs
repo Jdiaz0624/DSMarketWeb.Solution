@@ -17,14 +17,20 @@ namespace DSMarketWeb.Solution.Paginas
             if (!IsPostBack) {
                 if (Session["IdUsuario"] != null)
                 {
-                    string Usuario = "";
                     var SacarInformacionUsuarioConectado = ObjDataLogica.Value.BuscaUsuarios(Convert.ToDecimal(Session["IdUsuario"]), null, null, null, null);
+
+                    Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                    lbUsuarioConectado.Text = "";
+
+                    Label lbNivelAcceso = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                    lbNivelAcceso.Text = "";
+
                     foreach (var n in SacarInformacionUsuarioConectado)
                     {
-                        Usuario = n.Persona;
+                        lbUsuarioConectado.Text = n.Persona;
                         lbNivelAcceso.Text = n.Nivel;
                     }
-                    lbUsuarioConectado.Text = Usuario + " - ";
+                   // lbUsuarioConectado.Text = Usuario + " - ";
                 }
                 else {
                     FormsAuthentication.SignOut();

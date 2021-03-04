@@ -913,6 +913,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             divBloqueDetalle.Visible = false;
             divBloqueSuplir.Visible = true;
             divBloqueDescartar.Visible = true;
+            NombreUsuairoPantalla("CONSULTA DE INVENTARIO");
         }
         #endregion
         #region VALIDAR FNCIONES
@@ -1237,12 +1238,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         }
         #endregion
+        #region COLOCAR EL NOMBRE DE USUARIO Y LA PANTALLA ACTUAL
+        private void NombreUsuairoPantalla(string Pantalla) {
+            DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+            Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+            lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+            Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
+            lbPantallaActual.Text = Pantalla;
+        }
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+
+                NombreUsuairoPantalla("CONSULTA DE INVENTARIO");
                 cbGraficarConsulta.Checked = true;
                 cbGraficarConsulta.Visible = false;
                 rbExportarPDF.Checked = true;
@@ -1325,6 +1338,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             cbAgregarImagenArticulo.Checked = false;
             DivBloqueImagenProducto.Visible = false;
             UpImagen.Enabled = true;
+            NombreUsuairoPantalla("CREAR NUEVO REGISTRO DE INVENTARIO");
         }
 
         protected void btnModificarConsulta_Click(object sender, EventArgs e)
@@ -1349,6 +1363,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             cbProductoAcumulativoMantenimiento.Visible = false;
             ddlSeleccionarTipoProductoMantenimiento.Enabled = false;
             UpImagen.Enabled = true;
+            NombreUsuairoPantalla("MODIFICAR REGISTRO DE INVENTARIO");
         }
 
         protected void btnEliminarConsulta_Click(object sender, EventArgs e)
@@ -1372,7 +1387,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                
             }
             UpImagen.Enabled = false;
-
+            NombreUsuairoPantalla("ELIMINAR REGISTRO DE INVENTARIO");
         }
 
         protected void btnExportarConsulta_Click(object sender, EventArgs e)
@@ -1479,6 +1494,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected void btnVolverMantenimiento_Click(object sender, EventArgs e)
         {
             VolverAtras();
+            NombreUsuairoPantalla("CONSULTA DE INVENTARIO");
         }
 
         protected void btnModificarMantenimiento_Click(object sender, EventArgs e)
