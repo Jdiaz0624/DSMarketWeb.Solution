@@ -42,15 +42,18 @@
             });
         })
     </script>
-
+    <asp:ScriptManager ID="ScripManagerFActuracion" runat="server"></asp:ScriptManager>
     <div class="container-fluid">
         <br /><br />
+         
         <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:Label ID="lbTipoProcesoFacturacion" runat="server" Text="Tipo de Proceso: " CssClass="Letranegrita"></asp:Label>
-                <asp:RadioButton ID="rbFacturacion" runat="server" Text="Facturación" CssClass="form-check-input" GroupName="TipoProceso" ToolTip="Facturar" />
-                <asp:RadioButton ID="rbCotizar" runat="server" Text="Cotización" CssClass="form-check-inpu" GroupName="TipoProceso" ToolTip="Cotizar" />
+                <asp:RadioButton ID="rbFacturacion" runat="server" Text="Facturación" CssClass="form-check-input" GroupName="TipoProceso" ToolTip="Facturar" AutoPostBack="true" OnCheckedChanged="rbFacturacion_CheckedChanged" />
+                <asp:RadioButton ID="rbConduce" runat="server" Text="Conduce" CssClass="form-check-input" GroupName="TipoProceso" ToolTip="Conduce de Factura" AutoPostBack="true" OnCheckedChanged="rbConduce_CheckedChanged" />
+                <asp:RadioButton ID="rbCotizar" runat="server" Text="Cotización" CssClass="form-check-inpu" GroupName="TipoProceso" ToolTip="Cotizar" AutoPostBack="true" OnCheckedChanged="rbCotizar_CheckedChanged" />
+             
             </div>
         </div>
 
@@ -71,7 +74,7 @@
                  CONTROLES AQUI
                 </div>
             </div>--%>
-        <asp:ScriptManager ID="ScripManagerFActuracion" runat="server"></asp:ScriptManager>
+       
          <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
                     BUSCAR CLIENTES REGISTRADOS PARA FACTURAR
                      </button><br />

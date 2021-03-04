@@ -15,6 +15,15 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
     {
 
         /// <summary>
+        /// ScripManagerFActuracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScripManagerFActuracion;
+
+        /// <summary>
         /// lbNumeroConectorFacturacion control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbFacturacion;
+
+        /// <summary>
+        /// rbConduce control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbConduce;
 
         /// <summary>
         /// rbCotizar control.
@@ -76,15 +94,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCredito;
-
-        /// <summary>
-        /// ScripManagerFActuracion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScripManagerFActuracion;
 
         /// <summary>
         /// UpdatePanelBuscarClientes control.

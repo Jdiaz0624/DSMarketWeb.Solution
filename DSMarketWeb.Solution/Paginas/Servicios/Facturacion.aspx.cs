@@ -291,19 +291,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         }
         #endregion
+        #region LETRERO
+        private void EncabezadoPantalla(string NombreEncabezado) {
+            DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+            Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+            lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+            Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
+            lbPantallaActual.Text = NombreEncabezado;
+        }
+        #endregion
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
-                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
-                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
-                lbUsuarioConectado.Text = Nombre.SacarNombre();
 
-                Label lbPantallaActual = (Label)Master.FindControl("lbNivelAccesoPantalla");
-                lbPantallaActual.Text = "FACTURACION";
-
+                EncabezadoPantalla("FACTURACION");
                 rbFacturacion.Checked = true;
                 rbContado.Checked = true;
                 int IdConfiguracionComprobante = (int)DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera.ConceptoConfiguracionGeneral.USAR_COMPROBANTES_FISCALES;
@@ -662,6 +667,21 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             catch (Exception) {
                 txtDescuentoMaximoVistaPrevia.Text = "ERROR EN CAMPO CANTIDAD";
             }
+        }
+
+        protected void rbFacturacion_CheckedChanged(object sender, EventArgs e)
+        {
+            EncabezadoPantalla("FACTURACION");
+        }
+
+        protected void rbConduce_CheckedChanged(object sender, EventArgs e)
+        {
+            EncabezadoPantalla("CONDUCE");
+        }
+
+        protected void rbCotizar_CheckedChanged(object sender, EventArgs e)
+        {
+            EncabezadoPantalla("COTIZACION");
         }
 
         protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)
