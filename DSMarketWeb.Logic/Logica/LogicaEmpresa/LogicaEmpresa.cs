@@ -19,41 +19,40 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
             var Listado = (from n in ObjData.SP_BUSCA_CLIENTES(IdCliente, IdComprobante, Nombre, RNC, Estatus, EnvioEmail, UsuarioProcesa)
                            select new DSMarketWeb.Logic.Entidades.EntidadesEmpresa.EClientes
                            {
-                               IdCliente = n.IdCliente,
-                               IdComprobante = n.IdComprobante,
-                               Comprobante = n.Comprobante,
-                               Nombre = n.Nombre,
-                               Telefono = n.Telefono,
-                               IdTipoIdentificacion = n.IdTipoIdentificacion,
-                               TipoIdentificacion = n.TipoIdentificacion,
-                               RNC = n.RNC,
-                               Direccion = n.Direccion,
-                               Email = n.Email,
-                               Comentario = n.Comentario,
-                               Estatus0 = n.Estatus0,
-                               Estatus = n.Estatus,
-                               EnvioEmail0 = n.EnvioEmail0,
-                               EnvioEmail = n.EnvioEmail,
-                               UsuarioAdiciona = n.UsuarioAdiciona,
-                               CreadoPor = n.CreadoPor,
-                               FechaAdiciona = n.FechaAdiciona,
-                               FechaCreado = n.FechaCreado,
-                               UsuarioModifica = n.UsuarioModifica,
-                               ModificadoPor = n.ModificadoPor,
-                               FechaModifica = n.FechaModifica,
-                               FechaModificado = n.FechaModificado,
-                               MontoCredito = n.MontoCredito,
-                               NombreEmpresa = n.NombreEmpresa,
-                               RNC1 = n.RNC1,
-                               Direccion1 = n.Direccion1,
-                               Email1 = n.Email1,
-                               Email2 = n.Email2,
-                               Telefonos = n.Telefonos,
-                               Facebook = n.Facebook,
-                               LogoEmpresa = n.LogoEmpresa,
-                               GeneradoPor = n.GeneradoPor,
-                               Instagran = n.Instagran,
-                               CantidadClientes = n.CantidadClientes
+                               IdCliente=n.IdCliente,
+                               IdComprobante=n.IdComprobante,
+                               Comprobante=n.Comprobante,
+                               Nombre=n.Nombre,
+                               Telefono=n.Telefono,
+                               IdTipoIdentificacion=n.IdTipoIdentificacion,
+                               TipoIdentificacion=n.TipoIdentificacion,
+                               RNC=n.RNC,
+                               Direccion=n.Direccion,
+                               Email=n.Email,
+                               Comentario=n.Comentario,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               EnvioEmail0=n.EnvioEmail0,
+                               EnvioEmail=n.EnvioEmail,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadoPor=n.CreadoPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado,
+                               MontoCredito=n.MontoCredito,
+                               NombreEmpresa=n.NombreEmpresa,
+                               RNCEmpresa=n.RNCEmpresa,
+                               DireccionEmpresa=n.DireccionEmpresa,
+                               PrimerEmailEmpresa=n.PrimerEmailEmpresa,
+                               SegundoEmailEmpresa=n.SegundoEmailEmpresa,
+                               Telefonos=n.Telefonos,
+                               Instagran=n.Instagran,
+                               Facebook=n.Facebook,
+                               LogoEmpresa=n.LogoEmpresa,
+                               GeneradoPor=n.GeneradoPor
                            }).ToList();
             return Listado;
         }
@@ -881,7 +880,6 @@ namespace DSMarketWeb.Logic.Logica.LogicaEmpresa
             return Mantenimiento;
         }
         #endregion
-
 
         #region MANTENIMIENTO DE CITAS
         //LISTADO DE CITAS ENCABEZADO

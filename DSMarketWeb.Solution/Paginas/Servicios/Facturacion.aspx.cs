@@ -18,6 +18,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         Lazy<DSMarketWeb.Logic.Logica.LogicaServicio.LogicaServicio> ObjDataServicio = new Lazy<Logic.Logica.LogicaServicio.LogicaServicio>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
 
+        enum CodigosBloqueoYDesbloqueo { 
+        BloquearControles = 1,
+        DesbloquearControles=2
+        }
+
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
         int _PrimeraPagina, _UltimaPagina;
@@ -99,7 +104,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             RptGrid.DataBind();
 
 
-            divPaginacionClienteConsulta.Visible = true;
+
             divPaginacionProductoAgregar.Visible = true;
         }
         enum OpcionesPaginacionValores
@@ -151,28 +156,43 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
 
         #endregion
-        #region MOSTRAR EL LISTADO DE LOS CLIENTES REGISTRADOS
-        private void MostrarClientesRegistrados() {
-            string _CodigoCliente = string.IsNullOrEmpty(txtCodigoClienteConsulta.Text.Trim()) ? null : txtCodigoClienteConsulta.Text.Trim();
-            string _RNCCliente = string.IsNullOrEmpty(txtRNCConsultaCliente.Text.Trim()) ? null : txtRNCConsultaCliente.Text.Trim();
-            string _NombreCliente = string.IsNullOrEmpty(txtNombreClienteConsulta.Text.Trim()) ? null : txtNombreClienteConsulta.Text.Trim();
+        #region BUSCAR CLIENTES REGISTRADOS
+        private void BuscarClientes() {
 
-            var Listado = ObjdataEmpresa.Value.BuscaClientes(
+            string _CodigoCliente = string.IsNullOrEmpty(txtCodigoClienteBuscar.Text.Trim()) ? null : txtCodigoClienteBuscar.Text.Trim();
+            string _RNCCedulaCLiente = string.IsNullOrEmpty(txtRNCCedulaCliente.Text.Trim()) ? null : txtRNCCedulaCliente.Text.Trim();
+
+            var Buscar = ObjdataEmpresa.Value.BuscaClientes(
                 _CodigoCliente,
                 null,
-                _NombreCliente,
-                _RNCCliente, true, null, null);
-            if (Listado.Count() < 1) {
-                lbCantidadRegistrosEncontradosClientesVariables.Text = "0";
+                null,
+                _RNCCedulaCLiente,
+                null,
+                null,
+                null);
+            if (Buscar.Count() < 1) {
+                ClientScript.RegisterStartupScript(GetType(), "CLienteNoEncontrado()", "CLienteNoEncontrado();", true);
             }
             else {
-                int CantidadRegistros = Listado.Count;
-                lbCantidadRegistrosEncontradosClientesVariables.Text = CantidadRegistros.ToString("N0");
-
-                Paginar(ref rpListadoClientesConsulta, Listado, 10, ref lbCantidadPaginaVAriableClienteConsulta, ref LinkPrimeraPaginaClienteConsulta, ref LinkAnteriorClienteConsulta, ref LinkSiguienteClienteConsulta, ref LinkUltimoClienteConsulta);
-                HandlePaging(ref dtPaginacionClienteConsulta, ref lbPaginaActualVariavleClienteConsulta);
+                cbAgregarComprobante.Checked = true;
+                MostrarComprobantesFiscalesActivos();
+                CargarTipoIdentificacion();
+                foreach (var n in Buscar) {
+                    DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarComprobante, n.IdComprobante.ToString());
+                    txtNombreCliente.Text = n.Nombre;
+                    DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRNC, n.IdTipoIdentificacion.ToString());
+                    txtRNCCliente.Text = n.RNC;
+                    txtTelefonoCliente.Text = n.Telefono;
+                    txtMailCliente.Text = n.Email;
+                    txtDireccion.Text = n.Direccion;
+                    lbCodigoClienteSeleccionado.Text = n.IdCliente.ToString();
+                    lbLimiteCreditoClienteSeleccionado.Text = n.MontoCredito.ToString();
+                    decimal MontoCredito = (decimal)n.MontoCredito;
+                    txtCodigoClienteSeleccionado.Text = n.IdCliente.ToString();
+                    txtLimiteCreditoClienteSeleccionado.Text = MontoCredito.ToString("N2");
+                }
+                BloquearDesbloquearControles((int)CodigosBloqueoYDesbloqueo.BloquearControles);
             }
-
         }
         #endregion
         #region CARLAR LAS LISTAS DESPLEGABLES DE LA PANTALLA
@@ -316,28 +336,111 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
            
         }
         #endregion
+        #region VALIDAR SI LOS COMPROBANTES ESTAN ACTIVOS
+        /// <summary>
+        /// Este metodo es para validar si los comprobantes estan activos o inactivos en la configuración general.
+        /// </summary>
+        private void ValidarComprobantesFiscales() {
+            int IdConfiguracionComprobante = (int)DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera.ConceptoConfiguracionGeneral.USAR_COMPROBANTES_FISCALES;
+            bool EstatusComprobantes = false;
+            DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera Validar = new Logic.Comunes.ValidarConfiguracionGenera(IdConfiguracionComprobante);
+            EstatusComprobantes = Validar.SacarEstatusConfiguracionGeneral();
+            if (EstatusComprobantes == true)
+            {
+                cbAgregarComprobante.Checked = true;
+                MostrarComprobantesFiscalesActivos();
+            }
+            else
+            {
+                cbAgregarComprobante.Checked = false;
+                MostrarComprobantesFiscalesSinUso();
+            }
+        }
+        #endregion
+        #region BLOQUEAR Y DESBLOQUEAR CONTROLES
+        private void BloquearDesbloquearControles(int CodigoOperacion) {
+
+            if (CodigoOperacion == (int)CodigosBloqueoYDesbloqueo.BloquearControles) {
+                lblCodigoCliente.Visible = true;
+                txtCodigoClienteSeleccionado.Visible = true;
+                lbLimiteCredito.Visible = true;
+                txtLimiteCreditoClienteSeleccionado.Visible = true;
+
+                cbAgregarComprobante.Enabled = false;
+                cbBuscarCliente.Enabled = false;
+                txtCodigoClienteBuscar.Enabled = false;
+                txtRNCCedulaCliente.Enabled = false;
+                ddlSeleccionarComprobante.Enabled = false;
+                txtNombreCliente.Enabled = false;
+                ddlSeleccionarTipoRNC.Enabled = false;
+                txtRNCCliente.Enabled = false;
+                txtTelefonoCliente.Enabled = false;
+                txtMailCliente.Enabled = false;
+                txtDireccion.Enabled = false;
+                DivBloqueAgregarClientes.Visible = false;
+                DivBotonQuitarCliente.Visible = true;
+
+                
+
+
+            }
+            else if (CodigoOperacion == (int)CodigosBloqueoYDesbloqueo.DesbloquearControles) {
+                cbAgregarComprobante.Enabled = true;
+                ValidarComprobantesFiscales();
+                cbBuscarCliente.Enabled = true;
+                cbBuscarCliente.Checked = false;
+                txtCodigoClienteBuscar.Enabled = true;
+                txtCodigoClienteBuscar.Text = string.Empty;
+                txtRNCCedulaCliente.Enabled = true;
+                txtRNCCedulaCliente.Text = string.Empty;
+                ddlSeleccionarComprobante.Enabled = true;
+                txtNombreCliente.Enabled = true;
+                txtNombreCliente.Text = string.Empty;
+                ddlSeleccionarTipoRNC.Enabled = true;
+                CargarTipoIdentificacion();
+                txtRNCCliente.Enabled = true;
+                txtRNCCliente.Text = string.Empty;
+                txtTelefonoCliente.Enabled = true;
+                txtTelefonoCliente.Text = string.Empty;
+                txtMailCliente.Enabled = true;
+                txtMailCliente.Text = string.Empty;
+                txtDireccion.Enabled = true;
+                txtDireccion.Text = string.Empty;
+                txtComentario.Text = string.Empty;
+                txtCodigoClienteSeleccionado.Text = string.Empty;
+                txtLimiteCreditoClienteSeleccionado.Text = string.Empty;
+                lbLimiteCreditoClienteSeleccionado.Text = "0";
+                lbCodigoClienteSeleccionado.Text = "1";
+                DivBloqueAgregarClientes.Visible = false;
+                DivBotonQuitarCliente.Visible = false;
+
+                lblCodigoCliente.Visible = false;
+                txtCodigoClienteSeleccionado.Visible = false;
+                lbLimiteCredito.Visible = false;
+                txtLimiteCreditoClienteSeleccionado.Visible = false;
+            }
+        
+        }
+        #endregion
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DivBloqueAgregarClientes.Visible = false;
+                lbCodigoClienteSeleccionado.Text = "1";
+                lbLimiteCreditoClienteSeleccionado.Text = "0";
+
+                lblCodigoCliente.Visible = false;
+                txtCodigoClienteSeleccionado.Visible = false;
+                lbLimiteCredito.Visible = false;
+                txtLimiteCreditoClienteSeleccionado.Visible = false;
 
                 EncabezadoPantalla("FACTURACION");
                 rbFacturacion.Checked = true;
                 rbContado.Checked = true;
-                int IdConfiguracionComprobante = (int)DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera.ConceptoConfiguracionGeneral.USAR_COMPROBANTES_FISCALES;
-                bool EstatusComprobantes = false;
-                DSMarketWeb.Logic.Comunes.ValidarConfiguracionGenera Validar = new Logic.Comunes.ValidarConfiguracionGenera(IdConfiguracionComprobante);
-                EstatusComprobantes = Validar.SacarEstatusConfiguracionGeneral();
-                if (EstatusComprobantes == true) {
-                    cbAgregarComprobante.Checked = true;
-                    MostrarComprobantesFiscalesActivos();
-                }
-                else {
-                    cbAgregarComprobante.Checked = false;
-                    MostrarComprobantesFiscalesSinUso();
-                }
+                ValidarComprobantesFiscales();
                 CargarTipoIdentificacion();
                 CargarTipoProductos();
                 CargarCategoias();
@@ -352,67 +455,19 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             }
         }
 
-        protected void btnConsultarClientes_Click(object sender, EventArgs e)
-        {
-            MostrarClientesRegistrados();
-          //  MostrarListadoCLientes();
-        }
-
-        protected void btnSeleccioanrCliente_Click(object sender, EventArgs e)
-        {
-            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
-            var hfIdClienteSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdClienteConsulta")).Value.ToString();
 
 
-            //BUSCAMOS EL CLIENTE Y SACAMOS LOS DATOS
-            var SeleccionarCliente = ObjdataEmpresa.Value.BuscaClientes(hfIdClienteSeleccionado.ToString());
-            Paginar(ref rpListadoClientesConsulta, SeleccionarCliente, 10, ref lbCantidadPaginaVAriableClienteConsulta, ref LinkPrimeraPaginaClienteConsulta, ref LinkAnteriorClienteConsulta, ref LinkSiguienteClienteConsulta, ref LinkUltimoClienteConsulta);
-            HandlePaging(ref dtPaginacionClienteConsulta, ref lbPaginaActualVariavleClienteConsulta);
-            cbAgregarComprobante.Checked = true;
-            MostrarComprobantesFiscalesActivos();
-            foreach (var n in SeleccionarCliente) {
-                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarComprobante, n.IdComprobante.ToString());
-                txtNombreCliente.Text = n.Nombre;
-                CargarTipoIdentificacion();
-                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRNC, n.IdTipoIdentificacion.ToString());
-                txtRNCCliente.Text = n.RNC;
-                txtTelefonoCliente.Text = n.Telefono;
-                txtMailCliente.Text = n.Email;
-                txtDireccion.Text = n.Direccion;
-                DivBotonQuitarCliente.Visible = true;
-            }
-        }
 
         protected void LinkPrimeraPaginaClienteConsulta_Click(object sender, EventArgs e)
         {
             CurrentPage = 0;
-            MostrarClientesRegistrados();
-        }
-
-        protected void LinkAnteriorClienteConsulta_Click(object sender, EventArgs e)
-        {
-            CurrentPage += -1;
-            MostrarClientesRegistrados();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior,ref lbPaginaActualVariavleClienteConsulta,ref lbCantidadPaginaVAriableClienteConsulta);
-        }
-
-        protected void dtPaginacionClienteConsulta_ItemDataBound(object sender, DataListItemEventArgs e)
-        {
 
         }
 
-        protected void dtPaginacionClienteConsulta_ItemCommand(object source, DataListCommandEventArgs e)
-        {
-            if (!e.CommandName.Equals("newPage")) return;
-            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
-            MostrarClientesRegistrados();
-        }
+  
 
-        protected void LinkSiguienteClienteConsulta_Click(object sender, EventArgs e)
-        {
-            CurrentPage += 1;
-            MostrarClientesRegistrados();
-        }
+
+
 
         protected void ddlSeleccionarTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -723,42 +778,26 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             divDiasCotizacion.Visible = true;
         }
 
-        protected void btnQuitar_Click(object sender, EventArgs e)
+        protected void cbBuscarCliente_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnClienteSeleccionar_Click(object sender, EventArgs e)
-        {
-            var ItemSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
-            var hfIdClienteSeleccionado = ((HiddenField)ItemSeleccionado.FindControl("hfIdClienteConsulta")).Value.ToString();
-
-
-            //BUSCAMOS EL CLIENTE Y SACAMOS LOS DATOS
-            var SeleccionarCliente = ObjdataEmpresa.Value.BuscaClientes(hfIdClienteSeleccionado.ToString());
-            Paginar(ref rpListadoClientesConsulta, SeleccionarCliente, 10, ref lbCantidadPaginaVAriableClienteConsulta, ref LinkPrimeraPaginaClienteConsulta, ref LinkAnteriorClienteConsulta, ref LinkSiguienteClienteConsulta, ref LinkUltimoClienteConsulta);
-            HandlePaging(ref dtPaginacionClienteConsulta, ref lbPaginaActualVariavleClienteConsulta);
-            cbAgregarComprobante.Checked = true;
-            MostrarComprobantesFiscalesActivos();
-            foreach (var n in SeleccionarCliente)
-            {
-                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarComprobante, n.IdComprobante.ToString());
-                txtNombreCliente.Text = n.Nombre;
-                CargarTipoIdentificacion();
-                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoRNC, n.IdTipoIdentificacion.ToString());
-                txtRNCCliente.Text = n.RNC;
-                txtTelefonoCliente.Text = n.Telefono;
-                txtMailCliente.Text = n.Email;
-                txtDireccion.Text = n.Direccion;
-                DivBotonQuitarCliente.Visible = true;
+            if (cbBuscarCliente.Checked == true) {
+                DivBloqueAgregarClientes.Visible = true;
+            }
+            else if (cbBuscarCliente.Checked == false) {
+                DivBloqueAgregarClientes.Visible = false;
             }
         }
 
-        protected void LinkUltimoClienteConsulta_Click(object sender, EventArgs e)
+        protected void btnConsultarRegistros_Click(object sender, EventArgs e)
         {
-            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
-            MostrarClientesRegistrados();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleClienteConsulta, ref lbCantidadPaginaVAriableClienteConsulta);
+            BuscarClientes();
         }
+
+        protected void btnQuitar_Click(object sender, EventArgs e)
+        {
+            BloquearDesbloquearControles((int)CodigosBloqueoYDesbloqueo.DesbloquearControles);
+        }
+
+
     }
 }

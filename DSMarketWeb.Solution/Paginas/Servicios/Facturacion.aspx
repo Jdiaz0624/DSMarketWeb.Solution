@@ -36,16 +36,33 @@
     </style>
 
     <script type="text/javascript">
+        function CLienteNoEncontrado() {
+            alert("No se encontro ningun cliente con los parametros ingresados, favor de verificar e intentar nuevamente.");
+        }
         $(document).ready(function () {
             $("#<%=btnAgregarRegistro.ClientID%>").click(function () {
                 alert("d");
+            });
+
+
+            $("#<%=btnConsultarRegistros.ClientID%>").click(function () {
+                var CodigoCliente = $("#<%=txtCodigoClienteBuscar.ClientID%>").val().length;
+                var RNCedula = $("#<%=txtRNCCedulaCliente.ClientID%>").val().length;
+
+                if (CodigoCliente < 1 && RNCedula < 1) {
+                    alert("Los campos de consulta no pueden estar ambos vacios para buscar un cliente, favor de llevar uno e intentarlo nuevamente.");
+                    $("#<%=txtCodigoClienteBuscar.ClientID%>").css("border-color", "red");
+                    $("#<%=txtRNCCedulaCliente.ClientID%>").css("border-color", "red");
+                    return false;
+                }
             });
         })
     </script>
     
     <div class="container-fluid">
         <br /><br />
-         
+         <asp:Label ID="lbCodigoClienteSeleccionado" runat="server" Text="Codigo de Cliente" Visible="false"></asp:Label>
+        <asp:Label ID="lbLimiteCreditoClienteSeleccionado" runat="server" Text="LimiteCredito" Visible="false"></asp:Label>
         <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
         <div class="form-check-inline">
             <div class="form-group form-check">
@@ -89,109 +106,33 @@
                  CONTROLES AQUI
                 </div>
             </div>--%>
-       <asp:ScriptManager ID="ScripManagerFActuracion" runat="server"></asp:ScriptManager>
-         <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
-                    BUSCAR CLIENTES REGISTRADOS PARA FACTURAR
-                     </button><br />
-       <div class="collapse" id="InformacionCliente">
-                <div class="card card-body">
-                    
-                 <asp:UpdatePanel ID="UpdatePanelBuscarClientes" runat="server">
-                     <ContentTemplate>
-                         <div class="form-row">
-                             <div class="form-group col-md-4">
-                                 <asp:Label ID="lbCodigoClienteConsulta" runat="server" Text="Codigo de Cliente" CssClass="Letranegrita"></asp:Label>
-                                 <asp:TextBox ID="txtCodigoClienteConsulta" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
-                             </div>
-
-                             <div class="form-group col-md-4">
-                                  <asp:Label ID="lbRNCClienteConsulta" runat="server" Text="RNC de Cliente" CssClass="Letranegrita"></asp:Label>
-                                 <asp:TextBox ID="txtRNCConsultaCliente" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
-                             </div>
-
-                             <div class="form-group col-md-4">
-                                  <asp:Label ID="lbNombreClienteConsulta" runat="server" Text="Nombre de Cliente" CssClass="Letranegrita"></asp:Label>
-                                 <asp:TextBox ID="txtNombreClienteConsulta" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
-                             </div>
-                         </div>
-                         <div align="center">
-                             <asp:Button ID="btnConsultarClientes" runat="server" Text="Consultar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Consultar Registros" OnClick="btnConsultarClientes_Click" />
-                             <br /><br />
-                             <asp:Label ID="lbCantidadRegistrosEncontradosClienteTitulo" runat="server" Text="Cantidad de Registros ( " CssClass="Letranegrita"></asp:Label>
-                             <asp:Label ID="lbCantidadRegistrosEncontradosClientesVariables" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                             <asp:Label ID="lbCantidadRegistrosEncontradosClientesCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
-                         </div>
-                         <br />
-
-                         <div class="table-responsive">
-                             <table class="table table-hover">
-                                 <thead>
-                                     <tr>
-                                         <th style="width:10%" align="center"> <asp:Label ID="lbSeleccionarClienteHeaderRepeater" runat="server" Text="Seleccionar" CssClass="Letranegrita"></asp:Label> </th>
-                                         <th style="width:10%" align="center"> <asp:Label ID="lbCodigoClienteHeaderRepeater" runat="server" Text="Codigo" CssClass="Letranegrita"></asp:Label>  </th>
-                                         <th style="width:30%" align="center"> <asp:Label ID="lbClienteClienteHeaderRepeater" runat="server" Text="Cliente" CssClass="Letranegrita"></asp:Label>  </th>
-                                         <th style="width:10%" align="center"> <asp:Label ID="lbRNCClienteHeaderRepeater" runat="server" Text="NCF" CssClass="Letranegrita"></asp:Label>  </th>
-                                         <th style="width:10%" align="center"> <asp:Label ID="lbTelefonoClienteHeaderRepeater" runat="server" Text="Telefono" CssClass="Letranegrita"></asp:Label>  </th>
-                                         <th style="width:20%" align="center"> <asp:Label ID="lbEmailClienteHeaderRepeater" runat="server" Text="Email" CssClass="Letranegrita"></asp:Label>  </th>
-                                         <th style="width:10%" align="center"> <asp:Label ID="lbCreditoClienteHeaderRepeater" runat="server" Text="Credito" CssClass="Letranegrita"></asp:Label>  </th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     <asp:Repeater ID="rpListadoClientesConsulta" runat="server">
-                                         <ItemTemplate>
-                                             <tr>
-                                         <asp:HiddenField ID="hfIdClienteConsulta" runat="server" Value='<%# Eval("IdCliente") %>' />
-
-                                         <td style="width:10%"> <asp:Button ID="btnClienteSeleccionar" runat="server" Text="Seleccionar" ToolTip="Seleccionar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnClienteSeleccionar_Click" /> </td>
-                                         <td style="width:10%"> <%# Eval("IdCliente") %> </td>
-                                         <td style="width:30%"> <%# Eval("Nombre") %> </td>
-                                         <td style="width:10%"> <%# Eval("Comprobante") %> </td>
-                                         <td style="width:10%"> <%# Eval("Telefono") %> </td>
-                                         <td style="width:20%"> <%# Eval("Email") %> </td>
-                                         <td style="width:10%"> <%#string.Format("{0:n2}", Eval("MontoCredito")) %> </td>
-                                     </tr>
-                                         </ItemTemplate>
-                                     </asp:Repeater>
-                                 </tbody>
-                             </table>
-                         </div>
-                          <!--PAGINACION DEL REPEATER-->
-            <div align="center">
-                <asp:Label ID="lbPaginaActualTituloClienteConsulta" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbPaginaActualVariavleClienteConsulta" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaTituloClienteConsulta" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaVAriableClienteConsulta" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            </div>
-             <div id="divPaginacionClienteConsulta" runat="server" align="center">
-        <div style="margin-top: 20px;">
-            <table style="width: 600px">
-                <tr>
-                    <td> <asp:LinkButton ID="LinkPrimeraPaginaClienteConsulta" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaClienteConsulta_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkAnteriorClienteConsulta" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorClienteConsulta_Click"></asp:LinkButton> </td>
-                    <td>
-                        <asp:DataList ID="dtPaginacionClienteConsulta" runat="server" OnItemCommand="dtPaginacionClienteConsulta_ItemCommand" OnItemDataBound="dtPaginacionClienteConsulta_ItemDataBound" RepeatDirection="Horizontal">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="LinkPaginacionCentralClienteConsulta" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:DataList>
-
-                    </td>
-                    <td> <asp:LinkButton ID="LinkSiguienteClienteConsulta" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteClienteConsulta_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkUltimoClienteConsulta" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoClienteConsulta_Click"></asp:LinkButton> </td>
-                </tr>
-            </table>
-        </div>
-        </div>
-                     </ContentTemplate>
-                 </asp:UpdatePanel>
-                </div>
-            </div>
+     
+    
+       
 
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarComprobante_CheckedChanged" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
+                <asp:CheckBox ID="cbBuscarCliente" runat="server" Text="Buscar Clientes" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbBuscarCliente_CheckedChanged" ToolTip="Buscar Clientes para facturar" />
                 <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" Visible="false" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarFechaManual_CheckedChanged" ToolTip="Agregar Fecha Manual" />
             </div>
+        </div>
+        
+        <div id="DivBloqueAgregarClientes" runat="server">
+            <div class="form-row" >
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbCodigoClienteBuscar" runat="server" Text="Codigo de Cliente" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCodigoClienteBuscar" MaxLength="11" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            </div>
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbRNCCedulaCLiente" runat="server" Text="RNC / Cedula" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtRNCCedulaCliente" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
+            <div align="center">
+                <asp:Button ID="btnConsultarRegistros" runat="server" Text="Buscar" ToolTip="Buscar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnConsultarRegistros_Click" />
+            </div>
+            <hr />
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -233,6 +174,14 @@
                 <asp:Label ID="lbComentario" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
                  <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
             </div>
+             <div class="form-group col-md-1">
+                <asp:Label ID="lblCodigoCliente" runat="server" Text="Codigo" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtCodigoClienteSeleccionado" runat="server" Enabled="false" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
+            </div>
+             <div class="form-group col-md-3">
+                <asp:Label ID="lbLimiteCredito" runat="server" Text="Limite de Credito" CssClass="Letranegrita"></asp:Label>
+                 <asp:TextBox ID="txtLimiteCreditoClienteSeleccionado" runat="server" Enabled="false" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
+            </div>
         </div>
         <div align="center" visible="false" id="DivBotonQuitarCliente" runat="server">
             <asp:Button ID="btnQuitar" runat="server" Text="Quitar" ToolTip="Quitar Cliente Seleccionado" OnClick="btnQuitar_Click" CssClass="btn btn-outline-secondary btn-sm" />
@@ -243,6 +192,7 @@
                      </button><br />
        <div class="collapse" id="AgegarProductosServicios">
                 <div class="card card-body">
+                    <asp:ScriptManager ID="ScripManagerAgregarServiciosProductos" runat="server"></asp:ScriptManager>
                  <asp:UpdatePanel ID="UpdatePanelAgregarServiciosProductos" runat="server">
                      <ContentTemplate>
                          <div class="form-row">

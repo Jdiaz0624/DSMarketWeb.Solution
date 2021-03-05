@@ -204,11 +204,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 lbCantidadRegistrosVariable.Text = "0";
             }
             else {
-                int CantidadRegistros = 0;
-                foreach (var n in Buscar) {
-                    CantidadRegistros = Convert.ToInt32(n.CantidadClientes);
-                   
-                }
+                int CantidadRegistros = Buscar.Count;
                 lbCantidadRegistrosVariable.Text = CantidadRegistros.ToString("N0");
                 Paginar(ref rpListadoClientes, Buscar, 10);
                 HandlePaging(ref dtPaginacion);
