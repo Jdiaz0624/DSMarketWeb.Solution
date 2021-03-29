@@ -865,7 +865,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
                 ClientScript.RegisterStartupScript(GetType(), "RegistroGuardado()", "RegistroGuardado();", true);
                 CurrentPage = 0;
-                RestablecerPantalla();
+                RestablecerPantalla(); 
             }
         }
 
