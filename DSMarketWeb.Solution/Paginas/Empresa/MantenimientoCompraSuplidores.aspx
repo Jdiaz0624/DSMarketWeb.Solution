@@ -3,14 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+      
 
         .btn-sm{
             width:90px;
@@ -451,9 +444,8 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbIdCompraSuplidoresTitulo" runat="server" Text="CONSULTA DE COMPRA DE SUPLIDORES"></asp:Label>
-            </div>
+            <br /><br />
+           
 
             <div class="form-check-inline">
                 <div class="form-group form-check">
@@ -718,11 +710,11 @@
 
 
         <div id="DivBloqueMantenimiento" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE COMPRA A SUPLIDORES"></asp:Label>
-                <asp:Label ID="lbIdregistroSeleccionado" runat="server" Text="IdCOmpraSuplidor" Visible="false"></asp:Label>
+            <br /><br />
+
+             <asp:Label ID="lbIdregistroSeleccionado" runat="server" Text="IdCOmpraSuplidor" Visible="false"></asp:Label>
                 <asp:Label ID="lbReporteUnico" runat="server" Text="ReporteUnico" Visible="false"></asp:Label>
-            </div>
+          
             <asp:ScriptManager ID="ScripManagerMantenimiento" runat="server"></asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanelMantenimiento" runat="server">
                 <ContentTemplate>

@@ -24,15 +24,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBloqueConsulta;
 
         /// <summary>
-        /// lbIdCompraSuplidoresTitulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbIdCompraSuplidoresTitulo;
-
-        /// <summary>
         /// lbExportarA control.
         /// </summary>
         /// <remarks>
@@ -895,15 +886,6 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBloqueMantenimiento;
-
-        /// <summary>
-        /// lbTituloMantenimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTituloMantenimiento;
 
         /// <summary>
         /// lbIdregistroSeleccionado control.

@@ -3,14 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
 
         .btn-sm{
             width:90px;
@@ -72,9 +64,7 @@
     </script>
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloCOnsulta" runat="server" Text="CONSULTA DE TIPO DE NOMINA"></asp:Label>
-            </div>
+           <br /><br />
 
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -149,10 +139,9 @@
         </div>
 
          <div id="DivMantenimiento" runat="server">
-             <div class="jumbotron" align="center">
-                 <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE TIPO DE NOMINA"></asp:Label>
-                 <asp:Label ID="lbIdRegistroSeleciconad" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
-             </div>
+              <br /><br />
+             <asp:Label ID="lbIdRegistroSeleciconad" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
+       
 
              <div class="form-row">
                  <div class="form-group col-md-4">
