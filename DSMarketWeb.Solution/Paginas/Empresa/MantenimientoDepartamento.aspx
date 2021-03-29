@@ -3,14 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
 
         .btn-sm{
             width:90px;
@@ -72,9 +64,7 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-            <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE DEPARTAMENTOS"></asp:Label>
-        </div>
+            <br /><br />
         <div class="form-row">
             <div class="form-group col-md-4">
                 <asp:Label ID="lbDepartamentoConsulta" runat="server" Text="Departamento" CssClass="Letranegrita"></asp:Label>
@@ -148,17 +138,16 @@
 
 
         <div id="DivBloqueMantenimiento" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMAntenimiento" runat="server" Text="MANTENIMIENTO DE DEPARTAMENTOS"></asp:Label>
-                <asp:Label  ID="lbIdRegistroseleccioado" runat="server" Text="lbIdRegistroSeleccionado" Visible="false"></asp:Label>
-            </div>
+             <br /><br />
+            <asp:Label  ID="lbIdRegistroseleccioado" runat="server" Text="lbIdRegistroSeleccionado" Visible="false"></asp:Label>
+         
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbDepartamentoMantenimiento" runat="server" Text="Departamento" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtDepartamentoMantenimiento" runat="server" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
                 </div>
                 <div class="form-group col-md-4">
-                    <asp:Label ID="lbCLaveSeguridadMantenimiento" runat="server" Text="Departamento" CssClass="Letranegrita"></asp:Label>
+                    <asp:Label ID="lbCLaveSeguridadMantenimiento" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtClaveSeguridadMantenimiento" runat="server" TextMode="Password" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
                 </div>
             </div>
