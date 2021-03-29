@@ -228,18 +228,18 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
 
 
                 //GUARDMOS LA IMAGEN EN BASE DE DATOS
-                SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
-                SqlCommand Comando = new SqlCommand("EXEC [Empresa].[SP_PROCESAR_FOTO_EMPLEADO] @IdEmpleado,@Foto,@NumeroRegistro,@Accion", Conexion);
+                SqlConnection ConexionGuardar = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                SqlCommand Guardar = new SqlCommand("EXEC [Empresa].[SP_PROCESAR_FOTO_EMPLEADO] @IdEmpleado,@Foto,@NumeroRegistro,@Accion", ConexionGuardar);
 
-                Comando.Parameters.Add("@IdEmpleado", SqlDbType.Decimal).Value = IdEmpleado;
-                Comando.Parameters.Add("@Foto", SqlDbType.Image).Value = bImagenThumbNail;
-                Comando.Parameters.Add("@NumeroRegistro", SqlDbType.Decimal).Value = NumeroRegistro;
-                Comando.Parameters.Add("@Accion", SqlDbType.Int).Value = Accion;
+                Guardar.Parameters.Add("@IdEmpleado", SqlDbType.Decimal).Value = IdEmpleado;
+                Guardar.Parameters.Add("@Foto", SqlDbType.Image).Value = bImagenThumbNail;
+                Guardar.Parameters.Add("@NumeroRegistro", SqlDbType.Decimal).Value = NumeroRegistro;
+                Guardar.Parameters.Add("@Accion", SqlDbType.Int).Value = Accion;
 
 
-                Conexion.Open();
-                Comando.ExecuteNonQuery();
-                Conexion.Close();
+                ConexionGuardar.Open();
+                Guardar.ExecuteNonQuery();
+                ConexionGuardar.Close();
 
                 //VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
                 string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
@@ -248,15 +248,12 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             else {
 
 
-                //GUARDMOS LA IMAGEN EN BASE DE DATOS
-                SqlConnection Conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
-                SqlCommand Comando = new SqlCommand("DELETE FROM  Empresa.FotoEmpleado WHERE IdEmpleado = " + IdEmpleado + " AND NumeroRegistro= " + NumeroRegistro, Conexion);
-
-
-
-                Conexion.Open();
-                Comando.ExecuteNonQuery();
-                Conexion.Close();
+                //ELIMINAMOS
+                SqlConnection ConexionEliminar = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                SqlCommand Eliminar = new SqlCommand("DELETE FROM  Empresa.FotoEmpleado WHERE IdEmpleado = " + IdEmpleado + " AND NumeroRegistro= " + NumeroRegistro, ConexionEliminar);
+                ConexionEliminar.Open();
+                Eliminar.ExecuteNonQuery();
+                ConexionEliminar.Close();
 
 
             }
@@ -279,6 +276,51 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             else
             {
                 ClientScript.RegisterStartupScript(GetType(), "ImagenPorDefectoNoEncontrada()", "ImagenPorDefectoNoEncontrada();", true);
+            }
+        }
+        #endregion
+        #region ACTUALIZAR FOTO DE EMPLEADO
+        private void ActualizarFotoEmpleado(decimal IdEmpleado, decimal NumeroRegistro, int Accion) {
+
+            if (cbActualizarFoto.Checked == true && cbLlevaFoto.Checked == true) {
+                //ELIMINAMOS
+                SqlConnection ConexionEliminar = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                SqlCommand Eliminar = new SqlCommand("DELETE FROM  Empresa.FotoEmpleado WHERE IdEmpleado = " + IdEmpleado + " AND NumeroRegistro= " + NumeroRegistro, ConexionEliminar);
+                ConexionEliminar.Open();
+                Eliminar.ExecuteNonQuery();
+                ConexionEliminar.Close();
+
+                //--------------------------------------------------------------------------------------------------------
+                int Tamanio = UpImagen.PostedFile.ContentLength;
+                byte[] ImagenOriginal = new byte[Tamanio];
+                UpImagen.PostedFile.InputStream.Read(ImagenOriginal, 0, Tamanio);
+                System.Drawing.Bitmap ImagenOriginalBinaria = new System.Drawing.Bitmap(UpImagen.PostedFile.InputStream);
+
+                //REDIRECCIONAR LA IMAGEN PARA COLOCARLE UN TAMAñO A VOLUNTAD
+                System.Drawing.Image ImgThumbNail;
+                int TamanioThumbNail = 200;
+                ImgThumbNail = DSMarketWeb.Logic.Comunes.RedimencionarImagen.Redireccionar(ImagenOriginalBinaria, TamanioThumbNail);
+                System.Drawing.ImageConverter Convertidor = new System.Drawing.ImageConverter();
+                byte[] bImagenThumbNail = (byte[])Convertidor.ConvertTo(ImgThumbNail, typeof(byte[]));
+
+
+                //GUARDMOS LA IMAGEN EN BASE DE DATOS
+                SqlConnection ConexionGuardar = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DSMarketWEBConexion"].ConnectionString);
+                SqlCommand Guardar = new SqlCommand("EXEC [Empresa].[SP_PROCESAR_FOTO_EMPLEADO] @IdEmpleado,@Foto,@NumeroRegistro,@Accion", ConexionGuardar);
+
+                Guardar.Parameters.Add("@IdEmpleado", SqlDbType.Decimal).Value = IdEmpleado;
+                Guardar.Parameters.Add("@Foto", SqlDbType.Image).Value = bImagenThumbNail;
+                Guardar.Parameters.Add("@NumeroRegistro", SqlDbType.Decimal).Value = NumeroRegistro;
+                Guardar.Parameters.Add("@Accion", SqlDbType.Int).Value = Accion;
+
+
+                ConexionGuardar.Open();
+                Guardar.ExecuteNonQuery();
+                ConexionGuardar.Close();
+
+                //VISUALIZAMOS LA IMAGEN EN EL CONTROL IMAGEN LUEGO DE HABER GUARDADO
+                string ImagenDataUrl64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbNail);
+                IMGFotoEmpleadoMantenimiento.ImageUrl = ImagenDataUrl64;
             }
         }
         #endregion
@@ -603,6 +645,14 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario NombreUsuario = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = NombreUsuario.SacarNombre();
+                Label lbNombrePantalla = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbNombrePantalla.Text = "MANTENIMIENTO DE EMPLEADOS";
+
+
                 CargarListasDesplegablesConsulta();
                 CargarListasDesplegablesMantenimiento();
                 rbTodos.Checked = true;
@@ -639,6 +689,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             txtPorcientoComisionVentasMantenimiento.Enabled = false;
             txtPorcientoComisionServicioMantenimiento.Enabled = false;
             cbEstatus.Checked = true;
+            cbActualizarFoto.Visible = false;
         }
 
         protected void btnModificarRegistro_Click(object sender, EventArgs e)
@@ -648,6 +699,7 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             btnModificar.Visible = true;
             lbClaveSeguridadMantenimiento.Visible = true;
             txtClaveSeguridadMantenimiento.Visible = true;
+            cbActualizarFoto.Visible = true;
         }
 
         protected void btnExportarRegistro_Click(object sender, EventArgs e)
@@ -733,6 +785,10 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtPorcientoComisionServicioMantenimiento.Text = "0";
                 txtPorcientoComisionVentasMantenimiento.Enabled = false;
                 txtPorcientoComisionServicioMantenimiento.Enabled = false;
+            }
+            if (cbLlevaFoto.Checked == true) {
+                DivBloqueImagenEmpleado.Visible = true;
+                MostrarImagenPorDefectoSistema(ref IMGFotoEmpleadoMantenimiento, 2);
             }
             Paginar(ref rpListadoEmpleado, BuscarRegistroSeleccionado, 1);
             HandlePaging(ref dtPaginacion);
@@ -852,6 +908,8 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                     {
                         ProcesarFotoEmpleado(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text), 2);
                     }
+                    ActualizarFotoEmpleado(Convert.ToDecimal(lbIdRegistroSeleccionado.Text), Convert.ToDecimal(lbNumeroRegistroSeleccionado.Text), 1);
+                    cbActualizarFoto.Checked = false;
                     ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
                     CurrentPage = 0;
                     RestablecerPantalla();

@@ -3,14 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+  
 
         .btn-sm{
             width:90px;
@@ -317,9 +310,7 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE EMPLEADOS"></asp:Label>
-            </div>
+            <br /><br />
             <div class="form-check-inline">
                 <div class="form-group form-check">
                     <asp:Label ID="lbEstatus" runat="server" Text="Estatus de Empleado" CssClass="Letranegrita"></asp:Label>
@@ -395,13 +386,13 @@
 
                 <asp:Label ID="Label1" runat="server" Text=" " CssClass="Letranegrita"></asp:Label>
 
-                <asp:Label ID="lbRegistrosActivosTitulo" runat="server" Text="Registros Activos" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbRegistrosActivosTitulo" runat="server" Text="Registros Activos ( " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbRegistrosActivosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbRegistrosActivosCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
 
                 <asp:Label ID="Label5" runat="server" Text=" " CssClass="Letranegrita"></asp:Label>
 
-                <asp:Label ID="lbCantidadRegistrosInactivosTitulo" runat="server" Text="Registros Inactivos" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadRegistrosInactivosTitulo" runat="server" Text="Registros Inactivos ( " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosInactivosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
                 <asp:Label ID="lbCantidadRegistrosInactivosCerrar" runat="server" Text=" ) " CssClass="Letranegrita"></asp:Label>
             </div>
@@ -492,12 +483,10 @@
 
 
         <div id="DivBloqueMantenimiento" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE EMPLEADOS"></asp:Label>
+            <br /><br />
                 <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
                 <asp:Label ID="lbReporteUnico" runat="server" Text="0" Visible="false"></asp:Label>
                 <asp:Label ID="lbNumeroRegistroSeleccionado" runat="server" Text="Numero de registro" Visible="false"></asp:Label>
-            </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -625,6 +614,7 @@
                     <asp:CheckBox ID="cbEstatus" runat="server" Text="Estatus" ToolTip="Estatus de Empleado" CssClass="form-check-input" /> 
                      <asp:CheckBox ID="cbAplicaParaComision" runat="server" AutoPostBack="true" OnCheckedChanged="cbAplicaParaComision_CheckedChanged" Text="Aplica Para Comision" ToolTip="Aplica Para Comisión" CssClass="form-check-input" />
                     <asp:CheckBox ID="cbLlevaFoto" runat="server" Text="Lleva Foto" AutoPostBack="true" OnCheckedChanged="cbLlevaFoto_CheckedChanged" ToolTip="Lleva Foto" CssClass="form-check-input" />
+                    <asp:CheckBox ID="cbActualizarFoto" runat="server" Text="Actualizar Foto" Visible="false" CssClass="form-check-input" ToolTip="Actualizar la foto del empleado" />
                 </div>
             </div>
 
