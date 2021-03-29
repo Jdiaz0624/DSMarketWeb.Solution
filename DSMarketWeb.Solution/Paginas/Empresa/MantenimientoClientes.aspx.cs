@@ -16,6 +16,11 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
 
+        enum TipoRegistroReporte { 
+        RegistroUnico = 1,
+        RegistroColectivo=0
+        }
+
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
         int _PrimeraPagina, _UltimaPagina;
@@ -247,20 +252,32 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
             string _NumeroIdentificacion = string.IsNullOrEmpty(txtRNCConsulta.Text.Trim()) ? null : txtRNCConsulta.Text.Trim();
             bool? _Estatus = null;
             bool? _EnviaEmail = null;
-           
+            int RegistroUnico = Convert.ToInt32(lbRegistroUnico.Text);
 
             ReportDocument Reporte = new ReportDocument();
 
             Reporte.Load(RutaReporte);
             Reporte.Refresh();
 
-            Reporte.SetParameterValue("@IdCliente", _CodigoCliente);
-            Reporte.SetParameterValue("@IdComprobante", _TipoComprobante);
-            Reporte.SetParameterValue("@Nombre", _NombreCliente);
-            Reporte.SetParameterValue("@RNC", _NumeroIdentificacion);
-            Reporte.SetParameterValue("@Estatus", _Estatus);
-            Reporte.SetParameterValue("@EnvioEmail", _EnviaEmail);
-            Reporte.SetParameterValue("@UsuarioProcesa", IdUsuario);
+            if (RegistroUnico == (int)TipoRegistroReporte.RegistroColectivo) {
+                Reporte.SetParameterValue("@IdCliente", _CodigoCliente);
+                Reporte.SetParameterValue("@IdComprobante", _TipoComprobante);
+                Reporte.SetParameterValue("@Nombre", _NombreCliente);
+                Reporte.SetParameterValue("@RNC", _NumeroIdentificacion);
+                Reporte.SetParameterValue("@Estatus", _Estatus);
+                Reporte.SetParameterValue("@EnvioEmail", _EnviaEmail);
+                Reporte.SetParameterValue("@UsuarioProcesa", IdUsuario);
+            }
+            else if (RegistroUnico == (int)TipoRegistroReporte.RegistroUnico) {
+                Reporte.SetParameterValue("@IdCliente", lbIdRegistroSeleccionado.Text);
+                Reporte.SetParameterValue("@IdComprobante", null);
+                Reporte.SetParameterValue("@Nombre", null);
+                Reporte.SetParameterValue("@RNC", null);
+                Reporte.SetParameterValue("@Estatus", null);
+                Reporte.SetParameterValue("@EnvioEmail", null);
+                Reporte.SetParameterValue("@UsuarioProcesa", IdUsuario);
+            }
+         
 
             Reporte.SetDatabaseLogon(UsuarioBD, ClaveBD);
 
@@ -319,6 +336,18 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                //SACAMOS EL NOMBRE DE USUARIO Y EL NOMBRE DE LA PANTALLA EN LA QUE ESTAMOS
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario NombreUsuario = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = NombreUsuario.SacarNombre();
+
+
+                Label lbNombrePantalla = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbNombrePantalla.Text = "MANTENIMIENTO DE CLIENTES";
+
+
+
                 ModoConsulta();
                 Consulta_Mantenimiento();
                 divPaginacion.Visible = false;
@@ -379,10 +408,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 ClaveBD = DSMarketWeb.Logic.Comunes.SeguridadEncriptacion.DesEncriptar(n.Clave);
             }
 
-            if (RegistroUnico == 0) {
+            if (RegistroUnico == (int)TipoRegistroReporte.RegistroColectivo)
+            {
                 GenerarReporte(IdUSuario, Server.MapPath("ReporteClientes.rpt"), UsuarioBD, ClaveBD, "Reporte de Clientes");
             }
-            else { }
+            else if (RegistroUnico == (int)TipoRegistroReporte.RegistroUnico) {
+                GenerarReporte(IdUSuario, Server.MapPath("ReporteClienteUnico.rpt"), UsuarioBD, ClaveBD, "Reporte de Cliente");
+            }
         }
 
         protected void btnRestablecerPantalla_Click(object sender, EventArgs e)
@@ -411,6 +443,9 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
                 txtLimiteCredito.Text = n.MontoCredito.ToString();
                 txtComentarioMantenimiento.Text = n.Comentario;
                 txtDireccionMAntenimiento.Text = n.Direccion;
+                cbEstatus.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
+                cbEnvioEmail.Checked = (n.EnvioEmail0.HasValue ? n.EnvioEmail0.Value : false);
+
             }
             Paginar(ref rpListadoClientes, BuscarRegistro, 1);
             HandlePaging(ref dtPaginacion);

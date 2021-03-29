@@ -10,7 +10,7 @@ namespace DSMarketWeb.Logic.Comunes
     {
         readonly DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad ObjData = new Logica.LogicaSeguridad.LogicaSeguridad();
 
-        public decimal Idusuario = 0;
+        private decimal Idusuario = 0;
 
         public SacarNombreUsuario(decimal IdUsuarioCON) {
             Idusuario = IdUsuarioCON;
