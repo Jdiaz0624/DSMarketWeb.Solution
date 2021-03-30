@@ -3,14 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
 
         .btn-sm{
             width:90px;
@@ -149,48 +141,32 @@
             </div>
         </div>
         <!--FIN DEL REPEATER-->
-            <div align="center">
-                <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina: " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbPaginaActualPaginacion" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPagiansTitulos" runat="server" Text="Cantidad de Paginas: " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginasVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+             <div align="center">
+                <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="LinkBlbPaginaActualVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" de " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
-            <!--INICIO DE LA PAGINACION-->
-            <div id="divPaginacionCategorias" runat="server" align="center">
-                <div style="margin-top:20px;">
-                    <table style="width:600px;">
-                        <tr>
-                            <td>
-                                <asp:LinkButton ID="LinkPrimeraPagina" Text="Primero" runat="server" ToolTip="Ir a la primera pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkPrimeraPagina_Click" ></asp:LinkButton>
-                            </td>
+             <div id="divPaginacionDetalle" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPagina" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPagina_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnterior" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnterior_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacion" runat="server" OnItemCommand="dtPaginacion_ItemCommand" OnItemDataBound="dtPaginacion_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentral" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
 
-                            <td>
-                                <asp:LinkButton ID="LinkSiguientePagina" runat="server" Text="Siguiente" ToolTip="Pasar a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguientePagina_Click"></asp:LinkButton>
-                            </td>
-
-                            <td>
-                                 <asp:DataList ID="rptPaging" runat="server"
-                                    OnItemCommand="rptPaging_ItemCommand"
-                                    OnItemDataBound="rptPaging_ItemDataBound" RepeatDirection="Horizontal">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="lbPaging" runat="server"
-                                            CommandArgument='<%# Eval("PageIndex") %>' CommandName="newPage"
-                                            Text='<%# Eval("PageText") %> ' Width="20px"></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:DataList>
-                            </td>
-
-                            <td>
-                                <asp:LinkButton ID="LinkPaginaAnterior" runat="server" Text="Anterior" ToolTip="Ir a la pagina anterior del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkPaginaAnterior_Click"></asp:LinkButton>
-                            </td>
-
-                            <td>
-                                <asp:LinkButton ID="LinkUltimaPagina" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimaPagina_Click"></asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguiente" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguiente_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimo" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimo_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+        </div>
         
         <br />
         </div>
@@ -199,11 +175,10 @@
 
         <div id="divBloqueMantenimiento" runat="server">
             <div class="container-fluid">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="Mantenimiento de Categorias"></asp:Label>
-                <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Visible="false" Text="IdRegistro"></asp:Label>
+                <br /><br />
+                 <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Visible="false" Text="IdRegistro"></asp:Label>
                 <asp:Label ID="lbAccionTomarMantenimiento" runat="server" Visible="false" Text="Accion a Tomar"></asp:Label>
-            </div>
+          
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbTipoProductoMantenimiento" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
