@@ -218,6 +218,15 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario NombreUsuario = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = NombreUsuario.SacarNombre();
+
+                Label lbNombrePantalla = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbNombrePantalla.Text = "MANTENIMIENTO DE TIPO DE MOVIMIENTOS";
+
+
+
                 ModoConsulta();
                 Consulta_Mantenimiento();
                 ListadoTipoMovimiento();

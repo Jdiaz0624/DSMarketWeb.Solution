@@ -3,14 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+      
 
         .btn-sm{
             width:90px;
@@ -152,9 +145,8 @@
 
     <div class="container-fluid">
         <div id="DivBloqueConsulta" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloConsulta" runat="server" Text="CONSULTA DE % DE RETENCIONES" CssClass="Letranegrita"></asp:Label>
-            </div>
+            <br /><br />
+           
 
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -241,11 +233,10 @@
         </div>
 
         <div id="DivBloqueMantenimiento" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE % DE RETENCION" CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
+             <br /><br />
+             <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
                 <asp:Label ID="lbSecuenciaSeleccionada" runat="server" Text="SecuenciaSeleccionada" Visible="false"></asp:Label>
-            </div>
+           
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarretencionMantenimiento" runat="server" Text="Seleccionar Retencion" CssClass="Letranegrita"></asp:Label>
