@@ -464,7 +464,7 @@
          <br /><br />
             <div class="form-check-inline">
                 <div class="form-group form-check">
-                    <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de Fecha a la Consulta" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFecha_CheckedChanged" />
+                    <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input Letranegrita" ToolTip="Agregar Rango de Fecha a la Consulta"/>
                     <asp:CheckBox ID="cbMostrarTodoHistorialVenta" runat="server" Text="Mostrar todo el Inventario (Reporte)" AutoPostBack="true" OnCheckedChanged="cbMostrarTodoHistorialVenta_CheckedChanged" ToolTip="Mostrar Todo el Inventario en el reprte" CssClass="form-check-input Letranegrita" />
                     <asp:CheckBox ID="cbProductosVendisodDescartados" runat="server" Text="Productos Vendididos / Descartados" ToolTip="Mostrar el Historial de Productos Vendidos y Descartados" CssClass="form-check-input Letranegrita" AutoPostBack="true" OnCheckedChanged="cbProductosVendisodDescartados_CheckedChanged" />
                     <asp:CheckBox ID="cbELiminarProductosVendidosDescartados" runat="server" CssClass="Letranegrita" Text="Eliminar Productos fuera de Stock" ToolTip="Sacar todos los prductos que esten fuera del inventario para aligerar el inventario general" Visible="false" AutoPostBack="true" OnCheckedChanged="cbELiminarProductosVendidosDescartados_CheckedChanged" />
@@ -623,48 +623,32 @@
                     </table>
                 </div>
                 </div>
-            <div align="center">
-                    <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
-                    <asp:Label ID="lbNumeroVariable" runat="server" CssClass="Letranegrita" Text=" 0 "></asp:Label>
-                    <asp:Label ID="lbDeTitulo" runat="server" CssClass="Letranegrita" Text="De "></asp:Label>
-                    <asp:Label ID="lbCantidadPaginasVariable" CssClass="Letranegrita" runat="server" Text=" 0 "></asp:Label>
-                </div>
-            <!--FIN DEL REPEATER-->
+           <div align="center">
+                <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="LinkBlbPaginaActualVariavle" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" de " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+            </div>
+             <div id="divPaginacionDetalle" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPagina" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPagina_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnterior" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnterior_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacion" runat="server" OnItemCommand="dtPaginacion_ItemCommand" OnItemDataBound="dtPaginacion_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentral" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
 
-            <!--INICIO DE LA PAGINACION-->
-                <div id="divPaginacion" runat="server" align="center">
-                 <div style="margin-top: 20px;">
-                    <table style="width: 600px;">
-                        <tr>
-                            <td>
-                                <asp:LinkButton ID="lbPrimeraPagina" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbFirst_Click" >Primero</asp:LinkButton>
-                            </td>
-                            <td>
-                                <asp:LinkButton ID="lbPaginaAnterior" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbPrevious_Click" >Atras</asp:LinkButton>
-                            </td>
-                            <td>
-                                <asp:DataList ID="rptPaging" runat="server"
-                                    OnItemCommand="rptPaging_ItemCommand"
-                                    OnItemDataBound="rptPaging_ItemDataBound" RepeatDirection="Horizontal">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="lbPaging" runat="server"
-                                            CommandArgument='<%# Eval("PageIndex") %>' CommandName="newPage"
-                                            Text='<%# Eval("PageText") %> ' Width="20px"></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:DataList>
-                            </td>
-                            <td>
-                                <asp:LinkButton ID="lbPaginaGuguiente" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbNext_Click" >Siguiente</asp:LinkButton>
-                            </td>
-                            <td>
-                                <asp:LinkButton ID="lbUltimaPagina" runat="server" CssClass="btn btn-outline-success btn-sm" OnClick="lbLast_Click" >Ultimo</asp:LinkButton>
-                            </td>
-                            
-                        </tr>
-                    </table>
-
-                </div>
-             </div>
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguiente" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguiente_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimo" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimo_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+        </div>
             <!--FIN DE LA PAGINACION-->
 
 
