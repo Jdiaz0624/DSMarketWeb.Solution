@@ -14,11 +14,10 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
 
 
+        #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
         int _PrimeraPagina, _UltimaPagina;
         private int _TamanioPagina = 10;
-        /// <summary>
-        /// Ete metodo es para calcular el numero de pagina        /// </summary>
         private int CurrentPage
         {
             get
@@ -35,10 +34,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
 
         }
-
-
-        #region MOSTRAR LISTADO DE TIPO DE SUPLIDORES
-        private void HandlePaging()
+        private void HandlePaging(ref DataList NombreDataList, ref Label LbPaginaActual)
         {
             var dt = new DataTable();
             dt.Columns.Add("IndicePagina"); //Start from 0
@@ -62,7 +58,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
             //AGREGAMOS LA PAGINA EN LA QUE ESTAMOS
             int NumeroPagina = (int)CurrentPage;
-            lbPaginaActualVariavle.Text = (NumeroPagina + 1).ToString();
+            LbPaginaActual.Text = (NumeroPagina + 1).ToString();
             // Now creating page number based on above first and last page index
             for (var i = _PrimeraPagina; i < _UltimaPagina; i++)
             {
@@ -72,34 +68,34 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 dt.Rows.Add(dr);
             }
 
-            //data list
-            dlPaginacion.DataSource = dt;
-            dlPaginacion.DataBind();
+
+            NombreDataList.DataSource = dt;
+            NombreDataList.DataBind();
         }
-        private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros)
+        private void Paginar(ref Repeater RptGrid, IEnumerable<object> Listado, int _NumeroRegistros, ref Label lbCantidadPagina, ref LinkButton PrimeraPagina, ref LinkButton PaginaAnterior, ref LinkButton SiguientePagina, ref LinkButton UltimaPagina)
         {
             pagedDataSource.DataSource = Listado;
             pagedDataSource.AllowPaging = true;
 
             ViewState["TotalPages"] = pagedDataSource.PageCount;
             // lbNumeroVariable.Text = "1";
-            lbCantidadPaginaVAriable.Text = pagedDataSource.PageCount.ToString();
+            lbCantidadPagina.Text = pagedDataSource.PageCount.ToString();
 
             //MOSTRAMOS LA CANTIDAD DE PAGINAS A MOSTRAR O NUMERO DE REGISTROS
             pagedDataSource.PageSize = (_NumeroRegistros == 0 ? _TamanioPagina : _NumeroRegistros);
             pagedDataSource.CurrentPageIndex = CurrentPage;
 
             //HABILITAMOS LOS BOTONES DE LA PAGINACION
-            LinkPrimeraPaginaPaginacion.Enabled = !pagedDataSource.IsFirstPage;
-            LinkPaginaAnterior.Enabled = !pagedDataSource.IsFirstPage;
-            LinkPaginaSiguiente.Enabled = !pagedDataSource.IsLastPage;
-            LinkUltipaPagina.Enabled = !pagedDataSource.IsLastPage;
+            PrimeraPagina.Enabled = !pagedDataSource.IsFirstPage;
+            PaginaAnterior.Enabled = !pagedDataSource.IsFirstPage;
+            SiguientePagina.Enabled = !pagedDataSource.IsLastPage;
+            UltimaPagina.Enabled = !pagedDataSource.IsLastPage;
 
             RptGrid.DataSource = pagedDataSource;
             RptGrid.DataBind();
 
 
-            divPaginacionTipoSuplidor.Visible = true;
+            // divPaginacionDetalle.Visible = true;
         }
         enum OpcionesPaginacionValores
         {
@@ -108,8 +104,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             PaginaAnterior = 3,
             UltimaPagina = 4
         }
-
-        private void MoverValoresPaginacion(int Accion)
+        private void MoverValoresPaginacion(int Accion, ref Label lbPaginaActual, ref Label lbCantidadPaginas)
         {
 
             int PaginaActual = 0;
@@ -118,38 +113,41 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
                 case 1:
                     //PRIMERA PAGINA
-                    LinkPrimeraPaginaPaginacion.Text = "1";
+                    lbPaginaActual.Text = "1";
 
                     break;
 
                 case 2:
                     //SEGUNDA PAGINA
-                    PaginaActual = Convert.ToInt32(lbPaginaActualVariavle.Text);
+                    PaginaActual = Convert.ToInt32(lbPaginaActual.Text);
                     PaginaActual++;
-                    lbPaginaActualVariavle.Text = PaginaActual.ToString();
+                    lbPaginaActual.Text = PaginaActual.ToString();
                     break;
 
                 case 3:
                     //PAGINA ANTERIOR
-                    PaginaActual = Convert.ToInt32(lbPaginaActualVariavle.Text);
+                    PaginaActual = Convert.ToInt32(lbPaginaActual.Text);
                     if (PaginaActual > 1)
                     {
                         PaginaActual--;
-                        lbPaginaActualVariavle.Text = PaginaActual.ToString();
+                        lbPaginaActual.Text = PaginaActual.ToString();
                     }
                     break;
 
                 case 4:
                     //ULTIMA PAGINA
-                    lbPaginaActualVariavle.Text = lbCantidadPaginaVAriable.Text;
+                    lbPaginaActual.Text = lbCantidadPaginas.Text;
                     break;
 
 
             }
 
         }
+        #endregion
 
-        private void BuscarListado() {
+
+        #region MOSTRAR EL LISTADO DE LOS TIPOS DE SUPLIDORES
+        private void ListadoTipoSuplidores() {
             string _TipoSuplidor = string.IsNullOrEmpty(txtTipoSuplidorConsulta.Text.Trim()) ? null : txtTipoSuplidorConsulta.Text.Trim();
 
             var Buscar = ObjDataInventario.Value.BuscaTipoSuplidores(
@@ -157,17 +155,14 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 _TipoSuplidor);
             if (Buscar.Count() < 1) {
                 lbCantidadRegistrsVariable.Text = "0";
+                rpListadoTipoSuplidores.DataSource = null;
+                rpListadoTipoSuplidores.DataBind();
             }
             else {
-                int CantidadRegistros = 0;
-                foreach (var n in Buscar) {
-                    CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
-                }
+                int CantidadRegistros = Buscar.Count;
                 lbCantidadRegistrsVariable.Text = CantidadRegistros.ToString("N0");
-                Paginar(ref rpListadoTipoSuplidores, Buscar, 10);
-                HandlePaging();
-                divPaginacionTipoSuplidor.Visible = true;
-            
+                Paginar(ref rpListadoTipoSuplidores, Buscar, 10, ref lbCantidadPaginaVariable, ref LinkPrimeraPagina, ref LinkAnterior, ref LinkSiguiente, ref LinkUltimo);
+                HandlePaging(ref dtPaginacion, ref LinkBlbPaginaActualVariable);
             }
         }
         #endregion
@@ -201,7 +196,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             txtClaveseguridad.Text = string.Empty;
             lbClaveSegruidd.Visible = false;
             txtClaveseguridad.Visible = false;
-            BuscarListado();
+            ListadoTipoSuplidores();
         }
         #endregion
 
@@ -230,13 +225,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
                 ModoConsulta();
                 MostrarControlesConsulta();
-                divPaginacionTipoSuplidor.Visible = false;
+                ListadoTipoSuplidores();
             }
         }
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            BuscarListado();
+            ListadoTipoSuplidores();
         }
 
         protected void btnNuevoRegistro_Click(object sender, EventArgs e)
@@ -272,58 +267,16 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             lbIdRegistroSeleccionado.Text = hfIdTipoSuplidor.ToString();
 
             var BuscarregistroSeleccionado = ObjDataInventario.Value.BuscaTipoSuplidores(Convert.ToDecimal(hfIdTipoSuplidor));
+            lbCantidadRegistrsVariable.Text = "1";
+            Paginar(ref rpListadoTipoSuplidores, BuscarregistroSeleccionado, 1, ref lbCantidadPaginaVariable, ref LinkPrimeraPagina, ref LinkAnterior, ref LinkSiguiente, ref LinkUltimo);
+            HandlePaging(ref dtPaginacion, ref LinkBlbPaginaActualVariable);
             foreach (var n in BuscarregistroSeleccionado) {
                 txtTipoSuplidorMantenimiento.Text = n.TipoSuplidor;
                 cbEstatus.Checked = (n.Estatus0.HasValue ? n.Estatus0.Value : false);
             }
-            Paginar(ref rpListadoTipoSuplidores, BuscarregistroSeleccionado, 1);
-            HandlePaging();
+
             lbCantidadRegistrsVariable.Text = "1";
             ModoMantenimiento();
-        }
-
-        protected void LinkPrimeraPaginaPaginacion_Click(object sender, EventArgs e)
-        {
-
-            CurrentPage = 0;
-            BuscarListado();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.PrimeraPagina);
-        }
-
-        protected void LinkPaginaAnterior_Click(object sender, EventArgs e)
-        {
-
-            CurrentPage += -1;
-            BuscarListado();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior);
-        }
-
-        protected void LinkPaginaSiguiente_Click(object sender, EventArgs e)
-        {
-
-            CurrentPage += 1;
-            BuscarListado();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.SiguientePagina);
-        }
-
-        protected void LinkUltipaPagina_Click(object sender, EventArgs e)
-        {
-
-            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
-            BuscarListado();
-            MoverValoresPaginacion((int)OpcionesPaginacionValores.UltimaPagina);
-        }
-
-        protected void dlPaginacion_CancelCommand(object source, DataListCommandEventArgs e)
-        {
-            if (!e.CommandName.Equals("newPage")) return;
-            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
-            BuscarListado();
-        }
-
-        protected void dlPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
-        {
-
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -350,6 +303,47 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 ClientScript.RegisterStartupScript(GetType(), "RegistroModificado()", "RegistroModificado();", true);
                 RestablecerPantalla();
             }
+        }
+
+        protected void LinkPrimeraPagina_Click(object sender, EventArgs e)
+        {
+            CurrentPage = 0;
+            ListadoTipoSuplidores();
+
+        }
+
+        protected void LinkAnterior_Click(object sender, EventArgs e)
+        {
+            CurrentPage += -1;
+            ListadoTipoSuplidores();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref LinkBlbPaginaActualVariable, ref lbCantidadPaginaVariable);
+        }
+
+        protected void dtPaginacion_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+
+        }
+
+        protected void dtPaginacion_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            ListadoTipoSuplidores();
+        }
+
+        protected void LinkSiguiente_Click(object sender, EventArgs e)
+        {
+            CurrentPage += 1;
+            ListadoTipoSuplidores();
+
+        }
+
+        protected void LinkUltimo_Click(object sender, EventArgs e)
+        {
+
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            ListadoTipoSuplidores();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref LinkBlbPaginaActualVariable, ref lbCantidadPaginaVariable);
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
