@@ -753,15 +753,6 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBloqueMantenimiento;
 
         /// <summary>
-        /// lbMantenimientoProducto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbMantenimientoProducto;
-
-        /// <summary>
         /// lbIdProductoSeleccionado control.
         /// </summary>
         /// <remarks>
@@ -1183,6 +1174,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbAgregarImagenArticulo;
+
+        /// <summary>
+        /// cbActualizarFotoProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbActualizarFotoProducto;
 
         /// <summary>
         /// cbNoLimpiarPantalla control.
@@ -1698,13 +1698,22 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl BloqueImagenProductoSeleccionado;
 
         /// <summary>
-        /// IMGFotoProducto control.
+        /// lbFotoProductoSeleccionado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image IMGFotoProducto;
+        protected global::System.Web.UI.WebControls.Label lbFotoProductoSeleccionado;
+
+        /// <summary>
+        /// imgFotoProductoSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgFotoProductoSeleccionado;
 
         /// <summary>
         /// btnVolverDetalle control.

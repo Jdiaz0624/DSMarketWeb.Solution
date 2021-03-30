@@ -5,14 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+       
 
         .btn-sm{
             width:90px;
@@ -124,7 +117,9 @@
             $("#<%=txtCantidadSuplir.ClientID%>").css("border-color", "red");
         }
 
-
+        function ErrorActualizarFotoProducto() {
+            alert("Error al actualizar la foto del producto, favor de verificar si selecciono la imagen correctamente en el equipo.");
+        }
         $(document).ready(function () {
             $('.solo-numero').keyup(function () {
                 this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -742,12 +737,11 @@
     </div>
 
     <div id="divBloqueMantenimiento" runat="server">
-        <div class="container-fluid">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbMantenimientoProducto" runat="server" Text="Mantenimiento de Producto" CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbIdProductoSeleccionado" runat="server" Text="IdProducto" Visible="false"></asp:Label>
+        <br /><br />
+        <asp:Label ID="lbIdProductoSeleccionado" runat="server" Text="IdProducto" Visible="false"></asp:Label>
                 <asp:Label ID="lbNumeroConectorProducto" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
-            </div>
+        <div class="container-fluid">
+         
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <asp:Label ID="lbSeleccionarTipoProductoMantenimiento" runat="server" Text="Seleccionar Tipo de Producto" CssClass="Letranegrita"></asp:Label>
@@ -861,23 +855,24 @@
                 <div class="form-group form-check">
                     <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbProductoAcumulativoMantenimiento_CheckedChanged" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
                     <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
-                    <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server" Visible="false" Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />
+                    <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server"  Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />
+                    <asp:CheckBox ID="cbActualizarFotoProducto" runat="server" Text="Actualizar Imagen" CssClass="form-check-input" ToolTip="Actualizar la imagen del producto" />
                     <asp:CheckBox ID="cbNoLimpiarPantalla" runat="server" Text="No Limpiar Pantalla" CssClass="form-check-input" ToolTip="No limpiar Pantalla al momento de realizar el mantenimiento" />
                 </div>
             </div>
             <hr />
             <!--ESTE ESTE BLOQUE ES PARA COLOCAR LA IMAGEN A UN PRODUCTO-->
-            <div id="DivBloqueImagenProducto"  visible="false" runat="server">
+            <div id="DivBloqueImagenProducto"   runat="server">
                 <div class="container" >
                     <div class="row" >
                         <div class="col-md-4 col-md-offset-4" align="center">
                             <asp:Label ID="lbTituloImagen" runat="server" Text="Imagen de Producto" CssClass="Letranegrita"></asp:Label>
                             <br />
-                            <asp:Image ID="IMGProducto" runat="server" Visible="false" onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <asp:Image ID="IMGProducto" runat="server"  onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
                             <br />
                             <br />
                             <asp:Label ID="lbBuscarImagen" runat="server" Text="Subir Imagen" CssClass="Letranegrita"></asp:Label>
-                            <asp:FileUpload ID="UpImagen" runat="server" Visible="false" accept=".jpg" CssClass="form-control" />
+                            <asp:FileUpload ID="UpImagen" runat="server"  accept=".jpg" CssClass="form-control" />
                             <br />
                             <br />
                         </div>
@@ -1015,10 +1010,20 @@
                 </div>
 
             </div>
-            <div id="BloqueImagenProductoSeleccionado" visible="false" runat="server">
-                 <div align="center">
-                     <asp:Image ID="IMGFotoProducto" runat="server" />
-                 </div>
+            <div id="BloqueImagenProductoSeleccionado"  runat="server">
+                  <div class="container" >
+                    <div class="row" >
+                        <div class="col-md-4 col-md-offset-4" align="center">
+                            <asp:Label ID="lbFotoProductoSeleccionado" runat="server" Text="Imagen de Producto" CssClass="Letranegrita"></asp:Label>
+                            <br />
+                            <asp:Image ID="imgFotoProductoSeleccionado" runat="server"  onmouseover="this.width=500;this.height=500;" onmouseout="this.width=400;this.height=400;" width="300" height="300" ImageUrl="~/Recursos/ImagenPorDefecto.jpg" />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
                 <br />
              
             </div>
