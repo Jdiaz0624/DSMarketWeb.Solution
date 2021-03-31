@@ -69,42 +69,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected global::System.Web.UI.WebControls.RadioButton rbCredito;
 
         /// <summary>
-        /// divDiasCotizacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDiasCotizacion;
-
-        /// <summary>
-        /// cbAgregarDiasCotizacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbAgregarDiasCotizacion;
-
-        /// <summary>
-        /// lbCantidadDiasCotizacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCantidadDiasCotizacion;
-
-        /// <summary>
-        /// txtDiasCotizacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDiasCotizacion;
-
-        /// <summary>
         /// cbAgregarComprobante control.
         /// </summary>
         /// <remarks>
@@ -121,15 +85,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbBuscarCliente;
-
-        /// <summary>
-        /// cbAgregarFechaManual control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbAgregarFechaManual;
 
         /// <summary>
         /// DivBloqueAgregarClientes control.

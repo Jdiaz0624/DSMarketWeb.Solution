@@ -70,24 +70,11 @@
             <div class="form-group form-check">
                 <asp:Label ID="lbTipoVenta" runat="server" Text="Tipo de Venta: " CssClass="Letranegrita"></asp:Label>
                 <asp:RadioButton ID="rbContado" runat="server" Text="Contado" CssClass="form-check-input" GroupName="TipoVenta" ToolTip="Realizar Venta a Contado" />
-                <asp:RadioButton ID="rbCredito" runat="server" Text="Credito" CssClass="form-check-input" GroupName="TipoVenta" ToolTip="Realizar Venta a Credito" />
+                <asp:RadioButton ID="rbCredito" runat="server" Text="Credito" Enabled="false" CssClass="form-check-input" GroupName="TipoVenta" ToolTip="Realizar Venta a Credito" />
             </div>
         </div>
         <br />
-        
-         <div  id="divDiasCotizacion" runat="server" visible="false" >
-             
-             <div class="form-check-inline">
-            <asp:CheckBox ID="cbAgregarDiasCotizacion" runat="server" Text="Agregar Dias de Vigencia de Cotizacion" CssClass="form-check-input Letranegrita" />
-           
-        </div>
-             <div class="form-row">
-                 <div class="form-group col-md-2">
-                     <asp:Label ID="lbCantidadDiasCotizacion" runat="server" Text="Cantidad de Dias"></asp:Label>
-                     <asp:TextBox ID="txtDiasCotizacion" runat="server" Text="1" TextMode="Number" CssClass="form-control"></asp:TextBox>
-                 </div>
-             </div>
-         </div>
+   
 
 
        <%-- <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
@@ -106,7 +93,6 @@
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarComprobante_CheckedChanged" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
                 <asp:CheckBox ID="cbBuscarCliente" runat="server" Text="Buscar Clientes" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbBuscarCliente_CheckedChanged" ToolTip="Buscar Clientes para facturar" />
-                <asp:CheckBox ID="cbAgregarFechaManual" runat="server" Text="Fecha Facturación Manual" Visible="false" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarFechaManual_CheckedChanged" ToolTip="Agregar Fecha Manual" />
             </div>
         </div>
         

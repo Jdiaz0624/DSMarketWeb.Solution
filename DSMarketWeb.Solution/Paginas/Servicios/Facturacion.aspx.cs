@@ -448,7 +448,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
              //   CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
-                cbAgregarFechaManual.Checked = false;
                 txtFechaManual.Enabled = false;
                 
             }
@@ -733,16 +732,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             }
         }
 
-        protected void cbAgregarFechaManual_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbAgregarFechaManual.Checked == true) {
-                txtFechaManual.Enabled = true;
-            }
-            else if(cbAgregarFechaManual.Checked==false) {
-                txtFechaManual.Enabled = false;
-                txtFechaManual.Text = string.Empty;
-            }
-        }
 
         protected void ddlTipoPago_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -759,23 +748,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             }
         }
 
-        protected void rbFacturacion_CheckedChanged(object sender, EventArgs e)
-        {
-            EncabezadoPantalla("FACTURACION");
-            divDiasCotizacion.Visible = false;
-        }
-
-        protected void rbConduce_CheckedChanged(object sender, EventArgs e)
-        {
-            EncabezadoPantalla("CONDUCE");
-            divDiasCotizacion.Visible = false;
-        }
-
-        protected void rbCotizar_CheckedChanged(object sender, EventArgs e)
-        {
-            EncabezadoPantalla("COTIZACION");
-            divDiasCotizacion.Visible = true;
-        }
+      
 
         protected void cbBuscarCliente_CheckedChanged(object sender, EventArgs e)
         {
