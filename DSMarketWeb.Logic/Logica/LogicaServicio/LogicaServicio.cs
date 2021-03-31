@@ -93,5 +93,57 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
             return Listado;
         }
         #endregion
+
+        #region METODOS PARA LA PANTALLA DE FACTURACION
+        //ENCABEZADO DE LA FACTURA
+        public DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionEncabezadoFactura GuardarInformacionEncabezadoFactura(DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionEncabezadoFactura Item, string Accion)
+        {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionEncabezadoFactura Guardar = null;
+
+            var InformacionEncabezadofactura = ObjData.SP_GUARDAR_INFORMACION_FACTURACION_ENCABEZADO(
+                Item.NumeroFactura,
+                Item.NumeroConector,
+                Item.LlevaComprobanre,
+                Item.IdComprobanre,
+                Item.NumeroComprobante,
+                Item.Cliente,
+                Item.IdTipoIdentificacion,
+                Item.NumeroIdentificacion,
+                Item.Telefono,
+                Item.CorreoElectronico,
+                Item.Direccion,
+                Item.Comentario,
+                Item.IdTipoVenta,
+                Item.IdTipoPlazoCredito,
+                Item.NumeroPlazoTiempo,
+                Item.IdTiempoPlazoCredito,
+                Accion);
+            if (InformacionEncabezadofactura != null) {
+                Guardar = (from n in InformacionEncabezadofactura
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionEncabezadoFactura
+                           {
+                               NumeroFactura=n.NumeroFactura,
+                               NumeroConector=n.NumeroConector,
+                               LlevaComprobanre=n.LlevaComprobanre,
+                               IdComprobanre=n.IdComprobanre,
+                               NumeroComprobante=n.NumeroComprobante,
+                               Cliente=n.Cliente,
+                               IdTipoIdentificacion=n.IdTipoIdentificacion,
+                               NumeroIdentificacion=n.NumeroIdentificacion,
+                               Telefono=n.Telefono,
+                               CorreoElectronico=n.CorreoElectronico,
+                               Direccion=n.Direccion,
+                               Comentario=n.Comentario,
+                               IdTipoVenta=n.IdTipoVenta,
+                               IdTipoPlazoCredito=n.IdTipoPlazoCredito,
+                               NumeroPlazoTiempo=n.NumeroPlazoTiempo,
+                               IdTiempoPlazoCredito=n.IdTiempoPlazoCredito,
+                           }).FirstOrDefault();
+            }
+            return Guardar;
+        }
+        #endregion
     }
 }

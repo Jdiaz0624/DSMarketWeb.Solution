@@ -101,6 +101,7 @@
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
+    <Compile Include="Entidades\EntidadesServicio\EGuardarFacturacionEncabezadoFactura.cs" />
     <Compile Include="Entidades\EntidadesServicio\ESacarTiempoGarantia.cs" />
     <Compile Include="Entidades\EntidadesServicio\ETipoPago.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionUnidadMedida.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
+    <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionGuardarEncabezadoFactura.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionTipoPago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

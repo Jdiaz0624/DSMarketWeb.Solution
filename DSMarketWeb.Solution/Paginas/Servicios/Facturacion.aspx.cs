@@ -555,12 +555,15 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void LinkPrimeraPaginaProductoAgregar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            MostrarProductos();
         }
 
         protected void LinkAnteriorProductoAgregar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarProductos();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductoAgregar, ref lbCantidadPaginaVAriableProductoAgregar);
         }
 
         protected void dtPaginacionProductoAgregar_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -570,17 +573,22 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void dtPaginacionProductoAgregar_ItemCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarProductos();
         }
 
         protected void LinkSiguienteProductoAgregar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            MostrarProductos();
         }
 
         protected void LinkUltimoProductoAgregar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarProductos();
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductoAgregar, ref lbCantidadPaginaVAriableProductoAgregar);
         }
 
         protected void btnAgregarRegistro_Click(object sender, EventArgs e)

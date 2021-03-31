@@ -58,4 +58,42 @@
       <Column Name="TiempoGarantia" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="Servicio.SP_GUARDAR_INFORMACION_FACTURACION_ENCABEZADO" Method="SP_GUARDAR_INFORMACION_FACTURACION_ENCABEZADO">
+    <Parameter Name="NumeroFactura" Parameter="numeroFactura" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="LlevaComprobanre" Parameter="llevaComprobanre" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="IdComprobanre" Parameter="idComprobanre" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="NumeroComprobante" Parameter="numeroComprobante" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Cliente" Parameter="cliente" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="IdTipoIdentificacion" Parameter="idTipoIdentificacion" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="NumeroIdentificacion" Parameter="numeroIdentificacion" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CorreoElectronico" Parameter="correoElectronico" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Direccion" Parameter="direccion" Type="System.String" DbType="VarChar(8000)" />
+    <Parameter Name="Comentario" Parameter="comentario" Type="System.String" DbType="VarChar(8000)" />
+    <Parameter Name="IdTipoVenta" Parameter="idTipoVenta" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdTipoPlazoCredito" Parameter="idTipoPlazoCredito" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="NumeroPlazoTiempo" Parameter="numeroPlazoTiempo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdTiempoPlazoCredito" Parameter="idTiempoPlazoCredito" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_GUARDAR_INFORMACION_FACTURACION_ENCABEZADOResult">
+      <Column Name="NumeroFactura" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="NumeroConector" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LlevaComprobanre" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdComprobanre" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="NumeroComprobante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Cliente" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="IdTipoIdentificacion" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="NumeroIdentificacion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CorreoElectronico" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="Comentario" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="FechaFacturacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdTipoVenta" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="IdTipoPlazoCredito" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="NumeroPlazoTiempo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="IdTiempoPlazoCredito" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
