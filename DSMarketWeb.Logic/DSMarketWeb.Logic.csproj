@@ -56,6 +56,7 @@
     <Compile Include="Comunes\SacarIdCreadoProducto.cs" />
     <Compile Include="Comunes\SacarNombreUsuario.cs" />
     <Compile Include="Comunes\SacarPorcientoDescuentoPrDefectoProductos.cs" />
+    <Compile Include="Comunes\SacartiempoGarantia.cs" />
     <Compile Include="Comunes\SeguridadEncriptacion.cs" />
     <Compile Include="Comunes\UtilidadDrop.cs" />
     <Compile Include="Comunes\ValidarClaveSeguridad.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
+    <Compile Include="Entidades\EntidadesServicio\ESacarTiempoGarantia.cs" />
     <Compile Include="Entidades\EntidadesServicio\ETipoPago.cs" />
     <Compile Include="Logica\LgicaContabilidad\LogicaConfiguracion.cs" />
     <Compile Include="Logica\LogicaCaja\LogicaCaja.cs" />

@@ -222,9 +222,9 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         private void CargarModelos() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModelo, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarTipoProducto.SelectedValue.ToString(), ddlSeleccionarCategria.SelectedValue.ToString(), ddlSeleccionarMarca.SelectedValue.ToString()), true);
         }
-        private void CargarTipoGarantia() {
-            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoGarantiaCalculos, ObjDataConfiguracion.Value.BuscaListas("TIEMPOGARANTIA", null, null));
-        }
+        //private void CargarTipoGarantia() {
+        //   
+        //}
         private void CargarTipoIngreso() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoIngreso, ObjDataConfiguracion.Value.BuscaListas("TIPOINGRESOS", null, null));
         }
@@ -438,7 +438,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 txtLimiteCreditoClienteSeleccionado.Visible = false;
 
                 EncabezadoPantalla("FACTURACION");
-                rbFacturacion.Checked = true;
                 rbContado.Checked = true;
                 ValidarComprobantesFiscales();
                 CargarTipoIdentificacion();
@@ -446,7 +445,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 CargarCategoias();
                 CargarMarcas();
                 CargarModelos();
-                CargarTipoGarantia();
+             //   CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
                 cbAgregarFechaManual.Checked = false;

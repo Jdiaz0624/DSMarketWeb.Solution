@@ -1113,6 +1113,60 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarCapacidadMantenimiento;
 
         /// <summary>
+        /// DivTipoGarantia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTipoGarantia;
+
+        /// <summary>
+        /// lbTipoGarantiaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTipoGarantiaMantenimiento;
+
+        /// <summary>
+        /// ddlSeleccionarTipoGarantiaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarTipoGarantiaMantenimiento;
+
+        /// <summary>
+        /// DivTiempoGarantia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTiempoGarantia;
+
+        /// <summary>
+        /// lbTiempoGarantiaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTiempoGarantiaMantenimiento;
+
+        /// <summary>
+        /// txtTiempoGarantiaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTiempoGarantiaMantenimiento;
+
+        /// <summary>
         /// lbComentarioMantenimiento control.
         /// </summary>
         /// <remarks>
@@ -1147,6 +1201,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtclaveSeguridadMantenimiento;
+
+        /// <summary>
+        /// cbAplicaParaGarantia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAplicaParaGarantia;
 
         /// <summary>
         /// cbProductoAcumulativoMantenimiento control.

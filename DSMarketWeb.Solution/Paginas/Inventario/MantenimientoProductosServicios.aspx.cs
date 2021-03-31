@@ -679,6 +679,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         #endregion
         #region GENERAR PROCESAR INFORMACION DEL PRODUCTO
         private void ProcesarInformacionProducto(decimal IdProducto, decimal NumeroConector, string Accion) {
+            int TipoTiempoGarantia = cbAplicaParaGarantia.Checked == true ? Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue) : 1;
+            string TiempoGarantia = cbAplicaParaGarantia.Checked == true ? txtTiempoGarantiaMantenimiento.Text : " ";
+
             DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Procesar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
                 IdProducto,
                 NumeroConector,
@@ -712,6 +715,9 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 Convert.ToDecimal(ddlSeleccionarColorMantenimiento.SelectedValue),
                 Convert.ToDecimal(ddlSeleccionarCondicionMantenimiento.SelectedValue),
                 Convert.ToDecimal(ddlSeleccionarCapacidadMantenimiento.SelectedValue),
+                cbAplicaParaGarantia.Checked,
+                TipoTiempoGarantia,
+                TiempoGarantia,
                 Accion);
             Procesar.ProcesarProducto();
 
@@ -794,6 +800,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             divBloqueSuplir.Visible = true;
             divBloqueDescartar.Visible = true;
             NombreUsuairoPantalla("CONSULTA DE INVENTARIO");
+            MostrarListadoInventario();
         }
         #endregion
         #region VALIDAR FNCIONES
@@ -1515,7 +1522,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                         Convert.ToDecimal(lbNumeroConectorProducto.Text),
                         0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0,
                         (decimal)Cantidad,
-                        0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0, "ADDPRODUCT");
+                        0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0,false,0,"", "ADDPRODUCT");
                     SacarProducto.ProcesarProducto();
                     lbStockSuplirDato.Text = NuevoStock.ToString("N0");
                 }
@@ -1535,7 +1542,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                          Convert.ToDecimal(lbNumeroConectorProducto.Text),
                          0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0,
                          (decimal)Cantidad,
-                         0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0, "LESSPRODUCT");
+                         0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, false, "", 0, 0, 0,false,0,"", "LESSPRODUCT");
                         SacarProducto.ProcesarProducto();
                         lbStockSuplirDato.Text = NuevoStock.ToString("N0");
                     }
@@ -1613,7 +1620,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 txtCapacidadDetalle.Text = n.Capacidad;
                 txtProductoAcumulativoDetalle.Text = n.ProductoAcumulativo;
                 txtAplicaParaImpuestoDetalle.Text = n.AplicaParaImpuesto;
-                txtComentarioDetalle.Text = n.Comentario;
+                txtComentarioDetalle.Text = n.Comentario;               
                 ProductoAcumulativo = Convert.ToBoolean(n.ProductoAcumulativo0);
                 IdTipoproducto = Convert.ToDecimal(n.IdTipoProducto);
                 int CantidadRegistros = Convert.ToInt32(n.CantidadRegistros);
@@ -1667,8 +1674,11 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 cbProductoAcumulativoMantenimiento.Checked = (Seleccionar.ProductoAcumulativo0.HasValue ? Seleccionar.ProductoAcumulativo0.Value : false);
                 cbAplicaImpuestoMantenimiento.Checked = (Seleccionar.AplicaParaImpuesto0.HasValue ? Seleccionar.AplicaParaImpuesto0.Value : false);
                 cbAgregarImagenArticulo.Checked = (Seleccionar.LlevaImagen0.HasValue ? Seleccionar.LlevaImagen0.Value : false);
-                
-                
+                cbAplicaParaGarantia.Checked = (Seleccionar.LlevaGarantia0.HasValue ? Seleccionar.LlevaGarantia0.Value : false);
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoGarantiaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIEMPOGARANTIA", null, null));
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoGarantiaMantenimiento, Seleccionar.IdTipoGarantia.ToString());
+                txtTiempoGarantiaMantenimiento.Text = Seleccionar.TiempoGarantia;
+
             }
             if (cbAgregarImagenArticulo.Checked == true) { 
             
@@ -1798,7 +1808,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 //CAMBIAMOS EL ESTATUS
                 DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos CambiarEstatus = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
                     _IdProducto, Convert.ToDecimal(lbNumeroConectorProducto.Text), _IdTipoProducto, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, 0, 0, 0, false,
-                    _ProductoAcumulativo, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, _Comentario, false, _EstatusProducto, "", 0, 0, 0, AccionTomar);
+                    _ProductoAcumulativo, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, _Comentario, false, _EstatusProducto, "", 0, 0, 0,false,0,"", AccionTomar);
                 CambiarEstatus.ProcesarProducto();
                 if (cbEliminarRegistroDescartado.Checked == true) {
                     ClientScript.RegisterStartupScript(GetType(), "RegistroEliminadoConExito()", "RegistroEliminadoConExito();", true);
@@ -1846,7 +1856,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             }
             else {
                 DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos EliminarProductosFueraInventario = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, 0, 0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, true, "", 0, 0, 0, "DELETEALLPRODUCTOUTOFSTOCK");
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, 0, 0, 0, false, false, false, 0, DateTime.Now, 0, DateTime.Now, DateTime.Now, "", false, true, "", 0, 0, 0,false,0,"", "DELETEALLPRODUCTOUTOFSTOCK");
                 EliminarProductosFueraInventario.ProcesarProducto();
                 ClientScript.RegisterStartupScript(GetType(), "ProcesoCompletadoCOnExito()", "ProcesoCompletadoCOnExito();", true);
                 RestablecerPantallaCOnsulta();
@@ -1887,6 +1897,27 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             CurrentPage += 1;
             MostrarListadoInventario();
+        }
+
+        protected void cbAplicaParaGarantia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAplicaParaGarantia.Checked == true) {
+                DivTipoGarantia.Visible = true;
+                DivTiempoGarantia.Visible = true;
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoGarantiaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIEMPOGARANTIA", null, null));
+                DSMarketWeb.Logic.Comunes.SacartiempoGarantia Sacartiempo = new Logic.Comunes.SacartiempoGarantia(Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue));
+                txtTiempoGarantiaMantenimiento.Text = Sacartiempo.TiempoGarantia();
+            }
+            else if (cbAplicaParaGarantia.Checked == false) {
+                DivTipoGarantia.Visible = false;
+                DivTiempoGarantia.Visible = false;
+            }
+        }
+
+        protected void ddlSeleccionarTipoGarantiaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DSMarketWeb.Logic.Comunes.SacartiempoGarantia Sacartiempo = new Logic.Comunes.SacartiempoGarantia(Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue));
+            txtTiempoGarantiaMantenimiento.Text = Sacartiempo.TiempoGarantia();
         }
 
         protected void LinkUltimo_Click(object sender, EventArgs e)

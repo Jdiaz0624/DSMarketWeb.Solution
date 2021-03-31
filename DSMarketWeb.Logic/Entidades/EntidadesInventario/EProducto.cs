@@ -71,6 +71,15 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesInventario
 		public System.Nullable<bool> AfectaOferta0 {get;set;}
 
 		public string AceptaOferta {get;set;}
+		public System.Nullable<bool> LlevaGarantia0 { get; set; }
+
+		public string LlevaGarantia { get; set; }
+
+		public System.Nullable<int> IdTipoGarantia { get; set; }
+
+		public string TipoTiempoGarantia { get; set; }
+
+		public string TiempoGarantia { get; set; }
 
 		public System.Nullable<bool> ProductoAcumulativo0 {get;set;}
 

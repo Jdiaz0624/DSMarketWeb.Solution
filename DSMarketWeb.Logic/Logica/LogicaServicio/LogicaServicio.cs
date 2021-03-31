@@ -81,5 +81,17 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
             return Mantenimiento;
         }
         #endregion
+        #region SACAR TIEMPO DE GARANTIA
+        public List<DSMarketWeb.Logic.Entidades.EntidadesServicio.ESacarTiempoGarantia> SacartiempoGarantia(int? @IdTipoTiempoGarantia = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_SACAR_TIEMPO_GARANTIA(IdTipoTiempoGarantia)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.ESacarTiempoGarantia
+                           {
+                               TiempoGarantia=n.TiempoGarantia
+                           }).ToList();
+            return Listado;
+        }
+        #endregion
     }
 }

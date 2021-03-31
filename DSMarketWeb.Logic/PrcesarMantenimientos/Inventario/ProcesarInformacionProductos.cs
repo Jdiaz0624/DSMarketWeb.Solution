@@ -42,44 +42,12 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
         private decimal IdColor = 0;
         private decimal IdCondicion = 0;
         private decimal IdCapacidad = 0;
+        private bool LlevaGarantia = false;
+        private int IdTipoTiempoGarantia = 0;
+        private string TiempoGarantia = "";
         private string Accion = "";
 
-        /// <summary>
-        /// Este Constructor es para Guardar, Modificar Eliminar y Suplir Productos del Inventario
-        /// </summary>
-        /// <param name="IdProductoCON"></param>
-        /// <param name="NumeroConectorCON"></param>
-        /// <param name="IdTipoProductoCON"></param>
-        /// <param name="IdCategoriaCON"></param>
-        /// <param name="IdUnidadMedidaCON"></param>
-        /// <param name="IdMarcaCON"></param>
-        /// <param name="IdModeloCON"></param>
-        /// <param name="IdTipoSuplidorCON"></param>
-        /// <param name="IdSuplidorCON"></param>
-        /// <param name="DescripcionCON"></param>
-        /// <param name="CodigoBarraCON"></param>
-        /// <param name="ReferenciaCON"></param>
-        /// <param name="PrecioCompraCON"></param>
-        /// <param name="PrecioVentaCON"></param>
-        /// <param name="StockCON"></param>
-        /// <param name="StockMinimoCON"></param>
-        /// <param name="PorcientoDescuentoCON"></param>
-        /// <param name="AfectaOfertaCON"></param>
-        /// <param name="ProductoAcumulativoCON"></param>
-        /// <param name="LlevaImagenCON"></param>
-        /// <param name="UsuarioAdicionCON"></param>
-        /// <param name="FechaAdicionaCON"></param>
-        /// <param name="UsuarioModificaCON"></param>
-        /// <param name="FechaModificaCON"></param>
-        /// <param name="FechaCON"></param>
-        /// <param name="ComentarioCON"></param>
-        /// <param name="AplicaParaImpuestoCON"></param>
-        /// <param name="EstatusProductoCON"></param>
-        /// <param name="NumeroSeguimientoCON"></param>
-        /// <param name="IdColorCON"></param>
-        /// <param name="IdCondicionCON"></param>
-        /// <param name="IdCapacidadCON"></param>
-        /// <param name="AccionCON"></param>
+
         public ProcesarInformacionProductos(
             decimal IdProductoCON,
             decimal NumeroConectorCON,
@@ -113,6 +81,9 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             decimal IdColorCON,
             decimal IdCondicionCON,
             decimal IdCapacidadCON,
+            bool LlevaGarantiaCON,
+            int IdTipoTiempoGarantiaCON,
+            string TiempoGarantiaCON,
             string AccionCON)
         {
             IdProducto = IdProductoCON;
@@ -147,6 +118,9 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             IdColor = IdColorCON;
             IdCondicion = IdCondicionCON;
             IdCapacidad = IdCapacidadCON;
+            LlevaGarantia = LlevaGarantiaCON;
+            IdTipoTiempoGarantia = IdTipoTiempoGarantiaCON;
+            TiempoGarantia = TiempoGarantiaCON;
             Accion = AccionCON;
         }
 
@@ -200,6 +174,9 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.IdColor = IdColor;
             Procesar.IdCondicion = IdCondicion;
             Procesar.IdCapacidad = IdCapacidad;
+            Procesar.LlevaGarantia0 = LlevaGarantia;
+            Procesar.IdTipoGarantia = IdTipoTiempoGarantia;
+            Procesar.TiempoGarantia = TiempoGarantia;
 
             var MAN = ObjData.MantenimientoProductos(Procesar, Accion);
         }

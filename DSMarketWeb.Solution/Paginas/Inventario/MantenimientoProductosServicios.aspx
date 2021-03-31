@@ -823,6 +823,16 @@
                     <asp:DropDownList ID="ddlSeleccionarCapacidadMantenimiento" runat="server" ToolTip="Seleccionar Capacidad" CssClass="form-control"></asp:DropDownList>
                 </div>
 
+                  <div class="form-group col-md-4" id="DivTipoGarantia" runat="server">
+                <asp:Label ID="lbTipoGarantiaMantenimiento" runat="server" Text="Tipo de Garantia" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarTipoGarantiaMantenimiento" runat="server" ToolTip="Seleccionar el Tipo de Garantia" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoGarantiaMantenimiento_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-4" id="DivTiempoGarantia" runat="server" >
+                <asp:Label ID="lbTiempoGarantiaMantenimiento" runat="server" Text="Tiempo de Garantia" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTiempoGarantiaMantenimiento" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            </div>
+
                  <div class="form-group col-md-12">
                     <asp:Label ID="lbComentarioMantenimiento" runat="server" Text="Comentario" CssClass="Letranegrita"></asp:Label>
                     <asp:TextBox ID="txtComentarioMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control"></asp:TextBox>
@@ -837,6 +847,7 @@
             </div>
             <div class="form-check-inline">
                 <div class="form-group form-check">
+                    <asp:CheckBox ID="cbAplicaParaGarantia" runat="server" Text="Lleva Garantia" AutoPostBack="true" OnCheckedChanged="cbAplicaParaGarantia_CheckedChanged" CssClass="form-check-input" ToolTip="Aplicar para garantia" />
                     <asp:CheckBox ID="cbProductoAcumulativoMantenimiento" runat="server" Text="Producto Acumulativo" AutoPostBack="true" OnCheckedChanged="cbProductoAcumulativoMantenimiento_CheckedChanged" CssClass="form-check-input" ToolTip="Establecer si el producto es acumulativo" />
                     <asp:CheckBox ID="cbAplicaImpuestoMantenimiento" runat="server" Text="Aplica para Impuesto" CssClass="form-check-input" ToolTip="Establecer si este producto aplica para impuesto" />
                     <asp:CheckBox ID="cbAgregarImagenArticulo" runat="server"  Text="Agregar Imagen" AutoPostBack="true" OnCheckedChanged="cbAgregarImagenArticulo_CheckedChanged" CssClass="form-check-input" ToolTip="Asignarle una imagen al producto" />

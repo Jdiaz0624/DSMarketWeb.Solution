@@ -51,6 +51,11 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                         PorcientoDescuento=n.PorcientoDescuento,
                                         AfectaOferta0=n.AfectaOferta0,
                                         AceptaOferta=n.AceptaOferta,
+                                        LlevaGarantia0=n.LlevaGarantia0,
+                                        LlevaGarantia=n.LlevaGarantia,
+                                        IdTipoGarantia=n.IdTipoGarantia,
+                                        TipoTiempoGarantia=n.TipoTiempoGarantia,
+                                        TiempoGarantia=n.TiempoGarantia,
                                         ProductoAcumulativo0=n.ProductoAcumulativo0,
                                         ProductoAcumulativo=n.ProductoAcumulativo,
                                         LlevaImagen0=n.LlevaImagen0,
@@ -117,6 +122,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                 Item.IdColor,
                 Item.IdCondicion,
                 Item.IdCapacidad,
+                Item.LlevaGarantia0,
+                Item.IdTipoGarantia,
+                Item.TiempoGarantia,
                 Accion);
             if (Producto != null) {
                 Mantenimiento = (from n in Producto
@@ -153,7 +161,10 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                      NumeroSeguimiento=n.NumeroSeguimiento,
                                      IdColor=n.IdColor,
                                      IdCondicion=n.IdCondicion,
-                                     IdCapacidad=n.IdCapacidad
+                                     IdCapacidad=n.IdCapacidad,
+                                     LlevaGarantia0=n.LlevaGarantia,
+                                     IdTipoGarantia=n.IdTipoGarantia,
+                                     TiempoGarantia=n.TiempoGarantia
                                  }).FirstOrDefault();
             }
             return Mantenimiento;

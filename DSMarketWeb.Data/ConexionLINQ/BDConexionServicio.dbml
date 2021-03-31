@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DSMarketWeb" Class="BDConexionServicioDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.26.24.199;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString2" Provider="System.Data.SqlClient" />
   <Function Name="Servicio.SP_MANTENIMIENTO_TIPO_PAGO" Method="SP_MANTENIMIENTO_TIPO_PAGO">
     <Parameter Name="IdTipoPago" Parameter="idTipoPago" Type="System.Decimal" DbType="Decimal(20,0)" />
     <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
@@ -50,6 +50,12 @@
       <Column Name="PorcentajeEntero" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="Valor" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
       <Column Name="CodigoTipoPago" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Servicio.SP_SACAR_TIEMPO_GARANTIA" Method="SP_SACAR_TIEMPO_GARANTIA">
+    <Parameter Name="IdTipoTiempoGarantia" Parameter="idTipoTiempoGarantia" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SP_SACAR_TIEMPO_GARANTIAResult">
+      <Column Name="TiempoGarantia" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

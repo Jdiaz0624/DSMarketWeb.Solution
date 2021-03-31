@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionServicioDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -74,6 +74,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoPago, descripcion);
 			return ((ISingleResult<SP_BUSCA_TIPO_PAGOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_SACAR_TIEMPO_GARANTIA")]
+		public ISingleResult<SP_SACAR_TIEMPO_GARANTIAResult> SP_SACAR_TIEMPO_GARANTIA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoTiempoGarantia", DbType="Int")] System.Nullable<int> idTipoTiempoGarantia)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoTiempoGarantia);
+			return ((ISingleResult<SP_SACAR_TIEMPO_GARANTIAResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -664,6 +671,32 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._CodigoTipoPago != value))
 				{
 					this._CodigoTipoPago = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_SACAR_TIEMPO_GARANTIAResult
+	{
+		
+		private System.Nullable<int> _TiempoGarantia;
+		
+		public SP_SACAR_TIEMPO_GARANTIAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TiempoGarantia", DbType="Int")]
+		public System.Nullable<int> TiempoGarantia
+		{
+			get
+			{
+				return this._TiempoGarantia;
+			}
+			set
+			{
+				if ((this._TiempoGarantia != value))
+				{
+					this._TiempoGarantia = value;
 				}
 			}
 		}
