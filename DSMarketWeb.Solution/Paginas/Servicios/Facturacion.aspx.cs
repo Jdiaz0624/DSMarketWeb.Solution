@@ -287,7 +287,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 null, null, null, null);
             int CantidadRegistros = BuscarProductosFacturar.Count;
             lbCantidadRegistrosProductosVariable.Text = CantidadRegistros.ToString("N0");
-            Paginar(ref rpListadoProductosAgregar, BuscarProductosFacturar, 10, ref lbCantidadPaginaVAriableProductoAgregar, ref LinkPrimeraPaginaProductoAgregar, ref LinkAnteriorProductoAgregar, ref LinkSiguienteProductoAgregar, ref LinkUltimoProductoAgregar);
+            Paginar(ref rpListadoProductosAgregar, BuscarProductosFacturar, 3, ref lbCantidadPaginaVAriableProductoAgregar, ref LinkPrimeraPaginaProductoAgregar, ref LinkAnteriorProductoAgregar, ref LinkSiguienteProductoAgregar, ref LinkUltimoProductoAgregar);
             HandlePaging(ref dtPaginacionProductoAgregar, ref lbPaginaActualVariavleProductoAgregar);
         }
         #endregion

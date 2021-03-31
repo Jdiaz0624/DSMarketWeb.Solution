@@ -3,14 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+     
 
         .btn-sm{
             width:90px;
@@ -195,11 +188,11 @@
             <!--PAGINACION DEL REPEATER-->
             <div align="center">
                 <asp:Label ID="lbPaginaActualTitulo" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbPaginaActualVariavle" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaVAriable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="LinkBlbPaginaActualVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTitulo" runat="server" Text=" de " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVariable" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
-             <div id="divPaginacion" runat="server" align="center">
+             <div id="divPaginacionDetalle" runat="server" align="center">
         <div style="margin-top: 20px;">
             <table style="width: 600px">
                 <tr>
@@ -218,15 +211,14 @@
                 </tr>
             </table>
         </div>
-    </div>
+        </div>
     </div>
 
 
     <div id="DivBloqueMantenimiento" runat="server">
-        <div class="jumbotron" align="center">
-            <asp:Label ID="lbMAntenimientoSuplidores" runat="server" Text="MANTENIMIENTO DE SUPLIDORES"></asp:Label>
-            <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
-        </div>
+        <br /><br />
+         <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="IdRegistroSeleccionado" Visible="false"></asp:Label>
+
 
         <div class="form-row">
             <div class="form-group col-md-4">

@@ -3,14 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
          <style type="text/css">
-        .jumbotron{
-            color:#000000; 
-            background:#1E90FF;
-            font-size:30px;
-            font-weight:bold;
-            font-family:'Gill Sans';
-            padding:25px;
-        }
+  
 
         .btn-sm{
             width:90px;
@@ -154,10 +147,8 @@
 
 
         <div id="DivBloqueMantenimiento" runat="server">
-            <div class="jumbotron" align="center">
-                <asp:Label ID="lbTituloMantenimiento" runat="server" Text="MANTENIMIENTO DE CONDICIONES"></asp:Label>
-                <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="Id de Condicion" Visible="false"></asp:Label>
-            </div>
+             <br /><br />
+           <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="Id de Condicion" Visible="false"></asp:Label>
 
             <div class="form-row">
                 <div class="form-group col-md-4">

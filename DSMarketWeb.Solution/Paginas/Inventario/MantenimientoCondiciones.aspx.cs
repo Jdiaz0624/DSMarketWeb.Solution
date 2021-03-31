@@ -223,6 +223,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 ModoConsulta();
                 Consultar_Mantenimiento();
                 divPaginacion.Visible = false;
+                MostrarListadoCondiciones();
             }
         }
 
