@@ -119,6 +119,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                 Item.IdTipoPlazoCredito,
                 Item.NumeroPlazoTiempo,
                 Item.IdTiempoPlazoCredito,
+                Item.Estatus,
                 Accion);
             if (InformacionEncabezadofactura != null) {
                 Guardar = (from n in InformacionEncabezadofactura
@@ -140,6 +141,123 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                IdTipoPlazoCredito=n.IdTipoPlazoCredito,
                                NumeroPlazoTiempo=n.NumeroPlazoTiempo,
                                IdTiempoPlazoCredito=n.IdTiempoPlazoCredito,
+                               Estatus=n.Estatus
+                           }).FirstOrDefault();
+            }
+            return Guardar;
+        }
+
+
+        //ITEMS DE LA FACTURA
+        public DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem GuardarItemsFacturas(DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem Guardar = null;
+
+            var ItemsFactura = ObjData.SP_GUARDAR_INFORMACION_FACTURACION_ITEM(
+             Item.NumerodeConector,
+             Item.TipodeProducto,
+             Item.Categoria,
+             Item.ProductoAcumulativo,
+             Item.Precio,
+             Item.Producto,
+             Item.Cantidad,
+             Item.PorcientodeDescuento,
+             Item.DescuentoAplicado,
+             Item.ImpuestoAplicado,
+             Item.LlevaGarantia,
+             Item.Garantia,
+             Item.CodigodeBarras,
+             Item.Referencia,
+             Item.IdProductoRespaldo,
+             Item.NumeroConectorRespaldo,
+             Item.IdTipoProductoRespaldo,
+             Item.IdCategoriaRespaldo,
+             Item.IdUnidadMedidaRespaldo,
+             Item.IdMarcaRespaldo,
+             Item.IdModeloRespaldo,
+             Item.IdTipoSuplidorRespaldo,
+             Item.IdSuplidorRespaldo,
+             Item.DescripcionRespaldo,
+             Item.CodigoBarraRespaldo,
+             Item.ReferenciaRespaldo,
+             Item.PrecioCompraRespaldo,
+             Item.PrecioVentaRespaldo,
+             Item.StockRespaldo,
+             Item.StockMinimoRespaldo,
+             Item.PorcientoDescuentoRespaldo,
+             Item.AfectaOfertaRespaldo,
+             Item.ProductoAcumulativoRespaldo,
+             Item.LlevaImagenRespaldo,
+             Item.UsuarioAdicionRespaldo,
+             Item.FechaAdicionaRespaldo,
+             Item.UsuarioModificaRespaldo,
+             Item.FechaModificaRespaldo,
+             Item.FechaRespaldo,
+             Item.ComentarioRespaldo,
+             Item.AplicaParaImpuestoRespaldo,
+             Item.EstatusProductoRespaldo,
+             Item.NumeroSeguimientoRespaldo,
+             Item.IdColorRespaldo,
+             Item.IdCondicionRespaldo,
+             Item.IdCapacidadRespaldo,
+             Item.LlevaGarantiaRespaldo,
+             Item.IdTipoGarantiaRespaldo,
+             Item.TiempoGarantiaRespaldo,
+             Accion);
+            if (ItemsFactura != null) {
+                Guardar = (from n in ItemsFactura
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem
+                           {
+                               NumerodeConector = n.NumerodeConector,
+                               TipodeProducto = n.TipodeProducto,
+                               Categoria = n.Categoria,
+                               ProductoAcumulativo = n.ProductoAcumulativo,
+                               Precio = n.Precio,
+                               Producto = n.Producto,
+                               Cantidad = n.Cantidad,
+                               PorcientodeDescuento = n.PorcientodeDescuento,
+                               DescuentoAplicado = n.DescuentoAplicado,
+                               ImpuestoAplicado = n.ImpuestoAplicado,
+                               LlevaGarantia = n.LlevaGarantia,
+                               Garantia = n.Garantia,
+                               CodigodeBarras = n.CodigodeBarras,
+                               Referencia = n.Referencia,
+                               IdProductoRespaldo = n.IdProductoRespaldo,
+                               NumeroConectorRespaldo = n.NumeroConectorRespaldo,
+                               IdTipoProductoRespaldo = n.IdTipoProductoRespaldo,
+                               IdCategoriaRespaldo = n.IdCategoriaRespaldo,
+                               IdUnidadMedidaRespaldo = n.IdUnidadMedidaRespaldo,
+                               IdMarcaRespaldo = n.IdMarcaRespaldo,
+                               IdModeloRespaldo = n.IdModeloRespaldo,
+                               IdTipoSuplidorRespaldo = n.IdTipoSuplidorRespaldo,
+                               IdSuplidorRespaldo = n.IdSuplidorRespaldo,
+                               DescripcionRespaldo = n.DescripcionRespaldo,
+                               CodigoBarraRespaldo = n.CodigoBarraRespaldo,
+                               ReferenciaRespaldo = n.ReferenciaRespaldo,
+                               PrecioCompraRespaldo = n.PrecioCompraRespaldo,
+                               PrecioVentaRespaldo = n.PrecioVentaRespaldo,
+                               StockRespaldo = n.StockRespaldo,
+                               StockMinimoRespaldo = n.StockMinimoRespaldo,
+                               PorcientoDescuentoRespaldo = n.PorcientoDescuentoRespaldo,
+                               AfectaOfertaRespaldo = n.AfectaOfertaRespaldo,
+                               ProductoAcumulativoRespaldo = n.ProductoAcumulativoRespaldo,
+                               LlevaImagenRespaldo = n.LlevaImagenRespaldo,
+                               UsuarioAdicionRespaldo = n.UsuarioAdicionRespaldo,
+                               FechaAdicionaRespaldo = n.FechaAdicionaRespaldo,
+                               UsuarioModificaRespaldo = n.UsuarioModificaRespaldo,
+                               FechaModificaRespaldo = n.FechaModificaRespaldo,
+                               FechaRespaldo = n.FechaRespaldo,
+                               ComentarioRespaldo = n.ComentarioRespaldo,
+                               AplicaParaImpuestoRespaldo = n.AplicaParaImpuestoRespaldo,
+                               EstatusProductoRespaldo = n.EstatusProductoRespaldo,
+                               NumeroSeguimientoRespaldo = n.NumeroSeguimientoRespaldo,
+                               IdColorRespaldo = n.IdColorRespaldo,
+                               IdCondicionRespaldo = n.IdCondicionRespaldo,
+                               IdCapacidadRespaldo = n.IdCapacidadRespaldo,
+                               LlevaGarantiaRespaldo = n.LlevaGarantiaRespaldo,
+                               IdTipoGarantiaRespaldo = n.IdTipoGarantiaRespaldo,
+                               TiempoGarantiaRespaldo = n.TiempoGarantiaRespaldo
                            }).FirstOrDefault();
             }
             return Guardar;

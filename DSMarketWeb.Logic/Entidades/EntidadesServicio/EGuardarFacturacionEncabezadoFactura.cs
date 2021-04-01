@@ -41,5 +41,6 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 		public System.Nullable<decimal> NumeroPlazoTiempo { get; set; }
 
 		public System.Nullable<decimal> IdTiempoPlazoCredito { get; set; }
+		public string Estatus { get; set; }
 	}
 }

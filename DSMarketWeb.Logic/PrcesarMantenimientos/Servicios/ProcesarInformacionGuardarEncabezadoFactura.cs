@@ -27,6 +27,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private decimal IdTipoPlazoCredito = 0;
         private decimal NumeroPlazoTiempo = 0;
         private decimal IdTiempoPlazoCredito = 0;
+        private string Estatus = "";
         private string Accion = "";
 
         public ProcesarInformacionGuardarEncabezadoFactura(
@@ -47,6 +48,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             decimal IdTipoPlazoCreditoCON,
             decimal NumeroPlazoTiempoCON,
             decimal IdTiempoPlazoCreditoCON,
+            string EstatusCON,
             string AccionCON)
         {
             NumeroFactura = NumeroFacturaCON;
@@ -66,6 +68,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             IdTipoPlazoCredito = IdTipoPlazoCreditoCON;
             NumeroPlazoTiempo = NumeroPlazoTiempoCON;
             IdTiempoPlazoCredito = IdTiempoPlazoCreditoCON;
+            Estatus = EstatusCON;
             Accion = AccionCON;
         }
 
@@ -89,6 +92,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.IdTipoPlazoCredito = IdTipoPlazoCredito;
             Procesar.NumeroPlazoTiempo = NumeroPlazoTiempo;
             Procesar.IdTiempoPlazoCredito = IdTiempoPlazoCredito;
+            Procesar.Estatus = Estatus;
 
             var MAN = ObjData.GuardarInformacionEncabezadoFactura(Procesar, Accion);
         }
