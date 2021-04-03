@@ -10,6 +10,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
     {
         readonly DSMarketWeb.Logic.Logica.LogicaServicio.LogicaServicio ObjData = new Logica.LogicaServicio.LogicaServicio();
 
+        private decimal NumeroRegistro = 0;
         private string NumerodeConector = "";
         private string TipodeProducto = "";
         private string Categoria = "";
@@ -59,9 +60,11 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private bool LlevaGarantiaRespaldo = false;
         private int IdTipoGarantiaRespaldo = 0;
         private string TiempoGarantiaRespaldo = "";
+        private bool EstatusActual = false;
         private string Accion = "";
 
         public ProcesarInformacionFacturacionItems(
+            decimal NumeroRegistroCON,
             string NumerodeConectorCON,
             string TipodeProductoCON,
             string CategoriaCON,
@@ -111,8 +114,10 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             bool LlevaGarantiaRespaldoCON,
             int IdTipoGarantiaRespaldoCON,
             string TiempoGarantiaRespaldoCON,
+            bool EstatusActualCON,
             string AccionCON)
         {
+            NumeroRegistro = NumeroRegistroCON;
             NumerodeConector = NumerodeConectorCON;
             TipodeProducto = TipodeProductoCON;
             Categoria = CategoriaCON;
@@ -162,12 +167,14 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             LlevaGarantiaRespaldo = LlevaGarantiaRespaldoCON;
             IdTipoGarantiaRespaldo = IdTipoGarantiaRespaldoCON;
             TiempoGarantiaRespaldo = TiempoGarantiaRespaldoCON;
+            EstatusActual = EstatusActualCON;
             Accion = AccionCON;
         }
 
-        private void ProcesarInformacion() {
+        public void ProcesarInformacion() {
             DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem Procesar = new Entidades.EntidadesServicio.EGuardarFacturacionItem();
 
+            Procesar.NumeroRegistro = NumeroRegistro;
             Procesar.NumerodeConector = NumerodeConector;
             Procesar.TipodeProducto = TipodeProducto;
             Procesar.Categoria = Categoria;
@@ -217,6 +224,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.LlevaGarantiaRespaldo = LlevaGarantiaRespaldo;
             Procesar.IdTipoGarantiaRespaldo = IdTipoGarantiaRespaldo;
             Procesar.TiempoGarantiaRespaldo = TiempoGarantiaRespaldo;
+            Procesar.EstatusActual = EstatusActual;
 
             var MAN = ObjData.GuardarItemsFacturas(Procesar, Accion);
         }

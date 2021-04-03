@@ -73,6 +73,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
                                         EstatusProducto0=n.EstatusProducto0,
                                         EstatusProducto=n.EstatusProducto,
                                         AplicaParaImpuesto=n.AplicaParaImpuesto,
+                                        Impuesto=n.Impuesto,
                                         NumeroSeguimiento=n.NumeroSeguimiento,
                                         CantidadRegistros=n.CantidadRegistros,
                                         ProductosConOferta=n.ProductosConOferta,

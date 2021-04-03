@@ -114,6 +114,7 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesInventario
 		public string EstatusProducto {get;set;}
 
 		public string AplicaParaImpuesto {get;set;}
+		public System.Nullable<decimal> Impuesto { get; set; }
 
 		public string NumeroSeguimiento {get;set;}
 

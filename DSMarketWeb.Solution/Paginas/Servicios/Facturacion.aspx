@@ -60,6 +60,12 @@
     </script>
     
     <div class="container-fluid">
+        <asp:Label ID="lbCodigoUsuarioConectado" runat="server" Text="Codigo de Usuario" Visible="false"></asp:Label>
+        <asp:Label ID="lbNumeroConector" runat="server" Text="Numero de Conector" Visible="false"></asp:Label>
+        <asp:Label ID="lbIdProductoSeleccionado" runat="server" Text="IdProductoSeleccionado" Visible="false"></asp:Label>
+        <asp:Label ID="lbNumeroConectorProductoSeleccionado" runat="server" Text="IdProductoSeleccionado" Visible="false"></asp:Label>
+
+
         <br /><br />
          <asp:Label ID="lbCodigoClienteSeleccionado" runat="server" Text="Codigo de Cliente" Visible="false"></asp:Label>
         <asp:Label ID="lbLimiteCreditoClienteSeleccionado" runat="server" Text="LimiteCredito" Visible="false"></asp:Label>
@@ -192,11 +198,6 @@
             <div class="form-group col-md-3">
                 <asp:Label ID="lbCantidadArticulos" runat="server" Text="Total Articulos" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtCantidadArticulos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-3" runat="server" visible="false" id="divFechaManual">
-                <asp:Label ID="lbFechaManual" runat="server" Text="Fecha Manual" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtFechaManual" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="form-group col-md-4">
@@ -485,9 +486,8 @@
                              <asp:Label ID="lbLetreroRojos" runat="server" align="center" Text="La cantidad que quieres procesar supera la cantidad disponible en almacen, favor de verificar" CssClass="Letranegrita"></asp:Label>
                          </div>
                          <div align="center">
+                          
                              <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />
-                             <asp:Button ID="btnEditarRegistroAgregado" runat="server" Text="Editar" ToolTip="Editar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnEditarRegistroAgregado_Click" />
-                             <asp:Button ID="btnEliminarRegistroAgregado" runat="server" Text="Eliminar" ToolTip="Eliminar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnEliminarRegistroAgregado_Click" />
                              <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Restablecer" ToolTip="Restablecer Vista Previa" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
                              <br /><br />
                              <asp:Label ID="lbCantidadRegistrosAgregadosTitulo" runat="server" Text="Cantidad de Registros Agregados ( " CssClass="Letranegrita"></asp:Label>
@@ -500,7 +500,8 @@
                                <thead>
                                      <tr>
                                      <th style="width:10%" align="left"> Seleccionar </th>
-                                     <th style="width:50%" align="left"> Producto </th>
+                                     <th style="width:30%" align="left"> Producto </th>
+                                         <th style="width:20%" align="left"> Garantia </th>
                                      <th style="width:10%" align="left"> Precio </th>
                                      <th style="width:10%" align="left"> Descuento </th>
                                      <th style="width:10%" align="left"> Cantidad </th>
@@ -511,12 +512,16 @@
                                      <asp:Repeater ID="rpListadoProductosAgregados" runat="server">
                                          <ItemTemplate>
                                              <tr>
-                                                 <th style="width:10%"> <asp:Button ID="btnSeleccionarRegistrosAgregadosHeaderRepeater" runat="server" Text="Seleccionar" ToolTip="Seleccionar Registros Agregados" OnClick="btnSeleccionarRegistrosAgregadosHeaderRepeater_Click" CssClass="btn btn-outline-secondary btn-sm" /> </th>
-                                                 <th style="width:50%"> <%# Eval("") %> </th>
-                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
-                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
-                                                 <th style="width:10%"> <%#string.Format("{0:n0}", Eval("")) %> </th>
-                                                 <th style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </th>
+                                                 <asp:HiddenField ID="hfNumeroRegistroItemAgregado" runat="server" Value='<%# Eval("NumeroRegistro") %>' />
+                                                 <asp:HiddenField ID="hfNumeroConectorItemAgregado" runat="server" Value='<%# Eval("NumerodeConector") %>' />
+
+                                                 <td style="width:10%"> <asp:Button ID="btnSeleccionarRegistrosAgregadosHeaderRepeater" runat="server" Text="Quitar" ToolTip="Seleccionar Registros Agregados" OnClick="btnSeleccionarRegistrosAgregadosHeaderRepeater_Click" CssClass="btn btn-outline-secondary btn-sm" /> </td>
+                                                 <td style="width:30%"> <%# Eval("Producto") %> </td>
+                                                 <td style="width:20%"> <%# Eval("GarantiaProducto") %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Precio")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Descuento")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n0}", Eval("Cantidad")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Total")) %> </td>
                                              </tr>
                                          </ItemTemplate>
                                      </asp:Repeater>
@@ -560,4 +565,8 @@
     </div>
   </div>
 </div>
+
+
+
+
 </asp:Content>

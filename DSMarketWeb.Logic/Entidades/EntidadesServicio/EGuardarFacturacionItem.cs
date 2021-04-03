@@ -8,6 +8,7 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 {
     public class EGuardarFacturacionItem
     {
+		public System.Nullable<decimal> NumeroRegistro { get; set; }
 		public string NumerodeConector {get;set;}
 
 		public string TipodeProducto {get;set;}
@@ -105,5 +106,6 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 		public System.Nullable<int> IdTipoGarantiaRespaldo {get;set;}
 
 		public string TiempoGarantiaRespaldo {get;set;}
+		public System.Nullable<bool> EstatusActual { get; set; }
 	}
 }

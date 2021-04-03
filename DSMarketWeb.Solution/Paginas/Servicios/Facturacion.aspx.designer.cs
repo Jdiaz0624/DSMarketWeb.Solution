@@ -15,6 +15,42 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
     {
 
         /// <summary>
+        /// lbCodigoUsuarioConectado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCodigoUsuarioConectado;
+
+        /// <summary>
+        /// lbNumeroConector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroConector;
+
+        /// <summary>
+        /// lbIdProductoSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbIdProductoSeleccionado;
+
+        /// <summary>
+        /// lbNumeroConectorProductoSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroConectorProductoSeleccionado;
+
+        /// <summary>
         /// lbCodigoClienteSeleccionado control.
         /// </summary>
         /// <remarks>
@@ -409,33 +445,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulos;
-
-        /// <summary>
-        /// divFechaManual control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFechaManual;
-
-        /// <summary>
-        /// lbFechaManual control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFechaManual;
-
-        /// <summary>
-        /// txtFechaManual control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaManual;
 
         /// <summary>
         /// lbTotalDescuento control.
@@ -1219,24 +1228,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarRegistro;
-
-        /// <summary>
-        /// btnEditarRegistroAgregado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarRegistroAgregado;
-
-        /// <summary>
-        /// btnEliminarRegistroAgregado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarRegistroAgregado;
 
         /// <summary>
         /// btnRestablecerVistaPrevia control.

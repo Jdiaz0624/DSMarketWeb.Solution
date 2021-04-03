@@ -155,6 +155,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
             DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem Guardar = null;
 
             var ItemsFactura = ObjData.SP_GUARDAR_INFORMACION_FACTURACION_ITEM(
+             Item.NumeroRegistro,
              Item.NumerodeConector,
              Item.TipodeProducto,
              Item.Categoria,
@@ -204,11 +205,13 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
              Item.LlevaGarantiaRespaldo,
              Item.IdTipoGarantiaRespaldo,
              Item.TiempoGarantiaRespaldo,
+             Item.EstatusActual,
              Accion);
             if (ItemsFactura != null) {
                 Guardar = (from n in ItemsFactura
                            select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EGuardarFacturacionItem
                            {
+                               NumeroRegistro=n.NumeroRegistro,
                                NumerodeConector = n.NumerodeConector,
                                TipodeProducto = n.TipodeProducto,
                                Categoria = n.Categoria,
@@ -257,10 +260,43 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                IdCapacidadRespaldo = n.IdCapacidadRespaldo,
                                LlevaGarantiaRespaldo = n.LlevaGarantiaRespaldo,
                                IdTipoGarantiaRespaldo = n.IdTipoGarantiaRespaldo,
-                               TiempoGarantiaRespaldo = n.TiempoGarantiaRespaldo
+                               TiempoGarantiaRespaldo = n.TiempoGarantiaRespaldo,
+                               EstatusActual=n.EstatusActual
                            }).FirstOrDefault();
             }
             return Guardar;
+        }
+
+
+        //BUSCAR LOS ITEMS AGREGADOS
+        public List<DSMarketWeb.Logic.Entidades.EntidadesServicio.EBuscaItemsAgregadoFActura> BuscaProductosAgregados(string NumeroConector = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_ITEMS_AGREGADOS_FACTURA(NumeroConector)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EBuscaItemsAgregadoFActura
+                           {
+                               NumeroRegistro=n.NumeroRegistro,
+                               NumerodeConector=n.NumerodeConector,
+                               Producto=n.Producto,
+                               Garantia=n.Garantia,
+                               IdTipoGarantiaRespaldo=n.IdTipoGarantiaRespaldo,
+                               GarantiaProducto=n.GarantiaProducto,
+                               Precio=n.Precio,
+                               Descuento=n.Descuento,
+                               Cantidad=n.Cantidad,
+                               Total=n.Total,
+                               IdTipoProductoRespaldo=n.IdTipoProductoRespaldo,
+                               ImpuestoAplicado=n.ImpuestoAplicado,
+                               TotalProductos=n.TotalProductos,
+                               TotalServicios=n.TotalServicios,
+                               TotalItems=n.TotalItems,
+                               TotalDescuento=n.TotalDescuento,
+                               SubTotal=n.SubTotal,
+                               TotalImpuesto=n.TotalImpuesto,
+                               TotalGeneral=n.TotalGeneral,
+
+                           }).ToList();
+            return Listado;
         }
         #endregion
     }

@@ -422,12 +422,198 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         
         }
         #endregion
+        #region GENERAR NUMERO DE CONECTOR
+        private void GenerarNumeroConector() {
 
+            Random NumeroAleatorio1 = new Random();
+            Random NumeroAleatorio2 = new Random();
+
+            string PrimerNumero = NumeroAleatorio1.Next(0, 999999999).ToString();
+            string SegundoNumero = NumeroAleatorio2.Next(0, 999999999).ToString();
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().Length == 1 ? "0" + DateTime.Now.Month.ToString() : DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Day.ToString().Length == 1 ? "0" + DateTime.Now.Day.ToString() : DateTime.Now.Day.ToString();
+
+            string NumeroRamdon = lbCodigoUsuarioConectado.Text + PrimerNumero + Year + Month + day + SegundoNumero;
+            lbNumeroConector.Text = NumeroRamdon;
+        }
+        #endregion
+        #region AGREGAR PRODUCTO A FACTURA
+        private void ProcesarItemFactura(decimal IdProductoSeleccionao, decimal NumeroConectorProducto,string Accion) {
+            //DECLARAMOS LAS VARIABLES PARA REALIZAR ESTE PROCESO
+            decimal IdProductoRespaldo = 0;
+            decimal NumeroConectorRespaldo = 0;
+            decimal IdTipoProductoRespaldo = 0;
+            decimal IdCategoriaRespaldo = 0;
+            decimal IdUnidadMedidaRespaldo  = 0;
+            decimal IdMarcaRespaldo = 0;
+            decimal IdModeloRespaldo = 0;
+            decimal IdTipoSuplidorRespaldo = 0;
+            decimal IdSuplidorRespaldo = 0;
+            string DescripcionRespaldo = "";
+            string CodigoBarraRespaldo = "";
+            string ReferenciaRespaldo = "";
+            decimal PrecioCompraRespaldo = 0;
+            decimal PrecioVentaRespaldo = 0;
+            decimal StockRespaldo = 0;
+            decimal StockMinimoRespaldo = 0;
+            decimal PorcientoDescuentoRespaldo = 0;
+            bool AfectaOfertaRespaldo = false;
+            bool ProductoAcumulativoRespaldo = false;
+            bool LlevaImagenRespaldo = false;
+            decimal UsuarioAdicionRespaldo = 0;
+            DateTime FechaAdicionaRespaldo = DateTime.Now;
+            decimal UsuarioModificaRespaldo = 0;
+            DateTime FechaModificaRespaldo = DateTime.Now;
+            DateTime FechaRespaldo = DateTime.Now;
+            string ComentarioRespaldo = "";
+            bool AplicaParaImpuestoRespaldo = false;
+            bool EstatusProductoRespaldo = false;
+            string NumeroSeguimientoRespaldo = "";
+            decimal IdColorRespaldo = 0;
+            decimal IdCondicionRespaldo = 0;
+            decimal IdCapacidadRespaldo = 0;
+            bool LlevaGarantiaRespaldo = false;
+            int IdTipoGarantiaRespaldo = 0;
+            string TiempoGarantiaRespaldo = "";
+
+            //SACAMOS TODOS LOS DATOS DEL PRODUCTO SELECCIONADO
+            if (Accion == "INSERT") {
+                var SacarInformacionPrducto = ObjDataInventario.Value.BuscaProductos(
+                    IdProductoSeleccionao, NumeroConectorProducto,
+                    null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                foreach (var n in SacarInformacionPrducto) {
+                    IdProductoRespaldo = (decimal)n.IdProducto;
+                    NumeroConectorRespaldo = (decimal)n.NumeroConector;
+                    IdTipoProductoRespaldo = (decimal)n.IdTipoProducto;
+                    IdCategoriaRespaldo = (decimal)n.IdCategoria;
+                    IdUnidadMedidaRespaldo = (decimal)n.IdUnidadMedida;
+                    IdMarcaRespaldo = (decimal)n.IdMarca;
+                    IdModeloRespaldo = (decimal)n.IdModelo;
+                    IdTipoSuplidorRespaldo = (decimal)n.IdTipoSuplidor;
+                    IdSuplidorRespaldo = (decimal)n.IdSuplidor;
+                    DescripcionRespaldo = n.Producto;
+                    CodigoBarraRespaldo = n.CodigoBarra;
+                    ReferenciaRespaldo = n.Referencia;
+                    PrecioCompraRespaldo = (decimal)n.PrecioCompra;
+                    PrecioVentaRespaldo = (decimal)n.PrecioVenta;
+                    StockRespaldo = (int)n.Stock;
+                    StockMinimoRespaldo = (int)n.StockMinimo;
+                    PorcientoDescuentoRespaldo = (decimal)n.PorcientoDescuento;
+                    AfectaOfertaRespaldo = (bool)n.AfectaOferta0;
+                    ProductoAcumulativoRespaldo = (bool)n.ProductoAcumulativo0;
+                    LlevaImagenRespaldo = (bool)n.LlevaGarantia0;
+                    UsuarioAdicionRespaldo = (decimal)n.UsuarioAdicion;
+                    FechaAdicionaRespaldo = (DateTime)n.FechaAdiciona;
+                    UsuarioModificaRespaldo = (decimal)n.UsuarioModifica;
+                    FechaModificaRespaldo = (DateTime)n.FechaModifica;
+                    FechaRespaldo = (DateTime)n.Fecha;
+                    ComentarioRespaldo = n.Comentario;
+                    AplicaParaImpuestoRespaldo = (bool)n.AplicaParaImpuesto0;
+                    EstatusProductoRespaldo = (bool)n.EstatusProducto0;
+                    NumeroSeguimientoRespaldo = n.NumeroSeguimiento;
+                    IdColorRespaldo = (decimal)n.IdColor;
+                    IdCondicionRespaldo = (decimal)n.IdCondicion;
+                    IdCapacidadRespaldo = (decimal)n.IdCapacidad;
+                    LlevaGarantiaRespaldo = (bool)n.LlevaGarantia0;
+                    IdTipoGarantiaRespaldo = (int)n.IdTipoGarantia;
+                    TiempoGarantiaRespaldo = n.TiempoGarantia;
+                }
+
+                //GUARDAMOS EL REGISTRO
+                DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems Guardar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems(
+                    0,
+                    lbNumeroConector.Text,
+                    txtTipoProductoVistaPrevia.Text,
+                    txtCategoriaVistaPrevia.Text,
+                    txtAcumulativoVistaPrevia.Text,
+                    Convert.ToDecimal(txtPrecioVistaPrevia.Text),
+                    txtProductoVistaPrevia.Text,
+                    Convert.ToInt32(txtCantidadUsarVistaPrevia.Text),
+                    Convert.ToInt32(txtPorcientoDescuentoVistaPrevia.Text),
+                    Convert.ToDecimal(txtDescuentoVistaPrevia.Text),
+                    Convert.ToDecimal(txtImpuestoVistaPrevia.Text),
+                    LlevaGarantiaRespaldo,
+                    TiempoGarantiaRespaldo,
+                    CodigoBarraRespaldo,
+                    ReferenciaRespaldo,
+                    IdProductoRespaldo,
+                    NumeroConectorRespaldo,
+                    IdTipoProductoRespaldo,
+                    IdCategoriaRespaldo,
+                    IdUnidadMedidaRespaldo,
+                    IdMarcaRespaldo,
+                    IdModeloRespaldo,
+                    IdTipoSuplidorRespaldo,
+                    IdSuplidorRespaldo,
+                    DescripcionRespaldo,
+                    CodigoBarraRespaldo,
+                    ReferenciaRespaldo,
+                    PrecioCompraRespaldo,
+                    PrecioVentaRespaldo,
+                    StockRespaldo,
+                    StockMinimoRespaldo,
+                    PorcientoDescuentoRespaldo,
+                    AfectaOfertaRespaldo,
+                    ProductoAcumulativoRespaldo,
+                    LlevaImagenRespaldo,
+                    UsuarioAdicionRespaldo,
+                    FechaAdicionaRespaldo,
+                    UsuarioModificaRespaldo,
+                    FechaModificaRespaldo,
+                    FechaRespaldo,
+                    ComentarioRespaldo,
+                    AplicaParaImpuestoRespaldo,
+                    EstatusProductoRespaldo,
+                    NumeroSeguimientoRespaldo,
+                    IdColorRespaldo,
+                    IdCondicionRespaldo,
+                    IdCapacidadRespaldo,
+                    LlevaGarantiaRespaldo,
+                    IdTipoGarantiaRespaldo,
+                    TiempoGarantiaRespaldo,
+                    false,
+                    Accion);
+                Guardar.ProcesarInformacion();
+            }
+        }
+        #endregion
+        #region MOSTRAR EL LISTADO DE LOS PRODUCTOS AGREGADOS
+        private void MostrarItemsAgregados(string NumeroConectorItem) {
+
+            var MostrarItemsAgregados = ObjDataServicio.Value.BuscaProductosAgregados(NumeroConectorItem);
+            int CantidadRegistrosMostrados = MostrarItemsAgregados.Count;
+            lbCantidadRegistrosAgregadosVariable.Text = CantidadRegistrosMostrados.ToString("N0");
+            Paginar(ref rpListadoProductosAgregados, MostrarItemsAgregados, 10, ref lbCantidadPaginaVAriableProductosAgregados, ref LinkPrimeraPaginaProductosAgregados, ref LinkAnteriorProductosAgregados, ref LinkSiguienteProductosAgregados, ref LinkUltimoProductosAgregados);
+            HandlePaging(ref dtPaginacionProductosAgregados, ref lbPaginaActualVariavleProductosAgregados);
+
+            int TotalProductos = 0, TotalServicios = 0, TotalItems = 0;
+            decimal TotalDescuento = 0, TotalImpuesto = 0, SubTotal = 0, TotalGeneral = 0;
+            foreach (var n in MostrarItemsAgregados) {
+                TotalProductos = (int)n.TotalProductos;
+                TotalServicios = (int)n.TotalServicios;
+                TotalItems = (int)n.TotalItems;
+                TotalDescuento = (decimal)n.TotalDescuento;
+                TotalImpuesto = (decimal)n.TotalImpuesto;
+                SubTotal = (decimal)n.SubTotal;
+                TotalGeneral = (decimal)n.TotalGeneral;
+            }
+            txtTotalProductosCalculos.Text = TotalProductos.ToString("N0");
+            txtCantidadServicios.Text = TotalServicios.ToString("N0");
+            txtCantidadArticulos.Text = TotalItems.ToString("N0");
+            txtTotalDescuento.Text = TotalDescuento.ToString("N2");
+            txtImpuesto.Text = TotalImpuesto.ToString("N2");
+            txtSubTotal.Text = SubTotal.ToString("N2");
+            txtTotal.Text = TotalGeneral.ToString("N2");
+        }
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                lbCodigoUsuarioConectado.Text = Session["IdUsuario"].ToString();
+                GenerarNumeroConector();
                 DivBloqueAgregarClientes.Visible = false;
                 lbCodigoClienteSeleccionado.Text = "1";
                 lbLimiteCreditoClienteSeleccionado.Text = "0";
@@ -448,7 +634,6 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
              //   CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
-                txtFechaManual.Enabled = false;
                 
             }
         }
@@ -498,6 +683,9 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             var NumeroConectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfNumeroConectorSeleccionado = ((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConectorProductoAgregar")).Value.ToString();
 
+            lbIdProductoSeleccionado.Text = hfIdProductosSeleccionado;
+            lbNumeroConectorProductoSeleccionado.Text = hfNumeroConectorSeleccionado;
+
             bool ProductoAcumulativo = false;
 
             var SacarRegistro = ObjDataInventario.Value.BuscaProductos(
@@ -517,6 +705,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 txtCantidadUsarVistaPrevia.Text = "1";
                 txtPorcientoDescuentoVistaPrevia.Text = n.PorcientoDescuento.ToString();
                 txtDescuentoVistaPrevia.Text = "0";
+                txtImpuestoVistaPrevia.Text = n.Impuesto.ToString();
                 bool AplicaImpuesto = (bool)n.AplicaParaImpuesto0;
                 if (AplicaImpuesto == true) {
 
@@ -643,20 +832,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 else {
                     DivLetreroRojo.Visible = false;
 
-                    //PROCESAR
+                    ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), "INSERT");
+                    MostrarItemsAgregados(lbNumeroConector.Text);
                 }
 
             }
-
-        }
-
-        protected void btnEditarRegistroAgregado_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnEliminarRegistroAgregado_Click(object sender, EventArgs e)
-        {
 
         }
 
