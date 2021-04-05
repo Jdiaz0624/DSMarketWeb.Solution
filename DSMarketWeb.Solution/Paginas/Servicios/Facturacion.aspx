@@ -246,6 +246,11 @@
             </div>
         </div>
         <br />
+        <div align="center">
+            <asp:Button ID="btnRefrescarCalculos" runat="server" Text="Actualizar" ToolTip="Actualizar Calclos" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRefrescarCalculos_Click" />
+            <asp:Button ID="btnCompletarOperacion" runat="server" Text="Completar" ToolTip="Completar Operación" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCompletarOperacion_Click" />
+        </div>
+        <br />
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>

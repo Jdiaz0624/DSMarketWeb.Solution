@@ -63,6 +63,61 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private bool EstatusActual = false;
         private string Accion = "";
 
+        /// <summary>
+        /// Este Constructor es para crear un nuevo registro en la tabla de items de factura
+        /// </summary>
+        /// <param name="NumeroRegistroCON"></param>
+        /// <param name="NumerodeConectorCON"></param>
+        /// <param name="TipodeProductoCON"></param>
+        /// <param name="CategoriaCON"></param>
+        /// <param name="ProductoAcumulativoCON"></param>
+        /// <param name="PrecioCON"></param>
+        /// <param name="ProductoCON"></param>
+        /// <param name="CantidadCON"></param>
+        /// <param name="PorcientodeDescuentoCON"></param>
+        /// <param name="DescuentoAplicadoCON"></param>
+        /// <param name="ImpuestoAplicadoCON"></param>
+        /// <param name="LlevaGarantiaCON"></param>
+        /// <param name="GarantiaCON"></param>
+        /// <param name="CodigodeBarrasCON"></param>
+        /// <param name="ReferenciaCON"></param>
+        /// <param name="IdProductoRespaldoCON"></param>
+        /// <param name="NumeroConectorRespaldoCON"></param>
+        /// <param name="IdTipoProductoRespaldoCON"></param>
+        /// <param name="IdCategoriaRespaldoCON"></param>
+        /// <param name="IdUnidadMedidaRespaldoCON"></param>
+        /// <param name="IdMarcaRespaldoCON"></param>
+        /// <param name="IdModeloRespaldoCON"></param>
+        /// <param name="IdTipoSuplidorRespaldoCON"></param>
+        /// <param name="IdSuplidorRespaldoCON"></param>
+        /// <param name="DescripcionRespaldoCON"></param>
+        /// <param name="CodigoBarraRespaldoCON"></param>
+        /// <param name="ReferenciaRespaldoCON"></param>
+        /// <param name="PrecioCompraRespaldoCON"></param>
+        /// <param name="PrecioVentaRespaldoCON"></param>
+        /// <param name="StockRespaldoCON"></param>
+        /// <param name="StockMinimoRespaldoCON"></param>
+        /// <param name="PorcientoDescuentoRespaldoCON"></param>
+        /// <param name="AfectaOfertaRespaldoCON"></param>
+        /// <param name="ProductoAcumulativoRespaldoCON"></param>
+        /// <param name="LlevaImagenRespaldoCON"></param>
+        /// <param name="UsuarioAdicionRespaldoCON"></param>
+        /// <param name="FechaAdicionaRespaldoCON"></param>
+        /// <param name="UsuarioModificaRespaldoCON"></param>
+        /// <param name="FechaModificaRespaldoCON"></param>
+        /// <param name="FechaRespaldoCON"></param>
+        /// <param name="ComentarioRespaldoCON"></param>
+        /// <param name="AplicaParaImpuestoRespaldoCON"></param>
+        /// <param name="EstatusProductoRespaldoCON"></param>
+        /// <param name="NumeroSeguimientoRespaldoCON"></param>
+        /// <param name="IdColorRespaldoCON"></param>
+        /// <param name="IdCondicionRespaldoCON"></param>
+        /// <param name="IdCapacidadRespaldoCON"></param>
+        /// <param name="LlevaGarantiaRespaldoCON"></param>
+        /// <param name="IdTipoGarantiaRespaldoCON"></param>
+        /// <param name="TiempoGarantiaRespaldoCON"></param>
+        /// <param name="EstatusActualCON"></param>
+        /// <param name="AccionCON"></param>
         public ProcesarInformacionFacturacionItems(
             decimal NumeroRegistroCON,
             string NumerodeConectorCON,
@@ -169,6 +224,16 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             TiempoGarantiaRespaldo = TiempoGarantiaRespaldoCON;
             EstatusActual = EstatusActualCON;
             Accion = AccionCON;
+        }
+
+        public ProcesarInformacionFacturacionItems(
+            decimal NumeroRegistroEliminar,
+            string NumeroConectorEliminar,
+            string AccionEliminar)
+        {
+            NumeroRegistro = NumeroRegistroEliminar;
+            NumerodeConector = NumeroConectorEliminar;
+            Accion = AccionEliminar;
         }
 
         public void ProcesarInformacion() {

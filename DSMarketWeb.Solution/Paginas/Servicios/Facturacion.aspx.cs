@@ -847,7 +847,18 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnSeleccionarRegistrosAgregadosHeaderRepeater_Click(object sender, EventArgs e)
         {
+            var ItemNumeroRegistroSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfItemNumeroRegistroSeleccionado = ((HiddenField)ItemNumeroRegistroSeleccionado.FindControl("hfNumeroRegistroItemAgregado")).Value.ToString();
 
+            var ItemNumeroCOnectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorSeleccionado = ((HiddenField)ItemNumeroCOnectorSeleccionado.FindControl("hfNumeroConectorItemAgregado")).Value.ToString();
+
+            DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems Eliminar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems(
+                Convert.ToDecimal(hfItemNumeroRegistroSeleccionado),
+                hfNumeroConectorSeleccionado,
+                "DELETE");
+            Eliminar.ProcesarInformacion();
+            MostrarItemsAgregados(lbNumeroConector.Text);
         }
 
         protected void LinkPrimeraPaginaProductosAgregados_Click(object sender, EventArgs e)
@@ -951,6 +962,16 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnConsultarRegistros_Click(object sender, EventArgs e)
         {
             BuscarClientes();
+        }
+
+        protected void btnRefrescarCalculos_Click(object sender, EventArgs e)
+        {
+            MostrarItemsAgregados(lbNumeroConector.Text);
+        }
+
+        protected void btnCompletarOperacion_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void btnQuitar_Click(object sender, EventArgs e)

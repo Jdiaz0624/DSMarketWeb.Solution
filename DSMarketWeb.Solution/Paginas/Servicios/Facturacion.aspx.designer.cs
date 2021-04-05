@@ -609,6 +609,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoPago;
 
         /// <summary>
+        /// btnRefrescarCalculos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRefrescarCalculos;
+
+        /// <summary>
+        /// btnCompletarOperacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCompletarOperacion;
+
+        /// <summary>
         /// rpListadoProductosFacturar control.
         /// </summary>
         /// <remarks>
