@@ -39,10 +39,10 @@
         function CLienteNoEncontrado() {
             alert("No se encontro ningun cliente con los parametros ingresados, favor de verificar e intentar nuevamente.");
         }
+        function CamposVaciosAgregarItem() {
+            alert("Has dejado campos vacios que son necesarios para realizar esta operación, favor de verificar.");
+        }
         $(document).ready(function () {
-            $("#<%=btnAgregarRegistro.ClientID%>").click(function () {
-                alert("d");
-            });
 
 
             $("#<%=btnConsultarRegistros.ClientID%>").click(function () {
@@ -56,6 +56,8 @@
                     return false;
                 }
             });
+
+            
         })
     </script>
     

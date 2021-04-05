@@ -788,55 +788,61 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             if (string.IsNullOrEmpty(txtDescuentoVistaPrevia.Text.Trim())) {
                 txtDescuentoVistaPrevia.Text = "0";
             }
-            CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
+        //    if (string.IsNullOrEmpty(txtCantidadUsarVistaPrevia.Text.Trim())) {
+        //        txtCantidadUsarVistaPrevia.Text = "1";
+        //    }
+        //    if (string.IsNullOrEmpty(txtDescuentoVistaPrevia.Text.Trim())) {
+        //        txtDescuentoVistaPrevia.Text = "0";
+        //    }
+        //    CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
+            
+        //    int CantidadDisponible = Convert.ToInt32(txtCantidadDisponibleVistaPrevia.Text);
+        //    int CantidadUsar = Convert.ToInt32(txtCantidadUsarVistaPrevia.Text);
 
-            int CantidadDisponible = Convert.ToInt32(txtCantidadDisponibleVistaPrevia.Text);
-            int CantidadUsar = Convert.ToInt32(txtCantidadUsarVistaPrevia.Text);
+        //    if (CantidadUsar > CantidadDisponible || CantidadUsar ==0 || CantidadUsar <0)
+        //    {
+        //        DivLetreroRojo.Visible = true;
+        //        if (CantidadUsar == 0)
+        //        {
+        //            lbLetreroRojos.Text = "La cantidad a procesar no puede ser igual a cero, favor de verificar.";
+        //        }
+        //        else if (CantidadUsar < 0) {
+        //            lbLetreroRojos.Text = "La cantidad que intentas procesar es menor a cero, favor de verificar.";
+        //        }
+        //        else
+        //        {
 
-            if (CantidadUsar > CantidadDisponible || CantidadUsar ==0 || CantidadUsar <0)
-            {
-                DivLetreroRojo.Visible = true;
-                if (CantidadUsar == 0)
-                {
-                    lbLetreroRojos.Text = "La cantidad a procesar no puede ser igual a cero, favor de verificar.";
-                }
-                else if (CantidadUsar < 0) {
-                    lbLetreroRojos.Text = "La cantidad que intentas procesar es menor a cero, favor de verificar.";
-                }
-                else
-                {
+        //            lbLetreroRojos.Text = "La cantidad que intentas procesar supera la cantidad disponible en almacen, favor de verificar.";
 
-                    lbLetreroRojos.Text = "La cantidad que intentas procesar supera la cantidad disponible en almacen, favor de verificar.";
+        //        }
+        //        lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+        //    }
+        //    else {
+        //        DivLetreroRojo.Visible = false;
 
-                }
-                lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
-            }
-            else {
-                DivLetreroRojo.Visible = false;
+        //        decimal DescuentoAplicado = Convert.ToDecimal(txtDescuentoVistaPrevia.Text);
+        //        decimal DescuentoMAximo = Convert.ToDecimal(txtDescuentoMaximoVistaPrevia.Text);
 
-                decimal DescuentoAplicado = Convert.ToDecimal(txtDescuentoVistaPrevia.Text);
-                decimal DescuentoMAximo = Convert.ToDecimal(txtDescuentoMaximoVistaPrevia.Text);
+        //        if (DescuentoAplicado > DescuentoMAximo || DescuentoAplicado < 0) {
 
-                if (DescuentoAplicado > DescuentoMAximo || DescuentoAplicado < 0) {
+        //            DivLetreroRojo.Visible = true;
 
-                    DivLetreroRojo.Visible = true;
+        //            if (DescuentoAplicado < 0) {
+        //                lbLetreroRojos.Text = "El descuento aplicado no puede ser un numero menor a cero, favor de verificar.";
+        //            }
+        //            else {
+        //                lbLetreroRojos.Text = "El descuento no puede ser mayor al descuento maximo aplicado por el sistema, favor de verificar.";
+        //            }
+        //            lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+        //        }
+        //        else {
+        //            DivLetreroRojo.Visible = false;
 
-                    if (DescuentoAplicado < 0) {
-                        lbLetreroRojos.Text = "El descuento aplicado no puede ser un numero menor a cero, favor de verificar.";
-                    }
-                    else {
-                        lbLetreroRojos.Text = "El descuento no puede ser mayor al descuento maximo aplicado por el sistema, favor de verificar.";
-                    }
-                    lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
-                }
-                else {
-                    DivLetreroRojo.Visible = false;
+        //            ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), "INSERT");
+        //            MostrarItemsAgregados(lbNumeroConector.Text);
+        //        }
 
-                    ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), "INSERT");
-                    MostrarItemsAgregados(lbNumeroConector.Text);
-                }
-
-            }
+        //    }
 
         }
 
