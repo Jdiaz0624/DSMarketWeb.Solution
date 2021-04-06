@@ -205,30 +205,6 @@
       <Column Name="EstatusActual" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="Servicio.SP_BUSCA_ITEMS_AGREGADOS_FACTURA" Method="SP_BUSCA_ITEMS_AGREGADOS_FACTURA">
-    <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.String" DbType="VarChar(30)" />
-    <ElementType Name="SP_BUSCA_ITEMS_AGREGADOS_FACTURAResult">
-      <Column Name="NumeroRegistro" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
-      <Column Name="NumerodeConector" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Producto" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
-      <Column Name="Garantia" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="IdTipoGarantiaRespaldo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="GarantiaProducto" Type="System.String" DbType="VarChar(131)" CanBeNull="true" />
-      <Column Name="Precio" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
-      <Column Name="Descuento" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
-      <Column Name="Cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Total" Type="System.Decimal" DbType="Decimal(32,2)" CanBeNull="true" />
-      <Column Name="IdTipoProductoRespaldo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
-      <Column Name="ImpuestoAplicado" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
-      <Column Name="TotalProductos" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalServicios" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalItems" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalDescuento" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
-      <Column Name="SubTotal" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
-      <Column Name="TotalImpuesto" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
-      <Column Name="TotalGeneral" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="Servicio.SP_VALIDAR_ITEMS_PRODUCTOS_ESPEJO" Method="SP_VALIDAR_ITEMS_PRODUCTOS_ESPEJO">
     <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Decimal" DbType="Decimal(20,0)" />
     <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.Decimal" DbType="Decimal(20,0)" />
@@ -257,6 +233,32 @@
       <Column Name="Cantidad" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
       <Column Name="ProductoAcumulativo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IdUsuario" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Servicio.SP_BUSCA_ITEMS_AGREGADOS_FACTURA" Method="SP_BUSCA_ITEMS_AGREGADOS_FACTURA">
+    <Parameter Name="NumeroConector" Parameter="numeroConector" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="SP_BUSCA_ITEMS_AGREGADOS_FACTURAResult">
+      <Column Name="NumeroRegistro" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="NumerodeConector" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Producto" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Garantia" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="IdTipoGarantiaRespaldo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GarantiaProducto" Type="System.String" DbType="VarChar(131)" CanBeNull="true" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
+      <Column Name="Descuento" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(32,2)" CanBeNull="true" />
+      <Column Name="IdTipoProductoRespaldo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="ImpuestoAplicado" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
+      <Column Name="IdProductoRespaldo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="NumeroConectorRespaldo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="TotalProductos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalServicios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalItems" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalDescuento" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="SubTotal" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="TotalImpuesto" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="TotalGeneral" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

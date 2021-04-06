@@ -32,6 +32,10 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 
 		public System.Nullable<decimal> ImpuestoAplicado { get; set; }
 
+		public System.Nullable<decimal> IdProductoRespaldo { get; set; }
+
+		public System.Nullable<decimal> NumeroConectorRespaldo { get; set; }
+
 		public System.Nullable<int> TotalProductos { get; set; }
 
 		public System.Nullable<int> TotalServicios { get; set; }

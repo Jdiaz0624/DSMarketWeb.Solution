@@ -439,7 +439,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         }
         #endregion
         #region AGREGAR PRODUCTO A FACTURA
-        private void ProcesarItemFactura(decimal IdProductoSeleccionao, decimal NumeroConectorProducto,string Accion) {
+        private void ProcesarItemFactura(decimal IdProductoSeleccionao, decimal NumeroConectorProducto,decimal Cantidad, string Accion) {
             //DECLARAMOS LAS VARIABLES PARA REALIZAR ESTE PROCESO
             decimal IdProductoRespaldo = 0;
             decimal NumeroConectorRespaldo = 0;
@@ -478,11 +478,13 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             string TiempoGarantiaRespaldo = "";
 
             //SACAMOS TODOS LOS DATOS DEL PRODUCTO SELECCIONADO
-            if (Accion == "INSERT") {
+            if (Accion == "INSERT")
+            {
                 var SacarInformacionPrducto = ObjDataInventario.Value.BuscaProductos(
                     IdProductoSeleccionao, NumeroConectorProducto,
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-                foreach (var n in SacarInformacionPrducto) {
+                foreach (var n in SacarInformacionPrducto)
+                {
                     IdProductoRespaldo = (decimal)n.IdProducto;
                     NumeroConectorRespaldo = (decimal)n.NumeroConector;
                     IdTipoProductoRespaldo = (decimal)n.IdTipoProducto;
@@ -572,6 +574,63 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                     LlevaGarantiaRespaldo,
                     IdTipoGarantiaRespaldo,
                     TiempoGarantiaRespaldo,
+                    false,
+                    Accion);
+                Guardar.ProcesarInformacion();
+            }
+            else if (Accion == "UPDATE") {
+                //GUARDAMOS EL REGISTRO
+                DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems Guardar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems(
+                    0,
+                    "",
+                    "",
+                    "",
+                    "",
+                    0,
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    false,
+                    "",
+                    "",
+                    "",
+                    IdProductoSeleccionao,
+                    NumeroConectorProducto,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    "",
+                    "",
+                    "",
+                    0,
+                    0,
+                    Cantidad,
+                    0,
+                    0,
+                    false,
+                    false,
+                    false,
+                    0,
+                    DateTime.Now,
+                    0,
+                     DateTime.Now,
+                     DateTime.Now,
+                    "",
+                    false,
+                    false,
+                    "",
+                    0,
+                    0,
+                    0,
+                    false,
+                    0,
+                    "",
                     false,
                     Accion);
                 Guardar.ProcesarInformacion();
@@ -849,20 +908,37 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 {
                     DivLetreroRojo.Visible = false;
 
-                    ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), "INSERT");
-                    MostrarItemsAgregados(lbNumeroConector.Text);
-
+                    decimal IdProducto = Convert.ToDecimal(lbIdProductoSeleccionado.Text);
+                    decimal NumeroConector = Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text);
+                    decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
                     bool Acumulativo = txtAcumulativoVistaPrevia.Text == "SI" ? true : false;
 
+                    //VALIDAMOS SI EL PRODUCTO A INGRESAR YA ESTA REGISTRADO
+                    var ValidarProducto = ObjDataServicio.Value.ValidarProductoEspejo(IdProducto, NumeroConector, IdUsuario);
+                    if (ValidarProducto.Count() < 1) {
 
-                    ManipularInformacionProductoEspejo(
-                        Convert.ToDecimal(lbIdProductoSeleccionado.Text),
-                        Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text),
-                        txtDescuentoVistaPrevia.Text,
-                        Convert.ToDecimal(txtCantidadUsarVistaPrevia.Text),
-                        Acumulativo,
-                        (decimal)Session["IdUsuario"],
-                        "INSERT");
+                        ManipularInformacionProductoEspejo(
+                            IdProducto,
+                            NumeroConector,
+                            txtDescuentoVistaPrevia.Text,
+                            Convert.ToDecimal(txtCantidadUsarVistaPrevia.Text),
+                            Acumulativo,
+                            IdUsuario,
+                            "INSERT");
+
+                        ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text),0,  "INSERT");
+                        MostrarItemsAgregados(lbNumeroConector.Text);
+                    }
+                    else {
+                        DivLetreroRojo.Visible = true;
+                        lbLetreroRojos.Text = "ESTE PRODUCTO YA ESTA AGREGADO PARA FACTURAR FAVOR DE VERIFICAR.";
+                        lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+
+                    }
+
+                    
+
+                    
                 }
 
             }
@@ -882,11 +958,24 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             var ItemNumeroCOnectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
             var hfNumeroConectorSeleccionado = ((HiddenField)ItemNumeroCOnectorSeleccionado.FindControl("hfNumeroConectorItemAgregado")).Value.ToString();
 
+            var IdProductoRespaldoSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProductoRespaldo = ((HiddenField)IdProductoRespaldoSeleccionado.FindControl("hfIdProductoRespaldo")).Value.ToString();
+
+            var NumeroConectorRespaldo = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorRespaldo = ((HiddenField)NumeroConectorRespaldo.FindControl("hfNumeroConectorRespaldo")).Value.ToString();
+
+            decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+
+
             DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems Eliminar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems(
                 Convert.ToDecimal(hfItemNumeroRegistroSeleccionado),
                 hfNumeroConectorSeleccionado,
                 "DELETE");
             Eliminar.ProcesarInformacion();
+
+            ManipularInformacionProductoEspejo(Convert.ToDecimal(hfIdProductoRespaldo), Convert.ToDecimal(hfNumeroConectorRespaldo), "", 0, false, (decimal)Session["IdUsuario"], "DELETE");
+
+
             MostrarItemsAgregados(lbNumeroConector.Text);
         }
 

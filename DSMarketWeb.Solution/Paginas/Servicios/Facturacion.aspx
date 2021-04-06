@@ -521,6 +521,10 @@
                                              <tr>
                                                  <asp:HiddenField ID="hfNumeroRegistroItemAgregado" runat="server" Value='<%# Eval("NumeroRegistro") %>' />
                                                  <asp:HiddenField ID="hfNumeroConectorItemAgregado" runat="server" Value='<%# Eval("NumerodeConector") %>' />
+                                                 <asp:HiddenField ID="hfIdProductoRespaldo" runat="server" Value='<%# Eval("IdProductoRespaldo") %>' />
+                                                 <asp:HiddenField ID="hfNumeroConectorRespaldo" runat="server" Value='<%# Eval("NumeroConectorRespaldo") %>' />
+                                                
+
 
                                                  <td style="width:10%"> <asp:Button ID="btnSeleccionarRegistrosAgregadosHeaderRepeater" runat="server" Text="Quitar" ToolTip="Seleccionar Registros Agregados" OnClick="btnSeleccionarRegistrosAgregadosHeaderRepeater_Click" CssClass="btn btn-outline-secondary btn-sm" /> </td>
                                                  <td style="width:30%"> <%# Eval("Producto") %> </td>

@@ -287,6 +287,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                Total=n.Total,
                                IdTipoProductoRespaldo=n.IdTipoProductoRespaldo,
                                ImpuestoAplicado=n.ImpuestoAplicado,
+                               IdProductoRespaldo=n.IdProductoRespaldo,
+                               NumeroConectorRespaldo=n.NumeroConectorRespaldo,
                                TotalProductos=n.TotalProductos,
                                TotalServicios=n.TotalServicios,
                                TotalItems=n.TotalItems,
@@ -294,7 +296,6 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                SubTotal=n.SubTotal,
                                TotalImpuesto=n.TotalImpuesto,
                                TotalGeneral=n.TotalGeneral,
-
                            }).ToList();
             return Listado;
         }
