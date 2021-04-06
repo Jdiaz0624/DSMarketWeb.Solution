@@ -299,5 +299,59 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
             return Listado;
         }
         #endregion
+
+        #region MANTENIMIENTO PRODUCTO ESPEJO
+        /// <summary>
+        /// Este metodo es para validar si existen registros en espera de facturar para no duplicar informacion en la factura
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <param name="NumeroConector"></param>
+        /// <param name="IdUsuario"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo> ValidarProductoEspejo(decimal? IdProducto = null, decimal? NumeroConector = null, decimal? IdUsuario = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_VALIDAR_ITEMS_PRODUCTOS_ESPEJO(IdProducto, NumeroConector, IdUsuario)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo
+                           {
+                               IdProducto=n.IdProducto,
+                               NumeroConector=n.NumeroConector,
+                               Descripcion=n.Descripcion,
+                               Cantidad=n.Cantidad,
+                               ProductoAcumulativo=n.ProductoAcumulativo,
+                               IdUsuario=n.IdUsuario
+                           }).ToList();
+            return Listado;
+        }
+
+        public DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo ManipularItemsProductoEspejo(DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo Manupular = null;
+
+            var ItensProductoEspejo = ObjData.SP_MANIPULACION_ITEMS_PRODUCTO_ESPEJO(
+                Item.IdProducto,
+                Item.NumeroConector,
+                Item.Descripcion,
+                Item.Cantidad,
+                Item.ProductoAcumulativo,
+                Item.IdUsuario,
+                Accion);
+
+            if (ItensProductoEspejo != null) {
+                Manupular = (from n in ItensProductoEspejo
+                             select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EProductoEspejo
+                             {
+                                 IdProducto=n.IdProducto,
+                                 NumeroConector=n.NumeroConector,
+                                 Descripcion=n.Descripcion,
+                                 Cantidad=n.Cantidad,
+                                 ProductoAcumulativo=n.ProductoAcumulativo,
+                                 IdUsuario=n.IdUsuario
+                             }).FirstOrDefault();
+            }
+            return Manupular;
+        }
+        #endregion
     }
 }

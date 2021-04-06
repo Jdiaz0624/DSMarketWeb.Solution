@@ -607,11 +607,19 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             txtTotal.Text = TotalGeneral.ToString("N2");
         }
         #endregion
+        #region MANIPULAR LA INFORMACION DEL PRODUCTO ESPEJO
+        private void ManipularInformacionProductoEspejo(decimal Idproducto, decimal NumeroConector, string Descripcion, decimal Cantidad, bool ProductoAcumulativo, decimal IdUsuario, string Accion) {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ManupularInformacionItemsProductoEspejo Manipular = new Logic.PrcesarMantenimientos.Servicios.ManupularInformacionItemsProductoEspejo(
+                Idproducto, NumeroConector, Descripcion, Cantidad, ProductoAcumulativo, IdUsuario, Accion);
+            Manipular.ProcesarInformacion();
+        }
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                ManipularInformacionProductoEspejo(0, 0, "", 0, false, (decimal)Session["IdUsuario"], "DELETEALL");
                 lbCodigoUsuarioConectado.Text = Session["IdUsuario"].ToString();
                 GenerarNumeroConector();
                 DivBloqueAgregarClientes.Visible = false;
@@ -843,6 +851,18 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
                     ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), "INSERT");
                     MostrarItemsAgregados(lbNumeroConector.Text);
+
+                    bool Acumulativo = txtAcumulativoVistaPrevia.Text == "SI" ? true : false;
+
+
+                    ManipularInformacionProductoEspejo(
+                        Convert.ToDecimal(lbIdProductoSeleccionado.Text),
+                        Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text),
+                        txtDescuentoVistaPrevia.Text,
+                        Convert.ToDecimal(txtCantidadUsarVistaPrevia.Text),
+                        Acumulativo,
+                        (decimal)Session["IdUsuario"],
+                        "INSERT");
                 }
 
             }
