@@ -299,6 +299,49 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                            }).ToList();
             return Listado;
         }
+
+        /// <summary>
+        /// Este metodo es para guardar la informacion de los calculos
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesServicio.EFacturacionCalculos GuardarInformacionCalculos(DSMarketWeb.Logic.Entidades.EntidadesServicio.EFacturacionCalculos Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesServicio.EFacturacionCalculos Guardar = null;
+
+            var FActuracionCalculos = ObjData.SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS(
+                Item.NumeroRegistro,
+                Item.NumeroConector,
+                Item.IdTipoIngreso,
+                Item.IdTipoPago,
+                Item.IdMoneda,
+                Item.ImpuestoTipoPago,
+                Item.ImpuestoComprobante,
+                Item.MontoPagado,
+                Item.Cambio,
+                Item.MontoPagadoMonedaOriginal,
+                Accion);
+            if (FActuracionCalculos != null) {
+                Guardar = (from n in FActuracionCalculos
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EFacturacionCalculos
+                           {
+                               NumeroRegistro=n.NumeroRegistro,
+                               NumeroConector=n.NumeroConector,
+                               IdTipoIngreso=n.IdTipoIngreso,
+                               IdTipoPago=n.IdTipoPago,
+                               IdMoneda=n.IdMoneda,
+                               ImpuestoTipoPago=n.ImpuestoTipoPago,
+                               ImpuestoComprobante=n.ImpuestoComprobante,
+                               MontoPagado=n.MontoPagado,
+                               Cambio=n.Cambio,
+                               MontoPagadoMonedaOriginal=n.MontoPagadoMonedaOriginal
+
+                           }).FirstOrDefault();
+            }
+            return Guardar;
+        }
         #endregion
 
         #region MANTENIMIENTO PRODUCTO ESPEJO
@@ -352,6 +395,77 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                              }).FirstOrDefault();
             }
             return Manupular;
+        }
+        #endregion
+
+        #region MANTENIMIENTO DE MONEDAS
+        /// <summary>
+        /// Este metodo muestra el listado de las monedas
+        /// </summary>
+        /// <param name="IdMoneda"></param>
+        /// <param name="Descripcion"></param>
+        /// <param name="Sigla"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas> BuscaMonedas(decimal? IdMoneda = null, string Descripcion = null, string Sigla = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_MONEDAS(IdMoneda, Descripcion, Sigla)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas
+                           {
+                               IdMoneda=n.IdMoneda,
+                               Moneda=n.Moneda,
+                               Sigla=n.Sigla,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               Tasa=n.Tasa,
+                               UsuarioAdiciona=n.UsuarioAdiciona,
+                               CreadiPor=n.CreadiPor,
+                               FechaAdiciona=n.FechaAdiciona,
+                               FechaCreado=n.FechaCreado,
+                               UsuarioModifica=n.UsuarioModifica,
+                               ModificadoPor=n.ModificadoPor,
+                               FechaModifica=n.FechaModifica,
+                               FechaModificado=n.FechaModificado
+
+                           }).ToList();
+            return Listado;
+        }
+
+        /// <summary>
+        /// Este metodo es para manipular la informacion 
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas ManipularInformacionMonedas(DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas Manipular = null;
+
+            var Moneda = ObjData.SP_MANTENIMIENTO_MONEDA(
+                Item.IdMoneda,
+                Item.Moneda,
+                Item.Sigla,
+                Item.Estatus0,
+                Item.Tasa,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Moneda != null) {
+                Manipular = (from n in Moneda
+                             select new DSMarketWeb.Logic.Entidades.EntidadesServicio.EMonedas
+                             {
+                                 IdMoneda=n.IdMoneda,
+                                 Moneda=n.Descripcion,
+                                 Sigla=n.Sigla,
+                                 Estatus0=n.Estatus,
+                                 Tasa=n.Tasa,
+                                 UsuarioAdiciona=n.UsuarioAdiciona,
+                                 FechaAdiciona=n.FechaAdiciona,
+                                 UsuarioModifica=n.UsuarioModifica,
+                                 FechaModifica=n.FechaModifica
+                             }).FirstOrDefault();
+            }
+            return Manipular;
         }
         #endregion
     }

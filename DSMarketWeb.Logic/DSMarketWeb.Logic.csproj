@@ -102,8 +102,10 @@
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EUsuario.cs" />
     <Compile Include="Entidades\EntidadesServicio\EBuscaItemsAgregadoFActura.cs" />
+    <Compile Include="Entidades\EntidadesServicio\EFacturacionCalculos.cs" />
     <Compile Include="Entidades\EntidadesServicio\EGuardarFacturacionEncabezadoFactura.cs" />
     <Compile Include="Entidades\EntidadesServicio\EGuardarFacturacionItem.cs" />
+    <Compile Include="Entidades\EntidadesServicio\EMonedas.cs" />
     <Compile Include="Entidades\EntidadesServicio\EProductoEspejo.cs" />
     <Compile Include="Entidades\EntidadesServicio\ESacarTiempoGarantia.cs" />
     <Compile Include="Entidades\EntidadesServicio\ETipoPago.cs" />
@@ -142,8 +144,10 @@
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ManupularInformacionItemsProductoEspejo.cs" />
+    <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionFacturacionCalculos.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionFacturacionItems.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionGuardarEncabezadoFactura.cs" />
+    <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionMonedas.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ProcesarInformacionTipoPago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
