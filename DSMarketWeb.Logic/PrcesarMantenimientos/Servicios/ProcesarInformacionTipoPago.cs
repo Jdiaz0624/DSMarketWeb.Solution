@@ -22,6 +22,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private bool PorcentajeEntero = false;
         private decimal Valor = 0;
         private string CodigoTipoPago = "";
+        private bool PorDefecto = false;
         private string Accion = "";
 
         public ProcesarInformacionTipoPago(
@@ -37,6 +38,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
              bool PorcentajeEnteroCON,
              decimal ValorCON,
              string CodigoTipoPagoCON,
+             bool PorDefectoCON,
              string AccionCON)
             {
             IdTipoPago = IdTipoPagoCON;
@@ -51,6 +53,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             PorcentajeEntero = PorcentajeEnteroCON;
             Valor = ValorCON;
             CodigoTipoPago = CodigoTipoPagoCON;
+            PorDefecto = PorDefectoCON;
             Accion = AccionCON;
         }
         public void ProcesarInformacion() {
@@ -68,6 +71,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.PorcentajeEntero0 = PorcentajeEntero;
             Procesar.Valor = Valor;
             Procesar.CodigoTipoPago = CodigoTipoPago;
+            Procesar.PorDefecto0 = PorDefecto;
 
             var MAN = ObjDaya.MantenimientoTipoPago(Procesar, Accion);
         }

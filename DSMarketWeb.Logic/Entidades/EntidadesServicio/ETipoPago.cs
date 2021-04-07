@@ -47,5 +47,9 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 		public System.Nullable<decimal> Valor { get; set; }
 
 		public string CodigoTipoPago { get; set; }
+
+		public System.Nullable<bool> PorDefecto0 { get; set; }
+
+		public string PorDefecto { get; set; }
 	}
 }

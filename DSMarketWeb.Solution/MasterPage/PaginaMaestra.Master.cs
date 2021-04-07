@@ -41,7 +41,7 @@ namespace DSMarketWeb.Solution.MasterPage
         {
             if (Session["IdUsuario"] != null)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+                Response.Redirect("~/Paginas/Servicios/TipoPago.aspx");
             }
             else
             {

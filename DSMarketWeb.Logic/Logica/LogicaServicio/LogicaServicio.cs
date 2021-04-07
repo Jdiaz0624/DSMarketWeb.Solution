@@ -38,7 +38,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                PorcentajeEntero=n.PorcentajeEntero,
                                Valor=n.Valor,
                                CodigoTipoPago=n.CodigoTipoPago,
-
+                               PorDefecto0=n.PorDefecto0,
+                               PorDefecto=n.PorDefecto
                            }).ToList();
             return Listado;
         }
@@ -59,6 +60,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                 Item.PorcentajeEntero0,
                 Item.Valor,
                 Item.CodigoTipoPago,
+                Item.PorDefecto0,
                 Accion);
             if (TipoPago != null) {
                 Mantenimiento = (from n in TipoPago
@@ -75,7 +77,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                      ImpuestoAdicional0=n.ImpuestoAdicional,
                                      PorcentajeEntero0=n.PorcentajeEntero,
                                      Valor=n.Valor,
-                                     CodigoTipoPago=n.CodigoTipoPago
+                                     CodigoTipoPago=n.CodigoTipoPago,
+                                     PorDefecto0=n.PorDefecto
                                  }).FirstOrDefault();
             }
             return Mantenimiento;
