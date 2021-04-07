@@ -752,5 +752,18 @@ namespace DSMarketWeb.Solution.MasterPage
         {
 
         }
+
+        protected void LinkMoneda_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Servicios/Moneda.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
     }
 }

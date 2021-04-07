@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionServicioDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -188,13 +188,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			return ((ISingleResult<SP_BUSCA_ITEMS_AGREGADOS_FACTURAResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_MANTENIMIENTO_MONEDA")]
-		public ISingleResult<SP_MANTENIMIENTO_MONEDAResult> SP_MANTENIMIENTO_MONEDA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sigla", DbType="VarChar(10)")] string sigla, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Tasa", DbType="Decimal(20,2)")] System.Nullable<decimal> tasa, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMoneda, descripcion, sigla, estatus, tasa, idUsuario, accion);
-			return ((ISingleResult<SP_MANTENIMIENTO_MONEDAResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS")]
 		public ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult> SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoIngreso", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoIngreso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoPago", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoTipoPago", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoComprobante", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoComprobante, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagado", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cambio", DbType="Decimal(20,2)")] System.Nullable<decimal> cambio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagadoMonedaOriginal", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagadoMonedaOriginal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
 		{
@@ -207,6 +200,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMoneda, descripcion, sigla);
 			return ((ISingleResult<SP_BUSCA_MONEDASResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_MANTENIMIENTO_MONEDA")]
+		public ISingleResult<SP_MANTENIMIENTO_MONEDAResult> SP_MANTENIMIENTO_MONEDA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sigla", DbType="VarChar(10)")] string sigla, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Tasa", DbType="Decimal(20,2)")] System.Nullable<decimal> tasa, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PorDefecto", DbType="Bit")] System.Nullable<bool> porDefecto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMoneda, descripcion, sigla, estatus, tasa, idUsuario, porDefecto, accion);
+			return ((ISingleResult<SP_MANTENIMIENTO_MONEDAResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2704,176 +2704,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		}
 	}
 	
-	public partial class SP_MANTENIMIENTO_MONEDAResult
-	{
-		
-		private decimal _IdMoneda;
-		
-		private string _Descripcion;
-		
-		private string _Sigla;
-		
-		private System.Nullable<bool> _Estatus;
-		
-		private System.Nullable<decimal> _Tasa;
-		
-		private System.Nullable<decimal> _UsuarioAdiciona;
-		
-		private System.Nullable<System.DateTime> _FechaAdiciona;
-		
-		private System.Nullable<decimal> _UsuarioModifica;
-		
-		private System.Nullable<System.DateTime> _FechaModifica;
-		
-		public SP_MANTENIMIENTO_MONEDAResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMoneda", DbType="Decimal(20,0) NOT NULL")]
-		public decimal IdMoneda
-		{
-			get
-			{
-				return this._IdMoneda;
-			}
-			set
-			{
-				if ((this._IdMoneda != value))
-				{
-					this._IdMoneda = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
-		public string Descripcion
-		{
-			get
-			{
-				return this._Descripcion;
-			}
-			set
-			{
-				if ((this._Descripcion != value))
-				{
-					this._Descripcion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sigla", DbType="VarChar(10)")]
-		public string Sigla
-		{
-			get
-			{
-				return this._Sigla;
-			}
-			set
-			{
-				if ((this._Sigla != value))
-				{
-					this._Sigla = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
-		public System.Nullable<bool> Estatus
-		{
-			get
-			{
-				return this._Estatus;
-			}
-			set
-			{
-				if ((this._Estatus != value))
-				{
-					this._Estatus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tasa", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> Tasa
-		{
-			get
-			{
-				return this._Tasa;
-			}
-			set
-			{
-				if ((this._Tasa != value))
-				{
-					this._Tasa = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioAdiciona
-		{
-			get
-			{
-				return this._UsuarioAdiciona;
-			}
-			set
-			{
-				if ((this._UsuarioAdiciona != value))
-				{
-					this._UsuarioAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaAdiciona
-		{
-			get
-			{
-				return this._FechaAdiciona;
-			}
-			set
-			{
-				if ((this._FechaAdiciona != value))
-				{
-					this._FechaAdiciona = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> UsuarioModifica
-		{
-			get
-			{
-				return this._UsuarioModifica;
-			}
-			set
-			{
-				if ((this._UsuarioModifica != value))
-				{
-					this._UsuarioModifica = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaModifica
-		{
-			get
-			{
-				return this._FechaModifica;
-			}
-			set
-			{
-				if ((this._FechaModifica != value))
-				{
-					this._FechaModifica = value;
-				}
-			}
-		}
-	}
-	
 	public partial class SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult
 	{
 		
@@ -3092,6 +2922,10 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		private System.Nullable<System.DateTime> _FechaModifica;
 		
 		private string _FechaModificado;
+		
+		private System.Nullable<bool> _PorDefecto0;
+		
+		private string _PorDefecto;
 		
 		public SP_BUSCA_MONEDASResult()
 		{
@@ -3317,6 +3151,226 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._FechaModificado != value))
 				{
 					this._FechaModificado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PorDefecto0", DbType="Bit")]
+		public System.Nullable<bool> PorDefecto0
+		{
+			get
+			{
+				return this._PorDefecto0;
+			}
+			set
+			{
+				if ((this._PorDefecto0 != value))
+				{
+					this._PorDefecto0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PorDefecto", DbType="VarChar(2) NOT NULL", CanBeNull=false)]
+		public string PorDefecto
+		{
+			get
+			{
+				return this._PorDefecto;
+			}
+			set
+			{
+				if ((this._PorDefecto != value))
+				{
+					this._PorDefecto = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_MANTENIMIENTO_MONEDAResult
+	{
+		
+		private decimal _IdMoneda;
+		
+		private string _Descripcion;
+		
+		private string _Sigla;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		private System.Nullable<decimal> _Tasa;
+		
+		private System.Nullable<decimal> _UsuarioAdiciona;
+		
+		private System.Nullable<System.DateTime> _FechaAdiciona;
+		
+		private System.Nullable<decimal> _UsuarioModifica;
+		
+		private System.Nullable<System.DateTime> _FechaModifica;
+		
+		private System.Nullable<bool> _PorDefecto;
+		
+		public SP_MANTENIMIENTO_MONEDAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMoneda", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdMoneda
+		{
+			get
+			{
+				return this._IdMoneda;
+			}
+			set
+			{
+				if ((this._IdMoneda != value))
+				{
+					this._IdMoneda = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sigla", DbType="VarChar(10)")]
+		public string Sigla
+		{
+			get
+			{
+				return this._Sigla;
+			}
+			set
+			{
+				if ((this._Sigla != value))
+				{
+					this._Sigla = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tasa", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> Tasa
+		{
+			get
+			{
+				return this._Tasa;
+			}
+			set
+			{
+				if ((this._Tasa != value))
+				{
+					this._Tasa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioAdiciona", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioAdiciona
+		{
+			get
+			{
+				return this._UsuarioAdiciona;
+			}
+			set
+			{
+				if ((this._UsuarioAdiciona != value))
+				{
+					this._UsuarioAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAdiciona", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaAdiciona
+		{
+			get
+			{
+				return this._FechaAdiciona;
+			}
+			set
+			{
+				if ((this._FechaAdiciona != value))
+				{
+					this._FechaAdiciona = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioModifica", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> UsuarioModifica
+		{
+			get
+			{
+				return this._UsuarioModifica;
+			}
+			set
+			{
+				if ((this._UsuarioModifica != value))
+				{
+					this._UsuarioModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModifica", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaModifica
+		{
+			get
+			{
+				return this._FechaModifica;
+			}
+			set
+			{
+				if ((this._FechaModifica != value))
+				{
+					this._FechaModifica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PorDefecto", DbType="Bit")]
+		public System.Nullable<bool> PorDefecto
+		{
+			get
+			{
+				return this._PorDefecto;
+			}
+			set
+			{
+				if ((this._PorDefecto != value))
+				{
+					this._PorDefecto = value;
 				}
 			}
 		}

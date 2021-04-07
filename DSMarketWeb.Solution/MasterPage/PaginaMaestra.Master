@@ -44,6 +44,7 @@
     <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#" style="width:100%" role="button" aria-haspopup="true" aria-expanded="false">Servicio</a>
     <div class="dropdown-menu">
      <asp:LinkButton ID="LinkFacturacion"  runat="server" Text="Facturación" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkFacturacion_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMoneda" runat="server" Text="Monedas" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMoneda_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkTipoPago" runat="server" Text="Tipo de Pago" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkTipoPago_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkHistorialFacturacion" runat="server" Text="Historial de Facturación" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkHistorialFacturacion_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkHistorialCotizaciones" runat="server" Text="Historial de Cotizaciones" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkHistorialCotizaciones_Click"></asp:LinkButton>

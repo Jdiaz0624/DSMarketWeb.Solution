@@ -35,5 +35,8 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 		public System.Nullable<System.DateTime> FechaModifica { get; set; }
 
 		public string FechaModificado { get; set; }
+		public System.Nullable<bool> PorDefecto0 { get; set; }
+
+		public string PorDefecto { get; set; }
 	}
 }

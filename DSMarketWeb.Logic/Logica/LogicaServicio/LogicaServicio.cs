@@ -425,7 +425,9 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                UsuarioModifica=n.UsuarioModifica,
                                ModificadoPor=n.ModificadoPor,
                                FechaModifica=n.FechaModifica,
-                               FechaModificado=n.FechaModificado
+                               FechaModificado=n.FechaModificado,
+                               PorDefecto0=n.PorDefecto0,
+                               PorDefecto=n.PorDefecto
 
                            }).ToList();
             return Listado;
@@ -449,6 +451,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                 Item.Estatus0,
                 Item.Tasa,
                 Item.UsuarioAdiciona,
+                Item.PorDefecto0,
                 Accion);
             if (Moneda != null) {
                 Manipular = (from n in Moneda
@@ -462,7 +465,8 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                  UsuarioAdiciona=n.UsuarioAdiciona,
                                  FechaAdiciona=n.FechaAdiciona,
                                  UsuarioModifica=n.UsuarioModifica,
-                                 FechaModifica=n.FechaModifica
+                                 FechaModifica=n.FechaModifica,
+                                 PorDefecto0=n.PorDefecto
                              }).FirstOrDefault();
             }
             return Manipular;

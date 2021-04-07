@@ -60,6 +60,15 @@ namespace DSMarketWeb.Solution.MasterPage
         protected global::System.Web.UI.WebControls.LinkButton LinkFacturacion;
 
         /// <summary>
+        /// LinkMoneda control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMoneda;
+
+        /// <summary>
         /// LinkTipoPago control.
         /// </summary>
         /// <remarks>

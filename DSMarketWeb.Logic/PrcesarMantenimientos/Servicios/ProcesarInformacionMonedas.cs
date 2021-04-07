@@ -16,6 +16,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private bool Estatus = false;
         private decimal Tasa = 0;
         private decimal IdUsuario = 0;
+        private bool PorDefecto = false;
         private string Accion = "";
 
         public ProcesarInformacionMonedas(
@@ -25,6 +26,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             bool EstatusCON,
             decimal TasaCON,
             decimal IdUsuarioCON,
+            bool PorDefectoCON,
             string AccionCON)
         {
             IdMoneda = IdMonedaCON;
@@ -33,6 +35,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Estatus = EstatusCON;
             Tasa = TasaCON;
             IdUsuario = IdUsuarioCON;
+            PorDefecto = PorDefectoCON;
             Accion = AccionCON;
         }
 
@@ -48,6 +51,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.FechaAdiciona = DateTime.Now;
             Procesar.UsuarioModifica = IdUsuario;
             Procesar.FechaModifica = DateTime.Now;
+            Procesar.PorDefecto0 = PorDefecto;
 
             var MAN = ObjData.ManipularInformacionMonedas(Procesar, Accion);  
         }
