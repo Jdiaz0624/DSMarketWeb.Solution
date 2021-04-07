@@ -49,7 +49,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.UsuarioModifica = IdUsuario;
             Procesar.FechaModifica = DateTime.Now;
 
-            var MAN = ObjData.ManipularInformacionMonedas(Procesar, Accion);
+            var MAN = ObjData.ManipularInformacionMonedas(Procesar, Accion);  
         }
     }
 }
