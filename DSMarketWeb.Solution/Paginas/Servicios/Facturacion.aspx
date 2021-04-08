@@ -61,6 +61,9 @@
         function CamposVaciosAgregarItem() {
             alert("Has dejado campos vacios que son necesarios para realizar esta operación, favor de verificar.");
         }
+        function SeleccionarItem() {
+            alert("Favor de seleccionar un item para agregarlo a la factura.");
+        }
         $(document).ready(function () {
 
 
@@ -89,7 +92,7 @@
         <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
     <br /><br />
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="DivBloqueCheckRadios" runat="server">
         
          <div class="form-check-inline">
             <div class="form-group form-check">
@@ -354,15 +357,7 @@
                              </div>
                          </div>
 
-                         <div class="form-check-inline">
-                             <div class="form-group form-check">
-                                 <asp:CheckBox ID="cbANoplicaGarantia" runat="server" Text="No Aplica Garantia" CssClass="form-check-input" ToolTip="Espesificar si este articulo no tiene garantia" /><br />
-                                 
-                             </div>
-                         </div>
-                         <div id="DivLetreroRojo" runat="server" visible="false"  align="center">
-                             <asp:Label ID="lbLetreroRojos" runat="server" align="center" Text="La cantidad que quieres procesar supera la cantidad disponible en almacen, favor de verificar" CssClass="Letranegrita"></asp:Label>
-                         </div>
+             
                          <div align="center">
                           
                              <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />
@@ -438,7 +433,7 @@
             </table>
         </div>
         </div>
-
+        <br />
     </div>
 
     <!--ESTE BLOQUE ES PARA REALIZAR LOS CALCULOS QUE VAN PARA LA FACTURA -->

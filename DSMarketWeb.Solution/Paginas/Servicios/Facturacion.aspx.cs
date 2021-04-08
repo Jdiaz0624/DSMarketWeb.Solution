@@ -637,7 +637,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         #endregion
         #region MOSTRAR EL LISTADO DE LOS PRODUCTOS AGREGADOS
         private void MostrarItemsAgregados(string NumeroConectorItem) {
-
+            CurrentPage = 0;
             var MostrarItemsAgregados = ObjDataServicio.Value.BuscaProductosAgregados(NumeroConectorItem);
             int CantidadRegistrosMostrados = MostrarItemsAgregados.Count;
             lbCantidadRegistrosAgregadosVariable.Text = CantidadRegistrosMostrados.ToString("N0");
@@ -859,96 +859,120 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(txtCantidadUsarVistaPrevia.Text.Trim()))
-            {
-                txtCantidadUsarVistaPrevia.Text = "1";
-            }
-            if (string.IsNullOrEmpty(txtDescuentoVistaPrevia.Text.Trim()))
-            {
-                txtDescuentoVistaPrevia.Text = "0";
-            }
-            CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
-
-            int CantidadDisponible = Convert.ToInt32(txtCantidadDisponibleVistaPrevia.Text);
-            int CantidadUsar = Convert.ToInt32(txtCantidadUsarVistaPrevia.Text);
-
-            if (CantidadUsar > CantidadDisponible || CantidadUsar == 0 || CantidadUsar < 0)
-            {
-                DivLetreroRojo.Visible = true;
-                if (CantidadUsar == 0)
+            try {
+                if (string.IsNullOrEmpty(txtCantidadUsarVistaPrevia.Text.Trim()))
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "CantidadIgualCero()", "CantidadIgualCero();", true);
+                    txtCantidadUsarVistaPrevia.Text = "1";
                 }
-                else if (CantidadUsar < 0)
+                if (string.IsNullOrEmpty(txtDescuentoVistaPrevia.Text.Trim()))
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "CantidadMenorCero()", "CantidadMenorCero();", true);
+                    txtDescuentoVistaPrevia.Text = "0";
                 }
-                else
+                CalcularDescuentoMAximoProducto(Convert.ToInt32(txtCantidadUsarVistaPrevia.Text), Convert.ToDecimal(txtPorcientoDescuentoVistaPrevia.Text));
+
+                int CantidadDisponible = Convert.ToInt32(txtCantidadDisponibleVistaPrevia.Text);
+                int CantidadUsar = Convert.ToInt32(txtCantidadUsarVistaPrevia.Text);
+
+                if (CantidadUsar > CantidadDisponible || CantidadUsar == 0 || CantidadUsar < 0)
                 {
 
-                    ClientScript.RegisterStartupScript(GetType(), "CantidadNodisponible()", "CantidadNodisponible();", true);
-
-                }
-                lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
-            }
-            else
-            {
-                DivLetreroRojo.Visible = false;
-
-                decimal DescuentoAplicado = Convert.ToDecimal(txtDescuentoVistaPrevia.Text);
-                decimal DescuentoMAximo = Convert.ToDecimal(txtDescuentoMaximoVistaPrevia.Text);
-
-                if (DescuentoAplicado > DescuentoMAximo || DescuentoAplicado < 0)
-                {
-
-                    DivLetreroRojo.Visible = true;
-
-                    if (DescuentoAplicado < 0)
+                    if (CantidadUsar == 0)
                     {
-                        ClientScript.RegisterStartupScript(GetType(), "DescuentoMenorCero()", "DescuentoMenorCero();", true);
+                        ClientScript.RegisterStartupScript(GetType(), "CantidadIgualCero()", "CantidadIgualCero();", true);
+                    }
+                    else if (CantidadUsar < 0)
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "CantidadMenorCero()", "CantidadMenorCero();", true);
                     }
                     else
                     {
-                        ClientScript.RegisterStartupScript(GetType(), "DescuentoMayorDescuentoMaximo()", "DescuentoMayorDescuentoMaximo();", true);
+
+                        ClientScript.RegisterStartupScript(GetType(), "CantidadNodisponible()", "CantidadNodisponible();", true);
+
                     }
-                    lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+
                 }
                 else
                 {
-                    DivLetreroRojo.Visible = false;
 
-                    decimal IdProducto = Convert.ToDecimal(lbIdProductoSeleccionado.Text);
-                    decimal NumeroConector = Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text);
-                    decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
-                    bool Acumulativo = txtAcumulativoVistaPrevia.Text == "SI" ? true : false;
 
-                    //VALIDAMOS SI EL PRODUCTO A INGRESAR YA ESTA REGISTRADO
-                    var ValidarProducto = ObjDataServicio.Value.ValidarProductoEspejo(IdProducto, NumeroConector, IdUsuario);
-                    if (ValidarProducto.Count() < 1) {
+                    decimal DescuentoAplicado = Convert.ToDecimal(txtDescuentoVistaPrevia.Text);
+                    decimal DescuentoMAximo = Convert.ToDecimal(txtDescuentoMaximoVistaPrevia.Text);
 
-                        ManipularInformacionProductoEspejo(
-                            IdProducto,
-                            NumeroConector,
-                            txtDescuentoVistaPrevia.Text,
-                            Convert.ToDecimal(txtCantidadUsarVistaPrevia.Text),
-                            Acumulativo,
-                            IdUsuario,
-                            "INSERT");
+                    if (DescuentoAplicado > DescuentoMAximo || DescuentoAplicado < 0)
+                    {
 
-                        ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text),0,  "INSERT");
-                        MostrarItemsAgregados(lbNumeroConector.Text);
-                    }
-                    else {
-                        ClientScript.RegisterStartupScript(GetType(), "ItemYaAgregadoFactura()", "ItemYaAgregadoFactura();", true);
+
+
+                        if (DescuentoAplicado < 0)
+                        {
+                            ClientScript.RegisterStartupScript(GetType(), "DescuentoMenorCero()", "DescuentoMenorCero();", true);
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(GetType(), "DescuentoMayorDescuentoMaximo()", "DescuentoMayorDescuentoMaximo();", true);
+                        }
 
                     }
+                    else
+                    {
 
-                    
 
-                    
+                        decimal IdProducto = Convert.ToDecimal(lbIdProductoSeleccionado.Text);
+                        decimal NumeroConector = Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text);
+                        decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+                        bool Acumulativo = txtAcumulativoVistaPrevia.Text == "SI" ? true : false;
+
+                        if (IdProducto == 0)
+                        {
+                            ClientScript.RegisterStartupScript(GetType(), "SeleccionarItem()", "SeleccionarItem();", true);
+                        }
+                        else
+                        {
+                            //VALIDAMOS SI EL PRODUCTO A INGRESAR YA ESTA REGISTRADO
+                            var ValidarProducto = ObjDataServicio.Value.ValidarProductoEspejo(IdProducto, NumeroConector, IdUsuario);
+                            if (ValidarProducto.Count() < 1)
+                            {
+
+                                ManipularInformacionProductoEspejo(
+                                    IdProducto,
+                                    NumeroConector,
+                                    txtDescuentoVistaPrevia.Text,
+                                    Convert.ToDecimal(txtCantidadUsarVistaPrevia.Text),
+                                    Acumulativo,
+                                    IdUsuario,
+                                    "INSERT");
+
+                                ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), 0, "INSERT");
+                                MostrarItemsAgregados(lbNumeroConector.Text);
+                                lbIdProductoSeleccionado.Text = "0";
+                                txtTipoProductoVistaPrevia.Text = string.Empty;
+                                txtCategoriaVistaPrevia.Text = string.Empty;
+                                txtAcumulativoVistaPrevia.Text = string.Empty;
+                                txtPrecioVistaPrevia.Text = string.Empty;
+                                txtProductoVistaPrevia.Text = string.Empty;
+                                txtCantidadDisponibleVistaPrevia.Text = string.Empty;
+                                txtCantidadUsarVistaPrevia.Text = string.Empty;
+                                txtPorcientoDescuentoVistaPrevia.Text = string.Empty;
+                                txtDescuentoVistaPrevia.Text = string.Empty;
+                                txtDescuentoMaximoVistaPrevia.Text = string.Empty;
+                                txtImpuestoVistaPrevia.Text = string.Empty;
+                            }
+                            else
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "ItemYaAgregadoFactura()", "ItemYaAgregadoFactura();", true);
+
+                            }
+                        }
+
+
+
+
+                    }
+
                 }
-
             }
+            catch (Exception) { ClientScript.RegisterStartupScript(GetType(), "SeleccionarItem()", "SeleccionarItem();", true); }
 
         }
 
@@ -960,6 +984,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             DivInformacionITEM.Visible = false;
             DivBloqueCalculos.Visible = true;
             DivBloqueProcesoCompletado.Visible = true;
+            DivBloqueCheckRadios.Visible = true;
         }
 
         protected void btnSeleccionarRegistrosAgregadosHeaderRepeater_Click(object sender, EventArgs e)
@@ -1112,6 +1137,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             DivInformacionITEM.Visible = true;
             DivBloqueCalculos.Visible = false;
             DivBloqueProcesoCompletado.Visible = false;
+            DivBloqueCheckRadios.Visible = false;
         }
 
         protected void ddlSeleccionarMoneda_SelectedIndexChanged(object sender, EventArgs e)
