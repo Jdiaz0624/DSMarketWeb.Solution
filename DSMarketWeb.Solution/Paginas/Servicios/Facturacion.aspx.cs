@@ -377,8 +377,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 txtTelefonoCliente.Enabled = false;
                 txtMailCliente.Enabled = false;
                 txtDireccion.Enabled = false;
-                DivBloqueAgregarClientes.Visible = false;
-                DivBotonQuitarCliente.Visible = true;
+             
 
                 
 
@@ -411,8 +410,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 txtLimiteCreditoClienteSeleccionado.Text = string.Empty;
                 lbLimiteCreditoClienteSeleccionado.Text = "0";
                 lbCodigoClienteSeleccionado.Text = "1";
-                DivBloqueAgregarClientes.Visible = false;
-                DivBotonQuitarCliente.Visible = false;
+              
 
                 lblCodigoCliente.Visible = false;
                 txtCodigoClienteSeleccionado.Visible = false;
@@ -648,6 +646,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
             int TotalProductos = 0, TotalServicios = 0, TotalItems = 0;
             decimal TotalDescuento = 0, TotalImpuesto = 0, SubTotal = 0, TotalGeneral = 0;
+            decimal TasaCambio = Convert.ToDecimal(txtTasaCambioCalculos.Text);
+
             foreach (var n in MostrarItemsAgregados) {
                 TotalProductos = (int)n.TotalProductos;
                 TotalServicios = (int)n.TotalServicios;
@@ -657,6 +657,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 SubTotal = (decimal)n.SubTotal;
                 TotalGeneral = (decimal)n.TotalGeneral;
             }
+
+            TotalGeneral = TotalGeneral / TasaCambio;
             txtTotalProductosCalculos.Text = TotalProductos.ToString("N0");
             txtCantidadServicios.Text = TotalServicios.ToString("N0");
             txtCantidadArticulos.Text = TotalItems.ToString("N0");
@@ -673,15 +675,21 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             Manipular.ProcesarInformacion();
         }
         #endregion
+        private void SacarTasaCambioMoneda() {
+            DSMarketWeb.Logic.Comunes.SacarTasaCambio Sacartasa = new Logic.Comunes.SacarTasaCambio(Convert.ToDecimal(ddlSeleccionarMoneda.SelectedValue));
+            txtTasaCambioCalculos.Text = Sacartasa.TasaMoneda().ToString();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                DivBloqueInformacionCliente.Visible = true;
+                DivBloqueCalculos.Visible = true;
                 ManipularInformacionProductoEspejo(0, 0, "", 0, false, (decimal)Session["IdUsuario"], "DELETEALL");
                 lbCodigoUsuarioConectado.Text = Session["IdUsuario"].ToString();
                 GenerarNumeroConector();
-                DivBloqueAgregarClientes.Visible = false;
+          
                 lbCodigoClienteSeleccionado.Text = "1";
                 lbLimiteCreditoClienteSeleccionado.Text = "0";
 
@@ -701,7 +709,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
              //   CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
-                
+                DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMoneda, ObjDataConfiguracion.Value.BuscaListas("MONEDA", null, null));
+                SacarTasaCambioMoneda();
             }
         }
 
@@ -868,16 +877,16 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 DivLetreroRojo.Visible = true;
                 if (CantidadUsar == 0)
                 {
-                    lbLetreroRojos.Text = "La cantidad a procesar no puede ser igual a cero, favor de verificar.";
+                    ClientScript.RegisterStartupScript(GetType(), "CantidadIgualCero()", "CantidadIgualCero();", true);
                 }
                 else if (CantidadUsar < 0)
                 {
-                    lbLetreroRojos.Text = "La cantidad que intentas procesar es menor a cero, favor de verificar.";
+                    ClientScript.RegisterStartupScript(GetType(), "CantidadMenorCero()", "CantidadMenorCero();", true);
                 }
                 else
                 {
 
-                    lbLetreroRojos.Text = "La cantidad que intentas procesar supera la cantidad disponible en almacen, favor de verificar.";
+                    ClientScript.RegisterStartupScript(GetType(), "CantidadNodisponible()", "CantidadNodisponible();", true);
 
                 }
                 lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
@@ -896,11 +905,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
                     if (DescuentoAplicado < 0)
                     {
-                        lbLetreroRojos.Text = "El descuento aplicado no puede ser un numero menor a cero, favor de verificar.";
+                        ClientScript.RegisterStartupScript(GetType(), "DescuentoMenorCero()", "DescuentoMenorCero();", true);
                     }
                     else
                     {
-                        lbLetreroRojos.Text = "El descuento no puede ser mayor al descuento maximo aplicado por el sistema, favor de verificar.";
+                        ClientScript.RegisterStartupScript(GetType(), "DescuentoMayorDescuentoMaximo()", "DescuentoMayorDescuentoMaximo();", true);
                     }
                     lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
                 }
@@ -930,9 +939,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                         MostrarItemsAgregados(lbNumeroConector.Text);
                     }
                     else {
-                        DivLetreroRojo.Visible = true;
-                        lbLetreroRojos.Text = "ESTE PRODUCTO YA ESTA AGREGADO PARA FACTURAR FAVOR DE VERIFICAR.";
-                        lbLetreroRojos.ForeColor = System.Drawing.Color.Red;
+                        ClientScript.RegisterStartupScript(GetType(), "ItemYaAgregadoFactura()", "ItemYaAgregadoFactura();", true);
 
                     }
 
@@ -947,7 +954,12 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnRestablecerVistaPrevia_Click(object sender, EventArgs e)
         {
-
+            DivBloqueBuscarClientes.Visible = true;
+            DivBloqueQuitarClientes.Visible = true;
+            DivBloqueInformacionCliente.Visible = true;
+            DivInformacionITEM.Visible = false;
+            DivBloqueCalculos.Visible = true;
+            DivBloqueProcesoCompletado.Visible = true;
         }
 
         protected void btnSeleccionarRegistrosAgregadosHeaderRepeater_Click(object sender, EventArgs e)
@@ -1070,10 +1082,10 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void cbBuscarCliente_CheckedChanged(object sender, EventArgs e)
         {
             if (cbBuscarCliente.Checked == true) {
-                DivBloqueAgregarClientes.Visible = true;
+               
             }
             else if (cbBuscarCliente.Checked == false) {
-                DivBloqueAgregarClientes.Visible = false;
+               
             }
         }
 
@@ -1090,6 +1102,22 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnCompletarOperacion_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnAgregarItems_Click(object sender, EventArgs e)
+        {
+            DivBloqueBuscarClientes.Visible = false;
+            DivBloqueQuitarClientes.Visible = false;
+            DivBloqueInformacionCliente.Visible = false;
+            DivInformacionITEM.Visible = true;
+            DivBloqueCalculos.Visible = false;
+            DivBloqueProcesoCompletado.Visible = false;
+        }
+
+        protected void ddlSeleccionarMoneda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SacarTasaCambioMoneda();
+            MostrarItemsAgregados(lbNumeroConector.Text);
         }
 
         protected void btnQuitar_Click(object sender, EventArgs e)

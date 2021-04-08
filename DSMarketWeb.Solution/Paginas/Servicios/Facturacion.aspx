@@ -36,6 +36,25 @@
     </style>
 
     <script type="text/javascript">
+        function CantidadIgualCero() {
+            alert("La cantidad a procesar no puede ser igual a cero, favor de verificar.");
+        }
+        function CantidadMenorCero() {
+            alert("La cantidad que intentas procesar es menor a cero, favor de verificar.");
+        }
+        function CantidadNodisponible() {
+            alert("La cantidad que intentas procesar supera la cantidad disponible en almacen, favor de verificar.");
+        }
+        function DescuentoMenorCero() {
+            alert("El descuento aplicado no puede ser un numero menor a cero, favor de verificar.");
+        }
+        function DescuentoMayorDescuentoMaximo() {
+            alert("El descuento no puede ser mayor al descuento maximo aplicado por el sistema, favor de verificar.");
+        }
+        function ItemYaAgregadoFactura() {
+            alert("Este Item ya esta agregado para facturar, favor de verificar.");
+        }
+
         function CLienteNoEncontrado() {
             alert("No se encontro ningun cliente con los parametros ingresados, favor de verificar e intentar nuevamente.");
         }
@@ -60,20 +79,18 @@
             
         })
     </script>
-    
-    <div class="container-fluid">
+
         <asp:Label ID="lbCodigoUsuarioConectado" runat="server" Text="Codigo de Usuario" Visible="false"></asp:Label>
         <asp:Label ID="lbNumeroConector" runat="server" Text="Numero de Conector" Visible="false"></asp:Label>
         <asp:Label ID="lbIdProductoSeleccionado" runat="server" Text="IdProductoSeleccionado" Visible="false"></asp:Label>
         <asp:Label ID="lbNumeroConectorProductoSeleccionado" runat="server" Text="IdProductoSeleccionado" Visible="false"></asp:Label>
-
-
-        <br /><br />
-         <asp:Label ID="lbCodigoClienteSeleccionado" runat="server" Text="Codigo de Cliente" Visible="false"></asp:Label>
+        <asp:Label ID="lbCodigoClienteSeleccionado" runat="server" Text="Codigo de Cliente" Visible="false"></asp:Label>
         <asp:Label ID="lbLimiteCreditoClienteSeleccionado" runat="server" Text="LimiteCredito" Visible="false"></asp:Label>
         <asp:Label ID="lbNumeroConectorFacturacion" runat="server" Text="NumeroConector" Visible="false"></asp:Label>
+    <br /><br />
 
-
+    <div class="container-fluid">
+        
          <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:Label ID="lbTipoVenta" runat="server" Text="Tipo de Venta: " CssClass="Letranegrita"></asp:Label>
@@ -82,30 +99,18 @@
             </div>
         </div>
         <br />
-   
-
-
-       <%-- <button class="btn btn-outline-primary btn-sm BotonEspecoal" type="button" id="btnInformacionCobertura" data-toggle="collapse" data-target="#InformacionCliente" aria-expanded="false" aria-controls="collapseExample">
-                    TITULO AQUI
-                     </button><br />
-       <div class="collapse" id="InformacionCliente">
-                <div class="card card-body">
-                 CONTROLES AQUI
-                </div>
-            </div>--%>
-     
-    
-       
-
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarComprobante" runat="server" Text="Agregar Comprobante" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarComprobante_CheckedChanged" ToolTip="Agregar Comprobante Fiscal a la Facturación" />
                 <asp:CheckBox ID="cbBuscarCliente" runat="server" Text="Buscar Clientes" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbBuscarCliente_CheckedChanged" ToolTip="Buscar Clientes para facturar" />
             </div>
         </div>
-        
-        <div id="DivBloqueAgregarClientes" runat="server">
-            <div class="form-row" >
+    </div>
+
+    
+    <!--ESTE BLOQUE ES PARA BUSCAR CLIENTES REGISTRADOS EN LA BASE DE DATOS-->
+    <div id="DivBloqueBuscarClientes" runat="server" visible="false" >
+          <div class="form-row" >
             <div class="form-group col-md-6">
                 <asp:Label ID="lbCodigoClienteBuscar" runat="server" Text="Codigo de Cliente" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtCodigoClienteBuscar" MaxLength="11" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
@@ -119,7 +124,13 @@
                 <asp:Button ID="btnConsultarRegistros" runat="server" Text="Buscar" ToolTip="Buscar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnConsultarRegistros_Click" />
             </div>
             <hr />
-        </div>
+
+    </div>
+
+   
+
+    <!--ESTE BLOQUE ES PARA LLENAR LA INFORMACION DEL CLIENTE AL QUE SE LE ESTA FACTURANDO -->
+    <div id="DivBloqueInformacionCliente" runat="server" visible="false">
         <div class="form-row">
             <div class="form-group col-md-3">
                 <asp:Label ID="lbSeleccionarComprobante" runat="server" Text="Comprobante" CssClass="Letranegrita"></asp:Label>
@@ -169,164 +180,24 @@
                  <asp:TextBox ID="txtLimiteCreditoClienteSeleccionado" runat="server" Enabled="false" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="8000"></asp:TextBox>
             </div>
         </div>
-        <div align="center" visible="false" id="DivBotonQuitarCliente" runat="server">
+
+    </div>
+
+     <!--ESTE BLOQUE ES PARA QUITAR LOS CLIENTES CONSULTADOS EN LA BASE DE DATOS Y DESBLOQUEAR CONTROLES -->
+    <div id="DivBloqueQuitarClientes" runat="server" visible="false">
+
+          <div align="center" runat="server">
             <asp:Button ID="btnQuitar" runat="server" Text="Quitar" ToolTip="Quitar Cliente Seleccionado" OnClick="btnQuitar_Click" CssClass="btn btn-outline-secondary btn-sm" />
         </div>
 
-       <br />
-        <div align="center">
-             <button type="button" id="btnOtrosFiltros" class="btn btn-outline-secondary btn-sm BotonEspecoal" data-toggle="modal" data-target=".OtrosFiltros">PRODUCTOS / SERVICIOS</button>
-        </div>
+      
         <br />
-       
 
-        <div class="form-row">
-          
-            <div class="form-group col-md-6">
-                <asp:Label ID="lbTipoIngresoCalculos" runat="server" Text="Tipo de Ingreso" CssClass="Letranegrita"></asp:Label>
-                <asp:DropDownList ID="ddlSeleccionarTipoIngreso" runat="server" ToolTip="Seleccionar el tipo de ingreso" CssClass="form-control"></asp:DropDownList>
-            </div>
-
-            <div class="form-group col-md-3">
-                <asp:Label ID="lbCantidadProductos" runat="server" Text="Total de Productos" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtTotalProductosCalculos" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-            </div>
-
-            <div class="form-group col-md-3">
-                <asp:Label ID="lbCantidadServicios" runat="server" Text="Total de Servicios" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtCantidadServicios" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-            <div class="form-group col-md-3">
-                <asp:Label ID="lbCantidadArticulos" runat="server" Text="Total Articulos" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtCantidadArticulos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-            <div class="form-group col-md-4">
-                <asp:Label ID="lbTotalDescuento" runat="server" Text="Total de Descuento" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtTotalDescuento" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbSubTotal" runat="server" Text="Sub Total" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtSubTotal" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbImpuesto" runat="server" Text="Impuesto" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtImpuesto" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbImpuestoTipoPago" runat="server" Text="Impuesto de Tipo Pago" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtImpuestoTipoPago" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbImpuestoComprobante" runat="server" Text="Impuesto Comprobante" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtImpuestoComprobante" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbTotal" runat="server" Text="Total" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtTotal" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbMontoPagar" runat="server" Text="Monto a Pagar" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtMontoPagar" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbCambio" runat="server" Text="Cambio" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtCambio" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
-            </div>
-
-             <div class="form-group col-md-4">
-                <asp:Label ID="lbTipoPago" runat="server" Text="Tipo de Pago" CssClass="Letranegrita"></asp:Label>
-                <asp:DropDownList ID="ddlTipoPago" runat="server" ToolTip="Seleccionar el Tipo de Pago" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoPago_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
-            </div>
-        </div>
-        <br />
-        <div align="center">
-            <asp:Button ID="btnRefrescarCalculos" runat="server" Text="Actualizar" ToolTip="Actualizar Calclos" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRefrescarCalculos_Click" />
-            <asp:Button ID="btnCompletarOperacion" runat="server" Text="Completar" ToolTip="Completar Operación" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCompletarOperacion_Click" />
-        </div>
-        <br />
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th style="width:40%" align="left"> Producto </th>
-                        <th style="width:10%" align="left"> Tipo </th>
-                        <th style="width:10%" align="left"> Categoria </th>
-                        <th style="width:10%" align="left"> Precio </th>
-                        <th style="width:10%" align="left"> Cantidad </th>
-                        <th style="width:10%" align="left"> Descuento </th>
-                        <th style="width:10%" align="left"> Total </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <asp:Repeater ID="rpListadoProductosFacturar" runat="server">
-                        <ItemTemplate>
-                            <tr>
-                                <td style="width:40%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n0}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </tbody>
-            </table>
-        </div>
-
-         <div align="center">
-                <asp:Label ID="lbPaginaActualTituloProductosFacturar" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbPaginaActualVariavleProductosFacturar" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaTituloProductosFacturar" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaVAriableProductosFacturar" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
-            </div>
-             <div id="divPaginacionProductosFacturar" runat="server" align="center">
-        <div style="margin-top: 20px;">
-            <table style="width: 600px">
-                <tr>
-                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductosFacturar" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductosFacturar_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkAnteriorProductosFacturar" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductosFacturar_Click"></asp:LinkButton> </td>
-                    <td>
-                        <asp:DataList ID="dtPaginacionProductosFacturar" runat="server" OnItemCommand="dtPaginacionProductosFacturar_ItemCommand" OnItemDataBound="dtPaginacionProductosFacturar_ItemDataBound" RepeatDirection="Horizontal">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="LinkPaginacionCentralProductosFacturar" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:DataList>
-
-                    </td>
-                    <td> <asp:LinkButton ID="LinkSiguienteProductosFacturar" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductosFacturar_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkUltimoProductosFacturar" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductosFacturar_Click"></asp:LinkButton> </td>
-                </tr>
-            </table>
-        </div>
-                 <br />
-        </div>
     </div>
 
-
-
-
-
-
-        <div class="modal fade bd-example-modal-xl OtrosFiltros" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-
-        <asp:ScriptManager ID="ScripManagerProductosServicios" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanelProductoServicios" runat="server">
-            <ContentTemplate>
-          <div class="container-fluid">
-                 <div class="form-row">
+    <!--ESTE BLOQUE ES PARA AGREGAR Y QUITAR ITEMS DE LA FACTURA -->
+    <div id="DivInformacionITEM" runat="server" visible="false">
+         <div class="form-row">
                              <div class="form-group col-md-3">
                                  <asp:Label ID="lbSeleccionarTipoProducto" runat="server" Text="Tipo de Producto" CssClass="Letranegrita"></asp:Label>
                                  <asp:DropDownList ID="ddlSeleccionarTipoProducto" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoProducto_SelectedIndexChanged" ToolTip="Seleccionar el Tipo de Producto" CssClass="form-control"></asp:DropDownList>
@@ -495,7 +366,7 @@
                          <div align="center">
                           
                              <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />
-                             <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Restablecer" ToolTip="Restablecer Vista Previa" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
+                             <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Volver" ToolTip="Volver a la Pantalla Principal" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
                              <br /><br />
                              <asp:Label ID="lbCantidadRegistrosAgregadosTitulo" runat="server" Text="Cantidad de Registros Agregados ( " CssClass="Letranegrita"></asp:Label>
                              <asp:Label ID="lbCantidadRegistrosAgregadosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
@@ -567,6 +438,177 @@
             </table>
         </div>
         </div>
+
+    </div>
+
+    <!--ESTE BLOQUE ES PARA REALIZAR LOS CALCULOS QUE VAN PARA LA FACTURA -->
+    <div id="DivBloqueCalculos" runat="server" visible="false">
+        <div align="center">
+            <asp:Button ID="btnAgregarItems" runat="server" Text="AGREGAR O QUITAR PRODUCTOS / SERVICIOS" CssClass="btn btn-outline-secondary btn-sm BotonEspecoal" ToolTip="Agregar / Quitar Items a la factura" OnClick="btnAgregarItems_Click" />
+        </div>
+        <br />
+        <div class="form-row">
+          
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbTipoIngresoCalculos" runat="server" Text="Tipo de Ingreso" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarTipoIngreso" runat="server" ToolTip="Seleccionar el tipo de ingreso" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadProductos" runat="server" Text="Total de Productos" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTotalProductosCalculos" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadServicios" runat="server" Text="Total de Servicios" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCantidadServicios" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-3">
+                <asp:Label ID="lbCantidadArticulos" runat="server" Text="Total Articulos" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCantidadArticulos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbTotalDescuento" runat="server" Text="Total de Descuento" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTotalDescuento" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbSubTotal" runat="server" Text="Sub Total" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtSubTotal" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbImpuesto" runat="server" Text="Impuesto" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtImpuesto" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbImpuestoTipoPago" runat="server" Text="Impuesto de Tipo Pago" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtImpuestoTipoPago" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbImpuestoComprobante" runat="server" Text="Impuesto Comprobante" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtImpuestoComprobante" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbTotal" runat="server" Text="Total" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTotal" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbMontoPagar" runat="server" Text="Monto a Pagar" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtMontoPagar" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbCambio" runat="server" Text="Cambio" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtCambio" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbTipoPago" runat="server" Text="Tipo de Pago" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlTipoPago" runat="server" ToolTip="Seleccionar el Tipo de Pago" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoPago_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+            <div class="form-group col-md-4">
+                <asp:Label ID="lbMoneda" runat="server" Text="Seleccionar Moneda" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarMoneda" runat="server" ToolTip="Seleccionar la moneda" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarMoneda_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+             <div class="form-group col-md-4">
+                <asp:Label ID="lbTasaCambioCalculos" runat="server" Text="Tasa Cambio" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtTasaCambioCalculos" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
+         <br />
+        <div align="center">
+            <asp:Button ID="btnRefrescarCalculos" runat="server" Text="Actualizar" ToolTip="Actualizar Calclos" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRefrescarCalculos_Click" />
+            <asp:Button ID="btnCompletarOperacion" runat="server" Text="Completar" ToolTip="Completar Operación" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCompletarOperacion_Click" />
+        </div>
+        <br />
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:40%" align="left"> Producto </th>
+                        <th style="width:10%" align="left"> Tipo </th>
+                        <th style="width:10%" align="left"> Categoria </th>
+                        <th style="width:10%" align="left"> Precio </th>
+                        <th style="width:10%" align="left"> Cantidad </th>
+                        <th style="width:10%" align="left"> Descuento </th>
+                        <th style="width:10%" align="left"> Total </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <asp:Repeater ID="rpListadoProductosFacturar" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td style="width:40%"> <%# Eval("") %> </td>
+                                <td style="width:10%"> <%# Eval("") %> </td>
+                                <td style="width:10%"> <%# Eval("") %> </td>
+                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
+                                <td style="width:10%"> <%#string.Format("{0:n0}", Eval("")) %> </td>
+                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
+                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
+        </div>
+
+         <div align="center">
+                <asp:Label ID="lbPaginaActualTituloProductosFacturar" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualVariavleProductosFacturar" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTituloProductosFacturar" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVAriableProductosFacturar" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+            </div>
+         <div id="divPaginacionProductosFacturar" runat="server" align="center">
+        <div style="margin-top: 20px;">
+            <table style="width: 600px">
+                <tr>
+                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductosFacturar" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnteriorProductosFacturar" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td>
+                        <asp:DataList ID="dtPaginacionProductosFacturar" runat="server" OnItemCommand="dtPaginacionProductosFacturar_ItemCommand" OnItemDataBound="dtPaginacionProductosFacturar_ItemDataBound" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkPaginacionCentralProductosFacturar" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+
+                    </td>
+                    <td> <asp:LinkButton ID="LinkSiguienteProductosFacturar" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimoProductosFacturar" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductosFacturar_Click"></asp:LinkButton> </td>
+                </tr>
+            </table>
+        </div>
+                 <br />
+        </div>
+    </div>
+
+    <!--ESTE BLOQUE SE MUESTRA AL MOMENTO COMPLETAR EL PROCESO DE FACTURACION Y DE DONDE SE PUEDE DESCARGAR LA FACTURA -->
+    <div id="DivBloqueProcesoCompletado" runat="server" visible="false"></div>
+
+
+ <%--    <br />
+        <div align="center">
+             <button type="button" id="btnOtrosFiltros" class="btn btn-outline-secondary btn-sm BotonEspecoal" data-toggle="modal" data-target=".OtrosFiltros">PRODUCTOS / SERVICIOS</button>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl OtrosFiltros" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+
+        <asp:ScriptManager ID="ScripManagerProductosServicios" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanelProductoServicios" runat="server">
+            <ContentTemplate>
+          <div class="container-fluid">
+                
           </div>
 
             </ContentTemplate>
@@ -575,9 +617,5 @@
         <br />
     </div>
   </div>
-</div>
-
-
-
-
+</div>--%>
 </asp:Content>
