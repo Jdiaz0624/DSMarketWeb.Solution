@@ -33,6 +33,16 @@
            width:100%;
              font-weight:bold;
           }
+
+        .BotonEspecoal2 {
+           width:15%;
+             font-weight:bold;
+          }
+
+         .TamanioImagen {
+         width:20%;
+         height:20%;
+         }
     </style>
 
     <script type="text/javascript">
@@ -124,7 +134,7 @@
             </div>
         </div>
             <div align="center">
-                <asp:Button ID="btnConsultarRegistros" runat="server" Text="Buscar" ToolTip="Buscar Cliente" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnConsultarRegistros_Click" />
+                <asp:Button ID="btnConsultarRegistros" runat="server" Text="Buscar" ToolTip="Buscar Cliente" CssClass="btn btn-lg btn-primary btn-sm" OnClick="btnConsultarRegistros_Click" />
             </div>
             <hr />
 
@@ -190,7 +200,7 @@
     <div id="DivBloqueQuitarClientes" runat="server" visible="false">
 
           <div align="center" runat="server">
-            <asp:Button ID="btnQuitar" runat="server" Text="Quitar" ToolTip="Quitar Cliente Seleccionado" OnClick="btnQuitar_Click" CssClass="btn btn-outline-secondary btn-sm" />
+            <asp:Button ID="btnQuitar" runat="server" Text="Quitar" ToolTip="Quitar Cliente Seleccionado" OnClick="btnQuitar_Click" CssClass="btn btn-danger btn-sm" />
         </div>
 
       
@@ -237,7 +247,7 @@
                              </div>
                          </div>
                          <div align="center">
-                             <asp:Button ID="btnBuscarProducto" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary btn-sm" ToolTip="Buscar Producto" OnClick="btnBuscarProducto_Click" />
+                             <asp:Button ID="btnBuscarProducto" runat="server" Text="Buscar" CssClass="btn btn-lg btn-primary btn-sm" ToolTip="Buscar Producto" OnClick="btnBuscarProducto_Click" />
                              <br />
                              <asp:Label ID="lbCantidadRegistrosProductosTitulo" runat="server" Text="Cantidad de Registros ( " CssClass="Letranegrita"></asp:Label>
                              <asp:Label ID="lbCantidadRegistrosProductosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
@@ -360,8 +370,8 @@
              
                          <div align="center">
                           
-                             <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnAgregarRegistro_Click" />
-                             <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Volver" ToolTip="Volver a la Pantalla Principal" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
+                             <asp:Button ID="btnAgregarRegistro" runat="server" Text="Agregar" ToolTip="Agregar Registro" CssClass="btn btn-lg btn-primary btn-sm" OnClick="btnAgregarRegistro_Click" />
+                             <asp:Button ID="btnRestablecerVistaPrevia" runat="server" Text="Volver" ToolTip="Volver a la Pantalla Principal" CssClass="btn btn-lg btn-primary btn-sm" OnClick="btnRestablecerVistaPrevia_Click" />
                              <br /><br />
                              <asp:Label ID="lbCantidadRegistrosAgregadosTitulo" runat="server" Text="Cantidad de Registros Agregados ( " CssClass="Letranegrita"></asp:Label>
                              <asp:Label ID="lbCantidadRegistrosAgregadosVariable" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
@@ -372,13 +382,13 @@
                              <table class="table table-hover">
                                <thead>
                                      <tr>
-                                     <th style="width:10%" align="left"> Seleccionar </th>
-                                     <th style="width:30%" align="left"> Producto </th>
-                                         <th style="width:20%" align="left"> Garantia </th>
-                                     <th style="width:10%" align="left"> Precio </th>
-                                     <th style="width:10%" align="left"> Descuento </th>
-                                     <th style="width:10%" align="left"> Cantidad </th>
-                                     <th style="width:10%" align="left"> Total </th>
+                                     <th style="width:10%" align="left"> QUITAR </th>
+                                     <th style="width:30%" align="left"> PRODUCTO </th>
+                                         <th style="width:20%" align="left"> GARANTIA </th>
+                                     <th style="width:10%" align="left"> PRECIO </th>
+                                     <th style="width:10%" align="left"> DESCUENTO </th>
+                                     <th style="width:10%" align="left"> CANTIDAD </th>
+                                     <th style="width:10%" align="left"> TOTAL </th>
                                  </tr>
                                </thead>
                                  <tbody>
@@ -521,8 +531,9 @@
         </div>
          <br />
         <div align="center">
-            <asp:Button ID="btnRefrescarCalculos" runat="server" Text="Actualizar" ToolTip="Actualizar Calclos" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnRefrescarCalculos_Click" />
-            <asp:Button ID="btnCompletarOperacion" runat="server" Text="Completar" ToolTip="Completar Operación" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnCompletarOperacion_Click" />
+            <asp:Button ID="btnRefrescarCalculos" runat="server" Text="Actualizar" ToolTip="Actualizar Calclos" CssClass="btn btn-lg btn-primary btn-sm" OnClick="btnRefrescarCalculos_Click" />
+            <asp:Button ID="btnCompletarOperacion" runat="server" Text="Completar" ToolTip="Completar Operación" CssClass="btn btn-success btn-sm" OnClick="btnCompletarOperacion_Click" />
+            <asp:Button ID="brnCancelarFacturacion" runat="server" Text="Cancelar" ToolTip="Cancelar Operación" CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Quieres Cancelar esta operación?');" OnClick="brnCancelarFacturacion_Click" />
         </div>
         <br />
 
@@ -530,26 +541,31 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width:40%" align="left"> Producto </th>
-                        <th style="width:10%" align="left"> Tipo </th>
-                        <th style="width:10%" align="left"> Categoria </th>
-                        <th style="width:10%" align="left"> Precio </th>
-                        <th style="width:10%" align="left"> Cantidad </th>
-                        <th style="width:10%" align="left"> Descuento </th>
-                        <th style="width:10%" align="left"> Total </th>
+                        <th style="width:10%" align="left"> QUITAR </th>
+                        <th style="width:30%" align="left"> PRODUCTO </th>
+                        <th style="width:20%" align="left"> GARANTIA </th>
+                        <th style="width:10%" align="left"> PRECIO </th>
+                        <th style="width:10%" align="left"> DESCUENTO </th>
+                        <th style="width:10%" align="left"> CANTIDAD </th>
+                        <th style="width:10%" align="left"> TOTAL </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <asp:Repeater ID="rpListadoProductosFacturar" runat="server">
+                    <asp:Repeater ID="rpListadoProductosFacturarPrincipal" runat="server">
                         <ItemTemplate>
                             <tr>
-                                <td style="width:40%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%# Eval("") %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n0}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
-                                <td style="width:10%"> <%#string.Format("{0:n2}", Eval("")) %> </td>
+                                                 <asp:HiddenField ID="hfNumeroRegistroItemAgregadoPrincipal" runat="server" Value='<%# Eval("NumeroRegistro") %>' />
+                                                 <asp:HiddenField ID="hfNumeroConectorItemAgregadoPrincipal" runat="server" Value='<%# Eval("NumerodeConector") %>' />
+                                                 <asp:HiddenField ID="hfIdProductoRespaldoPrincipal" runat="server" Value='<%# Eval("IdProductoRespaldo") %>' />
+                                                 <asp:HiddenField ID="hfNumeroConectorRespaldoPrincipal" runat="server" Value='<%# Eval("NumeroConectorRespaldo") %>' />
+
+                                                 <td style="width:10%"> <asp:Button ID="btnQuitarItemFacturaPrincipal" runat="server" Text="Quitar" ToolTip="Quitar Items Agregados" OnClick="btnQuitarItemFacturaPrincipal_Click" CssClass="btn btn-outline-secondary btn-sm" /> </td>
+                                                 <td style="width:30%"> <%# Eval("Producto") %> </td>
+                                                 <td style="width:20%"> <%# Eval("GarantiaProducto") %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Precio")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Descuento")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n0}", Eval("Cantidad")) %> </td>
+                                                 <td style="width:10%"> <%#string.Format("{0:n2}", Eval("Total")) %> </td>
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>
@@ -558,27 +574,27 @@
         </div>
 
          <div align="center">
-                <asp:Label ID="lbPaginaActualTituloProductosFacturar" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbPaginaActualVariavleProductosFacturar" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaTituloProductosFacturar" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
-                <asp:Label ID="lbCantidadPaginaVAriableProductosFacturar" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualTituloProductosFacturarPrincipal" runat="server" Text="Pagina " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbPaginaActualVariavleProductosFacturarPrincipal" runat="server" Text=" 0 " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaTituloProductosFacturarPrincipal" runat="server" Text=" DE " CssClass="Letranegrita"></asp:Label>
+                <asp:Label ID="lbCantidadPaginaVAriableProductosFacturarPrincipal" runat="server" Text="0" CssClass="Letranegrita"></asp:Label>
             </div>
          <div id="divPaginacionProductosFacturar" runat="server" align="center">
         <div style="margin-top: 20px;">
             <table style="width: 600px">
                 <tr>
-                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductosFacturar" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductosFacturar_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkAnteriorProductosFacturar" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkPrimeraPaginaProductosFacturarPrincipal" runat="server" Text="Primero" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la primera pagina del listado" OnClick="LinkPrimeraPaginaProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkAnteriorProductosFacturarPrincipal" runat="server" Text="Anterior" CssClass="btn btn-outline-success btn-sm" ToolTip="Ir a la pagina anterior del listado" OnClick="LinkAnteriorProductosFacturar_Click"></asp:LinkButton> </td>
                     <td>
-                        <asp:DataList ID="dtPaginacionProductosFacturar" runat="server" OnItemCommand="dtPaginacionProductosFacturar_ItemCommand" OnItemDataBound="dtPaginacionProductosFacturar_ItemDataBound" RepeatDirection="Horizontal">
+                        <asp:DataList ID="dtPaginacionProductosFacturarPrincipal" runat="server" OnItemCommand="dtPaginacionProductosFacturar_ItemCommand" OnItemDataBound="dtPaginacionProductosFacturar_ItemDataBound" RepeatDirection="Horizontal">
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkPaginacionCentralProductosFacturar" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkPaginacionCentralProductosFacturarPrincipal" runat="server" CommandArgument='<%# Eval("IndicePagina") %>' CommandName="newPage" Text='<%# Eval("TextoPagina") %>' Width="20px"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:DataList>
 
                     </td>
-                    <td> <asp:LinkButton ID="LinkSiguienteProductosFacturar" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductosFacturar_Click"></asp:LinkButton> </td>
-                    <td> <asp:LinkButton ID="LinkUltimoProductosFacturar" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkSiguienteProductosFacturarPrincipal" runat="server" Text="Siguiente" ToolTip="Ir a la siguiente pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkSiguienteProductosFacturar_Click"></asp:LinkButton> </td>
+                    <td> <asp:LinkButton ID="LinkUltimoProductosFacturarPrincipal" runat="server" Text="Ultimo" ToolTip="Ir a la ultima pagina del listado" CssClass="btn btn-outline-success btn-sm" OnClick="LinkUltimoProductosFacturar_Click"></asp:LinkButton> </td>
                 </tr>
             </table>
         </div>
@@ -587,7 +603,23 @@
     </div>
 
     <!--ESTE BLOQUE SE MUESTRA AL MOMENTO COMPLETAR EL PROCESO DE FACTURACION Y DE DONDE SE PUEDE DESCARGAR LA FACTURA -->
-    <div id="DivBloqueProcesoCompletado" runat="server" visible="false"></div>
+    <div id="DivBloqueProcesoCompletado" runat="server" visible="false">
+        <div align="center">
+            <asp:Image ID="IMGFotoProcesoCompletado" CssClass="TamanioImagen" runat="server" ImageUrl="~/Recursos/tenor.gif" />
+            <br />
+            <asp:Label ID="lbLetreroProcesoCompletado" runat="server" Text="PROCESO COMPLETADO CON EXITO" CssClass="Letranegrita TamanioImagen"></asp:Label>
+            <br />
+            <asp:Label ID="lbNumeroFactura" runat="server" Text="Numero de Factura: " CssClass="Letranegrita TamanioImagen"></asp:Label>
+            <asp:Label ID="lbNumeroFacturaVariable" runat="server" Text=" 0 " CssClass="Letranegrita TamanioImagen"></asp:Label>
+        </div>
+        <br />
+         <div align="center">
+             <asp:Button ID="btnDescargarFactura" runat="server" Text="Descrgar Factura" CssClass="btn btn-lg btn-primary btn-sm BotonEspecoal2" ToolTip="Descargar la Factura" OnClick="btnDescargarFactura_Click" />
+             <asp:Button ID="btnImprimirFactura" runat="server" Text="Imprimir Directo" CssClass="btn btn-lg btn-primary btn-sm BotonEspecoal2" ToolTip="Imprimir directo a la Impresora predeterminada" OnClick="btnImprimirFactura_Click" />
+             <asp:Button ID="btnNuevoProceso" runat="server" Text="Nuevo proceso" CssClass="btn btn-lg btn-primary btn-sm BotonEspecoal2" ToolTip="Crear Nueva Factura" OnClick="btnNuevoProceso_Click" />
+        </div>
+        <br />
+    </div>
 
 
  <%--    <br />

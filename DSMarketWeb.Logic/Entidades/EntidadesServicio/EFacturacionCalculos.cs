@@ -25,7 +25,5 @@ namespace DSMarketWeb.Logic.Entidades.EntidadesServicio
 		public System.Nullable<decimal> MontoPagado { get; set; }
 
 		public System.Nullable<decimal> Cambio { get; set; }
-
-		public System.Nullable<decimal> MontoPagadoMonedaOriginal { get; set; }
 	}
 }

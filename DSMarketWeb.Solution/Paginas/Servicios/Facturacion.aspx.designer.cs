@@ -1320,49 +1320,58 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected global::System.Web.UI.WebControls.Button btnCompletarOperacion;
 
         /// <summary>
-        /// rpListadoProductosFacturar control.
+        /// brnCancelarFacturacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpListadoProductosFacturar;
+        protected global::System.Web.UI.WebControls.Button brnCancelarFacturacion;
 
         /// <summary>
-        /// lbPaginaActualTituloProductosFacturar control.
+        /// rpListadoProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPaginaActualTituloProductosFacturar;
+        protected global::System.Web.UI.WebControls.Repeater rpListadoProductosFacturarPrincipal;
 
         /// <summary>
-        /// lbPaginaActualVariavleProductosFacturar control.
+        /// lbPaginaActualTituloProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPaginaActualVariavleProductosFacturar;
+        protected global::System.Web.UI.WebControls.Label lbPaginaActualTituloProductosFacturarPrincipal;
 
         /// <summary>
-        /// lbCantidadPaginaTituloProductosFacturar control.
+        /// lbPaginaActualVariavleProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCantidadPaginaTituloProductosFacturar;
+        protected global::System.Web.UI.WebControls.Label lbPaginaActualVariavleProductosFacturarPrincipal;
 
         /// <summary>
-        /// lbCantidadPaginaVAriableProductosFacturar control.
+        /// lbCantidadPaginaTituloProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCantidadPaginaVAriableProductosFacturar;
+        protected global::System.Web.UI.WebControls.Label lbCantidadPaginaTituloProductosFacturarPrincipal;
+
+        /// <summary>
+        /// lbCantidadPaginaVAriableProductosFacturarPrincipal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCantidadPaginaVAriableProductosFacturarPrincipal;
 
         /// <summary>
         /// divPaginacionProductosFacturar control.
@@ -1374,49 +1383,49 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPaginacionProductosFacturar;
 
         /// <summary>
-        /// LinkPrimeraPaginaProductosFacturar control.
+        /// LinkPrimeraPaginaProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkPrimeraPaginaProductosFacturar;
+        protected global::System.Web.UI.WebControls.LinkButton LinkPrimeraPaginaProductosFacturarPrincipal;
 
         /// <summary>
-        /// LinkAnteriorProductosFacturar control.
+        /// LinkAnteriorProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkAnteriorProductosFacturar;
+        protected global::System.Web.UI.WebControls.LinkButton LinkAnteriorProductosFacturarPrincipal;
 
         /// <summary>
-        /// dtPaginacionProductosFacturar control.
+        /// dtPaginacionProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dtPaginacionProductosFacturar;
+        protected global::System.Web.UI.WebControls.DataList dtPaginacionProductosFacturarPrincipal;
 
         /// <summary>
-        /// LinkSiguienteProductosFacturar control.
+        /// LinkSiguienteProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkSiguienteProductosFacturar;
+        protected global::System.Web.UI.WebControls.LinkButton LinkSiguienteProductosFacturarPrincipal;
 
         /// <summary>
-        /// LinkUltimoProductosFacturar control.
+        /// LinkUltimoProductosFacturarPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkUltimoProductosFacturar;
+        protected global::System.Web.UI.WebControls.LinkButton LinkUltimoProductosFacturarPrincipal;
 
         /// <summary>
         /// DivBloqueProcesoCompletado control.
@@ -1426,5 +1435,68 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBloqueProcesoCompletado;
+
+        /// <summary>
+        /// IMGFotoProcesoCompletado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image IMGFotoProcesoCompletado;
+
+        /// <summary>
+        /// lbLetreroProcesoCompletado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbLetreroProcesoCompletado;
+
+        /// <summary>
+        /// lbNumeroFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroFactura;
+
+        /// <summary>
+        /// lbNumeroFacturaVariable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumeroFacturaVariable;
+
+        /// <summary>
+        /// btnDescargarFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescargarFactura;
+
+        /// <summary>
+        /// btnImprimirFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnImprimirFactura;
+
+        /// <summary>
+        /// btnNuevoProceso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNuevoProceso;
     }
 }

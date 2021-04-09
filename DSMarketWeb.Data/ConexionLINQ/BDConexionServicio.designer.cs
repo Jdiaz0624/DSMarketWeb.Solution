@@ -174,13 +174,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			return ((ISingleResult<SP_BUSCA_ITEMS_AGREGADOS_FACTURAResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS")]
-		public ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult> SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoIngreso", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoIngreso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoPago", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoTipoPago", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoComprobante", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoComprobante, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagado", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cambio", DbType="Decimal(20,2)")] System.Nullable<decimal> cambio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagadoMonedaOriginal", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagadoMonedaOriginal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroRegistro, numeroConector, idTipoIngreso, idTipoPago, idMoneda, impuestoTipoPago, impuestoComprobante, montoPagado, cambio, montoPagadoMonedaOriginal, accion);
-			return ((ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_BUSCA_MONEDAS")]
 		public ISingleResult<SP_BUSCA_MONEDASResult> SP_BUSCA_MONEDAS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sigla", DbType="VarChar(10)")] string sigla)
 		{
@@ -207,6 +200,13 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idTipoPago, descripcion, estatus, usuarioAdiciona, bloqueaMonto, impuestoAdicional, porcentajeEntero, valor, codigoTipoPago, porDefecto, accion);
 			return ((ISingleResult<SP_MANTENIMIENTO_TIPO_PAGOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS")]
+		public ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult> SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoIngreso", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoIngreso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoPago", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoTipoPago", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoComprobante", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoComprobante, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagado", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cambio", DbType="Decimal(20,2)")] System.Nullable<decimal> cambio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroRegistro, numeroConector, idTipoIngreso, idTipoPago, idMoneda, impuestoTipoPago, impuestoComprobante, montoPagado, cambio, accion);
+			return ((ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2112,194 +2112,6 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		}
 	}
 	
-	public partial class SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult
-	{
-		
-		private System.Nullable<decimal> _NumeroRegistro;
-		
-		private string _NumeroConector;
-		
-		private System.Nullable<decimal> _IdTipoIngreso;
-		
-		private System.Nullable<decimal> _IdTipoPago;
-		
-		private System.Nullable<decimal> _IdMoneda;
-		
-		private System.Nullable<decimal> _ImpuestoTipoPago;
-		
-		private System.Nullable<decimal> _ImpuestoComprobante;
-		
-		private System.Nullable<decimal> _MontoPagado;
-		
-		private System.Nullable<decimal> _Cambio;
-		
-		private System.Nullable<decimal> _MontoPagadoMonedaOriginal;
-		
-		public SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroRegistro", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> NumeroRegistro
-		{
-			get
-			{
-				return this._NumeroRegistro;
-			}
-			set
-			{
-				if ((this._NumeroRegistro != value))
-				{
-					this._NumeroRegistro = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroConector", DbType="VarChar(30)")]
-		public string NumeroConector
-		{
-			get
-			{
-				return this._NumeroConector;
-			}
-			set
-			{
-				if ((this._NumeroConector != value))
-				{
-					this._NumeroConector = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoIngreso", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdTipoIngreso
-		{
-			get
-			{
-				return this._IdTipoIngreso;
-			}
-			set
-			{
-				if ((this._IdTipoIngreso != value))
-				{
-					this._IdTipoIngreso = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoPago", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdTipoPago
-		{
-			get
-			{
-				return this._IdTipoPago;
-			}
-			set
-			{
-				if ((this._IdTipoPago != value))
-				{
-					this._IdTipoPago = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMoneda", DbType="Decimal(20,0)")]
-		public System.Nullable<decimal> IdMoneda
-		{
-			get
-			{
-				return this._IdMoneda;
-			}
-			set
-			{
-				if ((this._IdMoneda != value))
-				{
-					this._IdMoneda = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImpuestoTipoPago", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> ImpuestoTipoPago
-		{
-			get
-			{
-				return this._ImpuestoTipoPago;
-			}
-			set
-			{
-				if ((this._ImpuestoTipoPago != value))
-				{
-					this._ImpuestoTipoPago = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImpuestoComprobante", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> ImpuestoComprobante
-		{
-			get
-			{
-				return this._ImpuestoComprobante;
-			}
-			set
-			{
-				if ((this._ImpuestoComprobante != value))
-				{
-					this._ImpuestoComprobante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoPagado", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> MontoPagado
-		{
-			get
-			{
-				return this._MontoPagado;
-			}
-			set
-			{
-				if ((this._MontoPagado != value))
-				{
-					this._MontoPagado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cambio", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> Cambio
-		{
-			get
-			{
-				return this._Cambio;
-			}
-			set
-			{
-				if ((this._Cambio != value))
-				{
-					this._Cambio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoPagadoMonedaOriginal", DbType="Decimal(20,2)")]
-		public System.Nullable<decimal> MontoPagadoMonedaOriginal
-		{
-			get
-			{
-				return this._MontoPagadoMonedaOriginal;
-			}
-			set
-			{
-				if ((this._MontoPagadoMonedaOriginal != value))
-				{
-					this._MontoPagadoMonedaOriginal = value;
-				}
-			}
-		}
-	}
-	
 	public partial class SP_BUSCA_MONEDASResult
 	{
 		
@@ -3425,6 +3237,176 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._PorDefecto != value))
 				{
 					this._PorDefecto = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult
+	{
+		
+		private System.Nullable<decimal> _NumeroRegistro;
+		
+		private string _NumeroConector;
+		
+		private System.Nullable<decimal> _IdTipoIngreso;
+		
+		private System.Nullable<decimal> _IdTipoPago;
+		
+		private System.Nullable<decimal> _IdMoneda;
+		
+		private System.Nullable<decimal> _ImpuestoTipoPago;
+		
+		private System.Nullable<decimal> _ImpuestoComprobante;
+		
+		private System.Nullable<decimal> _MontoPagado;
+		
+		private System.Nullable<decimal> _Cambio;
+		
+		public SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroRegistro", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> NumeroRegistro
+		{
+			get
+			{
+				return this._NumeroRegistro;
+			}
+			set
+			{
+				if ((this._NumeroRegistro != value))
+				{
+					this._NumeroRegistro = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroConector", DbType="VarChar(30)")]
+		public string NumeroConector
+		{
+			get
+			{
+				return this._NumeroConector;
+			}
+			set
+			{
+				if ((this._NumeroConector != value))
+				{
+					this._NumeroConector = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoIngreso", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdTipoIngreso
+		{
+			get
+			{
+				return this._IdTipoIngreso;
+			}
+			set
+			{
+				if ((this._IdTipoIngreso != value))
+				{
+					this._IdTipoIngreso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdTipoPago", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdTipoPago
+		{
+			get
+			{
+				return this._IdTipoPago;
+			}
+			set
+			{
+				if ((this._IdTipoPago != value))
+				{
+					this._IdTipoPago = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMoneda", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdMoneda
+		{
+			get
+			{
+				return this._IdMoneda;
+			}
+			set
+			{
+				if ((this._IdMoneda != value))
+				{
+					this._IdMoneda = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImpuestoTipoPago", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> ImpuestoTipoPago
+		{
+			get
+			{
+				return this._ImpuestoTipoPago;
+			}
+			set
+			{
+				if ((this._ImpuestoTipoPago != value))
+				{
+					this._ImpuestoTipoPago = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImpuestoComprobante", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> ImpuestoComprobante
+		{
+			get
+			{
+				return this._ImpuestoComprobante;
+			}
+			set
+			{
+				if ((this._ImpuestoComprobante != value))
+				{
+					this._ImpuestoComprobante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoPagado", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> MontoPagado
+		{
+			get
+			{
+				return this._MontoPagado;
+			}
+			set
+			{
+				if ((this._MontoPagado != value))
+				{
+					this._MontoPagado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cambio", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> Cambio
+		{
+			get
+			{
+				return this._Cambio;
+			}
+			set
+			{
+				if ((this._Cambio != value))
+				{
+					this._Cambio = value;
 				}
 			}
 		}

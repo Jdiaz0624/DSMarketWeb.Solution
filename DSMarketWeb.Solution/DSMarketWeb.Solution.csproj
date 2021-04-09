@@ -117,6 +117,7 @@
     <Content Include="Recursos\Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="Recursos\ImagenPorDefecto.jpg" />
     <Content Include="Recursos\Iniciales.ico" />
+    <Content Include="Recursos\tenor.gif" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

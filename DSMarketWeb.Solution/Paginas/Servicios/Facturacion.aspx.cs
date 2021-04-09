@@ -191,6 +191,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                     txtCodigoClienteSeleccionado.Text = n.IdCliente.ToString();
                     txtLimiteCreditoClienteSeleccionado.Text = MontoCredito.ToString("N2");
                 }
+                DivBloqueQuitarClientes.Visible = true;
                 BloquearDesbloquearControles((int)CodigosBloqueoYDesbloqueo.BloquearControles);
             }
         }
@@ -667,6 +668,38 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             txtSubTotal.Text = SubTotal.ToString("N2");
             txtTotal.Text = TotalGeneral.ToString("N2");
         }
+
+        private void MostrarItemsAgregadosPantallaPrincipal(string NumeroConector) {
+            CurrentPage = 0;
+            var MostrarItemsAgregados = ObjDataServicio.Value.BuscaProductosAgregados(NumeroConector);
+            int CantidadRegistrosMostrados = MostrarItemsAgregados.Count;
+            Paginar(ref rpListadoProductosFacturarPrincipal, MostrarItemsAgregados, 10, ref lbCantidadPaginaVAriableProductosFacturarPrincipal, ref LinkPrimeraPaginaProductosFacturarPrincipal, ref LinkAnteriorProductosFacturarPrincipal, ref LinkSiguienteProductosFacturarPrincipal, ref LinkUltimoProductosFacturarPrincipal);
+            HandlePaging(ref dtPaginacionProductosFacturarPrincipal, ref lbPaginaActualVariavleProductosFacturarPrincipal);
+
+            int TotalProductos = 0, TotalServicios = 0, TotalItems = 0;
+            decimal TotalDescuento = 0, TotalImpuesto = 0, SubTotal = 0, TotalGeneral = 0;
+            decimal TasaCambio = Convert.ToDecimal(txtTasaCambioCalculos.Text);
+
+            foreach (var n in MostrarItemsAgregados)
+            {
+                TotalProductos = (int)n.TotalProductos;
+                TotalServicios = (int)n.TotalServicios;
+                TotalItems = (int)n.TotalItems;
+                TotalDescuento = (decimal)n.TotalDescuento;
+                TotalImpuesto = (decimal)n.TotalImpuesto;
+                SubTotal = (decimal)n.SubTotal;
+                TotalGeneral = (decimal)n.TotalGeneral;
+            }
+
+            TotalGeneral = TotalGeneral / TasaCambio;
+            txtTotalProductosCalculos.Text = TotalProductos.ToString("N0");
+            txtCantidadServicios.Text = TotalServicios.ToString("N0");
+            txtCantidadArticulos.Text = TotalItems.ToString("N0");
+            txtTotalDescuento.Text = TotalDescuento.ToString("N2");
+            txtImpuesto.Text = TotalImpuesto.ToString("N2");
+            txtSubTotal.Text = SubTotal.ToString("N2");
+            txtTotal.Text = TotalGeneral.ToString("N2");
+        }
         #endregion
         #region MANIPULAR LA INFORMACION DEL PRODUCTO ESPEJO
         private void ManipularInformacionProductoEspejo(decimal Idproducto, decimal NumeroConector, string Descripcion, decimal Cantidad, bool ProductoAcumulativo, decimal IdUsuario, string Accion) {
@@ -686,6 +719,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             if (!IsPostBack) {
                 DivBloqueInformacionCliente.Visible = true;
                 DivBloqueCalculos.Visible = true;
+                DivBloqueProcesoCompletado.Visible = false;
                 ManipularInformacionProductoEspejo(0, 0, "", 0, false, (decimal)Session["IdUsuario"], "DELETEALL");
                 lbCodigoUsuarioConectado.Text = Session["IdUsuario"].ToString();
                 GenerarNumeroConector();
@@ -945,6 +979,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
                                 ProcesarItemFactura(Convert.ToDecimal(lbIdProductoSeleccionado.Text), Convert.ToDecimal(lbNumeroConectorProductoSeleccionado.Text), 0, "INSERT");
                                 MostrarItemsAgregados(lbNumeroConector.Text);
+                                MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
                                 lbIdProductoSeleccionado.Text = "0";
                                 txtTipoProductoVistaPrevia.Text = string.Empty;
                                 txtCategoriaVistaPrevia.Text = string.Empty;
@@ -978,12 +1013,12 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void btnRestablecerVistaPrevia_Click(object sender, EventArgs e)
         {
-            DivBloqueBuscarClientes.Visible = true;
-            DivBloqueQuitarClientes.Visible = true;
+           // DivBloqueBuscarClientes.Visible = true;
+          //  DivBloqueQuitarClientes.Visible = true;
             DivBloqueInformacionCliente.Visible = true;
             DivInformacionITEM.Visible = false;
             DivBloqueCalculos.Visible = true;
-            DivBloqueProcesoCompletado.Visible = true;
+            DivBloqueProcesoCompletado.Visible = false;
             DivBloqueCheckRadios.Visible = true;
         }
 
@@ -1014,16 +1049,21 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
 
             MostrarItemsAgregados(lbNumeroConector.Text);
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
         }
 
         protected void LinkPrimeraPaginaProductosAgregados_Click(object sender, EventArgs e)
         {
+            CurrentPage = 0;
+            MostrarItemsAgregados(lbNumeroConector.Text);
 
         }
 
         protected void LinkAnteriorProductosAgregados_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarItemsAgregados(lbNumeroConector.Text);
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductosAgregados, ref lbCantidadPaginaVAriableProductosAgregados);
         }
 
         protected void dtPaginacionProductosAgregados_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -1033,27 +1073,36 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void dtPaginacionProductosAgregados_ItemCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarItemsAgregados(lbNumeroConector.Text);
         }
 
         protected void LinkSiguienteProductosAgregados_Click(object sender, EventArgs e)
         {
 
+            CurrentPage += 1;
+            MostrarItemsAgregados(lbNumeroConector.Text);
         }
 
         protected void LinkUltimoProductosAgregados_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarItemsAgregados(lbNumeroConector.Text);
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductosAgregados, ref lbCantidadPaginaVAriableProductosAgregados);
         }
 
         protected void LinkPrimeraPaginaProductosFacturar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = 0;
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
         }
 
         protected void LinkAnteriorProductosFacturar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += -1;
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductosFacturarPrincipal, ref lbCantidadPaginaVAriableProductosFacturarPrincipal);
         }
 
         protected void dtPaginacionProductosFacturar_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -1063,17 +1112,22 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
         protected void dtPaginacionProductosFacturar_ItemCommand(object source, DataListCommandEventArgs e)
         {
-
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
         }
 
         protected void LinkSiguienteProductosFacturar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage += 1;
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
         }
 
         protected void LinkUltimoProductosFacturar_Click(object sender, EventArgs e)
         {
-
+            CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+            MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref lbPaginaActualVariavleProductosFacturarPrincipal, ref lbCantidadPaginaVAriableProductosFacturarPrincipal);
         }
 
         protected void cbAgregarComprobante_CheckedChanged(object sender, EventArgs e)
@@ -1107,10 +1161,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void cbBuscarCliente_CheckedChanged(object sender, EventArgs e)
         {
             if (cbBuscarCliente.Checked == true) {
-               
+                DivBloqueBuscarClientes.Visible = true;
             }
             else if (cbBuscarCliente.Checked == false) {
-               
+                DivBloqueBuscarClientes.Visible = false;
+                DivBloqueQuitarClientes.Visible = false;
             }
         }
 
@@ -1122,33 +1177,94 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnRefrescarCalculos_Click(object sender, EventArgs e)
         {
             MostrarItemsAgregados(lbNumeroConector.Text);
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
         }
 
         protected void btnCompletarOperacion_Click(object sender, EventArgs e)
         {
-
+            DivBloqueBuscarClientes.Visible = false;
+            DivBloqueQuitarClientes.Visible = false;
+            DivBloqueInformacionCliente.Visible = false;
+            DivInformacionITEM.Visible = false;
+            DivBloqueCalculos.Visible = false;
+            DivBloqueProcesoCompletado.Visible = true;
+            DivBloqueCheckRadios.Visible = false;
         }
 
         protected void btnAgregarItems_Click(object sender, EventArgs e)
         {
-            DivBloqueBuscarClientes.Visible = false;
-            DivBloqueQuitarClientes.Visible = false;
+            //DivBloqueBuscarClientes.Visible = false;
+           // DivBloqueQuitarClientes.Visible = false;
             DivBloqueInformacionCliente.Visible = false;
             DivInformacionITEM.Visible = true;
             DivBloqueCalculos.Visible = false;
             DivBloqueProcesoCompletado.Visible = false;
             DivBloqueCheckRadios.Visible = false;
+            
         }
 
         protected void ddlSeleccionarMoneda_SelectedIndexChanged(object sender, EventArgs e)
         {
             SacarTasaCambioMoneda();
             MostrarItemsAgregados(lbNumeroConector.Text);
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+        }
+
+        protected void brnCancelarFacturacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnQuitarItemFacturaPrincipal_Click(object sender, EventArgs e)
+        {
+            var ItemNumeroRegistroSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfItemNumeroRegistroSeleccionado = ((HiddenField)ItemNumeroRegistroSeleccionado.FindControl("hfNumeroRegistroItemAgregadoPrincipal")).Value.ToString();
+
+            var ItemNumeroCOnectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorSeleccionado = ((HiddenField)ItemNumeroCOnectorSeleccionado.FindControl("hfNumeroConectorItemAgregadoPrincipal")).Value.ToString();
+
+            var IdProductoRespaldoSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdProductoRespaldo = ((HiddenField)IdProductoRespaldoSeleccionado.FindControl("hfIdProductoRespaldoPrincipal")).Value.ToString();
+
+            var NumeroConectorRespaldo = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorRespaldo = ((HiddenField)NumeroConectorRespaldo.FindControl("hfNumeroConectorRespaldoPrincipal")).Value.ToString();
+
+            decimal IdUsuario = Session["IdUsuario"] != null ? (decimal)Session["IdUsuario"] : 0;
+
+
+            DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems Eliminar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionItems(
+                Convert.ToDecimal(hfItemNumeroRegistroSeleccionado),
+                hfNumeroConectorSeleccionado,
+                "DELETE");
+            Eliminar.ProcesarInformacion();
+
+            ManipularInformacionProductoEspejo(Convert.ToDecimal(hfIdProductoRespaldo), Convert.ToDecimal(hfNumeroConectorRespaldo), "", 0, false, (decimal)Session["IdUsuario"], "DELETE");
+
+
+            MostrarItemsAgregados(lbNumeroConector.Text);
+            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+        }
+
+        protected void btnDescargarFactura_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnImprimirFactura_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNuevoProceso_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void btnQuitar_Click(object sender, EventArgs e)
         {
             BloquearDesbloquearControles((int)CodigosBloqueoYDesbloqueo.DesbloquearControles);
+            DivBloqueBuscarClientes.Visible = false;
+            DivBloqueQuitarClientes.Visible = false;
         }
 
 

@@ -324,7 +324,6 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                 Item.ImpuestoComprobante,
                 Item.MontoPagado,
                 Item.Cambio,
-                Item.MontoPagadoMonedaOriginal,
                 Accion);
             if (FActuracionCalculos != null) {
                 Guardar = (from n in FActuracionCalculos
@@ -338,8 +337,7 @@ namespace DSMarketWeb.Logic.Logica.LogicaServicio
                                ImpuestoTipoPago=n.ImpuestoTipoPago,
                                ImpuestoComprobante=n.ImpuestoComprobante,
                                MontoPagado=n.MontoPagado,
-                               Cambio=n.Cambio,
-                               MontoPagadoMonedaOriginal=n.MontoPagadoMonedaOriginal
+                               Cambio=n.Cambio
 
                            }).FirstOrDefault();
             }

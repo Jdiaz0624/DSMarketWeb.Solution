@@ -19,7 +19,6 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
         private decimal ImpuestoComprobante = 0;
         private decimal MontoPagado = 0;
         private decimal Cambio = 0;
-        private decimal MontoPagadoMonedaOriginal = 0;
         private string Accion = "";
 
         public ProcesarInformacionFacturacionCalculos(
@@ -32,7 +31,6 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             decimal ImpuestoComprobanteCON,
             decimal MontoPagadoCON,
             decimal CambioCON,
-            decimal MontoPagadoMonedaOriginalCON,
             string AccionCON)
         {
             NumeroRegistro = NumeroRegistroCON;
@@ -44,7 +42,6 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             ImpuestoComprobante = ImpuestoComprobanteCON;
             MontoPagado = MontoPagadoCON;
             Cambio = CambioCON;
-            MontoPagadoMonedaOriginal = MontoPagadoMonedaOriginalCON;
             Accion = AccionCON;
         }
         public void ProcesarInformacion() {
@@ -59,7 +56,6 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Servicios
             Procesar.ImpuestoComprobante = ImpuestoComprobante;
             Procesar.MontoPagado = MontoPagado;
             Procesar.Cambio = Cambio;
-            Procesar.MontoPagadoMonedaOriginal = MontoPagadoMonedaOriginal;
 
             var MAn = ObjData.GuardarInformacionCalculos(Procesar, Accion);
         }
