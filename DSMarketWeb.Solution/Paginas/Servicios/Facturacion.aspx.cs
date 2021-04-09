@@ -708,6 +708,23 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             Manipular.ProcesarInformacion();
         }
         #endregion
+        #region GUARDAR INFORMACION DE LOS CALCULOS
+        private void GuardarInformacionalculos() {
+            DSMarketWeb.Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionCalculos Guardar = new Logic.PrcesarMantenimientos.Servicios.ProcesarInformacionFacturacionCalculos(
+                0,
+                lbNumeroConector.Text,
+                Convert.ToDecimal(ddlSeleccionarTipoIngreso.SelectedValue),
+                Convert.ToDecimal(ddlTipoPago.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarMoneda.SelectedValue),
+                Convert.ToDecimal(txtImpuestoTipoPago.Text),
+                Convert.ToDecimal(txtImpuestoComprobante.Text),
+                Convert.ToDecimal(txtMontoPagar.Text),
+                Convert.ToDecimal(txtCambio.Text),
+                Convert.ToDecimal(txtTasaCambioCalculos.Text),
+                "INSERT");
+            Guardar.ProcesarInformacion();
+        }
+        #endregion
         private void SacarTasaCambioMoneda() {
             DSMarketWeb.Logic.Comunes.SacarTasaCambio Sacartasa = new Logic.Comunes.SacarTasaCambio(Convert.ToDecimal(ddlSeleccionarMoneda.SelectedValue));
             txtTasaCambioCalculos.Text = Sacartasa.TasaMoneda().ToString();
@@ -740,11 +757,13 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 CargarCategoias();
                 CargarMarcas();
                 CargarModelos();
-             //   CargarTipoGarantia();
                 CargarTipoIngreso();
                 CargarTipoPago();
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMoneda, ObjDataConfiguracion.Value.BuscaListas("MONEDA", null, null));
                 SacarTasaCambioMoneda();
+
+                MostrarItemsAgregados(lbNumeroConector.Text);
+                MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
             }
         }
 

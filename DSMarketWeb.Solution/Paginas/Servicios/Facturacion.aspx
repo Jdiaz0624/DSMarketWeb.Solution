@@ -74,6 +74,9 @@
         function SeleccionarItem() {
             alert("Favor de seleccionar un item para agregarlo a la factura.");
         }
+        function ItemsNoEncontrados() {
+            alert("No es posible proceder con este proceso, por que no se encontraron items para facturar, favor de agregar productos o servicios para proceder con el proceso.");
+        }
         $(document).ready(function () {
 
 
@@ -89,7 +92,121 @@
                 }
             });
 
-            
+            $("#<%=btnCompletarOperacion.ClientID%>").click(function () {
+                //VALIDAMOS EL CAMPO TIPO DE INGRESO
+                var TipoIngreso = $("#<%=ddlSeleccionarTipoIngreso.ClientID%>").val();
+                if (TipoIngreso < 1) {
+                    alert("El campo tipo de ingreso no puede estar vacio para completar esta operación, favor de verificar.");
+                    $("#<%=ddlSeleccionarTipoIngreso.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    //VALIDAMOS EL TOTAL DE PRODUCTOS
+                    var TotalProductos = $("#<%=txtTotalProductosCalculos.ClientID%>").val().length;
+                    if (TotalProductos < 1) {
+                        alert("El campo Total de Productos no puede estar vacio para completar esta operación, favor de verificar.");
+                        $("#<%=txtTotalProductosCalculos.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                    else {
+                        //VALIDAMOS EL TOTAL DE SERVICIOS
+                        var TotalServicios = $("#<%=txtCantidadServicios.ClientID%>").val().length;
+                        if (TotalServicios < 1) {
+                            alert("El campo total de servicios no puede estar vacio para completar esta operación, favor de verificar.");
+                            $("#<%=txtCantidadServicios.ClientID%>").css("border-color", "red");
+                            return false;
+                        }
+                        else {
+                            //VALIDAMOS EL CAMPO DE AL CANTIDAD DE ITEMS AGREGADOS
+                            var TotalItems = $("#<%=txtCantidadArticulos.ClientID%>").val().length;
+                            if (TotalItems < 1) {
+                                alert("El campo total de items no puede estar vacio para completar esta operación, favor de verificar.");
+                                $("#<%=txtCantidadArticulos.ClientID%>").css("border-color", "red");
+                                return false;
+                            }
+                            else {
+                                //VALIDAMOS EL CAMPO TOTAL DE DESCUENTO
+                                var ValidarTotalDescuento = $("#<%=txtTotalDescuento.ClientID%>").val().length;
+                                if (ValidarTotalDescuento < 1) {
+                                    alert("El campo Total de descuento no puede estar vacio para completar esta operación, favor de verificar.");
+                                    $("#<%=txtTotalDescuento.ClientID%>").css("border-color", "red");
+                                    return false;
+                                }
+                                else {
+                                    //VALIDAMOS EL CAMPO SUB TOTAL
+                                    var SubTotal = $("#<%=txtSubTotal.ClientID%>").val().length;
+                                    if (SubTotal < 1) {
+                                        alert("El campo Sub Total no puede estar vacio para completar esta operación, favor de verificar.");
+                                        $("#<%=txtSubTotal.ClientID%>").css("border-color", "red");
+                                        return false;
+                                    }
+                                    else {
+                                        //VALIDAMOS EL IMPUESTO
+                                        var Impuesto = $("#<%=txtImpuesto.ClientID%>").val().length;
+                                        if (Impuesto < 1) {
+                                            alert("El campo impuesto no puede estar vacio para completar esta operación, favor de verificar.");
+                                            $("#<%=txtImpuesto.ClientID%>").css("border-color", "red");
+                                            return false;
+                                        }
+                                        else {
+                                            //VALIDAMOS EL IMPUESTO DE TIPO DE PAGO
+                                            var ImpuestoTipoPago = $("#<%=txtImpuestoTipoPago.ClientID%>").val().length;
+                                            if (ImpuestoTipoPago < 1) {
+                                                alert("El campo Impuesto de tipo de pago no puede estar vacio para completar esta operación, favor de verificar.");
+                                                $("#<%=txtImpuestoTipoPago.ClientID%>").css("border-color", "red");
+                                                return false;
+                                            }
+                                            else {
+                                                //VALIDAMOS EL CAMPO DE IMPUESTO DE COMPROBANTE
+                                                var ImpuestoComprobante = $("#<%=txtImpuestoComprobante.ClientID%>").val().length;
+                                                if (ImpuestoComprobante < 1) {
+                                                    alert("El campo impuesto de comprobante no puede estar vacio para completar esta operación, favor de verificar.");
+                                                    $("#<%=txtImpuestoComprobante.ClientID%>").css("border-color", "red");
+                                                    return false;
+                                                }
+                                                else {
+                                                    //VALIDAR EL CAMPO TOTAL 
+                                                    var Total = $("#<%=txtTotal.ClientID%>").val().length;
+                                                    if (Total < 1) {
+                                                        alert("El campo total no puede estar vacio para completar esta operación, favor de verificar.");
+                                                        $("#<%=txtTotal.ClientID%>").css("border-color", "red");
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        //VALIDAMOS EL CAMPO MONTO PAGADO
+                                                        var Montopagado = $("#<%=txtMontoPagar.ClientID%>").val().length;
+                                                        if (Montopagado < 1) {
+                                                            alert("El campo monto pagado no puede estar vacio para completar esta operación, favor de verificar.");
+                                                            $("#<%=txtMontoPagar.ClientID%>").css("border-color", "red");
+                                                            return false;
+                                                        }
+                                                        else {
+                                                            //VALIDAMOS EL CAMPO CAMBIO
+                                                            var Cambio = $("#<%=txtCambio.ClientID%>").val().length;
+                                                            if (Cambio < 1) {
+                                                                alert("El campo cambio no puede estar vacio para completar esta operación, favor de verificar.");
+                                                                $("#<%=txtCambio.ClientID%>").css("border-color", "red");
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                //ddlTipoPago
+                                                               // ddlSeleccionarMoneda
+                                                               // txtTasaCambioCalculos
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            });
         })
     </script>
 

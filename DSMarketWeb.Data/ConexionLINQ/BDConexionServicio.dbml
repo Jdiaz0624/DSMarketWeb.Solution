@@ -320,6 +320,7 @@
     <Parameter Name="ImpuestoComprobante" Parameter="impuestoComprobante" Type="System.Decimal" DbType="Decimal(20,2)" />
     <Parameter Name="MontoPagado" Parameter="montoPagado" Type="System.Decimal" DbType="Decimal(20,2)" />
     <Parameter Name="Cambio" Parameter="cambio" Type="System.Decimal" DbType="Decimal(20,2)" />
+    <Parameter Name="TasaMoneda" Parameter="tasaMoneda" Type="System.Decimal" DbType="Decimal(20,2)" />
     <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
     <ElementType Name="SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult">
       <Column Name="NumeroRegistro" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
@@ -331,6 +332,7 @@
       <Column Name="ImpuestoComprobante" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
       <Column Name="MontoPagado" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
       <Column Name="Cambio" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
+      <Column Name="TasaMoneda" Type="System.Decimal" DbType="Decimal(20,2)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

@@ -203,9 +203,9 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Servicio.SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS")]
-		public ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult> SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoIngreso", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoIngreso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoPago", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoTipoPago", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoComprobante", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoComprobante, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagado", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cambio", DbType="Decimal(20,2)")] System.Nullable<decimal> cambio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		public ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult> SP_GUARDAR_INFORMACION_FACTURACION_CALCULOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> numeroRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoIngreso", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoIngreso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoPago", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMoneda", DbType="Decimal(20,0)")] System.Nullable<decimal> idMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoTipoPago", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoTipoPago, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ImpuestoComprobante", DbType="Decimal(20,2)")] System.Nullable<decimal> impuestoComprobante, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MontoPagado", DbType="Decimal(20,2)")] System.Nullable<decimal> montoPagado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cambio", DbType="Decimal(20,2)")] System.Nullable<decimal> cambio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TasaMoneda", DbType="Decimal(20,2)")] System.Nullable<decimal> tasaMoneda, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroRegistro, numeroConector, idTipoIngreso, idTipoPago, idMoneda, impuestoTipoPago, impuestoComprobante, montoPagado, cambio, accion);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroRegistro, numeroConector, idTipoIngreso, idTipoPago, idMoneda, impuestoTipoPago, impuestoComprobante, montoPagado, cambio, tasaMoneda, accion);
 			return ((ISingleResult<SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult>)(result.ReturnValue));
 		}
 	}
@@ -3263,6 +3263,8 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		
 		private System.Nullable<decimal> _Cambio;
 		
+		private System.Nullable<decimal> _TasaMoneda;
+		
 		public SP_GUARDAR_INFORMACION_FACTURACION_CALCULOSResult()
 		{
 		}
@@ -3407,6 +3409,22 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._Cambio != value))
 				{
 					this._Cambio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TasaMoneda", DbType="Decimal(20,2)")]
+		public System.Nullable<decimal> TasaMoneda
+		{
+			get
+			{
+				return this._TasaMoneda;
+			}
+			set
+			{
+				if ((this._TasaMoneda != value))
+				{
+					this._TasaMoneda = value;
 				}
 			}
 		}
