@@ -730,6 +730,68 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             txtTasaCambioCalculos.Text = Sacartasa.TasaMoneda().ToString();
         }
 
+        private void SacarImpuestoAdicional(decimal IdTipoPago) {
+            bool LlevaImpuestoAdicional = false;
+            bool ValorEntero = false;
+            decimal Valor = 0;
+            bool BloqueaMonto = false;
+
+            var BuscarTipoPago = ObjDataServicio.Value.BuscaTipoPagos(IdTipoPago, null);
+            foreach (var n in BuscarTipoPago) {
+                LlevaImpuestoAdicional = (bool)n.ImpuestoAdicional0;
+                ValorEntero = (bool)n.PorcentajeEntero0;
+                Valor = (decimal)n.Valor;
+                BloqueaMonto = (bool)n.BloqueaMonto0;
+            }
+
+            if (BloqueaMonto == true) {
+                txtMontoPagar.Enabled = false;
+                txtMontoPagar.Text = txtTotal.Text;
+                
+            }
+            else if (BloqueaMonto == false) {
+                txtMontoPagar.Enabled = true;
+                txtMontoPagar.Text = "0";
+            }
+
+            if (LlevaImpuestoAdicional == false)
+            {
+                txtImpuestoTipoPago.Text = "0";
+            }
+            else if(LlevaImpuestoAdicional==true) {
+                if (ValorEntero == true) {
+                    txtImpuestoTipoPago.Text = Valor.ToString();
+                }
+                else {
+                    decimal ValorDececimal = Valor / 100;
+                    txtImpuestoTipoPago.Text = ValorDececimal.ToString();
+                }
+            }
+        }
+
+        private decimal SacarCambio(decimal TotalPagar, decimal MontoPagado) {
+
+            decimal Cambio = MontoPagado  - TotalPagar;
+            return Cambio;
+        }
+
+        private void SacarImpuestoComprobante(decimal IdCmprobante) {
+
+            if (IdCmprobante == 0) {
+                txtImpuestoComprobante.Text = "0";
+            }
+            else {
+                bool LibreImpuesto = false;
+                decimal PorcentajeImpuesto = 0;
+                const decimal Conversor = 100;
+                decimal TotalPagar = 0;
+                decimal ImpuestoTipoPago = Convert.ToDecimal(txtImpuestoTipoPago.Text);
+
+              //  var BuscarInformacion = ObjDataConfiguracion.Value.fis
+                
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -764,6 +826,10 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
 
                 MostrarItemsAgregados(lbNumeroConector.Text);
                 MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+                SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
+                txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
+
+               
             }
         }
 
@@ -1163,6 +1229,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void ddlTipoPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             ValidarCampoTipoPago(Convert.ToDecimal(ddlTipoPago.SelectedValue));
+            SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
         }
 
         protected void txtCantidadUsarVistaPrevia_TextChanged(object sender, EventArgs e)
@@ -1277,6 +1344,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void btnNuevoProceso_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void txtMontoPagar_TextChanged(object sender, EventArgs e)
+        {
+            txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
         }
 
         protected void btnQuitar_Click(object sender, EventArgs e)

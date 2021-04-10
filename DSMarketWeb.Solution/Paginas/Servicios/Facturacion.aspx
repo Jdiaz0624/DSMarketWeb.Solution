@@ -189,9 +189,31 @@
                                                                 return false;
                                                             }
                                                             else {
-                                                                //ddlTipoPago
-                                                               // ddlSeleccionarMoneda
-                                                               // txtTasaCambioCalculos
+                                                                //VALIDAMOS EL CAMPO TIPO DE PAGO
+                                                                var TipoPago = $("#<%=ddlTipoPago.ClientID%>").val();
+                                                                if (TipoPago < 1) {
+                                                                    alert("El campo tipo de pago no puede estar vacio para completar esta operación, favor de verificar.");
+                                                                    $("#<%=ddlTipoPago.ClientID%>").css("border-color", "red");
+                                                                    return false;
+                                                                }
+                                                                else {
+                                                                    //VALIDAMOS EL CAMPO MONEDA
+                                                                    var Moneda = $("#<%=ddlSeleccionarMoneda.ClientID%>").val();
+                                                                    if (Moneda < 1) {
+                                                                        alert("El campo moneda no pude estar vacio para completar esta operación, favor de verificar.");
+                                                                        $("#<%=ddlSeleccionarMoneda.ClientID%>").css("border-color", "red");
+                                                                        return false;
+                                                                    }
+                                                                    else {
+                                                                        //VALIDAMOS EL CAMPO CAMBIO 
+                                                                        var Cambio = $("#<%=txtTasaCambioCalculos.ClientID%>").val().length;
+                                                                        if (Cambio < 1) {
+                                                                            alert("El campo cambio no puede estar vacio para completar esta operación, favor de verificar.");
+                                                                            $("#<%=txtTasaCambioCalculos.ClientID%>").css("border-color", "red");
+                                                                            return false;
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -623,7 +645,7 @@
 
              <div class="form-group col-md-4">
                 <asp:Label ID="lbMontoPagar" runat="server" Text="Monto a Pagar" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtMontoPagar" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtMontoPagar" runat="server" Enabled="false" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtMontoPagar_TextChanged"></asp:TextBox>
             </div>
 
              <div class="form-group col-md-4">

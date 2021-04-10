@@ -201,5 +201,82 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             return Modificar;
         }
         #endregion
+
+        #region MANTENIMIENTO DE COMPROBANTES FISCALES
+        //LISTADO DE COMPROBANTES FISCALES
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales> BuscaComprobantesFiscales(decimal? IdComprbanteFiscal = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_COMPROBANTES_FISCALES(IdComprbanteFiscal)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales
+                           {
+                               IdComprobante=n.IdComprobante,
+                               Comprobante=n.Comprobante,
+                               Serie=n.Serie,
+                               TipoComprobante=n.TipoComprobante,
+                               Secuencia=n.Secuencia,
+                               SecuenciaInicial=n.SecuenciaInicial,
+                               SecuenciaFinal=n.SecuenciaFinal,
+                               Limite=n.Limite,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus,
+                               ValidoHasta=n.ValidoHasta,
+                               PorDefecto0=n.PorDefecto0,
+                               PorDefecto=n.PorDefecto,
+                               Posiciones=n.Posiciones,
+                               CobroPorcientoAdicional=n.CobroPorcientoAdicional,
+                               LibreImpuesto0=n.LibreImpuesto0,
+                               LibreImpuesto=n.LibreImpuesto
+                           }).ToList();
+            return Listado;
+        
+        }
+
+        //MANTENIMIENTO DE COMPROBANTES FISCALES
+        public DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales MantenimientoComprobantesFiscales(DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales Mantenimiento = null;
+
+            var ComprobanteFiscal = ObjData.SP_MANTENIMIENTO_COMPROBANTE_FISCALES(
+                Item.IdComprobante,
+                Item.Comprobante,
+                Item.Serie,
+                Item.TipoComprobante,
+                (long)Item.Secuencia,
+                (long)Item.SecuenciaInicial,
+                (long)Item.Posiciones,
+                (long)Item.Limite,
+                Item.Estatus0,
+                Item.ValidoHasta,
+                Item.PorDefecto0,
+                (long)Item.Posiciones,
+                Item.CobroPorcientoAdicional,
+                Item.LibreImpuesto0,
+                Accion);
+
+            if (ComprobanteFiscal != null) {
+                Mantenimiento = (from n in ComprobanteFiscal
+                                 select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EComprobantesFuscales
+                                 {
+                                     IdComprobante=n.IdComprobante,
+                                     Comprobante=n.Descripcion,
+                                     Serie=n.Serie,
+                                     TipoComprobante=n.TipoComprobante,
+                                     Secuencia=n.Secuencia,
+                                     SecuenciaInicial=n.SecuenciaInicial,
+                                     SecuenciaFinal=n.SecuenciaFinal,
+                                     Limite=n.Limite,
+                                     Estatus0=n.Estatus,
+                                     ValidoHasta=n.ValidoHasta,
+                                     PorDefecto0=n.PorDefecto,
+                                     Posiciones=n.Posiciones,
+                                     CobroPorcientoAdicional=n.CobroPorcientoAdicional,
+                                     LibreImpuesto0=n.LibreImpuesto
+                                 }).FirstOrDefault();
+            }
+            return Mantenimiento;
+        }
+        #endregion
     }
 }
