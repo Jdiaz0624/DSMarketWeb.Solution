@@ -828,7 +828,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
                 SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
                 txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
-
+                txtImpuestoComprobante.Text = "0";
                
             }
         }
