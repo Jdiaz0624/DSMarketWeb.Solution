@@ -77,6 +77,10 @@
         function ItemsNoEncontrados() {
             alert("No es posible proceder con este proceso, por que no se encontraron items para facturar, favor de agregar productos o servicios para proceder con el proceso.");
         }
+
+        function ErrorCalculos() {
+            alert("Error al realizar los calculos respectivos de la pantalla, favor de verificar el campo comprobante fiscal o el tipo de pago que este llenos esos campos.");
+        }
         $(document).ready(function () {
 
 
@@ -286,7 +290,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <asp:Label ID="lbSeleccionarComprobante" runat="server" Text="Comprobante" CssClass="Letranegrita"></asp:Label>
-                <asp:DropDownList ID="ddlSeleccionarComprobante" runat="server" CssClass="form-control" ToolTip="Seleccionar Comprobante"></asp:DropDownList>
+                <asp:DropDownList ID="ddlSeleccionarComprobante" runat="server" CssClass="form-control" ToolTip="Seleccionar Comprobante" OnSelectedIndexChanged="ddlSeleccionarComprobante_SelectedIndexChanged"></asp:DropDownList>
             </div>
 
              <div class="form-group col-md-3">

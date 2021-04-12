@@ -637,6 +637,10 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         }
         #endregion
         #region MOSTRAR EL LISTADO DE LOS PRODUCTOS AGREGADOS
+        /// <summary>
+        /// Este metodo es para calcular los items agregados a la factura y actualizar el listado de la pantalla de PRODUCTOS / SERVICIOS
+        /// </summary>
+        /// <param name="NumeroConectorItem"></param>
         private void MostrarItemsAgregados(string NumeroConectorItem) {
             CurrentPage = 0;
             var MostrarItemsAgregados = ObjDataServicio.Value.BuscaProductosAgregados(NumeroConectorItem);
@@ -667,8 +671,16 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             txtImpuesto.Text = TotalImpuesto.ToString("N2");
             txtSubTotal.Text = SubTotal.ToString("N2");
             txtTotal.Text = TotalGeneral.ToString("N2");
+
+
+            //RealizarCalculosPantalla()
+            SacarImpuestoComprobante(Convert.ToDecimal(ddlSeleccionarComprobante.SelectedValue));
         }
 
+        /// <summary>
+        /// Este metodo es para mostrar los items agregados a la factura y actualizar el listado en la pantalla principal
+        /// </summary>
+        /// <param name="NumeroConector"></param>
         private void MostrarItemsAgregadosPantallaPrincipal(string NumeroConector) {
             CurrentPage = 0;
             var MostrarItemsAgregados = ObjDataServicio.Value.BuscaProductosAgregados(NumeroConector);
@@ -730,42 +742,59 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             txtTasaCambioCalculos.Text = Sacartasa.TasaMoneda().ToString();
         }
 
+        /// <summary>
+        /// Este metodo es para sacar el impuesto del tipo de pago
+        /// </summary>
+        /// <param name="IdTipoPago"></param>
         private void SacarImpuestoAdicional(decimal IdTipoPago) {
-            bool LlevaImpuestoAdicional = false;
-            bool ValorEntero = false;
-            decimal Valor = 0;
-            bool BloqueaMonto = false;
+            try {
+                bool LlevaImpuestoAdicional = false;
+                bool ValorEntero = false;
+                decimal Valor = 0;
+                bool BloqueaMonto = false;
 
-            var BuscarTipoPago = ObjDataServicio.Value.BuscaTipoPagos(IdTipoPago, null);
-            foreach (var n in BuscarTipoPago) {
-                LlevaImpuestoAdicional = (bool)n.ImpuestoAdicional0;
-                ValorEntero = (bool)n.PorcentajeEntero0;
-                Valor = (decimal)n.Valor;
-                BloqueaMonto = (bool)n.BloqueaMonto0;
-            }
+                var BuscarTipoPago = ObjDataServicio.Value.BuscaTipoPagos(IdTipoPago, null);
+                foreach (var n in BuscarTipoPago)
+                {
+                    LlevaImpuestoAdicional = (bool)n.ImpuestoAdicional0;
+                    ValorEntero = (bool)n.PorcentajeEntero0;
+                    Valor = (decimal)n.Valor;
+                    BloqueaMonto = (bool)n.BloqueaMonto0;
+                }
 
-            if (BloqueaMonto == true) {
-                txtMontoPagar.Enabled = false;
-                txtMontoPagar.Text = txtTotal.Text;
-                
-            }
-            else if (BloqueaMonto == false) {
-                txtMontoPagar.Enabled = true;
-                txtMontoPagar.Text = "0";
-            }
+                if (BloqueaMonto == true)
+                {
+                    txtMontoPagar.Enabled = false;
+                    txtMontoPagar.Text = txtTotal.Text;
 
-            if (LlevaImpuestoAdicional == false)
-            {
+                }
+                else if (BloqueaMonto == false)
+                {
+                    txtMontoPagar.Enabled = true;
+                    txtMontoPagar.Text = "0";
+                }
+
+                if (LlevaImpuestoAdicional == false)
+                {
+                    txtImpuestoTipoPago.Text = "0";
+                }
+                else if (LlevaImpuestoAdicional == true)
+                {
+                    if (ValorEntero == true)
+                    {
+                        decimal TotalPagar = Convert.ToDecimal(txtTotal.Text);
+                        txtImpuestoTipoPago.Text = (Valor * TotalPagar).ToString("N2");
+                    }
+                    else
+                    {
+                        decimal ValorDececimal = Valor / 100;
+                        decimal TotalPagar = Convert.ToDecimal(txtTotal.Text);
+                        txtImpuestoTipoPago.Text = (TotalPagar * ValorDececimal).ToString("N2");
+                    }
+                }
+            }
+            catch (Exception) {
                 txtImpuestoTipoPago.Text = "0";
-            }
-            else if(LlevaImpuestoAdicional==true) {
-                if (ValorEntero == true) {
-                    txtImpuestoTipoPago.Text = Valor.ToString();
-                }
-                else {
-                    decimal ValorDececimal = Valor / 100;
-                    txtImpuestoTipoPago.Text = ValorDececimal.ToString();
-                }
             }
         }
 
@@ -775,20 +804,52 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             return Cambio;
         }
 
+        /// <summary>
+        /// Este metodo es para sacar el impuesto del comprobante en caso de tenerlo
+        /// </summary>
+        /// <param name="IdCmprobante"></param>
         private void SacarImpuestoComprobante(decimal IdCmprobante) {
 
             if (IdCmprobante == 0) {
                 txtImpuestoComprobante.Text = "0";
+                decimal TotalPagar = Convert.ToDecimal(txtTotal.Text);
+                decimal ImpuestoTipoPago = Convert.ToDecimal(txtImpuestoTipoPago.Text);
+                decimal ImpuestoComprobante = 0;
+                txtTotal.Text = (TotalPagar + (ImpuestoTipoPago + ImpuestoComprobante)).ToString("N2");
             }
             else {
                 bool LibreImpuesto = false;
                 decimal PorcentajeImpuesto = 0;
                 const decimal Conversor = 100;
-                decimal TotalPagar = 0;
+                decimal TotalPagar = Convert.ToDecimal(txtTotal.Text);
                 decimal ImpuestoTipoPago = Convert.ToDecimal(txtImpuestoTipoPago.Text);
 
-              //  var BuscarInformacion = ObjDataConfiguracion.Value.fis
-                
+                decimal ImpuestoComprobante = Convert.ToDecimal(txtImpuestoTipoPago.Text);
+
+                var BuscarInformacion = ObjDataConfiguracion.Value.BuscaComprobantesFiscales(IdCmprobante);
+                foreach (var n in BuscarInformacion) {
+                    LibreImpuesto = (bool)n.LibreImpuesto0;
+                    PorcentajeImpuesto = (decimal)n.CobroPorcientoAdicional / Conversor;
+                }
+                ImpuestoComprobante = TotalPagar * PorcentajeImpuesto;
+                txtImpuestoComprobante.Text = ImpuestoComprobante.ToString("N2");
+                txtTotal.Text = (TotalPagar + (ImpuestoTipoPago + ImpuestoComprobante)).ToString("N2");
+
+            }
+        }
+
+        /// <summary>
+        /// Este metodo es para actualizar los items, tanto en la pantalla principal como en la de productos / servicios, y realizar los calculos correspondiente para el proceso de facturacion.
+        /// </summary>
+        private void RealizarCalculosPantalla() {
+            try {
+                MostrarItemsAgregados(lbNumeroConector.Text);
+                MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+                SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
+                SacarImpuestoComprobante(Convert.ToDecimal(ddlSeleccionarComprobante.SelectedValue));
+            }
+            catch (Exception) {
+                ClientScript.RegisterStartupScript(GetType(), "ErrorCalculos()", "ErrorCalculos();", true);
             }
         }
 
@@ -821,14 +882,18 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
                 CargarModelos();
                 CargarTipoIngreso();
                 CargarTipoPago();
+                SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMoneda, ObjDataConfiguracion.Value.BuscaListas("MONEDA", null, null));
                 SacarTasaCambioMoneda();
 
-                MostrarItemsAgregados(lbNumeroConector.Text);
-                MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
-                SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
-                txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
-                txtImpuestoComprobante.Text = "0";
+                RealizarCalculosPantalla();
+                try {
+                    txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
+                }
+                catch (Exception) {
+                    txtCambio.Text = "0";
+                }
+                
                
             }
         }
@@ -1133,8 +1198,7 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
             ManipularInformacionProductoEspejo(Convert.ToDecimal(hfIdProductoRespaldo), Convert.ToDecimal(hfNumeroConectorRespaldo), "", 0, false, (decimal)Session["IdUsuario"], "DELETE");
 
 
-            MostrarItemsAgregados(lbNumeroConector.Text);
-            MostrarItemsAgregadosPantallaPrincipal(lbNumeroConector.Text);
+            RealizarCalculosPantalla();
         }
 
         protected void LinkPrimeraPaginaProductosAgregados_Click(object sender, EventArgs e)
@@ -1219,9 +1283,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         {
             if (cbAgregarComprobante.Checked == true) {
                 MostrarComprobantesFiscalesActivos();
+                RealizarCalculosPantalla();
             }
             else if (cbAgregarComprobante.Checked == false) {
                 MostrarComprobantesFiscalesSinUso();
+                RealizarCalculosPantalla();
             }
         }
 
@@ -1230,6 +1296,8 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         {
             ValidarCampoTipoPago(Convert.ToDecimal(ddlTipoPago.SelectedValue));
             SacarImpuestoAdicional(Convert.ToDecimal(ddlTipoPago.SelectedValue));
+            RealizarCalculosPantalla();
+           
         }
 
         protected void txtCantidadUsarVistaPrevia_TextChanged(object sender, EventArgs e)
@@ -1349,6 +1417,11 @@ namespace DSMarketWeb.Solution.Paginas.Servicios
         protected void txtMontoPagar_TextChanged(object sender, EventArgs e)
         {
             txtCambio.Text = SacarCambio(Convert.ToDecimal(txtTotal.Text), Convert.ToDecimal(txtMontoPagar.Text)).ToString();
+        }
+
+        protected void ddlSeleccionarComprobante_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RealizarCalculosPantalla();
         }
 
         protected void btnQuitar_Click(object sender, EventArgs e)
