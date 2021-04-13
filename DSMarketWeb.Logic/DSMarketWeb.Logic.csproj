@@ -86,6 +86,7 @@
     <Compile Include="Entidades\EntidadesEmpresa\EValidarFotoEmpleado.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />
     <Compile Include="Entidades\EntidadesInventario\EMarcas.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EProductoServicio.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESuplidores.cs" />
     <Compile Include="Entidades\EntidadesInventario\ETipoSuplidores.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionMarcas.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionTipoSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />

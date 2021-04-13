@@ -267,5 +267,179 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Mantenimiento;
         }
         #endregion
+        #region MANTENIMIENTO DE PRODUCTOS Y SERVICIOS
+        /// <summary>
+        /// Este metodo es para consultar productos y servicios en el sistema
+        /// </summary>
+        /// <param name="IdRegistro"></param>
+        /// <param name="NumeroConector"></param>
+        /// <param name="IdTipoProducto"></param>
+        /// <param name="IdCategoria"></param>
+        /// <param name="IdMarca"></param>
+        /// <param name="IdTipoSuplidor"></param>
+        /// <param name="IdSuplidor"></param>
+        /// <param name="Descripcion"></param>
+        /// <param name="CodigoBarra"></param>
+        /// <param name="Referencia"></param>
+        /// <param name="NumeroSeguimiento"></param>
+        /// <param name="CodigoProducto"></param>
+        /// <param name="FechaIngresoDesde"></param>
+        /// <param name="FechaIngresoHasta"></param>
+        /// <param name="IdUsuarioGenera"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio> BuscaProductosServicios(decimal? IdRegistro = null, string NumeroConector = null, decimal? IdTipoProducto = null, decimal? IdCategoria = null, decimal? IdMarca = null, decimal? IdTipoSuplidor = null, decimal? IdSuplidor = null, string Descripcion = null, string CodigoBarra = null, string Referencia = null, string NumeroSeguimiento = null, string CodigoProducto = null, DateTime? FechaIngresoDesde = null, DateTime? FechaIngresoHasta = null, decimal? IdUsuarioGenera = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_PRODUCTOS_SERVICIOS(IdRegistro, NumeroConector, IdTipoProducto, IdCategoria, IdMarca, IdTipoSuplidor, IdSuplidor, Descripcion, CodigoBarra, Referencia, NumeroSeguimiento, CodigoProducto, FechaIngresoDesde, FechaIngresoHasta, IdUsuarioGenera)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio
+                           {
+                               IdRegistro = n.IdRegistro,
+                               NumeroConector = n.NumeroConector,
+                               IdTipoProducto = n.IdTipoProducto,
+                               TipoProducto = n.TipoProducto,
+                               IdCategoria = n.IdCategoria,
+                               Categoria = n.Categoria,
+                               IdMarca = n.IdMarca,
+                               Marca = n.Marca,
+                               IdTipoSuplidor = n.IdTipoSuplidor,
+                               TipoSuplidor = n.TipoSuplidor,
+                               IdSuplidor = n.IdSuplidor,
+                               Suplidor = n.Suplidor,
+                               Descripcion = n.Descripcion,
+                               CodigoBarra = n.CodigoBarra,
+                               Referencia = n.Referencia,
+                               NumeroSeguimiento = n.NumeroSeguimiento,
+                               CodigoProducto = n.CodigoProducto,
+                               PrecioCompra = n.PrecioCompra,
+                               PrecioVenta = n.PrecioVenta,
+                               GananciaAproximada = n.GananciaAproximada,
+                               Stock = n.Stock,
+                               StockMinimo = n.StockMinimo,
+                               Estatus = n.Estatus,
+                               UnidadMedida = n.UnidadMedida,
+                               Modelo = n.Modelo,
+                               Color = n.Color,
+                               Condicion = n.Condicion,
+                               Capacidad = n.Capacidad,
+                               AplicaParaImpuesto0 = n.AplicaParaImpuesto0,
+                               AplicaParaImpuesto = n.AplicaParaImpuesto,
+                               TieneImagen0 = n.TieneImagen0,
+                               TieneImagen = n.TieneImagen,
+                               LlevaGarantia0 = n.LlevaGarantia0,
+                               LlevaGarantia = n.LlevaGarantia,
+                               IdTipoGarantia = n.IdTipoGarantia,
+                               TipoTiempoGarantia = n.TipoTiempoGarantia,
+                               TiempoGarantia = n.TiempoGarantia,
+                               Comentario = n.Comentario,
+                               UsuarioAdiciona = n.UsuarioAdiciona,
+                               CreadoPor = n.CreadoPor,
+                               FechaAdiciona = n.FechaAdiciona,
+                               FechaAdicionaString = n.FechaAdicionaString,
+                               UsuarioModifica = n.UsuarioModifica,
+                               ModificadoPor = n.ModificadoPor,
+                               FechaModifica = n.FechaModifica,
+                               FechaModificaString = n.FechaModificaString,
+                               FechaIngreso = n.FechaIngreso,
+                               FechaIngresoString = n.FechaIngresoString,
+                               FotoProducto = n.FotoProducto,
+                               NombreEmpresa = n.NombreEmpresa,
+                               RNC = n.RNC,
+                               Direccion = n.Direccion,
+                               Telefonos = n.Telefonos,
+                               Email = n.Email,
+                               Email2 = n.Email2,
+                               Facebook = n.Facebook,
+                               Instagran = n.Instagran,
+                               LogoEmpresa = n.LogoEmpresa,
+                               GeneradoPor = n.GeneradoPor,
+                               CapitalInvertido = n.CapitalInvertido,
+                               GananciaAproximadaTotal = n.GananciaAproximadaTotal
+
+                           }).ToList();
+            return Listado;
+        
+        }
+
+        /// <summary>
+        /// Este metodo es para procesar la información de los productos y los servicios
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio MantenimientoProductosServicio(DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio Item, string Accion) {
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio Procesar = null;
+
+            var Informacion = ObjData.SP_PROCESAR_INFORMACION_PRODUCTOS_SERVICIOS(
+                Item.IdRegistro,
+                Item.NumeroConector,
+                Item.IdTipoProducto,
+                Item.IdCategoria,
+                Item.IdMarca,
+                Item.IdTipoSuplidor,
+                Item.IdSuplidor,
+                Item.Descripcion,
+                Item.CodigoBarra,
+                Item.Referencia,
+                Item.NumeroSeguimiento,
+                Item.CodigoProducto,
+                Item.PrecioCompra,
+                Item.PrecioVenta,
+                Item.Stock,
+                Item.StockMinimo,
+                Item.UnidadMedida,
+                Item.Modelo,
+                Item.Color,
+                Item.Condicion,
+                Item.Capacidad,
+                Item.AplicaParaImpuesto0,
+                Item.TieneImagen0,
+                Item.LlevaGarantia0,
+                Item.IdTipoGarantia,
+                Item.TiempoGarantia,
+                Item.Comentario,
+                Item.UsuarioAdiciona,
+                Accion);
+            if (Informacion != null) {
+                Procesar = (from n in Informacion
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EProductoServicio
+                            {
+                                IdRegistro = n.IdRegistro,
+                                NumeroConector =n.NumeroConector,
+                                IdTipoProducto =n.IdTipoProducto,
+                                IdCategoria =n.IdCategoria,
+                                IdMarca =n.IdMarca,
+                                IdTipoSuplidor =n.IdTipoSuplidor,
+                                IdSuplidor =n.IdSuplidor,
+                                Descripcion =n.Descripcion,
+                                CodigoBarra =n.CodigoBarra,
+                                Referencia =n.Referencia,
+                                NumeroSeguimiento =n.NumeroSeguimiento,
+                                CodigoProducto =n.CodigoProducto,
+                                PrecioCompra=n.PrecioCompra,
+                                PrecioVenta=n.PrecioVenta,
+                                Stock=n.Stock,
+                                StockMinimo=n.StockMinimo,
+                                UnidadMedida=n.UnidadMedida,
+                                Modelo=n.Modelo,
+                                Color=n.Color,
+                                Condicion =n.Condicion,
+                                Capacidad=n.Capacidad,
+                                AplicaParaImpuesto0=n.AplicaParaImpuesto,
+                                TieneImagen0 =n.TieneImagen,
+                                LlevaGarantia0 =n.LlevaGarantia,
+                                IdTipoGarantia =n.IdTipoGarantia,
+                                TiempoGarantia =n.TiempoGarantia,
+                                Comentario=n.Comentario,
+                                UsuarioAdiciona=n.UsuarioAdiciona,
+                                FechaAdiciona=n.FechaAdiciona,
+                                UsuarioModifica=n.UsuarioModifica,
+                                FechaModifica=n.FechaModifica,
+                                FechaIngreso=n.FechaIngreso
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
     }
 }
