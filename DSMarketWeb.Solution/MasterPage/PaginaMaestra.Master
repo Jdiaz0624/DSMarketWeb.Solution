@@ -72,14 +72,9 @@
     <div class="dropdown-menu">
         <asp:LinkButton ID="LinkProductos"  runat="server" Text="Productos / Servicios" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkProductos_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkMantenimientoCategoria" runat="server" Text="Categorias" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoCategoria_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkMantenimientoUnidadMedida" runat="server" Text="Unidad de Medida" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoUnidadMedida_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkMantenimientomarcas" runat="server" Text="Marcas" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientomarcas_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkMantenimientoModelos" runat="server" Text="Modelos" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoModelos_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkTipoSuplidores" runat="server" Text="Tipo de Suplidores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkTipoSuplidores_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkSuplidores" runat="server" Text="Suplidores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkSuplidores_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkCapacidad" runat="server" Text="Capacidad" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkCapacidad_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkColores" runat="server" Text="Colores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkColores_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkCondicion" runat="server" Text="Condicion" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkCondicion_Click"></asp:LinkButton>
     </div>
   </li>
 </ul>
@@ -123,15 +118,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" style="width:100%" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
     <div class="dropdown-menu">
-        <asp:LinkButton ID="LinkReporteProductos"  runat="server" Text="Productos / Servicios" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteProductos_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteMarcas" runat="server" Text="Marcas" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteMarcas_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteModelos" runat="server" Text="Modelos" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoModelos_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkHistorialCuadreCaja" runat="server" Text="Cuadre de Caja" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkCuadreCaja_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkAntiguedadSaldo" runat="server" Text="Antiguedad de Saldo" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkAntiguedadSaldo_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteVentas" runat="server" Text="Facturación" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteVentas_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteTSS" runat="server" Text="TSS" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteTSS_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteDGII" runat="server" Text="DGII" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteDGII_Click"></asp:LinkButton>
-        <asp:LinkButton ID="LinkReporteFinancieros" runat="server" Text="Financieros" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkReporteFinancieros_Click"></asp:LinkButton>
+      
     </div>
   </li>
 </ul>

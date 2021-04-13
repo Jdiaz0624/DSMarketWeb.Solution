@@ -97,39 +97,11 @@ namespace DSMarketWeb.Solution.MasterPage
 
         }
 
-        protected void LinkMantenimientoUnidadMedida_Click(object sender, EventArgs e)
-        {
-            if (Session["IdUsuario"] != null)
-            {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoUnidadMedida.aspx");
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-        }
-
         protected void LinkMantenimientomarcas_Click(object sender, EventArgs e)
         {
             if (Session["IdUsuario"] != null)
             {
                 Response.Redirect("~/Paginas/Inventario/MantenimientoMarcas.aspx");
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-        }
-
-        protected void LinkMantenimientoModelos_Click(object sender, EventArgs e)
-        {
-            if (Session["IdUsuario"] != null)
-            {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoModelos.aspx");
             }
             else
             {
@@ -158,48 +130,6 @@ namespace DSMarketWeb.Solution.MasterPage
             if (Session["IdUsuario"] != null)
             {
                 Response.Redirect("~/Paginas/Inventario/MantenimientoSuplidores.aspx");
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-        }
-
-        protected void LinkCapacidad_Click(object sender, EventArgs e)
-        {
-            if (Session["IdUsuario"] != null)
-            {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoCapacidad.aspx");
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-        }
-
-        protected void LinkColores_Click(object sender, EventArgs e)
-        {
-            if (Session["IdUsuario"] != null)
-            {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoColores.aspx");
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-        }
-
-        protected void LinkCondicion_Click(object sender, EventArgs e)
-        {
-            if (Session["IdUsuario"] != null)
-            {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoCondiciones.aspx");
             }
             else
             {

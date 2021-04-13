@@ -566,13 +566,13 @@ namespace DSMarketWeb.Solution.Paginas.Empresa
         private void MostrarServicios() {
             string _NombreServicio = string.IsNullOrEmpty(txtBuscarServicio.Text.Trim()) ? null : txtBuscarServicio.Text.Trim();
 
-            var BuscarServicio = ObjDataInventario.Value.BuscaProductos(
-                new Nullable<decimal>(),
-                null,
-                _NombreServicio,
-                null, null, null, null, 2, null, null, null, null, null, null, null, null, null, null, null);
-            Paginar(ref rpListadoServiciosAgregar, BuscarServicio, 10, ref lbCantidadPaginaVariableAgregarServicio, ref LinkPrimeroServicioAgregar, ref LinkAnteriorServicioAgregar, ref LinkSiguienteServicioAgregar, ref LinkUltimoServicioAgregar);
-            HandlePaging(ref dtPaginacionServicioAgregar, ref lbPaginaActualVariableAgregarServicio);
+            //var BuscarServicio = ObjDataInventario.Value.BuscaProductos(
+            //    new Nullable<decimal>(),
+            //    null,
+            //    _NombreServicio,
+            //    null, null, null, null, 2, null, null, null, null, null, null, null, null, null, null, null);
+            //Paginar(ref rpListadoServiciosAgregar, BuscarServicio, 10, ref lbCantidadPaginaVariableAgregarServicio, ref LinkPrimeroServicioAgregar, ref LinkAnteriorServicioAgregar, ref LinkSiguienteServicioAgregar, ref LinkUltimoServicioAgregar);
+            //HandlePaging(ref dtPaginacionServicioAgregar, ref lbPaginaActualVariableAgregarServicio);
         }
 
         private void GenerarNumerConector() {

@@ -141,15 +141,6 @@ namespace DSMarketWeb.Solution.MasterPage
         protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoCategoria;
 
         /// <summary>
-        /// LinkMantenimientoUnidadMedida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoUnidadMedida;
-
-        /// <summary>
         /// LinkMantenimientomarcas control.
         /// </summary>
         /// <remarks>
@@ -157,15 +148,6 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientomarcas;
-
-        /// <summary>
-        /// LinkMantenimientoModelos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoModelos;
 
         /// <summary>
         /// LinkTipoSuplidores control.
@@ -184,33 +166,6 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkSuplidores;
-
-        /// <summary>
-        /// LinkCapacidad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkCapacidad;
-
-        /// <summary>
-        /// LinkColores control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkColores;
-
-        /// <summary>
-        /// LinkCondicion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkCondicion;
 
         /// <summary>
         /// LinkClientes control.
@@ -346,87 +301,6 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkComprobantesFiscales;
-
-        /// <summary>
-        /// LinkReporteProductos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteProductos;
-
-        /// <summary>
-        /// LinkReporteMarcas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteMarcas;
-
-        /// <summary>
-        /// LinkReporteModelos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteModelos;
-
-        /// <summary>
-        /// LinkHistorialCuadreCaja control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkHistorialCuadreCaja;
-
-        /// <summary>
-        /// LinkAntiguedadSaldo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkAntiguedadSaldo;
-
-        /// <summary>
-        /// LinkReporteVentas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteVentas;
-
-        /// <summary>
-        /// LinkReporteTSS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteTSS;
-
-        /// <summary>
-        /// LinkReporteDGII control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteDGII;
-
-        /// <summary>
-        /// LinkReporteFinancieros control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkReporteFinancieros;
 
         /// <summary>
         /// LinkInformacionEmpresa control.
