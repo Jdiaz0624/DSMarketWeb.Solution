@@ -249,6 +249,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 ModoConsulta();
                 OcultarControles();
                 MostrarListadoCategorias();
+                
             }
         }
 
