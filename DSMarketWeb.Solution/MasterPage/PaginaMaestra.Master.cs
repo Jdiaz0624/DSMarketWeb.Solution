@@ -73,7 +73,7 @@ namespace DSMarketWeb.Solution.MasterPage
         {
             if (Session["IdUsuario"] != null)
             {
-                Response.Redirect("~/Paginas/Inventario/MantenimientoProductosServicios.aspx");
+                Response.Redirect("~/Paginas/Inventario/Inventario.aspx");
             }
             else
             {

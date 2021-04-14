@@ -100,6 +100,7 @@
     <Content Include="Paginas\Empresa\Retenciones.aspx" />
     <Content Include="Paginas\Empresa\TipoEmpleado.aspx" />
     <Content Include="Paginas\Empresa\TipoMovimiento.aspx" />
+    <Content Include="Paginas\Inventario\Inventario.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoCategorias.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoMarcas.aspx" />
     <Content Include="Paginas\Inventario\MantenimientoSuplidores.aspx" />
@@ -323,6 +324,13 @@
     </Compile>
     <Compile Include="Paginas\Empresa\TipoMovimiento.aspx.designer.cs">
       <DependentUpon>TipoMovimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Inventario\Inventario.aspx.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Inventario\Inventario.aspx.designer.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Inventario\MantenimientoCategorias.aspx.cs">
       <DependentUpon>MantenimientoCategorias.aspx</DependentUpon>
