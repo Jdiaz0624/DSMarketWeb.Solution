@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DSMarketWeb" Class="BDConexionInventarioDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=172.26.24.199;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString1" Provider="System.Data.SqlClient" />
   <Function Name="Inventario.SP_BUSCA_CATEGORIAS_WEB" Method="SP_BUSCA_CATEGORIAS_WEB">
     <Parameter Name="IdCategoria" Parameter="idCategoria" Type="System.Decimal" DbType="Decimal(20,0)" />
     <Parameter Name="IdTipoProducto" Parameter="idTipoProducto" Type="System.Decimal" DbType="Decimal(20,0)" />
@@ -269,6 +269,7 @@
     <Parameter Name="FechaIngresoDesde" Parameter="fechaIngresoDesde" Type="System.DateTime" DbType="Date" />
     <Parameter Name="FechaIngresoHasta" Parameter="fechaIngresoHasta" Type="System.DateTime" DbType="Date" />
     <Parameter Name="IdUsuarioGenera" Parameter="idUsuarioGenera" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Stock" Parameter="stock" Type="System.Decimal" DbType="Decimal(20,0)" />
     <ElementType Name="SP_BUSCA_PRODUCTOS_SERVICIOSResult">
       <Column Name="IdRegistro" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
       <Column Name="NumeroConector" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />

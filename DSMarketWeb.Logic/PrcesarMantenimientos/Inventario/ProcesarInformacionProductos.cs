@@ -111,6 +111,7 @@ namespace DSMarketWeb.Logic.PrcesarMantenimientos.Inventario
             Procesar.IdCategoria = IdCategoria;
             Procesar.IdMarca = IdMarca;
             Procesar.IdTipoSuplidor = IdTipoSuplidor;
+            Procesar.IdSuplidor = IdSuplidor;
             Procesar.Descripcion = Descripcion;
             Procesar.CodigoBarra = CodigoBarra;
             Procesar.Referencia = Referencia;

@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionInventarioDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString2, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -155,9 +155,25 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_PRODUCTOS_SERVICIOS")]
-		public ISingleResult<SP_BUSCA_PRODUCTOS_SERVICIOSResult> SP_BUSCA_PRODUCTOS_SERVICIOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> idRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoProducto", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCategoria", DbType="Decimal(20,0)")] System.Nullable<decimal> idCategoria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMarca", DbType="Decimal(20,0)")] System.Nullable<decimal> idMarca, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(200)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoBarra", DbType="VarChar(50)")] string codigoBarra, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Referencia", DbType="VarChar(50)")] string referencia, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroSeguimiento", DbType="VarChar(50)")] string numeroSeguimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoProducto", DbType="VarChar(50)")] string codigoProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaIngresoDesde", DbType="Date")] System.Nullable<System.DateTime> fechaIngresoDesde, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaIngresoHasta", DbType="Date")] System.Nullable<System.DateTime> fechaIngresoHasta, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioGenera", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuarioGenera)
+		public ISingleResult<SP_BUSCA_PRODUCTOS_SERVICIOSResult> SP_BUSCA_PRODUCTOS_SERVICIOS(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdRegistro", DbType="Decimal(20,0)")] System.Nullable<decimal> idRegistro, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroConector", DbType="VarChar(30)")] string numeroConector, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoProducto", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoProducto, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCategoria", DbType="Decimal(20,0)")] System.Nullable<decimal> idCategoria, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMarca", DbType="Decimal(20,0)")] System.Nullable<decimal> idMarca, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdTipoSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idTipoSuplidor, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSuplidor", DbType="Decimal(20,0)")] System.Nullable<decimal> idSuplidor, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(200)")] string descripcion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoBarra", DbType="VarChar(50)")] string codigoBarra, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Referencia", DbType="VarChar(50)")] string referencia, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumeroSeguimiento", DbType="VarChar(50)")] string numeroSeguimiento, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoProducto", DbType="VarChar(50)")] string codigoProducto, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaIngresoDesde", DbType="Date")] System.Nullable<System.DateTime> fechaIngresoDesde, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaIngresoHasta", DbType="Date")] System.Nullable<System.DateTime> fechaIngresoHasta, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioGenera", DbType="Decimal(20,0)")] System.Nullable<decimal> idUsuarioGenera, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Stock", DbType="Decimal(20,0)")] System.Nullable<decimal> stock)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idRegistro, numeroConector, idTipoProducto, idCategoria, idMarca, idTipoSuplidor, idSuplidor, descripcion, codigoBarra, referencia, numeroSeguimiento, codigoProducto, fechaIngresoDesde, fechaIngresoHasta, idUsuarioGenera);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idRegistro, numeroConector, idTipoProducto, idCategoria, idMarca, idTipoSuplidor, idSuplidor, descripcion, codigoBarra, referencia, numeroSeguimiento, codigoProducto, fechaIngresoDesde, fechaIngresoHasta, idUsuarioGenera, stock);
 			return ((ISingleResult<SP_BUSCA_PRODUCTOS_SERVICIOSResult>)(result.ReturnValue));
 		}
 	}
@@ -2907,7 +2923,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		
 		private System.Nullable<decimal> _UsuarioAdiciona;
 		
-		private string _CreadoPor; 
+		private string _CreadoPor;
 		
 		private System.Nullable<System.DateTime> _FechaAdiciona;
 		

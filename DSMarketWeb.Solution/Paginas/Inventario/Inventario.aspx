@@ -225,7 +225,7 @@
         <div class="form-check-inline">
             <div class="form-group form-check">
                 <asp:CheckBox ID="cbAgregarRangoFecha" runat="server" Text="Agregar Rango de Fecha" CssClass="form-check-input" AutoPostBack="true" OnCheckedChanged="cbAgregarRangoFecha_CheckedChanged" />
-             
+             <asp:CheckBox ID="cbMostrarProductosAgotados" runat="server" Text="Mostrar Productos Agotados" CssClass="form-check-input"/>
             </div>
         </div>
         <div class="form-row">
@@ -579,6 +579,7 @@
             <asp:Button ID="btnGuardarRegistroMantenimientio" runat="server" Text="Guardar" ToolTip="Guardar Registro" OnClick="btnGuardarRegistroMantenimientio_Click" CssClass="btn btn-primary btn-sm" />
             <asp:Button ID="btnEditarRegistroMantenimiento" runat="server" Text="Editar" ToolTip="Editar Registro Seleccionado" OnClick="btnEditarRegistroMantenimiento_Click" CssClass="btn btn-primary btn-sm" />
             <asp:Button ID="btnEliminarRegistroMantenimiento" runat="server" Text="Borrar" ToolTip="Borrar Registro Seleccionado" OnClick="btnEliminarRegistroMantenimiento_Click" CssClass="btn btn-danger btn-sm" />
+            <asp:Button ID="btnVolverAtras" runat="server" Text="Volver" ToolTip="Volver Atras" OnClick="btnVolverAtras_Click" CssClass="btn btn-danger btn-sm" />
         </div>
         <br />
     </div>
