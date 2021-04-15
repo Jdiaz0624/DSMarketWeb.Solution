@@ -16,6 +16,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         Lazy<DSMarketWeb.Logic.Logica.LogicaInventario.LogicaInventario> ObjDataInventario = new Lazy<Logic.Logica.LogicaInventario.LogicaInventario>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
         Lazy<DSMarketWeb.Logic.Logica.LogicaSeguridad.LogicaSeguridad> ObjDataSeguridad = new Lazy<Logic.Logica.LogicaSeguridad.LogicaSeguridad>();
+        Lazy<DSMarketWeb.Logic.Logica.LogicaServicio.LogicaServicio> ObjdataServicio = new Lazy<Logic.Logica.LogicaServicio.LogicaServicio>();
 
         enum TipoDeReporte {
         ReporteGeneral=1,
@@ -163,6 +164,27 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         }
         private void CargarMarcas() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaConsulta, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoProductoConsulta.SelectedValue.ToString(), ddlSeleccionarCategoriaConsulta.SelectedValue.ToString()), true);
+        }
+        #endregion
+
+        #region LISTAS DESPLEGABLES DE LA PANTALA DE MANTENIMIENTO
+        private void ListadoTipoProductoMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoPrductoMantenimieto, ObjDataConfiguracion.Value.BuscaListas("TIPOPRODUCTO", null, null));
+        }
+        private void ListadoCategoriasMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCategoriaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CATEGORIAS", ddlSeleccionarTipoPrductoMantenimieto.SelectedValue.ToString(), null));
+        }
+        private void ListadoMarcasMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarMarcaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("MARCAS", ddlSeleccionarTipoPrductoMantenimieto.SelectedValue.ToString(), ddlSeleccionarCategoriaMantenimiento.SelectedValue.ToString()));
+        }
+        private void ListadoTipoSuplidoresMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIPOSUPLIDOR", null, null));
+        }
+        private void ListadoSuplidoresMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarSuplidorMantenimiento, ObjDataConfiguracion.Value.BuscaListas("SUPLIDOR", ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue.ToString(), null));
+        }
+        private void ListadoTiempoGarantiaMantenimiento() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarTipoGarantiaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("TIEMPOGARANTIA", null, null));
         }
         #endregion
 
@@ -345,6 +367,68 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             rbPDF.Checked = true;
             DivFechaDesde.Visible = false;
             DivFechaHasta.Visible = false;
+            btnDetalleItemSeleccionado.Visible = false;
+        }
+        #endregion
+
+        #region PROCESAR INFORMACION DE LOS PRODUCTOS Y SERVICIOS
+        private void ProcesarInformacionProductosservicios(decimal IdRegistro, string NumeroConector, string Accion) {
+            int IdTipoGarantia = cbLlevaGarantiaMantenimiento.Checked == true ? Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue) : 1;
+            int TipoTiempoGarantia = cbLlevaGarantiaMantenimiento.Checked == true ? Convert.ToInt32(txtTiempoGarantiaMantenimiento.Text) : 0;
+
+            DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Procesar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                IdRegistro,
+                NumeroConector,
+                Convert.ToDecimal(ddlSeleccionarTipoPrductoMantenimieto.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarCategoriaMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarMarcaMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarTipoSuplidorMantenimiento.SelectedValue),
+                Convert.ToDecimal(ddlSeleccionarSuplidorMantenimiento.SelectedValue),
+                txtDescripcionMantenimiento.Text,
+                txtCodigoBarraMantenimiento.Text,
+                txtReferenciaMantenimiento.Text,
+                txtNumeroSeguimientoMantenimiento.Text,
+                txtCodigoProductoMantenimiento.Text,
+                Convert.ToDecimal(txtPrecioCompraMantenimiento.Text),
+                Convert.ToDecimal(txtPrecioVentaMantenimiento.Text),
+                Convert.ToDecimal(txtStockMantenimiento.Text),
+                Convert.ToDecimal(txtStockMinimoMantenimiento.Text),
+                txtUnidadMedidaMantenimiento.Text,
+                txtModeloMantenimiento.Text,
+                txtColorMantenimiento.Text,
+                txtCondicionMantenimiento.Text,
+                txtCapacidadMantenimiento.Text,
+                cbAplicaParaImpuestoMantenimiento.Checked,
+                false,
+                cbLlevaGarantiaMantenimiento.Checked,
+                IdTipoGarantia,
+                TipoTiempoGarantia,
+                txtComentarioMantenimiento.Text,
+                (decimal)Session["IdUsuario"],
+                Accion);
+            Procesar.ProcesarInformacion();
+        }
+        #endregion
+
+        #region SACAR EL TIPO DE TIEMPO DE GARANTIA
+        private int SacarTipoTiempoGarantia(int IdGarantia) {
+            int TipoTiempo = 0;
+
+            var SacarInformacion = ObjdataServicio.Value.SacartiempoGarantia(IdGarantia);
+            foreach (var n in SacarInformacion) {
+                TipoTiempo = (int)n.TiempoGarantia;
+            }
+            return TipoTiempo;
+        }
+        #endregion
+
+        #region GENERAR EL NUMERO DE CONECTOR PARA GUARDAR REGISTRO
+        private void GenerarNumeroConector() {
+            Random NumeroRandon = new Random();
+
+            int PrimerNumero = NumeroRandon.Next(0, 999999999);
+            int SegundoNumero = NumeroRandon.Next(0, 999999999);
+
         }
         #endregion
 
@@ -365,11 +449,20 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CargarTipoProductos();
                 CargarCategorias();
                 CargarMarcas();
+
+                ListadoTipoProductoMantenimiento();
+                ListadoCategoriasMantenimiento();
+                ListadoMarcasMantenimiento();
+                ListadoTipoSuplidoresMantenimiento();
+                ListadoSuplidoresMantenimiento();
+                ListadoTiempoGarantiaMantenimiento();
+                txtTiempoGarantiaMantenimiento.Text = SacarTipoTiempoGarantia(Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue)).ToString();
                 ListadoProductosServicios();
                 rbPDF.Checked = true;
                 btnEditar.Enabled = false;
                 btnEliminar.Enabled = false;
                 btnSuplir.Enabled = false;
+                btnDetalleItemSeleccionado.Visible = false;
                 lbIdRegistro.Text = "-1";
             }
         }
@@ -444,7 +537,14 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-
+            IdBloqueConsulta.Visible = false;
+            DivBloqueMantenimiento.Visible = true;
+            txtDescripcionMantenimiento.Enabled = false;
+            btnGuardarRegistroMantenimientio.Visible = true;
+            btnEditarRegistroMantenimiento.Visible = false;
+            btnEliminarRegistroMantenimiento.Visible = false;
+            lbIdRegistro.Text = "0";
+            GenerarNumeroConector();
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -515,8 +615,109 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             MoverValoresPaginacion((int)OpcionesPaginacionValores.PaginaAnterior, ref LinkBlbPaginaActualVariable, ref lbCantidadPaginaVariable);
         }
 
+        protected void ddlSeleccionarTipoPrductoMantenimieto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
+            ListadoCategoriasMantenimiento();
+            ListadoMarcasMantenimiento();
+           
+        }
+
+        protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+       
+            ListadoMarcasMantenimiento();
+   
+        }
+
+        protected void ddlSeleccionarTipoSuplidorMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+      
+            ListadoSuplidoresMantenimiento();
+        }
+
+        protected void cbLlevaGarantiaMantenimiento_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSeleccionarTipoGarantiaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtTiempoGarantiaMantenimiento.Text = SacarTipoTiempoGarantia(Convert.ToInt32(ddlSeleccionarTipoGarantiaMantenimiento.SelectedValue)).ToString();
+        }
+
+        protected void btnGuardarRegistroMantenimientio_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEditarRegistroMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminarRegistroMantenimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
         {
+            var IdRegistroSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfIdRegistroSeleccionado = ((HiddenField)IdRegistroSeleccionado.FindControl("hfIdRegistro")).Value.ToString();
+
+            var NumeroConectorSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
+            var hfNumeroConectorSeleccionado = ((HiddenField)NumeroConectorSeleccionado.FindControl("hfNumeroConector")).Value.ToString();
+
+            lbIdRegistro.Text = hfIdRegistroSeleccionado.ToString();
+            lbNumeroConector.Text = hfNumeroConectorSeleccionado.ToString();
+
+            var RegistroSeleccionado = ObjDataInventario.Value.BuscaProductosServicios(
+                Convert.ToDecimal(hfIdRegistroSeleccionado),
+                hfNumeroConectorSeleccionado,
+                null, null, null, null, null, null, null, null, null, null, null, null, null);
+            Paginar(ref rpListadoProductosServicios, RegistroSeleccionado, 1, ref lbCantidadPaginaVariable, ref LinkPrimeraPagina, ref LinkAnterior, ref LinkSiguiente, ref LinkUltimo);
+            HandlePaging(ref dtPaginacion, ref LinkBlbPaginaActualVariable);
+
+            int CantidadRegistro = RegistroSeleccionado.Count;
+            decimal CapitalInvertido = 0, GananciaAproximada = 0, PrecioProducto = 0, Stock = 0, StockMinimo = 0;
+          
+            foreach (var n in RegistroSeleccionado) {
+                CapitalInvertido = (decimal)n.CapitalInvertido;
+                GananciaAproximada = (decimal)n.GananciaAproximadaTotal;
+
+
+                //SACAMOS LOS DATOS DEL PRODUCTO SELECCIONADO PARA MOSTRARLO EN EL DETALLE
+                txtTipoProductoItemSeleccionado.Text = n.TipoProducto;
+                txtCategoriaItemsseleccionado.Text = n.Categoria;
+                txtMarcaItemSeleccionado.Text = n.Marca;
+                txtTipoSuplidorItemSeleccionado.Text = n.TipoSuplidor;
+                txtSuplidorItemsSeleccionado.Text = n.Suplidor;
+                txtReferenciaItemsSeleccionado.Text = n.Referencia;
+                txtDescripcionItemsSeleccionado.Text = n.Descripcion;
+                txtCodigoBarraItemSeleccionado.Text = n.CodigoBarra;
+                txtCodigoProductoItemSeleccionado.Text = n.CodigoProducto;
+                PrecioProducto = (decimal)n.PrecioVenta;
+                txtPrecioItemSeleccionado.Text = PrecioProducto.ToString("N2");
+                Stock = (decimal)n.Stock;
+                txtStockItemSeleccionado.Text = Stock.ToString("N0");
+                StockMinimo = (decimal)n.StockMinimo;
+                txtStockMinimoItemSeleccionado.Text = StockMinimo.ToString("N0");
+                txtEstatusItemSeleccionado.Text = n.Estatus;
+                txtComentarioItemSeleccionado.Text = n.Comentario;
+            }
+            lbCantidadRegistrosVariable.Text = CantidadRegistro.ToString("N0");
+            lbCapitalInvertidovariable.Text = CapitalInvertido.ToString("N2");
+            lbGananciaAproximadaVariable.Text = GananciaAproximada.ToString("N2");
+            btnDetalleItemSeleccionado.Visible = true;
+
+            btnConsultarRegistros.Enabled = false;
+            btnNuevo.Enabled = false;
+            btnEditar.Enabled = true;
+            btnEliminar.Enabled = true;
+            btnSuplir.Enabled = true;
+            btnReporte.Enabled = true;
+            btnRestablecer.Enabled = true;
 
         }
     }
