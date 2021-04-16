@@ -19,8 +19,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         Lazy<DSMarketWeb.Logic.Logica.LogicaServicio.LogicaServicio> ObjdataServicio = new Lazy<Logic.Logica.LogicaServicio.LogicaServicio>();
 
         enum TipoDeReporte {
-        ReporteGeneral=1,
-        ReporteUnico=2
+            ReporteGeneral = 1,
+            ReporteUnico = 2
+        }
+
+        enum TipoProducto {
+            Producto = 1,
+            Servicio = 2
         }
 
         #region CONTROL PARA MOSTRAR LA PAGINACION
@@ -258,7 +263,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                     divPaginacionDetalle.Visible = true;
                 }
             }
-           
+
         }
         #endregion
 
@@ -358,12 +363,12 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             txtReferenciaConsulta.Text = string.Empty;
             txtCodigoProductoConulta.Text = string.Empty;
             cbAgregarRangoFecha.Checked = false;
-          //  cbReporteInventarioCompleto.Checked = false;
+            //  cbReporteInventarioCompleto.Checked = false;
             btnConsultarRegistros.Enabled = true;
             btnNuevo.Enabled = true;
             btnEditar.Enabled = false;
             btnEliminar.Enabled = false;
-            btnSuplir.Enabled = false;
+            btnSuplirItem.Visible = false;
             btnReporte.Enabled = true;
             btnRestablecer.Enabled = true;
             lbIdRegistro.Text = "-1";
@@ -471,7 +476,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             txtCondicionMantenimiento.Text = string.Empty;
             txtCapacidadMantenimiento.Text = string.Empty;
             ListadoTiempoGarantiaMantenimiento();
-            txtTiempoGarantiaMantenimiento.Text =  string.Empty;
+            txtTiempoGarantiaMantenimiento.Text = string.Empty;
             txtComentarioMantenimiento.Text = string.Empty;
         }
         private void BloquearControlesMantenimiento() {
@@ -557,7 +562,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 rbPDF.Checked = true;
                 btnEditar.Enabled = false;
                 btnEliminar.Enabled = false;
-                btnSuplir.Enabled = false;
+                btnSuplirItem.Visible = false;
                 btnDetalleItemSeleccionado.Visible = false;
                 lbIdRegistro.Text = "-1";
                 lbNumeroConector.Text = "-1";
@@ -581,7 +586,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CurrentPage = 0;
                 ListadoProductosServicios();
             }
-           
+
         }
 
         protected void txtCodigoBarraConsulta_TextChanged(object sender, EventArgs e)
@@ -590,7 +595,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CurrentPage = 0;
                 ListadoProductosServicios();
             }
-          
+
         }
 
         protected void txtReferenciaConsulta_TextChanged(object sender, EventArgs e)
@@ -599,7 +604,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CurrentPage = 0;
                 ListadoProductosServicios();
             }
-          
+
         }
 
         protected void txtCodigoProductoConulta_TextChanged(object sender, EventArgs e)
@@ -608,7 +613,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CurrentPage = 0;
                 ListadoProductosServicios();
             }
-            
+
         }
 
         protected void cbAgregarRangoFecha_CheckedChanged(object sender, EventArgs e)
@@ -629,7 +634,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 CurrentPage = 0;
                 ListadoProductosServicios();
             }
-            
+
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -672,11 +677,6 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnGuardarRegistroMantenimientio.Visible = false;
             btnEditarRegistroMantenimiento.Visible = false;
             btnEliminarRegistroMantenimiento.Visible = true;
-        }
-
-        protected void btnSuplir_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void btnReporte_Click(object sender, EventArgs e)
@@ -734,22 +734,22 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         protected void ddlSeleccionarTipoPrductoMantenimieto_SelectedIndexChanged(object sender, EventArgs e)
         {
-         
+
             ListadoCategoriasMantenimiento();
             ListadoMarcasMantenimiento();
-           
+
         }
 
         protected void ddlSeleccionarCategoriaMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-       
+
             ListadoMarcasMantenimiento();
-   
+
         }
 
         protected void ddlSeleccionarTipoSuplidorMantenimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-      
+
             ListadoSuplidoresMantenimiento();
         }
 
@@ -803,6 +803,73 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
         }
 
+        protected void btnProcesarSuplir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNombreProductoSeleccionadoSuplir.Text.Trim()) || string.IsNullOrEmpty(txtstockMinimoSuplir.Text.Trim()) || string.IsNullOrEmpty(txtStockSuplir.Text.Trim()) || string.IsNullOrEmpty(txtCantidadProcesarSuplir.Text.Trim()))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Has dejado campos vacios que son necesarios para procesar esta información, favor de verificar.');", true);
+
+            }
+            else {
+                if (rbSuplirItemsSuplir.Checked == true)
+                {
+                    DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Suplir = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                        Convert.ToDecimal(lbIdRegistro.Text),
+                        lbNumeroConector.Text,
+                        0, 0, 0, 0, 0, "", "", "", "", "", 0, 0,
+                        Convert.ToDecimal(txtCantidadProcesarSuplir.Text),
+                        0, "", "", "", "", "", false, false, false, 0, 0, "", 0, "ADDPRODUCT");
+                    Suplir.ProcesarInformacion();
+                    var ActualizarInformacion = ObjDataInventario.Value.BuscaProductosServicios(
+                        Convert.ToDecimal(lbIdRegistro.Text),
+                        lbNumeroConector.Text,
+                        null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                    foreach (var n in ActualizarInformacion)
+                    {
+                        txtStockSuplir.Text = n.Stock.ToString();
+                        txtstockMinimoSuplir.Text = n.StockMinimo.ToString();
+                    }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Registro Procesado con Exito.');", true);
+
+
+                }
+                else if (rbSacarItemsSuplir.Checked == true)
+                {
+
+                    decimal StockActual = Convert.ToDecimal(txtStockSuplir.Text);
+                    decimal StockSacar = Convert.ToDecimal(txtCantidadProcesarSuplir.Text);
+                    if (StockSacar > StockActual)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('La cantidad que intentas sacar supera la cantidad disponible en stock, favor de verificar.');", true);
+                    }
+                    else
+                    {
+                        DSMarketWeb.Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos Sacar = new Logic.PrcesarMantenimientos.Inventario.ProcesarInformacionProductos(
+                           Convert.ToDecimal(lbIdRegistro.Text),
+                           lbNumeroConector.Text,
+                           0, 0, 0, 0, 0, "", "", "", "", "", 0, 0,
+                           Convert.ToDecimal(txtCantidadProcesarSuplir.Text),
+                           0, "", "", "", "", "", false, false, false, 0, 0, "", 0, "LESSPRODUCT");
+                        Sacar.ProcesarInformacion();
+                        var ActualizarInformacion = ObjDataInventario.Value.BuscaProductosServicios(
+                            Convert.ToDecimal(lbIdRegistro.Text),
+                            lbNumeroConector.Text,
+                            null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                        foreach (var n in ActualizarInformacion)
+                        {
+                            txtStockSuplir.Text = n.Stock.ToString();
+                            txtstockMinimoSuplir.Text = n.StockMinimo.ToString();
+                        }
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Registro Procesado con Exito.');", true);
+                    }
+                }
+                else {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Favor de seleccionar una opción para procesar.');", true);
+                }
+                
+            }
+        }
+
         protected void btnSeleccionarRegistro_Click(object sender, EventArgs e)
         {
             var IdRegistroSeleccionado = (RepeaterItem)((Button)sender).NamingContainer;
@@ -823,11 +890,13 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
 
             int CantidadRegistro = RegistroSeleccionado.Count;
             decimal CapitalInvertido = 0, GananciaAproximada = 0, PrecioProducto = 0, Stock = 0, StockMinimo = 0;
+
+            decimal IdTipoProductoSeleccionado = 0;
           
             foreach (var n in RegistroSeleccionado) {
                 CapitalInvertido = (decimal)n.CapitalInvertido;
                 GananciaAproximada = (decimal)n.GananciaAproximadaTotal;
-
+                IdTipoProductoSeleccionado = (decimal)n.IdTipoProducto;
 
                 //SACAMOS LOS DATOS DEL PRODUCTO SELECCIONADO PARA MOSTRARLO EN EL DETALLE
                 txtTipoProductoItemSeleccionado.Text = n.TipoProducto;
@@ -881,6 +950,14 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
                 DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListSeleccionar(ref ddlSeleccionarTipoGarantiaMantenimiento, n.IdTipoGarantia.ToString());
                 txtTiempoGarantiaMantenimiento.Text = n.TiempoGarantia.ToString();
                 txtComentarioMantenimiento.Text = n.Comentario;
+
+
+                //SACAMOS LOS DATOS PARA LA INFORMACION PARA SUPLIR O SACAR
+                txtNombreProductoSeleccionadoSuplir.Text = n.Descripcion;
+                txtStockSuplir.Text = n.Stock.ToString();
+                txtstockMinimoSuplir.Text = n.StockMinimo.ToString();
+                txtCantidadProcesarSuplir.Text = "1";
+  
             }
 
             lbCantidadRegistrosVariable.Text = CantidadRegistro.ToString("N0");
@@ -892,7 +969,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnNuevo.Enabled = false;
             btnEditar.Enabled = true;
             btnEliminar.Enabled = true;
-            btnSuplir.Enabled = true;
+            if (IdTipoProductoSeleccionado == (decimal)TipoProducto.Producto)
+            {
+                btnSuplirItem.Visible = true;
+            }
+            else if (IdTipoProductoSeleccionado == (decimal)TipoProducto.Servicio) {
+                btnSuplirItem.Visible = false;
+            }
+            
+           
             btnReporte.Enabled = true;
             btnRestablecer.Enabled = true;
 

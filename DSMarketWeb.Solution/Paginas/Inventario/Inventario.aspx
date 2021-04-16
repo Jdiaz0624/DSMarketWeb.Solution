@@ -32,6 +32,8 @@
             alert("El campo referencia ingresado no es valido, favor de verificar.");
         }
 
+
+
         $(document).ready(function () {
             //VALIDAMOS LOS CAMPOS DEL BOTON GUARDAR
             $("#<%=btnGuardarRegistroMantenimientio.ClientID%>").click(function () {
@@ -288,7 +290,7 @@
             <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" ToolTip="Crear Nuevos Registros" CssClass="btn btn-primary btn-sm" OnClick="btnNuevo_Click" />
             <asp:Button ID="btnEditar" runat="server" Text="Editar" ToolTip="Modificar Registro Seleccionado" CssClass="btn btn-primary btn-sm" OnClick="btnEditar_Click" />
             <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" ToolTip="Eliminar Registro Seleccionado" CssClass="btn btn-danger btn-sm" OnClick="btnEliminar_Click" />
-            <asp:Button ID="btnSuplir" runat="server" Text="Suplir" ToolTip="Suplir Inventario" CssClass="btn btn-primary btn-sm" OnClick="btnSuplir_Click" />
+            <button type="button" id="btnSuplirItem" runat="server" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".SuplirsacarProductos">Suplir</button>
             <asp:Button ID="btnReporte" runat="server" Text="Reporte" ToolTip="Reporte de Inventario" CssClass="btn btn-primary btn-sm" OnClick="btnReporte_Click" />
             <asp:Button ID="btnRestablecer" runat="server" Text="Restablecer" ToolTip="Restablecer Pantalla" CssClass="btn btn-primary btn-sm" OnClick="btnRestablecer_Click" />
             <br /><br />
@@ -584,4 +586,60 @@
         <br />
     </div>
 
+
+
+
+
+
+    
+
+
+    
+           <div class="modal fade bd-example-modal-xl SuplirsacarProductos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+
+        <asp:UpdatePanel ID="UpdatePanelSuplirItem" runat="server">
+            <ContentTemplate>
+               <div class="container-fluid">
+                    <div class="form-check-inline">
+                    <div class="form-group form-check">
+                        <asp:Label ID="lbTipoOperacionSuplir" runat="server" Text="Tipo de Operación: " CssClass="Letranegrita"></asp:Label>
+                        <asp:RadioButton ID="rbSuplirItemsSuplir" runat="server" Text="Suplir" ToolTip="Suplir Productos a Inventario" CssClass="form-check-input" GroupName="SuplirSacarItem" />
+                        <asp:RadioButton ID="rbSacarItemsSuplir" runat="server" Text="Sacar" ToolTip="Sacar Productos de Inventario" CssClass="form-check-input" GroupName="SuplirSacarItem" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <asp:Label ID="lbNombreProductoSeleccionadoSuplir" runat="server" Text="Nombre de Producto" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtNombreProductoSeleccionadoSuplir" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                    </div>
+                     <div class="form-group col-md-6">
+                        <asp:Label ID="lbStockSuplir" runat="server" Text="Cantidad en Stock" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtStockSuplir" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <asp:Label ID="lbStockMinimoSuplir" runat="server" Text="Stock Minimo" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtstockMinimoSuplir" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <asp:Label ID="lbCantidadProcesar" runat="server" Text="Cantidad a Procesar" CssClass="Letranegrita"></asp:Label>
+                        <asp:TextBox ID="txtCantidadProcesarSuplir" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                    </div>
+                </div>
+                <br />
+
+                <div align="center">
+                    <asp:Button ID="btnProcesarSuplir" runat="server" Text="Procesar" ToolTip="Procesar Información" CssClass="btn btn-success btn-sm" OnClick="btnProcesarSuplir_Click" />
+                </div>
+                <br />
+               </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      
+        <br />
+    </div>
+  </div>
+</div>
 </asp:Content>
