@@ -215,6 +215,13 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
                 ddlSeleccionarModulo.Enabled = false;
                 cbFiltrarPorModulo.Enabled = false;
                 cbFiltrarPorModulo.Checked = false;
+
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+                Label lbNivelAccesoPantalla = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbNivelAccesoPantalla.Text = "CONFIGURACIONES GENERALES";
             }
         }
 
