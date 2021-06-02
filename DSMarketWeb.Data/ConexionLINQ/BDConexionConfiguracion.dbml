@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DSMarketWeb" Class="BDConexionConfiguracionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JDIAZ0624;Initial Catalog=DSMarketWeb;Integrated Security=False;User ID=sa" SettingsObjectName="DSMarketWeb.Data.Properties.Settings" SettingsPropertyName="DSMarketWebConnectionString3" Provider="System.Data.SqlClient" />
   <Function Name="Configuracion.SP_SACAR_INFORMACION_EMPRESA" Method="SP_SACAR_INFORMACION_EMPRESA">
     <ElementType Name="SP_SACAR_INFORMACION_EMPRESAResult">
       <Column Name="IdInformacionEmpresa" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
@@ -176,6 +176,31 @@
       <Column Name="Posiciones" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="CobroPorcientoAdicional" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LibreImpuesto" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Configuracion.SP_BUSCA_CONFIGURACIONES_GENERALES" Method="SP_BUSCA_CONFIGURACIONES_GENERALES">
+    <Parameter Name="IdConfiguracionGeneral" Parameter="idConfiguracionGeneral" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdModulo" Parameter="idModulo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <ElementType Name="SP_BUSCA_CONFIGURACIONES_GENERALESResult">
+      <Column Name="IdConfiguracion" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdModulo" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Modulo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="Configuracion.SP_MODIFICAR_CONFIGURACIONES_GENERALES" Method="SP_MODIFICAR_CONFIGURACIONES_GENERALES">
+    <Parameter Name="IdConfiguracion" Parameter="idConfiguracion" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdModulo" Parameter="idModulo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_MODIFICAR_CONFIGURACIONES_GENERALESResult">
+      <Column Name="IdConfiguracion" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="IdModulo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

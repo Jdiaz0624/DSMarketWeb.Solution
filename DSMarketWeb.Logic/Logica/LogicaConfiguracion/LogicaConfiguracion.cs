@@ -278,5 +278,55 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
             return Mantenimiento;
         }
         #endregion
+
+
+        #region MANTENIMIENTO DE CONFIGURACIONES GENERALES DEL SISTEMA
+        //LISTADO DE CONFIGURACIONES GENERALES DEL SISTEMA
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales> BuscaConfiguracionesGenerales(decimal? IdConfiguracion = null, decimal? IdModulo = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CONFIGURACIONES_GENERALES(IdConfiguracion, IdModulo)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales
+                           {
+                              IdConfiguracion=n.IdConfiguracion,
+                              IdModulo=n.IdModulo,
+                              Modulo=n.Modulo,
+                              Descripcion=n.Descripcion,
+                              Estatus=n.Estatus,
+                              Estatus0=n.Estatus0
+                           }).ToList();
+            return Listado;
+        }
+
+        /// <summary>
+        /// Este metodo es para modificar las configuraciones generales, solo modifica de activo a inactivo.
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales ModificarConfiguracionesGenerales(DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales Modificar = null;
+
+            var Configuraciones = ObjData.SP_MODIFICAR_CONFIGURACIONES_GENERALES(
+                Item.IdConfiguracion,
+                Item.IdModulo,
+                Item.Descripcion,
+                Item.Estatus0,
+                Accion);
+            if (Configuraciones != null) {
+                Modificar = (from n in Configuraciones
+                             select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EConfiguracionesGenerales
+                             {
+                                 IdConfiguracion=n.IdConfiguracion,
+                                 IdModulo=n.IdModulo,
+                                 Descripcion=n.Descripcion,
+                                 Estatus0=n.Estatus
+                             }).FirstOrDefault();
+            }
+            return Modificar;
+        }
+        #endregion
     }
 }

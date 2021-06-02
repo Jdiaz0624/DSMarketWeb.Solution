@@ -36,7 +36,7 @@
         
       <div class="list-group  list-group-flush">
           <asp:LinkButton ID="LinkInicio" runat="server" Text="Inicio" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" OnClick="lbPaginaInicioSistema_Click"></asp:LinkButton>
-          <asp:LinkButton ID="LinkCitas" runat="server" Text="Citas" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" OnClick="LinkCitas_Click"></asp:LinkButton>
+          
    
           <%--MODULO DE SERVICIO--%>
           <ul class="nav nav-item bg-dark list-group-item list-group-item-action">
@@ -78,7 +78,8 @@
     </div>
   </li>
 </ul>
-
+          <!--MODULO DE CITAS-->
+          <asp:LinkButton ID="LinkCitas" runat="server" Text="Citas" ForeColor="White" CssClass="list-group-item bg-dark list-group-item-action bg-light" OnClick="LinkCitas_Click"></asp:LinkButton>
 
                     <%--MODULO DE EMPRESA--%>
             <ul class="letraBanca nav nav-item list-group-item list-group-item-action bg-dark">

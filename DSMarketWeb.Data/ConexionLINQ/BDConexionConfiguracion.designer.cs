@@ -33,7 +33,7 @@ namespace DSMarketWeb.Data.ConexionLINQ
     #endregion
 		
 		public BDConexionConfiguracionDataContext() : 
-				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString1, mappingSource)
+				base(global::DSMarketWeb.Data.Properties.Settings.Default.DSMarketWebConnectionString3, mappingSource)
 		{
 			OnCreated();
 		}
@@ -144,6 +144,20 @@ namespace DSMarketWeb.Data.ConexionLINQ
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idComprobante, descripcion, serie, tipoComprobante, secuencia, secuenciaInicial, secuenciaFinal, limite, estatus, validoHasta, porDefecto, posiciones, cobroPorcientoAdicional, libreImpuesto, accion);
 			return ((ISingleResult<SP_MANTENIMIENTO_COMPROBANTE_FISCALESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_BUSCA_CONFIGURACIONES_GENERALES")]
+		public ISingleResult<SP_BUSCA_CONFIGURACIONES_GENERALESResult> SP_BUSCA_CONFIGURACIONES_GENERALES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdConfiguracionGeneral", DbType="Decimal(20,0)")] System.Nullable<decimal> idConfiguracionGeneral, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdModulo", DbType="Decimal(20,0)")] System.Nullable<decimal> idModulo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idConfiguracionGeneral, idModulo);
+			return ((ISingleResult<SP_BUSCA_CONFIGURACIONES_GENERALESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_MODIFICAR_CONFIGURACIONES_GENERALES")]
+		public ISingleResult<SP_MODIFICAR_CONFIGURACIONES_GENERALESResult> SP_MODIFICAR_CONFIGURACIONES_GENERALES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdConfiguracion", DbType="Decimal(20,0)")] System.Nullable<decimal> idConfiguracion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdModulo", DbType="Decimal(20,0)")] System.Nullable<decimal> idModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(1000)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idConfiguracion, idModulo, descripcion, estatus, accion);
+			return ((ISingleResult<SP_MODIFICAR_CONFIGURACIONES_GENERALESResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1696,6 +1710,202 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._LibreImpuesto != value))
 				{
 					this._LibreImpuesto = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_CONFIGURACIONES_GENERALESResult
+	{
+		
+		private decimal _IdConfiguracion;
+		
+		private decimal _IdModulo;
+		
+		private string _Modulo;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		public SP_BUSCA_CONFIGURACIONES_GENERALESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConfiguracion", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdConfiguracion
+		{
+			get
+			{
+				return this._IdConfiguracion;
+			}
+			set
+			{
+				if ((this._IdConfiguracion != value))
+				{
+					this._IdConfiguracion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdModulo", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdModulo
+		{
+			get
+			{
+				return this._IdModulo;
+			}
+			set
+			{
+				if ((this._IdModulo != value))
+				{
+					this._IdModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Modulo", DbType="VarChar(100)")]
+		public string Modulo
+		{
+			get
+			{
+				return this._Modulo;
+			}
+			set
+			{
+				if ((this._Modulo != value))
+				{
+					this._Modulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(1000)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_MODIFICAR_CONFIGURACIONES_GENERALESResult
+	{
+		
+		private System.Nullable<decimal> _IdConfiguracion;
+		
+		private System.Nullable<decimal> _IdModulo;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_MODIFICAR_CONFIGURACIONES_GENERALESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConfiguracion", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdConfiguracion
+		{
+			get
+			{
+				return this._IdConfiguracion;
+			}
+			set
+			{
+				if ((this._IdConfiguracion != value))
+				{
+					this._IdConfiguracion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdModulo", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdModulo
+		{
+			get
+			{
+				return this._IdModulo;
+			}
+			set
+			{
+				if ((this._IdModulo != value))
+				{
+					this._IdModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(1000)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
 				}
 			}
 		}

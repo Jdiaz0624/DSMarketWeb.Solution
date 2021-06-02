@@ -554,7 +554,8 @@ namespace DSMarketWeb.Solution.MasterPage
         protected void LinkMantenimientoGeneral_Click(object sender, EventArgs e)
         {
             if (Session["IdUsuario"] != null) {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertIns", "alert('Esta Opción no esta disponible por el momento');", true);
+                Response.Redirect("~/Paginas/Configuracion/ConfiguracionesGenerales.aspx");
             }
             else
             {

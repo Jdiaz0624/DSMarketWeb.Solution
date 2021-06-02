@@ -12,7 +12,7 @@ namespace DSMarketWeb.Data.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -84,6 +84,17 @@ namespace DSMarketWeb.Data.Properties {
         public string DSMarketWebConnectionString2 {
             get {
                 return ((string)(this["DSMarketWebConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=JDIAZ0624;Initial Catalog=DSMarketWeb;Integrated Security=False;User " +
+            "ID=sa;Password=!@Pa$$W0rd!@0624")]
+        public string DSMarketWebConnectionString3 {
+            get {
+                return ((string)(this["DSMarketWebConnectionString3"]));
             }
         }
     }

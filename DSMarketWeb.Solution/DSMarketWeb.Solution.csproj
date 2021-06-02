@@ -88,6 +88,7 @@
     <Content Include="Estilos\EstilosMenu.css" />
     <Content Include="Facturación-Electrónica-Icono-1024x1024.ico" />
     <Content Include="LoginSistema.aspx" />
+    <Content Include="Paginas\Configuracion\ConfiguracionesGenerales.aspx" />
     <Content Include="Paginas\Empresa\Bancos.aspx" />
     <Content Include="Paginas\Empresa\Citas.aspx" />
     <Content Include="Paginas\Empresa\MantenimientoCargos.aspx" />
@@ -240,6 +241,13 @@
     </Compile>
     <Compile Include="MasterPage\PaginaMaestra.Master.designer.cs">
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Configuracion\ConfiguracionesGenerales.aspx.cs">
+      <DependentUpon>ConfiguracionesGenerales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Configuracion\ConfiguracionesGenerales.aspx.designer.cs">
+      <DependentUpon>ConfiguracionesGenerales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Empresa\Bancos.aspx.cs">
       <DependentUpon>Bancos.aspx</DependentUpon>

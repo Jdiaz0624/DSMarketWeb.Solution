@@ -42,15 +42,6 @@ namespace DSMarketWeb.Solution.MasterPage
         protected global::System.Web.UI.WebControls.LinkButton LinkInicio;
 
         /// <summary>
-        /// LinkCitas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkCitas;
-
-        /// <summary>
         /// LinkFacturacion control.
         /// </summary>
         /// <remarks>
@@ -166,6 +157,15 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkSuplidores;
+
+        /// <summary>
+        /// LinkCitas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkCitas;
 
         /// <summary>
         /// LinkClientes control.

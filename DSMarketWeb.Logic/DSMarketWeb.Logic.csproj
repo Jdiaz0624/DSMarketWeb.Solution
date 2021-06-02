@@ -64,6 +64,7 @@
     <Compile Include="Comunes\ValidarImagenSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EBuscaImagenesSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EComprobantesFuscales.cs" />
+    <Compile Include="Entidades\EntidadesConfiguracion\EConfiguracionesGenerales.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EConfiguracionGeneral.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EImpuestoVenta.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Logica\LogicaSeguridad\LogicaSeguridad.cs" />
     <Compile Include="Logica\LogicaServicio\LogicaServicio.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionComprobantesFiscales.cs" />
+    <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionConfiguracionesGenerales.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionImpuestoVentas.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionBancos.cs" />
