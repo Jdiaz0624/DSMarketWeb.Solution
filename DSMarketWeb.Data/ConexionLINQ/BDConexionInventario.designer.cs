@@ -176,6 +176,76 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idRegistro, numeroConector, idTipoProducto, idCategoria, idMarca, idTipoSuplidor, idSuplidor, descripcion, codigoBarra, referencia, numeroSeguimiento, codigoProducto, fechaIngresoDesde, fechaIngresoHasta, idUsuarioGenera, stock);
 			return ((ISingleResult<SP_BUSCA_PRODUCTOS_SERVICIOSResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_PROCESAR_INFORMACION_MODELOS")]
+		public ISingleResult<SP_PROCESAR_INFORMACION_MODELOSResult> SP_PROCESAR_INFORMACION_MODELOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMarca", DbType="Decimal(20,0)")] System.Nullable<decimal> idMarca, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdModelo", DbType="Decimal(20,0)")] System.Nullable<decimal> idModelo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMarca, idModelo, descripcion, estatus, accion);
+			return ((ISingleResult<SP_PROCESAR_INFORMACION_MODELOSResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_MODELOS")]
+		public ISingleResult<SP_BUSCA_MODELOSResult> SP_BUSCA_MODELOS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMarca", DbType="Decimal(20,0)")] System.Nullable<decimal> idMarca, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdModelo", DbType="Decimal(20,0)")] System.Nullable<decimal> idModelo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idMarca, idModelo, descripcion);
+			return ((ISingleResult<SP_BUSCA_MODELOSResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_UNIDAD_MEDIDA")]
+		public ISingleResult<SP_BUSCA_UNIDAD_MEDIDAResult> SP_BUSCA_UNIDAD_MEDIDA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUnidadMedida", DbType="Decimal(20,0)")] System.Nullable<decimal> idUnidadMedida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUnidadMedida, descripcion);
+			return ((ISingleResult<SP_BUSCA_UNIDAD_MEDIDAResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_PROCESAR_INFORMACION_UNIDAD_MEDIDA")]
+		public ISingleResult<SP_PROCESAR_INFORMACION_UNIDAD_MEDIDAResult> SP_PROCESAR_INFORMACION_UNIDAD_MEDIDA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUnidadMedida", DbType="Decimal(20,0)")] System.Nullable<decimal> idUnidadMedida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="UnidadMedida", DbType="VarChar(100)")] string unidadMedida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUnidadMedida, unidadMedida, estatus, accion);
+			return ((ISingleResult<SP_PROCESAR_INFORMACION_UNIDAD_MEDIDAResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_COLORES")]
+		public ISingleResult<SP_BUSCA_COLORESResult> SP_BUSCA_COLORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdColor", DbType="Decimal(20,0)")] System.Nullable<decimal> idColor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Color", DbType="VarChar(100)")] string color)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idColor, color);
+			return ((ISingleResult<SP_BUSCA_COLORESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_PROCESAR_COLORES")]
+		public ISingleResult<SP_PROCESAR_COLORESResult> SP_PROCESAR_COLORES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdColor", DbType="Decimal(20,0)")] System.Nullable<decimal> idColor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idColor, descripcion, estatus, accion);
+			return ((ISingleResult<SP_PROCESAR_COLORESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_CONDICIONES")]
+		public ISingleResult<SP_BUSCA_CONDICIONESResult> SP_BUSCA_CONDICIONES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCondicion", DbType="Decimal(20,0)")] System.Nullable<decimal> idCondicion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCondicion, descripcion);
+			return ((ISingleResult<SP_BUSCA_CONDICIONESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_PROCESAR_CONDICIONES")]
+		public ISingleResult<SP_PROCESAR_CONDICIONESResult> SP_PROCESAR_CONDICIONES([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCondicion", DbType="Decimal(20,0)")] System.Nullable<decimal> idCondicion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Condicion", DbType="VarChar(100)")] string condicion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCondicion, condicion, estatus, accion);
+			return ((ISingleResult<SP_PROCESAR_CONDICIONESResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_BUSCA_CAPACIDAD")]
+		public ISingleResult<SP_BUSCA_CAPACIDADResult> SP_BUSCA_CAPACIDAD([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCapacidad", DbType="Decimal(20,0)")] System.Nullable<decimal> idCapacidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Capacidad", DbType="VarChar(100)")] string capacidad)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCapacidad, capacidad);
+			return ((ISingleResult<SP_BUSCA_CAPACIDADResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Inventario.SP_PROCESAR_CAPACIDAD")]
+		public ISingleResult<SP_PROCESAR_CAPACIDADResult> SP_PROCESAR_CAPACIDAD([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCapacidad", DbType="Decimal(20,0)")] System.Nullable<decimal> idCapacidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Descripcion", DbType="VarChar(100)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estatus", DbType="Bit")] System.Nullable<bool> estatus, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCapacidad, descripcion, estatus, accion);
+			return ((ISingleResult<SP_PROCESAR_CAPACIDADResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_BUSCA_CATEGORIAS_WEBResult
@@ -3943,6 +4013,770 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._GananciaAproximadaTotal != value))
 				{
 					this._GananciaAproximadaTotal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_PROCESAR_INFORMACION_MODELOSResult
+	{
+		
+		private System.Nullable<decimal> _IdMarca;
+		
+		private System.Nullable<decimal> _IdModelo;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_PROCESAR_INFORMACION_MODELOSResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMarca", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdMarca
+		{
+			get
+			{
+				return this._IdMarca;
+			}
+			set
+			{
+				if ((this._IdMarca != value))
+				{
+					this._IdMarca = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdModelo", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdModelo
+		{
+			get
+			{
+				return this._IdModelo;
+			}
+			set
+			{
+				if ((this._IdModelo != value))
+				{
+					this._IdModelo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_MODELOSResult
+	{
+		
+		private System.Nullable<decimal> _IdMarca;
+		
+		private string _Marca;
+		
+		private decimal _IdModelo;
+		
+		private string _Modelo;
+		
+		private string _Estatus;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		public SP_BUSCA_MODELOSResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMarca", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdMarca
+		{
+			get
+			{
+				return this._IdMarca;
+			}
+			set
+			{
+				if ((this._IdMarca != value))
+				{
+					this._IdMarca = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Marca", DbType="VarChar(100)")]
+		public string Marca
+		{
+			get
+			{
+				return this._Marca;
+			}
+			set
+			{
+				if ((this._Marca != value))
+				{
+					this._Marca = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdModelo", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdModelo
+		{
+			get
+			{
+				return this._IdModelo;
+			}
+			set
+			{
+				if ((this._IdModelo != value))
+				{
+					this._IdModelo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Modelo", DbType="VarChar(100)")]
+		public string Modelo
+		{
+			get
+			{
+				return this._Modelo;
+			}
+			set
+			{
+				if ((this._Modelo != value))
+				{
+					this._Modelo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_UNIDAD_MEDIDAResult
+	{
+		
+		private System.Nullable<decimal> _IdUnidadMedida;
+		
+		private string _UnidadMedida;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		public SP_BUSCA_UNIDAD_MEDIDAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadMedida", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdUnidadMedida
+		{
+			get
+			{
+				return this._IdUnidadMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadMedida != value))
+				{
+					this._IdUnidadMedida = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnidadMedida", DbType="VarChar(100)")]
+		public string UnidadMedida
+		{
+			get
+			{
+				return this._UnidadMedida;
+			}
+			set
+			{
+				if ((this._UnidadMedida != value))
+				{
+					this._UnidadMedida = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_PROCESAR_INFORMACION_UNIDAD_MEDIDAResult
+	{
+		
+		private System.Nullable<decimal> _IdUnidadMedida;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_PROCESAR_INFORMACION_UNIDAD_MEDIDAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUnidadMedida", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdUnidadMedida
+		{
+			get
+			{
+				return this._IdUnidadMedida;
+			}
+			set
+			{
+				if ((this._IdUnidadMedida != value))
+				{
+					this._IdUnidadMedida = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_COLORESResult
+	{
+		
+		private System.Nullable<decimal> _IdColor;
+		
+		private string _Color;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		public SP_BUSCA_COLORESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdColor", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdColor
+		{
+			get
+			{
+				return this._IdColor;
+			}
+			set
+			{
+				if ((this._IdColor != value))
+				{
+					this._IdColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(100)")]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this._Color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_PROCESAR_COLORESResult
+	{
+		
+		private System.Nullable<decimal> _IdColor;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_PROCESAR_COLORESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdColor", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdColor
+		{
+			get
+			{
+				return this._IdColor;
+			}
+			set
+			{
+				if ((this._IdColor != value))
+				{
+					this._IdColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_CONDICIONESResult
+	{
+		
+		private System.Nullable<decimal> _IdCondicion;
+		
+		private string _Condicion;
+		
+		private string _Estatus;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		public SP_BUSCA_CONDICIONESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCondicion", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdCondicion
+		{
+			get
+			{
+				return this._IdCondicion;
+			}
+			set
+			{
+				if ((this._IdCondicion != value))
+				{
+					this._IdCondicion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Condicion", DbType="VarChar(100)")]
+		public string Condicion
+		{
+			get
+			{
+				return this._Condicion;
+			}
+			set
+			{
+				if ((this._Condicion != value))
+				{
+					this._Condicion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_PROCESAR_CONDICIONESResult
+	{
+		
+		private System.Nullable<decimal> _IdCondicion;
+		
+		private string _Condicion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_PROCESAR_CONDICIONESResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCondicion", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdCondicion
+		{
+			get
+			{
+				return this._IdCondicion;
+			}
+			set
+			{
+				if ((this._IdCondicion != value))
+				{
+					this._IdCondicion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Condicion", DbType="VarChar(100)")]
+		public string Condicion
+		{
+			get
+			{
+				return this._Condicion;
+			}
+			set
+			{
+				if ((this._Condicion != value))
+				{
+					this._Condicion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_CAPACIDADResult
+	{
+		
+		private System.Nullable<decimal> _IdCapacidad;
+		
+		private string _Capacidad;
+		
+		private System.Nullable<bool> _Estatus0;
+		
+		private string _Estatus;
+		
+		public SP_BUSCA_CAPACIDADResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCapacidad", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdCapacidad
+		{
+			get
+			{
+				return this._IdCapacidad;
+			}
+			set
+			{
+				if ((this._IdCapacidad != value))
+				{
+					this._IdCapacidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Capacidad", DbType="VarChar(100)")]
+		public string Capacidad
+		{
+			get
+			{
+				return this._Capacidad;
+			}
+			set
+			{
+				if ((this._Capacidad != value))
+				{
+					this._Capacidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus0", DbType="Bit")]
+		public System.Nullable<bool> Estatus0
+		{
+			get
+			{
+				return this._Estatus0;
+			}
+			set
+			{
+				if ((this._Estatus0 != value))
+				{
+					this._Estatus0 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_PROCESAR_CAPACIDADResult
+	{
+		
+		private System.Nullable<decimal> _IdCapacidad;
+		
+		private string _Descripcion;
+		
+		private System.Nullable<bool> _Estatus;
+		
+		public SP_PROCESAR_CAPACIDADResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCapacidad", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdCapacidad
+		{
+			get
+			{
+				return this._IdCapacidad;
+			}
+			set
+			{
+				if ((this._IdCapacidad != value))
+				{
+					this._IdCapacidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estatus", DbType="Bit")]
+		public System.Nullable<bool> Estatus
+		{
+			get
+			{
+				return this._Estatus;
+			}
+			set
+			{
+				if ((this._Estatus != value))
+				{
+					this._Estatus = value;
 				}
 			}
 		}

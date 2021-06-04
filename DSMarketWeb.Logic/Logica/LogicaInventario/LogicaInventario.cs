@@ -131,6 +131,59 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
         }
 
         #endregion
+        #region MANTENIMIENTO DE MODELOS
+        /// <summary>
+        /// Mostrar el listado de los modelos
+        /// </summary>
+        /// <param name="IdMarca"></param>
+        /// <param name="IdModelo"></param>
+        /// <param name="Descripcion"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos> ListadoModelos(decimal? IdMarca = null, decimal? IdModelo = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_MODELOS(IdMarca, IdModelo, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos
+                           {
+                               IdMarca=n.IdMarca,
+                               Marca=n.Marca,
+                               IdModelo=n.IdModelo,
+                               Modelo=n.Modelo,
+                               Estatus=n.Estatus,
+                               Estatus0=n.Estatus0
+                           }).ToList();
+            return Listado;
+        }
+        /// <summary>
+        /// Procesar la información de los modelos dle sistema
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos ProcesarModelos(DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos Procesar = null;
+
+            var Modelos = ObjData.SP_PROCESAR_INFORMACION_MODELOS(
+                Item.IdMarca,
+                Item.IdModelo,
+                Item.Modelo,
+                Item.Estatus0,
+                Accion);
+            if (Modelos != null) {
+                Procesar = (from n in Modelos
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EModelos
+                            {
+                                IdMarca=n.IdMarca,
+                                IdModelo=n.IdModelo,
+                                Modelo=n.Descripcion,
+                                Estatus0=n.Estatus
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
         #region MANTENIMIENTO DE TIPO DE SUPLIDORES
         //LISTADO DE TIPO DE SUPLIDORES
         public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ETipoSuplidores> BuscaTipoSuplidores(decimal? IdTipoSuplidores = null, string Descripcion = null) {

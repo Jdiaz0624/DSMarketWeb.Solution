@@ -334,4 +334,114 @@
       <Column Name="GananciaAproximadaTotal" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="Inventario.SP_PROCESAR_INFORMACION_MODELOS" Method="SP_PROCESAR_INFORMACION_MODELOS">
+    <Parameter Name="IdMarca" Parameter="idMarca" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdModelo" Parameter="idModelo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_PROCESAR_INFORMACION_MODELOSResult">
+      <Column Name="IdMarca" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="IdModelo" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_MODELOS" Method="SP_BUSCA_MODELOS">
+    <Parameter Name="IdMarca" Parameter="idMarca" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="IdModelo" Parameter="idModelo" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="SP_BUSCA_MODELOSResult">
+      <Column Name="IdMarca" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Marca" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="IdModelo" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Modelo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_UNIDAD_MEDIDA" Method="SP_BUSCA_UNIDAD_MEDIDA">
+    <Parameter Name="IdUnidadMedida" Parameter="idUnidadMedida" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="SP_BUSCA_UNIDAD_MEDIDAResult">
+      <Column Name="IdUnidadMedida" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="UnidadMedida" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_PROCESAR_INFORMACION_UNIDAD_MEDIDA" Method="SP_PROCESAR_INFORMACION_UNIDAD_MEDIDA">
+    <Parameter Name="IdUnidadMedida" Parameter="idUnidadMedida" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="UnidadMedida" Parameter="unidadMedida" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_PROCESAR_INFORMACION_UNIDAD_MEDIDAResult">
+      <Column Name="IdUnidadMedida" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_COLORES" Method="SP_BUSCA_COLORES">
+    <Parameter Name="IdColor" Parameter="idColor" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Color" Parameter="color" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="SP_BUSCA_COLORESResult">
+      <Column Name="IdColor" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_PROCESAR_COLORES" Method="SP_PROCESAR_COLORES">
+    <Parameter Name="IdColor" Parameter="idColor" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_PROCESAR_COLORESResult">
+      <Column Name="IdColor" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_CONDICIONES" Method="SP_BUSCA_CONDICIONES">
+    <Parameter Name="IdCondicion" Parameter="idCondicion" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="SP_BUSCA_CONDICIONESResult">
+      <Column Name="IdCondicion" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Condicion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_PROCESAR_CONDICIONES" Method="SP_PROCESAR_CONDICIONES">
+    <Parameter Name="IdCondicion" Parameter="idCondicion" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Condicion" Parameter="condicion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_PROCESAR_CONDICIONESResult">
+      <Column Name="IdCondicion" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Condicion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_BUSCA_CAPACIDAD" Method="SP_BUSCA_CAPACIDAD">
+    <Parameter Name="IdCapacidad" Parameter="idCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Capacidad" Parameter="capacidad" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="SP_BUSCA_CAPACIDADResult">
+      <Column Name="IdCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Capacidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus0" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="Inventario.SP_PROCESAR_CAPACIDAD" Method="SP_PROCESAR_CAPACIDAD">
+    <Parameter Name="IdCapacidad" Parameter="idCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Descripcion" Parameter="descripcion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Estatus" Parameter="estatus" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_PROCESAR_CAPACIDADResult">
+      <Column Name="IdCapacidad" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

@@ -73,6 +73,77 @@ namespace DSMarketWeb.Logic.Logica.LogicaConfiguracion
         }
         #endregion
 
+        #region MANTENIMIENTO DE POLITICAS DE EMPRESA
+        /// <summary>
+        /// Listado de Politicas de Empresa
+        /// </summary>
+        /// <param name="IdPolitica"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa> BuscaPoliticasEmpresa(decimal? IdPolitica = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_POLITICAS_EMPRESA(IdPolitica)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa
+                           {
+                               IdPolitica=n.IdPolitica,
+                               Politica1=n.Politica1,
+                               Politica2=n.Politica2,
+                               Politica3=n.Politica3,
+                               Politica4=n.Politica4,
+                               Politica5=n.Politica5,
+                               Politica6=n.Politica6,
+                               Politica7=n.Politica7,
+                               Politica8=n.Politica8,
+                               Politica9=n.Politica9,
+                               Politica10=n.Politica10
+                           }).ToList();
+            return Listado;
+        }
+
+        /// <summary>
+        /// Modificar las politicas de la empresa
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa ModificarPoliticasEmpresa(DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa Modificar = null;
+
+            var PoliticasEmpresa = ObjData.SP_MODIFICAR_POLITICAS_EMPRESA(
+                Item.IdPolitica,
+                Item.Politica1,
+                Item.Politica2,
+                Item.Politica3,
+                Item.Politica4,
+                Item.Politica5,
+                Item.Politica6,
+                Item.Politica7,
+                Item.Politica8,
+                Item.Politica9,
+                Item.Politica10,
+                Accion);
+            if (PoliticasEmpresa != null) {
+                Modificar = (from n in PoliticasEmpresa
+                             select new DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EPoliticaEmpresa
+                             {
+                                 IdPolitica=n.IdPolitica,
+                                 Politica1=n.Politica1,
+                                 Politica2=n.Politica2,
+                                 Politica3=n.Politica3,
+                                 Politica4=n.Politica4,
+                                 Politica5=n.Politica5,
+                                 Politica6=n.Politica6,
+                                 Politica7=n.Politica7,
+                                 Politica8=n.Politica8,
+                                 Politica9=n.Politica9,
+                                 Politica10=n.Politica10
+                             }).FirstOrDefault();
+            }
+            return Modificar;
+        }
+        #endregion
         #region LISTAS
         public List<DSMarketWeb.Logic.Entidades.EntidadesConfiguracion.EListas> BuscaListas(string NombreLista = null, string PrimerFiltro = null, string SegundoFiltro = null, string TercerFiltro = null, string CuartoFiltro = null, string QuintoFiltro = null) {
             ObjData.CommandTimeout = 999999999;

@@ -69,6 +69,7 @@
     <Compile Include="Entidades\EntidadesConfiguracion\EImpuestoVenta.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EInformacionEmpresa.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EListas.cs" />
+    <Compile Include="Entidades\EntidadesConfiguracion\EPoliticaEmpresa.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EPorcientoDescuentoProductoPorDefecto.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EBancos.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ECargos.cs" />
@@ -85,11 +86,16 @@
     <Compile Include="Entidades\EntidadesEmpresa\ETipoMovimiento.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\ETipoNomina.cs" />
     <Compile Include="Entidades\EntidadesEmpresa\EValidarFotoEmpleado.cs" />
+    <Compile Include="Entidades\EntidadesInventario\ECapacidad.cs" />
     <Compile Include="Entidades\EntidadesInventario\ECategorias.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EColores.cs" />
+    <Compile Include="Entidades\EntidadesInventario\ECondiciones.cs" />
     <Compile Include="Entidades\EntidadesInventario\EMarcas.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EModelos.cs" />
     <Compile Include="Entidades\EntidadesInventario\EProductoServicio.cs" />
     <Compile Include="Entidades\EntidadesInventario\ESuplidores.cs" />
     <Compile Include="Entidades\EntidadesInventario\ETipoSuplidores.cs" />
+    <Compile Include="Entidades\EntidadesInventario\EUnidadMedida.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\EBuscaClaveSeguridad.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ECantidadIntentosLogin.cs" />
     <Compile Include="Entidades\EntidadesSeguridad\ESacarCreencialesBD.cs" />
@@ -113,6 +119,7 @@
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionConfiguracionesGenerales.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionImpuestoVentas.cs" />
     <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionInformacionEmpresa.cs" />
+    <Compile Include="PrcesarMantenimientos\Configuracion\ProcesarInformacionPoliticasEmpresa.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionBancos.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCargos.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionCitaEncabezado.cs" />
@@ -128,6 +135,7 @@
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionMarcas.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionModelos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionTipoSuplidores.cs" />

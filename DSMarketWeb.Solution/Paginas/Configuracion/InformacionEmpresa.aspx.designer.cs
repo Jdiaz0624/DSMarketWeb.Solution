@@ -168,6 +168,24 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
         protected global::System.Web.UI.WebControls.TextBox txtSitioWeb;
 
         /// <summary>
+        /// lbClaveSeguridad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridad;
+
+        /// <summary>
+        /// txtClaveSeguridad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridad;
+
+        /// <summary>
         /// btnModificar control.
         /// </summary>
         /// <remarks>
@@ -373,6 +391,24 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPolitica10;
+
+        /// <summary>
+        /// lbClaveSeguridadPoliticas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbClaveSeguridadPoliticas;
+
+        /// <summary>
+        /// txtClaveSeguridadPoliticas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClaveSeguridadPoliticas;
 
         /// <summary>
         /// btnModificarPoliticas control.

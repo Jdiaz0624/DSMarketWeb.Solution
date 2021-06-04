@@ -23,6 +23,37 @@
         }
     </style>
 
+    <script type="text/javascript">
+        function CLaveSeguridadNoValida() {
+            alert("La clave de seguridad ingresada no es valida, favor de verificar.");
+        }
+
+        function ClaveSeguridadVacio() {
+            alert("El campo clave de seguridad no puede estar vacio para modificar esta información, favor de verificar.");
+        }
+
+        $(document).ready(function () {
+            $("#<%=btnModificar.ClientID%>").click(function () {
+                var ClaveSeguridad = $("#<%=txtClaveSeguridad.ClientID%>").val().length;
+                if (ClaveSeguridad < 1) {
+                    ClaveSeguridadVacio();
+                    $("#<%=txtClaveSeguridad.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
+
+
+            $("#<%=btnModificarPoliticas.ClientID%>").click(function () {
+                var ClaveSeguridadPolitica = $("#<%=txtClaveSeguridadPoliticas.ClientID%>").val().length;
+                if (ClaveSeguridadPolitica < 1) {
+                    ClaveSeguridadVacio();
+                    $("#<%=txtClaveSeguridadPoliticas.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
+        })
+    </script>
+
     <div id="DivBloqueInformacionEmpresa" runat="server">
         <br />
         <div class="form-row">
@@ -58,12 +89,17 @@
 
             <div class="form-group col-md-6">
                 <asp:Label ID="lbInstagram" runat="server" Text="Instagram" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtInstagram" runat="server" CssClass="form-control" TextMode="Email" MaxLength="200"></asp:TextBox>
+                <asp:TextBox ID="txtInstagram" runat="server" CssClass="form-control" MaxLength="200"></asp:TextBox>
             </div>
 
             <div class="form-group col-md-6">
                 <asp:Label ID="lbSitioWeb" runat="server" Text="Sitio Web" CssClass="Letranegrita"></asp:Label>
-                <asp:TextBox ID="txtSitioWeb" runat="server" CssClass="form-control" TextMode="Email" MaxLength="200"></asp:TextBox>
+                <asp:TextBox ID="txtSitioWeb" runat="server" CssClass="form-control"  MaxLength="200"></asp:TextBox>
+            </div>
+
+             <div class="form-group col-md-6">
+                <asp:Label ID="lbClaveSeguridad" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtClaveSeguridad" runat="server" CssClass="form-control" TextMode="Password" MaxLength="200"></asp:TextBox>
             </div>
 
         </div>
@@ -126,6 +162,11 @@
             <div class="form-group col-md-12">
                 <asp:Label ID="lbPolitica10" runat="server" Text="Politica 10" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtPolitica10" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbClaveSeguridadPoliticas" runat="server" Text="Clave de Seguridad" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtClaveSeguridadPoliticas" runat="server" CssClass="form-control" TextMode="Password" MaxLength="200"></asp:TextBox>
             </div>
         </div>
 

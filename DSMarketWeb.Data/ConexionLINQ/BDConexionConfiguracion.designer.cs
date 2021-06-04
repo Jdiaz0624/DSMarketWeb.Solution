@@ -159,6 +159,20 @@ namespace DSMarketWeb.Data.ConexionLINQ
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idConfiguracion, idModulo, descripcion, estatus, accion);
 			return ((ISingleResult<SP_MODIFICAR_CONFIGURACIONES_GENERALESResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_BUSCA_POLITICAS_EMPRESA")]
+		public ISingleResult<SP_BUSCA_POLITICAS_EMPRESAResult> SP_BUSCA_POLITICAS_EMPRESA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdPolitica", DbType="Decimal(20,0)")] System.Nullable<decimal> idPolitica)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPolitica);
+			return ((ISingleResult<SP_BUSCA_POLITICAS_EMPRESAResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="Configuracion.SP_MODIFICAR_POLITICAS_EMPRESA")]
+		public ISingleResult<SP_MODIFICAR_POLITICAS_EMPRESAResult> SP_MODIFICAR_POLITICAS_EMPRESA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdPolitica", DbType="Decimal(20,0)")] System.Nullable<decimal> idPolitica, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica1", DbType="VarChar(1000)")] string politica1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica2", DbType="VarChar(1000)")] string politica2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica3", DbType="VarChar(1000)")] string politica3, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica4", DbType="VarChar(1000)")] string politica4, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica5", DbType="VarChar(1000)")] string politica5, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica6", DbType="VarChar(1000)")] string politica6, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica7", DbType="VarChar(1000)")] string politica7, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica8", DbType="VarChar(1000)")] string politica8, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica9", DbType="VarChar(1000)")] string politica9, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Politica10", DbType="VarChar(1000)")] string politica10, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(150)")] string accion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idPolitica, politica1, politica2, politica3, politica4, politica5, politica6, politica7, politica8, politica9, politica10, accion);
+			return ((ISingleResult<SP_MODIFICAR_POLITICAS_EMPRESAResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class SP_SACAR_INFORMACION_EMPRESAResult
@@ -1906,6 +1920,418 @@ namespace DSMarketWeb.Data.ConexionLINQ
 				if ((this._Estatus != value))
 				{
 					this._Estatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_BUSCA_POLITICAS_EMPRESAResult
+	{
+		
+		private decimal _IdPolitica;
+		
+		private string _Politica1;
+		
+		private string _Politica2;
+		
+		private string _Politica3;
+		
+		private string _Politica4;
+		
+		private string _Politica5;
+		
+		private string _Politica6;
+		
+		private string _Politica7;
+		
+		private string _Politica8;
+		
+		private string _Politica9;
+		
+		private string _Politica10;
+		
+		public SP_BUSCA_POLITICAS_EMPRESAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPolitica", DbType="Decimal(20,0) NOT NULL")]
+		public decimal IdPolitica
+		{
+			get
+			{
+				return this._IdPolitica;
+			}
+			set
+			{
+				if ((this._IdPolitica != value))
+				{
+					this._IdPolitica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica1", DbType="VarChar(1000)")]
+		public string Politica1
+		{
+			get
+			{
+				return this._Politica1;
+			}
+			set
+			{
+				if ((this._Politica1 != value))
+				{
+					this._Politica1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica2", DbType="VarChar(1000)")]
+		public string Politica2
+		{
+			get
+			{
+				return this._Politica2;
+			}
+			set
+			{
+				if ((this._Politica2 != value))
+				{
+					this._Politica2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica3", DbType="VarChar(1000)")]
+		public string Politica3
+		{
+			get
+			{
+				return this._Politica3;
+			}
+			set
+			{
+				if ((this._Politica3 != value))
+				{
+					this._Politica3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica4", DbType="VarChar(1000)")]
+		public string Politica4
+		{
+			get
+			{
+				return this._Politica4;
+			}
+			set
+			{
+				if ((this._Politica4 != value))
+				{
+					this._Politica4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica5", DbType="VarChar(1000)")]
+		public string Politica5
+		{
+			get
+			{
+				return this._Politica5;
+			}
+			set
+			{
+				if ((this._Politica5 != value))
+				{
+					this._Politica5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica6", DbType="VarChar(1000)")]
+		public string Politica6
+		{
+			get
+			{
+				return this._Politica6;
+			}
+			set
+			{
+				if ((this._Politica6 != value))
+				{
+					this._Politica6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica7", DbType="VarChar(1000)")]
+		public string Politica7
+		{
+			get
+			{
+				return this._Politica7;
+			}
+			set
+			{
+				if ((this._Politica7 != value))
+				{
+					this._Politica7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica8", DbType="VarChar(1000)")]
+		public string Politica8
+		{
+			get
+			{
+				return this._Politica8;
+			}
+			set
+			{
+				if ((this._Politica8 != value))
+				{
+					this._Politica8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica9", DbType="VarChar(1000)")]
+		public string Politica9
+		{
+			get
+			{
+				return this._Politica9;
+			}
+			set
+			{
+				if ((this._Politica9 != value))
+				{
+					this._Politica9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica10", DbType="VarChar(1000)")]
+		public string Politica10
+		{
+			get
+			{
+				return this._Politica10;
+			}
+			set
+			{
+				if ((this._Politica10 != value))
+				{
+					this._Politica10 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_MODIFICAR_POLITICAS_EMPRESAResult
+	{
+		
+		private System.Nullable<decimal> _IdPolitica;
+		
+		private string _Politica1;
+		
+		private string _Politica2;
+		
+		private string _Politica3;
+		
+		private string _Politica4;
+		
+		private string _Politica5;
+		
+		private string _Politica6;
+		
+		private string _Politica7;
+		
+		private string _Politica8;
+		
+		private string _Politica9;
+		
+		private string _Politica10;
+		
+		public SP_MODIFICAR_POLITICAS_EMPRESAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPolitica", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> IdPolitica
+		{
+			get
+			{
+				return this._IdPolitica;
+			}
+			set
+			{
+				if ((this._IdPolitica != value))
+				{
+					this._IdPolitica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica1", DbType="VarChar(1000)")]
+		public string Politica1
+		{
+			get
+			{
+				return this._Politica1;
+			}
+			set
+			{
+				if ((this._Politica1 != value))
+				{
+					this._Politica1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica2", DbType="VarChar(1000)")]
+		public string Politica2
+		{
+			get
+			{
+				return this._Politica2;
+			}
+			set
+			{
+				if ((this._Politica2 != value))
+				{
+					this._Politica2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica3", DbType="VarChar(1000)")]
+		public string Politica3
+		{
+			get
+			{
+				return this._Politica3;
+			}
+			set
+			{
+				if ((this._Politica3 != value))
+				{
+					this._Politica3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica4", DbType="VarChar(1000)")]
+		public string Politica4
+		{
+			get
+			{
+				return this._Politica4;
+			}
+			set
+			{
+				if ((this._Politica4 != value))
+				{
+					this._Politica4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica5", DbType="VarChar(1000)")]
+		public string Politica5
+		{
+			get
+			{
+				return this._Politica5;
+			}
+			set
+			{
+				if ((this._Politica5 != value))
+				{
+					this._Politica5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica6", DbType="VarChar(1000)")]
+		public string Politica6
+		{
+			get
+			{
+				return this._Politica6;
+			}
+			set
+			{
+				if ((this._Politica6 != value))
+				{
+					this._Politica6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica7", DbType="VarChar(1000)")]
+		public string Politica7
+		{
+			get
+			{
+				return this._Politica7;
+			}
+			set
+			{
+				if ((this._Politica7 != value))
+				{
+					this._Politica7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica8", DbType="VarChar(1000)")]
+		public string Politica8
+		{
+			get
+			{
+				return this._Politica8;
+			}
+			set
+			{
+				if ((this._Politica8 != value))
+				{
+					this._Politica8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica9", DbType="VarChar(1000)")]
+		public string Politica9
+		{
+			get
+			{
+				return this._Politica9;
+			}
+			set
+			{
+				if ((this._Politica9 != value))
+				{
+					this._Politica9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Politica10", DbType="VarChar(1000)")]
+		public string Politica10
+		{
+			get
+			{
+				return this._Politica10;
+			}
+			set
+			{
+				if ((this._Politica10 != value))
+				{
+					this._Politica10 = value;
 				}
 			}
 		}

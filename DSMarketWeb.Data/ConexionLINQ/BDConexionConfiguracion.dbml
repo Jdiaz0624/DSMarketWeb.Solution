@@ -203,4 +203,47 @@
       <Column Name="Estatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="Configuracion.SP_BUSCA_POLITICAS_EMPRESA" Method="SP_BUSCA_POLITICAS_EMPRESA">
+    <Parameter Name="IdPolitica" Parameter="idPolitica" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <ElementType Name="SP_BUSCA_POLITICAS_EMPRESAResult">
+      <Column Name="IdPolitica" Type="System.Decimal" DbType="Decimal(20,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Politica1" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica2" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica3" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica4" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica5" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica6" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica7" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica8" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica9" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica10" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="Configuracion.SP_MODIFICAR_POLITICAS_EMPRESA" Method="SP_MODIFICAR_POLITICAS_EMPRESA">
+    <Parameter Name="IdPolitica" Parameter="idPolitica" Type="System.Decimal" DbType="Decimal(20,0)" />
+    <Parameter Name="Politica1" Parameter="politica1" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica2" Parameter="politica2" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica3" Parameter="politica3" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica4" Parameter="politica4" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica5" Parameter="politica5" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica6" Parameter="politica6" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica7" Parameter="politica7" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica8" Parameter="politica8" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica9" Parameter="politica9" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Politica10" Parameter="politica10" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="SP_MODIFICAR_POLITICAS_EMPRESAResult">
+      <Column Name="IdPolitica" Type="System.Decimal" DbType="Decimal(20,0)" CanBeNull="true" />
+      <Column Name="Politica1" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica2" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica3" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica4" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica5" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica6" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica7" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica8" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica9" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Politica10" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
