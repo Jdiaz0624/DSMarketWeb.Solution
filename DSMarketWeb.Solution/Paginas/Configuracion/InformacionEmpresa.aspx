@@ -74,4 +74,65 @@
         </div>
         <br />
     </div>
+
+    <div id="DivBloquePoliticasEmpresa" runat="server">
+        <br />
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica1" runat="server" Text="Politica 1" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica1" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica2" runat="server" Text="Politica 2" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica2" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica3" runat="server" Text="Politica 3" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica3" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica4" runat="server" Text="Politica 4" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica4" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica5" runat="server" Text="Politica 5" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica5" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica6" runat="server" Text="Politica 6" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica6" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica7" runat="server" Text="Politica 7" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica7" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica8" runat="server" Text="Politica 8" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica8" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica9" runat="server" Text="Politica 9" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica9" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group col-md-12">
+                <asp:Label ID="lbPolitica10" runat="server" Text="Politica 10" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtPolitica10" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
+
+        <div align="center">
+               <asp:Button ID="btnModificarPoliticas" runat="server" Text="Modificar" CssClass="btn btn-primary btn-sm" OnClick="btnModificarPoliticas_Click" />
+               <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="btn btn-primary btn-sm" OnClick="btnVolver_Click" />
+        </div>
+        <br />
+    </div>
 </asp:Content>

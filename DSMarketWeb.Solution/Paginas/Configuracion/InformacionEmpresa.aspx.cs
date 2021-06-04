@@ -11,7 +11,18 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            MaintainScrollPositionOnPostBack = true;
+            if (!IsPostBack) {
+                DivBloqueInformacionEmpresa.Visible = true;
+                DivBloquePoliticasEmpresa.Visible = false;
 
+                DSMarketWeb.Logic.Comunes.SacarNombreUsuario Nombre = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
+                Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
+                lbUsuarioConectado.Text = Nombre.SacarNombre();
+
+                Label lbNivelAccesoPantalla = (Label)Master.FindControl("lbNivelAccesoPantalla");
+                lbNivelAccesoPantalla.Text = "INFORMACION DE EMPRESA";
+            }
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
@@ -20,6 +31,16 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
         }
 
         protected void btnPoliticas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnModificarPoliticas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
         {
 
         }
