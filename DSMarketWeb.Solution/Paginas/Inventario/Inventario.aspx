@@ -22,10 +22,10 @@
              font-weight:bold;
           }
 
-        /*th {
+        th {
             background-color: dodgerblue;
             color: white;
-        }*/
+        }
     </style>
     <script type="text/javascript">
         function CampoReferenciaEncontrado() {
