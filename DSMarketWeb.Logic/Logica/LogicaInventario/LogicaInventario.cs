@@ -587,5 +587,105 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Procesar;
         }
         #endregion
+        #region MANTENIMIENTO DE CONDICIONES
+        /// <summary>
+        /// ESTE METODO ES PARA BUSCAR LAS CONDICIONES
+        /// </summary>
+        /// <param name="IdCondicion"></param>
+        /// <param name="Descripcion"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones> BuscaCOndiciones(decimal? IdCondicion = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CONDICIONES(IdCondicion, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones
+                           {
+                               IdCondicion=n.IdCondicion,
+                               Condicion=n.Condicion,
+                               Estatus=n.Estatus,
+                               Estatus0=n.Estatus0
+                           }).ToList();
+            return Listado;
+        }
+
+        /// <summary>
+        /// PROCESAR INFORMACION PARA LAS CONDICIONES
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones ProcesarCondiciones(DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones Procesar = null;
+
+            var Condiciones = ObjData.SP_PROCESAR_CONDICIONES(
+                Item.IdCondicion,
+                Item.Condicion,
+                Item.Estatus0,
+                Accion);
+            if (Condiciones != null) {
+                Procesar = (from n in Condiciones
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECondiciones
+                            {
+                                IdCondicion=n.IdCondicion,
+                                Condicion=n.Condicion,
+                                Estatus0=n.Estatus
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
+        #region MANTENIMIENTO DE CAPACIDAD
+        /// <summary>
+        /// ESTE METODO ES PARA BUSCAR EL LISTADO DE LAS CAPACIDADES
+        /// </summary>
+        /// <param name="IdCapacidad"></param>
+        /// <param name="Capacidad"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad> BuscaCapacidad(decimal? IdCapacidad = null, string Capacidad = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_CAPACIDAD(IdCapacidad, Capacidad)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad
+                           {
+                               IdCapacidad=n.IdCapacidad,
+                               Capacidad=n.Capacidad,
+                               Estatus=n.Estatus,
+                               Estatus0=n.Estatus0
+                           }).ToList();
+            return Listado;
+        }
+
+
+        /// <summary>
+        /// ESTE METODO ES PROCESAR LA INFORMACION DE LAS CAPACIDADES
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad ProcesarCapacidad(DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad Item, string Accion) {
+
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad Procesar = null;
+
+            var Capacidad = ObjData.SP_PROCESAR_CAPACIDAD(
+                Item.IdCapacidad,
+                Item.Capacidad,
+                Item.Estatus0,
+                Accion);
+            if (Capacidad != null) {
+                Procesar = (from n in Capacidad
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.ECapacidad
+                            {
+                                IdCapacidad=n.IdCapacidad,
+                                Capacidad=n.Descripcion,
+                                Estatus0=n.Estatus
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
     }
 }
