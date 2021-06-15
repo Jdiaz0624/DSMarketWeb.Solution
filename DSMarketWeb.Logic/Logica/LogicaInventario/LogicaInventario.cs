@@ -494,5 +494,98 @@ namespace DSMarketWeb.Logic.Logica.LogicaInventario
             return Procesar;
         }
         #endregion
+        #region MANTENIMIENTO DE UNIDAD DE MEDIDA
+        /// <summary>
+        /// BUSCAR EL LISTADO DE LAS UNIDADES DE MEDIDAS
+        /// </summary>
+        /// <param name="IdUnidadMedida"></param>
+        /// <param name="Descripcion"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida> BuscaUnidadMedida(decimal? IdUnidadMedida = null, string Descripcion = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_UNIDAD_MEDIDA(IdUnidadMedida, Descripcion)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida
+                           {
+                               IdUnidadMedida=n.IdUnidadMedida,
+                               UnidadMedida=n.UnidadMedida,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus
+                           }).ToList();
+            return Listado;
+        }
+
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida ProcesarUnidadMedida(DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida Item, string Accion) {
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida Procesar = null;
+
+            var UnidadMedida = ObjData.SP_PROCESAR_INFORMACION_UNIDAD_MEDIDA(
+                Item.IdUnidadMedida,
+                Item.UnidadMedida,
+                Item.Estatus0,
+                Accion);
+            if (UnidadMedida != null) {
+                Procesar = (from n in UnidadMedida
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EUnidadMedida
+                            {
+                                IdUnidadMedida=n.IdUnidadMedida,
+                                UnidadMedida=n.Descripcion,
+                                Estatus0=n.Estatus
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
+        #region MANTENIMIENTO DE COLORES
+        /// <summary>
+        /// LISTADO DE COLORES
+        /// </summary>
+        /// <param name="IdColor"></param>
+        /// <param name="Color"></param>
+        /// <returns></returns>
+        public List<DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores> BuscaColores(decimal? IdColor = null, string Color = null) {
+            ObjData.CommandTimeout = 999999999;
+
+            var Listado = (from n in ObjData.SP_BUSCA_COLORES(IdColor, Color)
+                           select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores
+                           {
+                               IdColor=n.IdColor,
+                               Color=n.Color,
+                               Estatus0=n.Estatus0,
+                               Estatus=n.Estatus
+                           }).ToList();
+            return Listado;
+        }
+
+        /// <summary>
+        /// Procesar información de los colores
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <param name="Accion"></param>
+        /// <returns></returns>
+        public DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores ProcesarColores(DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores Item, string Accion) {
+
+            ObjData.CommandTimeout = 999999999;
+
+            DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores Procesar = null;
+
+            var Colores = ObjData.SP_PROCESAR_COLORES(
+                Item.IdColor,
+                Item.Color,
+                Item.Estatus0,
+                Accion);
+            if (Colores != null) {
+                Procesar = (from n in Colores
+                            select new DSMarketWeb.Logic.Entidades.EntidadesInventario.EColores
+                            {
+                                IdColor=n.IdColor,
+                                Color=n.Descripcion,
+                                Estatus0=n.Estatus
+                            }).FirstOrDefault();
+            }
+            return Procesar;
+        }
+        #endregion
     }
 }

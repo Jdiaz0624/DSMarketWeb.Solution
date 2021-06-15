@@ -135,11 +135,13 @@
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoMovimiento.cs" />
     <Compile Include="PrcesarMantenimientos\Empresa\ProcesarInformacionTipoNomina.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionCateorias.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionColores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionMarcas.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionModelos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionProductos.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionSuplidores.cs" />
     <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionTipoSuplidores.cs" />
+    <Compile Include="PrcesarMantenimientos\Inventario\ProcesarInformacionUnidadMedida.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarInformacionCantidadIntentosLogin.cs" />
     <Compile Include="PrcesarMantenimientos\Seguridad\ProcesarMantenimientoUsuarios.cs" />
     <Compile Include="PrcesarMantenimientos\Servicios\ManupularInformacionItemsProductoEspejo.cs" />
