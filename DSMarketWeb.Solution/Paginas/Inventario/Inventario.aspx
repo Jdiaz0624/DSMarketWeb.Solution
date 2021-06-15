@@ -28,7 +28,7 @@
         }
     </style>
     <script type="text/javascript">
-        function CampoReferenciaEncontrado() {
+        function CampoReferenciaEncontrado() { 
             alert("El campo referencia ingresado no es valido, favor de verificar.");
         }
 
