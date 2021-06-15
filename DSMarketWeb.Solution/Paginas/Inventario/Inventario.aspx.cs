@@ -10,6 +10,7 @@ using CrystalDecisions.Shared;
 
 namespace DSMarketWeb.Solution.Paginas.Inventario
 {
+    
     public partial class Inventario : System.Web.UI.Page
     {
 
@@ -27,6 +28,164 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             Producto = 1,
             Servicio = 2
         }
+
+        /// <summary>
+        /// Esta enumaración muestra todas las opciones generales de configuración registrada en base de datos
+        /// </summary>
+        enum OpcionesConfiguracionGeneral
+        {
+            ImpuestoPorDefecto = 1,
+            LlevaGarantiaPorDefecto = 2,
+            CampoReferenciaObligatorio = 3,
+            CampoReferenciaNumerico = 4,
+            ValidarCampoReferencia = 5,
+            UnidaddeMedidaSeleccionable = 6,
+            ModelosSeleccionable = 7,
+            ColoresSelecciobales = 8,
+            CondicionesSelecciobales = 9,
+            CapacidadesSelecciobales = 10,
+            CargarListasDesplegablesalguardar = 11,
+            AutoCompletarCampoReferenciaConsulta = 12
+
+        }
+
+        #region VALIDAR LAS CONFIGURACIONES GENERALES DEL SISTEMA
+        private void ValidarConfiguracionesGenerales() {
+            bool Respuesta = false;
+            //IMPUESTO
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarImpuesto = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.ImpuestoPorDefecto, 3);
+            Respuesta = ValidarImpuesto.ResultadoValidacion();
+            switch (Respuesta) {
+                case true:
+                    cbAplicaParaImpuestoMantenimiento.Checked = true;
+                    break;
+
+                case false:
+                    cbAplicaParaImpuestoMantenimiento.Checked = false;
+                    break;
+            }
+
+            //GANRANTIA
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarGarantia = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.LlevaGarantiaPorDefecto, 3);
+            Respuesta = ValidarGarantia.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    cbLlevaGarantiaMantenimiento.Checked = true;
+                    break;
+
+                case false:
+                    cbLlevaGarantiaMantenimiento.Checked = false;
+                    break;
+            }
+
+            //UNIDAD DE MEDIDA
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidadMedida = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.UnidaddeMedidaSeleccionable, 3);
+            Respuesta = ValidarUnidadMedida.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    txtUnidadMedidaMantenimiento.Visible = false;
+                    ddlSeleccionarUnidadMedidaMantenimiento.Visible = true;
+                    CargarUnidadMedida();
+                    break;
+
+                case false:
+                    txtUnidadMedidaMantenimiento.Visible = true;
+                    ddlSeleccionarUnidadMedidaMantenimiento.Visible = false;
+                    break;
+            }
+
+
+            //MODLEOS
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidarModelos = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.ModelosSeleccionable, 3);
+            Respuesta = ValidarUnidarModelos.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    txtModeloMantenimiento.Visible = false;
+                    ddlSeleccionarModeloMantenimiento.Visible = true;
+                    CargarModelos();
+                    break;
+
+                case false:
+                    txtModeloMantenimiento.Visible = true;
+                    ddlSeleccionarModeloMantenimiento.Visible = false;
+                    break;
+            }
+
+            //COLORES
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidarColores = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.ColoresSelecciobales, 3);
+            Respuesta = ValidarUnidarColores.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    txtColorMantenimiento.Visible = false;
+                    ddlSeleccionarColoresMantenimiento.Visible = true;
+                    CargarColores();
+                    break;
+
+                case false:
+                    txtColorMantenimiento.Visible = true;
+                    ddlSeleccionarColoresMantenimiento.Visible = false;
+                    break;
+            }
+
+            //CONDICIONES
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarCondiciones = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.CondicionesSelecciobales, 3);
+            Respuesta = ValidarCondiciones.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    txtCondicionMantenimiento.Visible = false;
+                    ddlSeleccionarCondicionesMantenimiento.Visible = true;
+                    CargarCondiciones();
+                    break;
+
+                case false:
+                    txtCondicionMantenimiento.Visible = true;
+                    ddlSeleccionarCondicionesMantenimiento.Visible = false;
+                    break;
+            }
+
+            //CAPACIDAD
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarCapacidad = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)OpcionesConfiguracionGeneral.CapacidadesSelecciobales, 3);
+            Respuesta = ValidarCapacidad.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    txtCapacidadMantenimiento.Visible = false;
+                    ddlSeleccionarCapacidadMantenimiento.Visible = true;
+                    CargarCapacidad();
+                    break;
+
+                case false:
+                    txtCapacidadMantenimiento.Visible = true;
+                    ddlSeleccionarCapacidadMantenimiento.Visible = false;
+                    break;
+            }
+
+        }
+        #endregion
+
+        #region CARGAR LAS LISTAS DESPLEGABLES DE LOS MANTENIMIENTOS
+        private void CargarUnidadMedida() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarUnidadMedidaMantenimiento, ObjDataConfiguracion.Value.BuscaListas("UNIDADMEDIDA", null, null));
+        }
+        private void CargarModelos() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModeloMantenimiento, ObjDataConfiguracion.Value.BuscaListas("MODELOS", ddlSeleccionarMarcaMantenimiento.SelectedValue.ToString(), null));
+        }
+        private void CargarColores() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarColoresMantenimiento, ObjDataConfiguracion.Value.BuscaListas("COLORES", null, null));
+        }
+
+        private void CargarCondiciones() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCondicionesMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CONDICIONES", null, null));
+        }
+        private void CargarCapacidad() {
+            DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarCapacidadMantenimiento, ObjDataConfiguracion.Value.BuscaListas("CAPACIDAD", null, null));
+        }
+        #endregion
 
         #region CONTROL PARA MOSTRAR LA PAGINACION
         readonly PagedDataSource pagedDataSource = new PagedDataSource();
@@ -537,6 +696,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         {
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack) {
+                
                 DSMarketWeb.Logic.Comunes.SacarNombreUsuario NombreUsuario = new Logic.Comunes.SacarNombreUsuario((decimal)Session["IdUsuario"]);
                 Label lbUsuarioConectado = (Label)Master.FindControl("lbUsuarioConectado");
                 lbUsuarioConectado.Text = NombreUsuario.SacarNombre();
@@ -653,6 +813,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             lbTiempoarantiaMantenimiento.Visible = false;
             txtTiempoGarantiaMantenimiento.Visible = false;
             lbNumeroConector.Text = GenerarNumeroConector();
+            ValidarConfiguracionesGenerales();
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -665,7 +826,7 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
             btnGuardarRegistroMantenimientio.Visible = false;
             btnEditarRegistroMantenimiento.Visible = true;
             btnEliminarRegistroMantenimiento.Visible = false;
-
+            
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)

@@ -12,6 +12,102 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
     {
         Lazy<DSMarketWeb.Logic.Logica.LogicaConfiguracion.LogicaConfiguracion> ObjDataConfiguracion = new Lazy<Logic.Logica.LogicaConfiguracion.LogicaConfiguracion>();
 
+        public enum ConceptoConfiguracionGeneralInventario
+        {
+            ImpuestoPorDefecto = 1,
+            LlevaGarantiaPorDefecto = 2,
+            CampoReferenciaObligatorio = 3,
+            CampoReferenciaNumerico = 4,
+            ValidarCampoReferencia = 5,
+            UnidaddeMedidaSeleccionable = 6,
+            ModelosSeleccionable = 7,
+            ColoresSelecciobales = 8,
+            CondicionesSelecciobales = 9,
+            CapacidadesSelecciobales = 10,
+            CargarListasDesplegablesalguardar = 11,
+            AutoCompletarCampoReferenciaConsulta = 12
+        }
+
+        private void OcultarOpcionesMenuInventario()
+        {
+            bool Respuesta = false;
+            LinkButton OpcionUnidadMedida = (LinkButton)Master.FindControl("LinkMantenimientoUnidadMedida");
+            LinkButton OpcionModelo = (LinkButton)Master.FindControl("LinkMantenimientoModelos");
+            LinkButton OpcionColor = (LinkButton)Master.FindControl("LinkMantenimientoColores");
+            LinkButton OpcionCapacidad = (LinkButton)Master.FindControl("LinkMantenimientoCapacidad");
+            LinkButton OpcionCondcion = (LinkButton)Master.FindControl("LinkMantenimientoCondiciones");
+            //UNIDAD DE MEDIDA
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidadMedida = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)ConceptoConfiguracionGeneralInventario.UnidaddeMedidaSeleccionable, 3);
+            Respuesta = ValidarUnidadMedida.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    OpcionUnidadMedida.Visible = true;
+                    break;
+
+                case false:
+                    OpcionUnidadMedida.Visible = false;
+                    break;
+            }
+
+
+            //MODLEOS
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidarModelos = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)ConceptoConfiguracionGeneralInventario.ModelosSeleccionable, 3);
+            Respuesta = ValidarUnidarModelos.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    OpcionModelo.Visible = true;
+                    break;
+
+                case false:
+                    OpcionModelo.Visible = false;
+                    break;
+            }
+
+            //COLORES
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarUnidarColores = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)ConceptoConfiguracionGeneralInventario.ColoresSelecciobales, 3);
+            Respuesta = ValidarUnidarColores.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    OpcionColor.Visible = true;
+                    break;
+
+                case false:
+                    OpcionColor.Visible = false;
+                    break;
+            }
+
+            //CONDICIONES
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarCondiciones = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)ConceptoConfiguracionGeneralInventario.CondicionesSelecciobales, 3);
+            Respuesta = ValidarCondiciones.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    OpcionCondcion.Visible = true;
+                    break;
+
+                case false:
+                    OpcionCondcion.Visible = false;
+                    break;
+            }
+
+            //CAPACIDAD
+            DSMarketWeb.Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema ValidarCapacidad = new Logic.Comunes.ValidarOpcionesConfiguracionesGeneralesSistema((decimal)ConceptoConfiguracionGeneralInventario.CapacidadesSelecciobales, 3);
+            Respuesta = ValidarCapacidad.ResultadoValidacion();
+            switch (Respuesta)
+            {
+                case true:
+                    OpcionCapacidad.Visible = true;
+                    break;
+
+                case false:
+                    OpcionCapacidad.Visible = false;
+                    break;
+            }
+        }
+
         #region CARGAR LOS MODULOS DEL SISTEMA
         private void ListaModulos() {
             DSMarketWeb.Logic.Comunes.UtilidadDrop.DropDownListLlena(ref ddlSeleccionarModulo, ObjDataConfiguracion.Value.BuscaListas("MODULOS", null, null));
@@ -154,7 +250,7 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
             var BuscarInformacion = ObjDataConfiguracion.Value.BuscaConfiguracionesGenerales(IdConfiguracion, IdModulo);
             Paginar(ref rpListadoConfiguraciones, BuscarInformacion, 10, ref lbCantidadPaginaVariable, ref LinkPrimeraPagina, ref LinkAnterior, ref LinkSiguiente, ref LinkUltimo);
             HandlePaging(ref dtPaginacion, ref LinkBlbPaginaActualVariable);
-           
+            LinkButton LinkProductosServicios = (LinkButton)Master.FindControl("");
         }
         #endregion
         #region VALIDAR LA CLAVE DE SEGURIDAD DEL SISTEMA
@@ -254,6 +350,7 @@ namespace DSMarketWeb.Solution.Paginas.Configuracion
             var hfIdModulo = ((HiddenField)IdModuloSeleccionado.FindControl("hfIdModulo")).Value.ToString();
 
             ModificarConfiguracionesGenerales(Convert.ToDecimal(hfIdConfiguracion.ToString()), Convert.ToDecimal(hfIdModulo.ToString()));
+            OcultarOpcionesMenuInventario();
         }
 
         protected void LinkPrimeraPagina_Click(object sender, EventArgs e)

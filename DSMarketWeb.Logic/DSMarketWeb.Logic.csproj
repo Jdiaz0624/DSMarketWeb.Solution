@@ -62,6 +62,7 @@
     <Compile Include="Comunes\ValidarClaveSeguridad.cs" />
     <Compile Include="Comunes\ValidarConfiguracionGenera.cs" />
     <Compile Include="Comunes\ValidarImagenSistema.cs" />
+    <Compile Include="Comunes\ValidarOpcionesConfiguracionesGeneralesSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EBuscaImagenesSistema.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EComprobantesFuscales.cs" />
     <Compile Include="Entidades\EntidadesConfiguracion\EConfiguracionesGenerales.cs" />

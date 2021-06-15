@@ -141,6 +141,15 @@ namespace DSMarketWeb.Solution.MasterPage
         protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientomarcas;
 
         /// <summary>
+        /// LinkMantenimientoModelos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoModelos;
+
+        /// <summary>
         /// LinkTipoSuplidores control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,42 @@ namespace DSMarketWeb.Solution.MasterPage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkSuplidores;
+
+        /// <summary>
+        /// LinkMantenimientoUnidadMedida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoUnidadMedida;
+
+        /// <summary>
+        /// LinkMantenimientoColores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoColores;
+
+        /// <summary>
+        /// LinkMantenimientoCondiciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoCondiciones;
+
+        /// <summary>
+        /// LinkMantenimientoCapacidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkMantenimientoCapacidad;
 
         /// <summary>
         /// LinkCitas control.

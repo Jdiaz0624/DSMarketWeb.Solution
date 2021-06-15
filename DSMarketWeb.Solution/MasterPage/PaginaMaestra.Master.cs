@@ -697,5 +697,70 @@ namespace DSMarketWeb.Solution.MasterPage
                 FormsAuthentication.RedirectToLoginPage();
             }
         }
+
+        protected void LinkMantenimientoModelos_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Inventario/MantenimientoModelos.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
+        protected void LinkMantenimientoUnidadMedida_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Inventario/MantenimientoUnidadMedida.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
+        protected void LinkMantenimientoColores_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Inventario/MantenimientoColores.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
+        protected void LinkMantenimientoCondiciones_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Inventario/MantenimientoCondiciones.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
+        protected void LinkMantenimientoCapacidad_Click(object sender, EventArgs e)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Response.Redirect("~/Paginas/Inventario/MantenimientoCapacidad.aspx");
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
     }
 }

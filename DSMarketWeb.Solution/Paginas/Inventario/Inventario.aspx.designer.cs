@@ -1095,6 +1095,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.TextBox txtUnidadMedidaMantenimiento;
 
         /// <summary>
+        /// ddlSeleccionarUnidadMedidaMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarUnidadMedidaMantenimiento;
+
+        /// <summary>
         /// lbModeloMantenimiento control.
         /// </summary>
         /// <remarks>
@@ -1111,6 +1120,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtModeloMantenimiento;
+
+        /// <summary>
+        /// ddlSeleccionarModeloMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarModeloMantenimiento;
 
         /// <summary>
         /// lbColorMantenimiento control.
@@ -1131,6 +1149,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.TextBox txtColorMantenimiento;
 
         /// <summary>
+        /// ddlSeleccionarColoresMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarColoresMantenimiento;
+
+        /// <summary>
         /// lbCondicionMantenimiento control.
         /// </summary>
         /// <remarks>
@@ -1149,6 +1176,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         protected global::System.Web.UI.WebControls.TextBox txtCondicionMantenimiento;
 
         /// <summary>
+        /// ddlSeleccionarCondicionesMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarCondicionesMantenimiento;
+
+        /// <summary>
         /// lbCapacidadmantenimiento control.
         /// </summary>
         /// <remarks>
@@ -1165,6 +1201,15 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCapacidadMantenimiento;
+
+        /// <summary>
+        /// ddlSeleccionarCapacidadMantenimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSeleccionarCapacidadMantenimiento;
 
         /// <summary>
         /// lbSeleccionarTipoGarantiaMantenimiento control.

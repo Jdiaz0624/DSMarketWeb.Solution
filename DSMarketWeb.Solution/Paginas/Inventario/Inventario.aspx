@@ -539,30 +539,36 @@
             <div class="form-group col-md-4">
                 <asp:Label ID="lbUnidadMedidaMantenimiento" runat="server" Text="Unidad de Medida" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtUnidadMedidaMantenimiento" runat="server" CssClass="form-control" placeholder="Opcional" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+                <asp:DropDownList ID="ddlSeleccionarUnidadMedidaMantenimiento" runat="server" CssClass="form-control" ToolTip="Seleccionar Unidad de Medida"></asp:DropDownList>
             </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbModeloMantenimiento" runat="server" Text="Modelo" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtModeloMantenimiento" runat="server" CssClass="form-control" placeholder="Opcional" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+                <asp:DropDownList ID="ddlSeleccionarModeloMantenimiento" runat="server" CssClass="form-control" ToolTip="Seleccionar Modelos"></asp:DropDownList>
             </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbColorMantenimiento" runat="server" Text="Color" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtColorMantenimiento" runat="server" CssClass="form-control" placeholder="Opcional" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+                <asp:DropDownList ID="ddlSeleccionarColoresMantenimiento" runat="server" CssClass="form-control" ToolTip="Seleccionar Colores"></asp:DropDownList>
             </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbCondicionMantenimiento" runat="server" Text="Condición" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtCondicionMantenimiento" runat="server" CssClass="form-control" placeholder="Opcional" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+                <asp:DropDownList ID="ddlSeleccionarCondicionesMantenimiento" runat="server" CssClass="form-control" ToolTip="Seleccionar Condiciones"></asp:DropDownList>
             </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbCapacidadmantenimiento" runat="server" Text="Capacidad" CssClass="Letranegrita"></asp:Label>
                 <asp:TextBox ID="txtCapacidadMantenimiento" runat="server" CssClass="form-control" placeholder="Opcional" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
+                <asp:DropDownList ID="ddlSeleccionarCapacidadMantenimiento" runat="server" CssClass="form-control" ToolTip="Seleccionar Capacidad"></asp:DropDownList>
             </div>
 
             <div class="form-group col-md-4">
                 <asp:Label ID="lbSeleccionarTipoGarantiaMantenimiento" runat="server" Text="Tipo de Garantia" CssClass="Letranegrita"></asp:Label>
+                
                 <asp:DropDownList ID="ddlSeleccionarTipoGarantiaMantenimiento" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlSeleccionarTipoGarantiaMantenimiento_SelectedIndexChanged" ToolTip="Seleccionar el Tipo de Garantia"></asp:DropDownList>
             </div>
 

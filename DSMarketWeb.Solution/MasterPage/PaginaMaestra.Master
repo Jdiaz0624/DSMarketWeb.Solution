@@ -73,8 +73,13 @@
         <asp:LinkButton ID="LinkProductos"  runat="server" Text="Productos / Servicios" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkProductos_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkMantenimientoCategoria" runat="server" Text="Categorias" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoCategoria_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkMantenimientomarcas" runat="server" Text="Marcas" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientomarcas_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMantenimientoModelos" runat="server" Text="Modelos" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoModelos_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkTipoSuplidores" runat="server" Text="Tipo de Suplidores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkTipoSuplidores_Click"></asp:LinkButton>
         <asp:LinkButton ID="LinkSuplidores" runat="server" Text="Suplidores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkSuplidores_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMantenimientoUnidadMedida" runat="server" Text="Unidad de Medida" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoUnidadMedida_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMantenimientoColores" runat="server" Text="Colores" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoColores_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMantenimientoCondiciones" runat="server" Text="Condiciones" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoCondiciones_Click"></asp:LinkButton>
+        <asp:LinkButton ID="LinkMantenimientoCapacidad" runat="server" Text="Capacidad" CssClass="list-group-item list-group-item-action bg-light" OnClick="LinkMantenimientoCapacidad_Click"></asp:LinkButton>
     </div>
   </li>
 </ul>
