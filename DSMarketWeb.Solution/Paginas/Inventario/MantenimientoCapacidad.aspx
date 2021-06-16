@@ -26,7 +26,18 @@
             color: white;
         }
     </style>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#<%=btnGuardar.ClientID%>").click(function () {
+                var Capacidad = $("#<%=txtCapacidadMantenimiento.ClientID%>").val().length;
+                if (Capacidad < 1) {
+                    alert("El campo capacidad no puede estar vacio para realizar esta operación, favor de verificar.");
+                    $("#<%=txtCapacidadMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+            });
+        })
+    </script>
     <br />
     <div class="container-fluid">
         <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="0" Visible="false"></asp:Label>
@@ -59,10 +70,10 @@
                         <asp:Repeater ID="rpCapacidad" runat="server">
                             <ItemTemplate>
                                 <tr>
-                                    <asp:HiddenField ID="hfIdCapacidad" runat="server" Value='<%# Eval("") %>' />
+                                    <asp:HiddenField ID="hfIdCapacidad" runat="server" Value='<%# Eval("IdCapacidad") %>' />
                                     <td align="left" style="width:10%"> <asp:Button ID="btnSeleccionarRegistro" runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" OnClick="btnSeleccionarRegistro_Click" /> </td>
-                                    <td align="left" style="width:80%"> <%# Eval("") %> </td>
-                                    <td align="left" style="width:10%"> <%# Eval("") %>  </td>
+                                    <td align="left" style="width:80%"> <%# Eval("Capacidad") %> </td>
+                                    <td align="left" style="width:10%"> <%# Eval("Estatus") %>  </td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
