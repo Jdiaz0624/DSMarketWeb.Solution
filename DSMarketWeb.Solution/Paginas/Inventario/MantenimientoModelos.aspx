@@ -30,6 +30,8 @@
 
     <br />
     <div class="container-fluid">
+        <asp:Label ID="lbIsRegistroSeleccionado" runat="server" Text="0" Visible="false"></asp:Label>
+        <asp:Label ID="lbAccion" runat="server" Text="Accion" Visible="false"></asp:Label>
         <div id="DivBloqueConsulta" runat="server">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -42,8 +44,7 @@
                     <asp:TextBox ID="txtModeloConsulta" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>
                 </div>
             </div>
-        </div>
-        <div align="center">
+             <div align="center">
             <asp:Button ID="btnConsultar" runat="server" Text="Consultar" ToolTip="Consultar Registros" CssClass="btn btn-primary btn-sm" OnClick="btnConsultar_Click" />
             <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" ToolTip="Crear Nuevos Registros" CssClass="btn btn-primary btn-sm" OnClick="btnNuevo_Click" />
             <asp:Button ID="btnEditar" runat="server" Text="Editar" ToolTip="Editar Registros" CssClass="btn btn-primary btn-sm" OnClick="btnEditar_Click" />
@@ -63,7 +64,7 @@
                 <tbody>
                     <asp:Repeater ID="rpListadoModelos" runat="server">
                         <ItemTemplate>
-                            <asp:HiddenField ID="hfIdCondiciones" runat="server" Value='<%# Eval("IdModelo") %>' />
+                            <asp:HiddenField ID="hfIdModelo" runat="server" Value='<%# Eval("IdModelo") %>' />
 
                             <tr>
                                 <td align="left" style="width:10%"><asp:Button ID="btnSeleccionarRegistros" runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" OnClick="btnSeleccionarRegistros_Click" /> </td>
@@ -102,6 +103,32 @@
                 </tr>
             </table>
         </div>
+        </div>
+        <br />
+        </div>
+       
+    </div>
+
+    <div id="DivBloqueMantenimiento" runat="server">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <asp:Label ID="lbMarcaMantenmiento" runat="server" Text="Seleccionar Marca" CssClass="Letranegrita"></asp:Label>
+                <asp:DropDownList ID="ddlSeleccionarMArcaMantenimiento" runat="server" ToolTip="Seleccionar la Marca para el Modelo" CssClass="form-control"></asp:DropDownList>
+            </div>
+
+             <div class="form-group col-md-6">
+                <asp:Label ID="lbModeloMantenimiento" runat="server" Text="Modelo" CssClass="Letranegrita"></asp:Label>
+                <asp:TextBox ID="txtModeloMantenimiento" runat="server" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="100"></asp:TextBox>
+            </div>
+        </div>
+        <div class="form-check-inline">
+            <div class="form-group form-check">
+                <asp:CheckBox ID="cbEstatusMantenimiento" runat="server" Text="Estatus" CssClass="form-check-input" />
+            </div>
+        </div>
+        <div align="center">
+            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" ToolTip="Guardar Registro" CssClass="btn btn-primary btn-sm" OnClick="btnGuardar_Click"/>
+            <asp:Button ID="btnVolverAtras" runat="server" Text="Volver" ToolTip="Volver Atras" CssClass="btn btn-primary btn-sm" OnClick="btnVolverAtras_Click" />
         </div>
         <br />
     </div>
