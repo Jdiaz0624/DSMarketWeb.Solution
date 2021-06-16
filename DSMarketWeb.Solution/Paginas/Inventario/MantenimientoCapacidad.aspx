@@ -29,6 +29,8 @@
 
     <br />
     <div class="container-fluid">
+        <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="0" Visible="false"></asp:Label>
+        <asp:Label ID="lbAccion" runat="server" Text="Accion" Visible="false"></asp:Label>
         <div id="DivBloqueConsulta" runat="server">
             <div class="form-row">
                 <div class="form-group col-md-6">

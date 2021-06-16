@@ -15,6 +15,24 @@ namespace DSMarketWeb.Solution.Paginas.Inventario
     {
 
         /// <summary>
+        /// lbIdRegistroSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbIdRegistroSeleccionado;
+
+        /// <summary>
+        /// lbAccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbAccion;
+
+        /// <summary>
         /// DivBloqueConsulta control.
         /// </summary>
         /// <remarks>

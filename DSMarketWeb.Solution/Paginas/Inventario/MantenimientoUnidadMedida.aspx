@@ -27,8 +27,23 @@
         }
     </style>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#<%=btnGuardar.ClientID%>").click(function () {
+                var UnidadMedida = $("#<%=txtUnidadMedidaMantenimiento.ClientID%>").val().length;
+            if (UnidadMedida < 1) {
+                alert("El campo unidad de medida no puede estar vacio para realizar esta operación, favor de verificar.");
+                $("#<%=txtUnidadMedidaMantenimiento.ClientID%>").css("border-color", "red");
+                return false;
+            }
+            });
+        })
+    </script>
+
     <br />
     <div class="container-fluid">
+        <asp:Label ID="lbIdRegistroSeleccionado" runat="server" Text="0" Visible="false"></asp:Label>
+        <asp:Label ID="lbAccion" runat="server" Text="Accion" Visible="false"></asp:Label>
         <div id="DivBloqueConsulta" runat="server">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -57,10 +72,10 @@
                         <asp:Repeater ID="rpUnidadMedida" runat="server">
                             <ItemTemplate>
                                 <tr>
-                                    <asp:HiddenField ID="hfIdUnidadMedida" runat="server" Value='<%# Eval("") %>' />
+                                    <asp:HiddenField ID="hfIdUnidadMedida" runat="server" Value='<%# Eval("IdUnidadMedida") %>' />
                                     <td align="left" style="width:10%"> <asp:Button ID="btnSeleccionarRegistro" runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" OnClick="btnSeleccionarRegistro_Click" /> </td>
-                                    <td align="left" style="width:80%"> <%# Eval("") %> </td>
-                                    <td align="left" style="width:10%"> <%# Eval("") %>  </td>
+                                    <td align="left" style="width:80%"> <%# Eval("UnidadMedida") %> </td>
+                                    <td align="left" style="width:10%"> <%# Eval("Estatus") %>  </td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
