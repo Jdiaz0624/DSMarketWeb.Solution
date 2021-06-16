@@ -28,6 +28,27 @@
         }
     </style>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#<%=btnGuardar.ClientID%>").click(function () {
+                var Marca = $("#<%=ddlSeleccionarMArcaMantenimiento.ClientID%>").val();
+                if (Marca < 1) {
+                    alert("El campo marca no puede estar vacio para realizar esta operación, favor de verificar.");
+                    $("#<%=ddlSeleccionarMArcaMantenimiento.ClientID%>").css("border-color", "red");
+                    return false;
+                }
+                else {
+                    var Modelo = $("#<%=txtModeloMantenimiento.ClientID%>").val().length;
+                    if (Modelo < 1) {
+                        alert("El campo modelo no puede estar vacio para realizar esta operación, favor de verificar.");
+                        $("#<%=txtModeloMantenimiento.ClientID%>").css("border-color", "red");
+                        return false;
+                    }
+                }
+            });
+
+        })
+    </script>
     <br />
     <div class="container-fluid">
         <asp:Label ID="lbIsRegistroSeleccionado" runat="server" Text="0" Visible="false"></asp:Label>
